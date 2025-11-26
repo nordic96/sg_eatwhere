@@ -5,7 +5,8 @@ import { Canvas } from "@react-three/fiber";
 import { MapControls } from "@react-three/drei";
 
 import TextureMap from "@/app/mapmodels/TextureMap";
-import MBSPlaceholder from "@/app/mapmodels/MBSPlaceholder";
+// import MBSPlaceholder from "@/app/mapmodels/MBSPlaceholder";
+import MBSModel from "@/app/mapmodels/MBSModel";
 
 export default function MapScene() {
   return (
@@ -18,7 +19,8 @@ export default function MapScene() {
         {/* The Map Plane */}
         <TextureMap />
 
-        <MBSPlaceholder position={[7.2, 0, 17]} />
+        {/* <MBSPlaceholder position={[7.2, 0, 17]} /> */}
+        <MBSModel position={[9.2, 0.3, 17]} />
         {/* Song Fa Bak Kut Teh Placeholder */}
         <mesh position={[2, 0, 13.1]}>
           <boxGeometry args={[0.5, 0.5, 0.5]} />
