@@ -2,7 +2,7 @@ import { ThreeElements } from "@react-three/fiber";
 
 export default function MBSPlaceholder(props: ThreeElements["group"]) {
   return (
-    <group {...props}>
+    <group {...props} rotation={[0, Math.PI / 3, 0]}>
       {/* Three towers */}
       {[-1, 0, 1].map((x, i) => (
         <mesh key={i} position={[x * 0.6, 0.6, 0]}>
