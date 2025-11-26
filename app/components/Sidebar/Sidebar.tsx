@@ -1,7 +1,9 @@
 "use client";
 
+import { data } from "@/app/constants/data";
 import useClickOutside from "@/app/hooks/useClickOutside";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import PlaceContent from "../PlaceContent/PlaceContent";
 
 export function openSidebar() {
   const sidebar = document.getElementById("list-sidebar");
@@ -20,6 +22,12 @@ export function closeSidebar() {
 export default function Sidebar() {
   const target = useRef(null);
   useClickOutside(target, () => closeSidebar());
+  const selectedData = data.filter((x) => x.id === "songfa")[0];
+
+  useEffect(() => {
+    openSidebar();
+  }, []);
+
   const onClose = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     closeSidebar();
@@ -29,12 +37,12 @@ export default function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      className="fixed flex flex-col right-5 bg-white top-10 grow px-8 py-8 w-[30vw] min-h-[79.5vh] transform translate-x-full opacity-0 transition-transform duration-500 ease-in-out"
+      className="fixed flex flex-col right-0 bg-white top-9 grow px-8 py-8 min-w-[300px] w-[30vw] max-w-[500px] min-h-[80.5vh] transform translate-x-full opacity-0 transition-transform duration-500 ease-in-out"
     >
       <div className="flex justify-end font-bold">
         <button onClick={onClose}>X</button>
       </div>
-      <p>I am a Sidebar</p>
+      <PlaceContent data={selectedData} />
     </div>
   );
 }
