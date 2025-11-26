@@ -7,6 +7,7 @@ import { MapControls } from "@react-three/drei";
 import TextureMap from "@/app/mapmodels/TextureMap";
 // import MBSPlaceholder from "@/app/mapmodels/MBSPlaceholder";
 import MBSModel from "@/app/mapmodels/MBSModel";
+import { openSidebar } from "../Sidebar/Sidebar";
 
 export default function MapScene() {
   return (
@@ -22,7 +23,12 @@ export default function MapScene() {
         {/* <MBSPlaceholder position={[7.2, 0, 17]} /> */}
         <MBSModel position={[9.2, 0.3, 17]} />
         {/* Song Fa Bak Kut Teh Placeholder */}
-        <mesh position={[2, 0, 13.1]}>
+        <mesh
+          position={[2, 0, 13.1]}
+          onClick={() => {
+            openSidebar();
+          }}
+        >
           <boxGeometry args={[0.5, 0.5, 0.5]} />
           <meshStandardMaterial color={["#c44"]} />
         </mesh>
