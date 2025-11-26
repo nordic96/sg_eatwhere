@@ -14,5 +14,7 @@ export default function useClickOutside<T extends HTMLElement | null>(
     handler(e);
     e.stopPropagation();
   }
-  document.addEventListener(eventType, eventHandler, eventListenerOptions);
+  if (typeof document !== "undefined") {
+    document.addEventListener(eventType, eventHandler, eventListenerOptions);
+  }
 }
