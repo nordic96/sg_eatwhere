@@ -5,9 +5,9 @@ import * as THREE from "three";
 import { ReactNode, useRef, useState } from "react";
 import { ThreeElements, useFrame } from "@react-three/fiber";
 import { Billboard, Html } from "@react-three/drei";
-import PlaceContent from "../PlaceContent/PlaceContent";
+import PlaceContent from "../../PlaceContent/PlaceContent";
 import { FoodHeritage } from "@/app/constants/data";
-import { useRiceBowlModel } from "../markers/RiceBowlModel";
+import { useRiceBowlModel } from "../RiceBowlModel";
 
 type FloatingMarkerProps = ThreeElements["group"] & {
   children: ReactNode;
