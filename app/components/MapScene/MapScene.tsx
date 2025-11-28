@@ -5,9 +5,12 @@ import { Canvas } from "@react-three/fiber";
 import { MapControls } from "@react-three/drei";
 
 import TextureMap from "@/app/mapmodels/TextureMap";
-// import MBSPlaceholder from "@/app/mapmodels/MBSPlaceholder";
-import MBSModel from "@/app/mapmodels/MBSModel";
+
 import { openSidebar } from "../Sidebar/Sidebar";
+import { FloatingMarker } from "../FloatingMarker/FloatingMarker";
+import { data } from "@/app/constants/data";
+import { geoConverter } from "@/app/utils/geographyUtil";
+import BuildingModel from "@/app/mapmodels/BuildingModel";
 
 export default function MapScene() {
   return (
@@ -19,19 +22,28 @@ export default function MapScene() {
 
         {/* The Map Plane */}
         <TextureMap />
-
-        {/* <MBSPlaceholder position={[7.2, 0, 17]} /> */}
-        <MBSModel position={[9.2, 0.3, 17]} />
+        <BuildingModel
+          position={[3, -0.01, 10]}
+          scaleMultiplier={0.007}
+          rotation={[0, Math.PI / 150, 0]}
+          assetPath={"/models/singapore_map.glb"}
+        />
         {/* Song Fa Bak Kut Teh Placeholder */}
-        <mesh
-          position={[2, 0, 13.1]}
-          onClick={() => {
-            openSidebar();
-          }}
-        >
-          <boxGeometry args={[0.5, 0.5, 0.5]} />
-          <meshStandardMaterial color={["#c44"]} />
-        </mesh>
+        {data.map((val) => {
+          return (
+            <FloatingMarker
+              key={val.id}
+              position={geoConverter(val.location.geoLocation)}
+              floatHeight={5}
+              data={val}
+            >
+              <mesh>
+                <boxGeometry args={[0.5, 0.5, 0.5]} />
+                <meshStandardMaterial color={["#c44"]} />
+              </mesh>
+            </FloatingMarker>
+          );
+        })}
         {/* Camera controls */}
         <MapControls
           enableRotate={true}
@@ -42,7 +54,7 @@ export default function MapScene() {
           minPolarAngle={Math.PI / 6}
           maxPolarAngle={Math.PI / 2.2}
           minDistance={10}
-          maxDistance={250}
+          maxDistance={80}
           zoomSpeed={0.6}
           enableDamping={true}
           dampingFactor={0.08}
