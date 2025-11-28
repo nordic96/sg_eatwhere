@@ -1,21 +1,33 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 
 import { Canvas } from "@react-three/fiber";
 import { MapControls } from "@react-three/drei";
 
 import TextureMap from "@/app/mapmodels/TextureMap";
 
-import { openSidebar } from "../Sidebar/Sidebar";
-import { FloatingMarker } from "../FloatingMarker/FloatingMarker";
+import { FloatingMarker } from "../markers/FloatingMarker/FloatingMarker";
 import { data } from "@/app/constants/data";
 import { geoConverter } from "@/app/utils/geographyUtil";
+import FullScreenLoader from "@/app/FullScreenLoader";
 import BuildingModel from "@/app/mapmodels/BuildingModel";
 
 export default function MapScene() {
+  const [ready, setReady] = useState(false);
+  if (!ready) {
+    return (
+      <FullScreenLoader
+        onReady={() => {
+          setTimeout(() => {
+            setReady(true);
+          }, 3000);
+        }}
+      />
+    );
+  }
   return (
     <Canvas camera={{ position: [0, 5, 8], fov: 45 }}>
-      <Suspense>
+      <Suspense fallback={null}>
         {/* Lighting */}
         <ambientLight intensity={1} />
         <directionalLight position={[5, 10, 5]} intensity={1} />

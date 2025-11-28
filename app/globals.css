@@ -18,6 +18,19 @@
     --foreground: #ededed;
   }
 } */
+@theme {
+  --color-primary: #A7292C;
+  --animate-fill: fill 3s linear forwards;
+  @keyframes fill {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+}
+
 
 body {
   background: var(--background);
@@ -36,16 +49,16 @@ body {
 
 header, footer {
   display: flex;
-  color: white;
-  background-color: black;
 }
 
 header {
   text-transform: uppercase;
   flex-direction: row;
+  border-bottom: 1px solid #888;
 }
 
 footer {
+  color: white;
   flex-direction: column;
   height: 80px;
 }
