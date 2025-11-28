@@ -1,22 +1,19 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import LabelContainer from "labelcontainer";
-import horizontalImage from "@/public/images/foodies_trail_sg_logo_horitontal.svg";
+import horizontalImage from "@/public/images/foodies_trail_sg_header_icon.svg";
 
 const Header = () => {
-  const lsInstance = LabelContainer.getInstance();
   return (
     <div>
       <header>
-        <div className="flex items-center justify-between grow px-8 py-2 shadow-lg">
-          <div className="flex gap-4 items-center">
+        <div className="flex items-center justify-between grow px-8 py-2 shadow-lg hover:text-primary">
+          <div className="flex gap-1 items-center">
             <div className="">
-              <Image src={horizontalImage} alt="logo" width={80} />
+              <Link href={"/"}>
+                <Image src={horizontalImage} alt="logo" width={150} />
+              </Link>
             </div>
-            <Link href={"/"}>
-              <p className="text-lg">{lsInstance.getLabel("header_title")}</p>
-            </Link>
           </div>
           <div>
             <Link href={"/about"}>About</Link>

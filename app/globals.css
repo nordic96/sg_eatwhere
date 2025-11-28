@@ -20,7 +20,7 @@
 } */
 @theme {
   --color-primary: #A7292C;
-  --animate-fill: fill 3s linear forwards;
+  --animate-fill: fill 2s linear forwards;
   @keyframes fill {
     0% {
       transform: scaleX(0);

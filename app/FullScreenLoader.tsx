@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useProgress } from "@react-three/drei";
 
 interface ProgressBarProps {
@@ -30,8 +31,11 @@ export default function FullScreenLoader(props: ScreenLoaderProps) {
     }
   }, [progress, props]);
 
-  return (
-    <div className="fixed inset-0 flex flex-col grow align-center justify-center">
+  if (typeof window === "undefined") {
+    return null;
+  }
+  return createPortal(
+    <div className="fixed bg-white inset-0 flex flex-col grow align-center justify-center">
       <div className={"absolute left-[50%] translate-x-[-50%] top-[40%] translate-y-[-40%]"}>
         <div className="flex flex-col gap-8 justify-center items-center">
           <div className={"w-[200px]"}>
@@ -42,6 +46,7 @@ export default function FullScreenLoader(props: ScreenLoaderProps) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.getElementById("root")!,
   );
 }
