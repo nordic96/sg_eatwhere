@@ -6,7 +6,7 @@ import horizontalImage from "@/public/images/header_icon.svg";
 const Header = () => {
   return (
     <div>
-      <header className="bg-primary text-white">
+      <header className="bg-primary text-white shadow-lg">
         <div className="flex items-center justify-between grow px-8 py-2 shadow-lg">
           <div className="flex gap-1 items-center">
             <div className="">
