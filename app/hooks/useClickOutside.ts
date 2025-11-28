@@ -1,20 +1,33 @@
-import { RefObject } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/refs */
+import { RefObject, useEffect, useRef } from "react";
 
-export default function useClickOutside<T extends HTMLElement | null>(
-  ref: RefObject<T>,
-  // eslint-disable-next-line no-unused-vars
+export default function useClickOutside<T extends HTMLElement>(
+  ref: RefObject<T | null>,
   handler: (event: MouseEvent | TouchEvent | FocusEvent) => void,
   eventType: "mousedown" | "touchstart" = "mousedown",
   eventListenerOptions?: boolean | AddEventListenerOptions,
 ) {
-  function eventHandler(e: MouseEvent | TouchEvent | FocusEvent) {
-    if (e.target === ref.current) {
-      return;
+  const latestHandler = useRef(handler);
+  latestHandler.current = handler;
+
+  useEffect(() => {
+    function listener(event: MouseEvent | TouchEvent | FocusEvent) {
+      const target = event.target as Node;
+      if (!target || !target.isConnected) {
+        return;
+      }
+
+      const outside = ref.current && !ref.current.contains(target);
+      if (!outside) {
+        return;
+      }
+
+      latestHandler.current(event);
     }
-    handler(e);
-    e.stopPropagation();
-  }
-  if (typeof document !== "undefined") {
-    document.addEventListener(eventType, eventHandler, eventListenerOptions);
-  }
+    window.addEventListener(eventType, listener, eventListenerOptions);
+    return () => {
+      window.removeEventListener(eventType, listener, eventListenerOptions);
+    };
+  }, [ref, eventType, eventListenerOptions]);
 }

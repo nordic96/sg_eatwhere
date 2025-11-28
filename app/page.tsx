@@ -4,7 +4,7 @@ import withSuspense from "./functions/withSuspense";
 
 function Home() {
   return (
-    <div className={"w-[97vw] h-[80vh] overflow-hiden"}>
+    <div className={"w-full h-[85vh] overflow-hiden pb-8"}>
       <MapScene />
       <Sidebar />
     </div>
