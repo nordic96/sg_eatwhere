@@ -39,6 +39,7 @@ body {
   display: flex;
   min-height: 100vh;
   font-size: 12px;
+  overflow-x: hidden;
 }
 
 #root {
@@ -47,19 +48,14 @@ body {
   flex-grow: 1;
 }
 
-header, footer {
-  display: flex;
-}
-
 header {
+  display: flex;
   flex-direction: row;
   border-bottom: 1px solid #888;
 }
 
 footer {
-  color: white;
-  flex-direction: column;
-  height: 80px;
+  border-top: 0.5px solid #999;
 }
 
 h1 {

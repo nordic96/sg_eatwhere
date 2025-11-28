@@ -1,17 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import horizontalImage from "@/public/images/foodies_trail_sg_header_icon.svg";
+import horizontalImage from "@/public/images/header_icon.svg";
 
 const Header = () => {
   return (
     <div>
-      <header>
-        <div className="flex items-center justify-between grow px-8 py-2 shadow-lg hover:text-primary">
+      <header className="bg-primary text-white">
+        <div className="flex items-center justify-between grow px-8 py-2 shadow-lg">
           <div className="flex gap-1 items-center">
             <div className="">
               <Link href={"/"}>
-                <Image src={horizontalImage} alt="logo" width={150} />
+                <Image src={horizontalImage} alt="logo" height={60} />
               </Link>
             </div>
           </div>
