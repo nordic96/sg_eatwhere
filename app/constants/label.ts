@@ -3,7 +3,7 @@ import { Labels } from "labelcontainer/build/types";
 export const labelData: Labels = {
   GLOBAL: {
     en: {
-      header_title: "The Foodie's Trail - Singapore",
+      header_title: "The Foodie's Trail - SG",
       intro_name: "John Doe",
       intro_secondary: "Software Engineer Based in CA, US",
       intro_desc: "Passionate, Self-Driven and Constant Learner",

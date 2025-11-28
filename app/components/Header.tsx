@@ -15,7 +15,7 @@ const Header = () => {
               <Image src={horizontalImage} alt="logo" width={80} />
             </div>
             <Link href={"/"}>
-              <p className="font-semibold text-md">{lsInstance.getLabel("header_title")}</p>
+              <p className="text-lg">{lsInstance.getLabel("header_title")}</p>
             </Link>
           </div>
           <div>
