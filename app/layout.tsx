@@ -41,8 +41,8 @@ export default function RootLayout({
         <div id="root">
           <Header />
           <Banner msg={lsInstance.getLabel("banner_text")} />
-          <div className={"flex justify-center grow w-screen h-scren"}>
-            <div className="flex grow flex-col px-8 max-w-[1440px]">{children}</div>
+          <div className={"flex justify-center grow h-scren"}>
+            <div className="flex grow flex-col max-w-[1440px] px-8">{children}</div>
           </div>
           <Footer />
         </div>
