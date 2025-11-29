@@ -20,6 +20,7 @@
 } */
 @theme {
   --color-primary: #A7292C;
+  --color-goldenmile: #F8D64F;
   --animate-fill: fill 2s linear forwards;
   @keyframes fill {
     0% {
