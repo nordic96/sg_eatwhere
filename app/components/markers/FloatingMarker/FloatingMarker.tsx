@@ -1,13 +1,17 @@
 "use client";
 
-// components/FloatingMarker.tsx
 import * as THREE from "three";
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useRef } from "react";
+
 import { ThreeElements, useFrame } from "@react-three/fiber";
 import { Billboard, Html } from "@react-three/drei";
-import PlaceContent from "../../PlaceContent/PlaceContent";
-import { FoodHeritage } from "@/app/constants/data";
 import { useRiceBowlModel } from "../RiceBowlModel";
+
+/** HTML */
+import PlaceContent from "../../PlaceContent/PlaceContent";
+import { Close } from "@mui/icons-material";
+import { FoodHeritage } from "@/app/constants/data";
+import { useHeritageStore } from "@/app/stores";
 
 type FloatingMarkerProps = ThreeElements["group"] & {
   children: ReactNode;
@@ -22,7 +26,7 @@ export const FloatingMarker = ({
   data,
   ...props
 }: FloatingMarkerProps) => {
-  const [open, setOpen] = useState(false);
+  const { heritageId, setHeritageId, unSelect } = useHeritageStore();
   const riceBowl = useRiceBowlModel();
   const floatRef = useRef<THREE.Group>(null);
 
@@ -40,16 +44,16 @@ export const FloatingMarker = ({
       <group>{children}</group>
 
       {/* Floating indicator above */}
-      <group ref={floatRef} scale={1} onClick={() => setOpen(true)}>
+      <group ref={floatRef} scale={1} onClick={() => setHeritageId(data.id)}>
         <primitive object={riceBowl} />
         <meshStandardMaterial emissive={"hotpink"} emissiveIntensity={2} toneMapped={false} />
       </group>
-      {open && (
+      {heritageId === data.id && (
         <Billboard position={[5, floatHeight + 10, 0]}>
           <Html>
             <div className={"flex w-[30vw] bg-white p-4 flex-col gap-2"}>
-              <div className="flex justify-end font-bold">
-                <button onClick={() => setOpen(false)}>X</button>
+              <div onClick={unSelect}>
+                <Close />
               </div>
               <PlaceContent data={data} />
             </div>
