@@ -39,7 +39,9 @@ export default function RootLayout({
       <body className={`${roboto.variable} ${publicSans.variable} antialiased`}>
         <div id="root">
           <Header />
-          <div className={"flex grow px-8 w-screen h-scren"}>{children}</div>
+          <div className={"flex justify-center grow w-screen h-scren"}>
+            <div className="flex grow flex-col px-8 max-w-[1440px]">{children}</div>
+          </div>
           <Footer />
         </div>
       </body>

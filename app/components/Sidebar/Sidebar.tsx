@@ -2,7 +2,7 @@
 
 import { data } from "@/app/constants/data";
 import useClickOutside from "@/app/hooks/useClickOutside";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import PlaceContent from "../PlaceContent/PlaceContent";
 
 export function openSidebar() {
@@ -37,7 +37,7 @@ export default function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      className="fixed flex flex-col right-0 bg-white top-9 grow px-8 py-8 min-w-[300px] w-[30vw] max-w-[500px] min-h-[80.5vh] transform translate-x-full opacity-0 transition-transform duration-500 ease-in-out"
+      className="fixed flex flex-col right-0 bg-white top-[76.5px] grow px-8 py-8 min-w-[300px] w-[30vw] max-w-[500px] min-h-[80.5vh] transform translate-x-full opacity-0 transition-transform duration-500 ease-in-out"
     >
       <div className="flex justify-end font-bold">
         <button onClick={onClose}>X</button>

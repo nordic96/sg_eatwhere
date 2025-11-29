@@ -9,7 +9,6 @@ import TextureMap from "@/app/mapmodels/TextureMap";
 import { FloatingMarker } from "../markers/FloatingMarker/FloatingMarker";
 import { data } from "@/app/constants/data";
 import { geoConverter } from "@/app/utils/geographyUtil";
-import BuildingModel from "@/app/mapmodels/BuildingModel";
 import dynamic from "next/dynamic";
 
 const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
@@ -35,12 +34,6 @@ export default function MapScene() {
 
           {/* The Map Plane */}
           <TextureMap />
-          <BuildingModel
-            position={[3, -0.01, 10]}
-            scaleMultiplier={0.007}
-            rotation={[0, Math.PI / 150, 0]}
-            assetPath={"/models/singapore_map.glb"}
-          />
           {/* Song Fa Bak Kut Teh Placeholder */}
           {data.map((val) => {
             return (
