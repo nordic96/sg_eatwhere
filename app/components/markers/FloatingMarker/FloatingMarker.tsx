@@ -10,8 +10,8 @@ import { useRiceBowlModel } from "../RiceBowlModel";
 /** HTML */
 import PlaceContent from "../../PlaceContent/PlaceContent";
 import { Close } from "@mui/icons-material";
-import { FoodHeritage } from "@/app/constants/data";
 import { useHeritageStore } from "@/app/stores";
+import { FoodHeritage } from "@/app/types";
 
 type FloatingMarkerProps = ThreeElements["group"] & {
   children: ReactNode;
