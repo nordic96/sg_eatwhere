@@ -53,6 +53,7 @@ export const data: FoodHeritage[] = [
     imgSource: [
       "https://www.dropbox.com/scl/fi/jtmyupd7bdu1665epxqmc/yatkayan_1.jpeg?rlkey=66gqlgfyc19852542e0uixd1n&st=ppikkcnu&raw=1",
       "https://www.dropbox.com/scl/fi/8ve3tapsitlhxeye1n617/yatkayan_2.jpeg?rlkey=ide4d8nipj2srolxdcjbn65ln&st=ew5jvt7j&raw=1",
+      "https://www.dropbox.com/scl/fi/qblw9f7d23wqapubecj5q/yatkayan_3.jpeg?rlkey=vorart56p46ay2mhxkn6k1af9&st=dzl7syc6&raw=1",
       "https://www.dropbox.com/scl/fi/yij93r59t6tklu3zbr1mh/yatkayan_4.jpeg?rlkey=agcccvv1r2op4l738jlowmixc&st=czgcczx4&raw=1",
     ],
     location: {
