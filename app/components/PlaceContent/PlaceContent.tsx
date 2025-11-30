@@ -68,7 +68,7 @@ export default function PlaceContent() {
       {/** Learn More Btn Container */}
       <div className="flex justify-center">
         <button
-          className="bg-primary py-1 px-4 rounded-lg text-white cursor-pointer"
+          className="bg-primary py-0.5 px-4 rounded-lg text-white cursor-pointer text-md font-bold"
           onClick={openMore}
         >
           Learn More

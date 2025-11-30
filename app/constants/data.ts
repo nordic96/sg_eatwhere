@@ -14,7 +14,7 @@ export const data: FoodHeritage[] = [
     ],
     location: {
       address: "76 Serangoon Rd, Singapore 217981",
-      gmapUrl: "https://maps.app.goo.gl/nQxPWjqA9NnKiUfK6",
+      gmapUrl: "https://maps.app.goo.gl/k7tFGxx6g8q9ooL49",
       mrt: ["little_india"],
       geoLocation: {
         latitude: 1.307901,
