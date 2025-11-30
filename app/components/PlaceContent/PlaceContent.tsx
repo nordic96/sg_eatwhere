@@ -82,7 +82,7 @@ function VerticalDivider() {
   return <span className="border-r-[0.1px] border-[#555] h-6"></span>;
 }
 
-function MrtLabel({ mrt }: { mrt: string }) {
+export function MrtLabel({ mrt }: { mrt: string }) {
   return (
     <span className="flex gap-1 items-center">
       <SubwayOutlined fontSize="small" />

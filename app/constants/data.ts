@@ -15,7 +15,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: "76 Serangoon Rd, Singapore 217981",
       gmapUrl: "https://maps.app.goo.gl/k7tFGxx6g8q9ooL49",
-      mrt: ["little_india"],
+      mrt: ["Little India"],
       geoLocation: {
         latitude: 1.307901,
         longitude: 103.853522,
@@ -37,7 +37,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: "7 Maxwell Rd, Amoy St, Food Centre, 02-119, 069111",
       gmapUrl: "https://maps.app.goo.gl/hmquZSaXGugMDH4q8",
-      mrt: ["tanjong_pagar"],
+      mrt: ["Tanjong Pagar"],
       geoLocation: {
         latitude: 1.2792477058866272,
         longitude: 103.84652104460396,
@@ -59,7 +59,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: "190 Middle Rd, #02-08 Fortune Centre, Singapore 188979",
       gmapUrl: "https://maps.app.goo.gl/kAc8EuW5MqgZDbWQA",
-      mrt: ["bencoolen"],
+      mrt: ["Bencoolen"],
       geoLocation: {
         latitude: 1.3007023528612611,
         longitude: 103.85208220385952,
