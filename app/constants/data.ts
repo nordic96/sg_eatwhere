@@ -46,7 +46,7 @@ export const data: FoodHeritage[] = [
   },
   {
     id: "yatkayan",
-    name: "Yat Ka Yan",
+    name: "Yat Ka Yan Dessert",
     desc: "Cantonese dessert",
     category: "dessert",
     bestDish: ["Durian Chendol", "Purple Rice with Icecream"],

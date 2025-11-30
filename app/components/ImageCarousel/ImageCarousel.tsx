@@ -26,13 +26,13 @@ export default function ImageCarousel({ img }: ImageCarouselProps) {
         className="absolute left-0 top-[50%] opacity-80 text-white bg-primary rounded-3xl cursor-pointer"
         onClick={onClickLeft}
       >
-        <West fontSize={"large"} />
+        <West fontSize={"medium"} />
       </div>
       <div
         className="absolute right-0 top-[50%] opacity-80 text-white bg-primary rounded-3xl cursor-pointer"
         onClick={onClickRight}
       >
-        <East fontSize={"large"} />
+        <East fontSize={"medium"} />
       </div>
       <div className="absolute px-1 top-0 right-0 opacity-80 rounded-xl bg-primary text-white">{`${currImg + 1} / ${img.length}`}</div>
     </div>
