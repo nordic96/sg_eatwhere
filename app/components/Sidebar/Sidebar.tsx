@@ -1,44 +1,32 @@
 "use client";
 
-import { data } from "@/app/constants/data";
 import useClickOutside from "@/app/hooks/useClickOutside";
 import { useRef } from "react";
-import PlaceContent from "../PlaceContent/PlaceContent";
 
-export function openSidebar() {
-  const sidebar = document.getElementById("list-sidebar");
-  sidebar?.classList.remove("translate-x-full", "opacity-0");
-  sidebar?.classList.add("translate-x-0", "opacity-100");
-}
-
-export function closeSidebar() {
-  const toggleButton = document.getElementById("list-sidebar");
-  if (toggleButton !== null) {
-    toggleButton.classList.remove("translate-x-0", "opacity-100");
-    toggleButton.classList.add("translate-x-full", "optacity-0");
-  }
-}
+import CloseButton from "../CloseButton/CloseButton";
+import { useHeritageStore } from "@/app/stores";
 
 export default function Sidebar() {
   const target = useRef(null);
-  useClickOutside(target, () => closeSidebar());
-  const selectedData = data.filter((x) => x.id === "songfa")[0];
+  const { closeMore } = useHeritageStore();
 
-  const onClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+  useClickOutside(target, closeMore);
+
+  const onClose = (e: React.MouseEvent) => {
     e.preventDefault();
-    closeSidebar();
+    closeMore();
   };
 
   return (
     <div
       id="list-sidebar"
       ref={target}
-      className="fixed flex flex-col right-0 bg-white top-[76.5px] grow px-8 py-8 min-w-[300px] w-[30vw] max-w-[500px] min-h-[80.5vh] transform translate-x-full opacity-0 transition-transform duration-500 ease-in-out"
+      className="fixed flex flex-col right-0 bg-white rounded-xl shadow-xl top-[58px] grow p-4 w-[384px] h-[85vh] max-h-[800px] transform translate-x-full opacity-0 transition-transform duration-500 ease-in-out"
     >
-      <div className="flex justify-end font-bold">
-        <button onClick={onClose}>X</button>
+      <div className="flex justify-end">
+        <CloseButton onClick={onClose} />
       </div>
-      <PlaceContent data={selectedData} />
+      {/* <PlaceContent /> */}
     </div>
   );
 }
