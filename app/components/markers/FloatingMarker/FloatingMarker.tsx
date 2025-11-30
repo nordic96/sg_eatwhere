@@ -9,7 +9,8 @@ import { useRiceBowlModel } from "../RiceBowlModel";
 
 /** HTML */
 import PlaceContent from "../../PlaceContent/PlaceContent";
-import { Close } from "@mui/icons-material";
+import CloseButton from "../../CloseButton/CloseButton";
+
 import { useHeritageStore } from "@/app/stores";
 import { FoodHeritage } from "@/app/types";
 
@@ -26,7 +27,7 @@ export const FloatingMarker = ({
   data,
   ...props
 }: FloatingMarkerProps) => {
-  const { heritageId, setHeritageId, unSelect } = useHeritageStore();
+  const { heritageId, setHeritageId, unSelect, clickedMore } = useHeritageStore();
   const riceBowl = useRiceBowlModel();
   const floatRef = useRef<THREE.Group>(null);
 
@@ -48,14 +49,12 @@ export const FloatingMarker = ({
         <primitive object={riceBowl} />
         <meshStandardMaterial emissive={"hotpink"} emissiveIntensity={2} toneMapped={false} />
       </group>
-      {heritageId === data.id && (
-        <Billboard position={[5, floatHeight + 10, 0]}>
+      {heritageId === data.id && !clickedMore && (
+        <Billboard position={[0, floatHeight + 15, 0]}>
           <Html>
-            <div className={"flex w-[30vw] bg-white p-4 flex-col gap-2"}>
-              <div onClick={unSelect}>
-                <Close />
-              </div>
-              <PlaceContent data={data} />
+            <div className={"flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2"}>
+              <CloseButton onClick={unSelect} />
+              <PlaceContent />
             </div>
           </Html>
         </Billboard>
