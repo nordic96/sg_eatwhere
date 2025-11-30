@@ -34,7 +34,7 @@ export default function PlaceContent() {
       <div className={"relative w-full h-[280px]"}>
         <ImageCarousel img={data.imgSource} />
         <span className="absolute bottom-0 left-[50%] translate-x-[-50%] text-center text-white">
-          <p className="text-4xl w-[200px] font-bold">{data.name}</p>
+          <p className="text-4xl w-[300px] font-bold">{data.name}</p>
           <p>{data.location.address}</p>
         </span>
       </div>

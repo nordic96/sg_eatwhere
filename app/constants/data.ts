@@ -26,7 +26,7 @@ export const data: FoodHeritage[] = [
   {
     id: "spicy_wife",
     name: "Spicy Wife Nasi Lemak",
-    desc: "Best Nasi Lemak",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.",
     category: "hawker",
     bestDish: ["aroma_chicken"],
     imgSource: [
@@ -47,7 +47,7 @@ export const data: FoodHeritage[] = [
   {
     id: "yatkayan",
     name: "Yat Ka Yan Dessert",
-    desc: "Cantonese dessert",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.",
     category: "dessert",
     bestDish: ["Durian Chendol", "Purple Rice with Icecream"],
     imgSource: [
@@ -65,5 +65,70 @@ export const data: FoodHeritage[] = [
         longitude: 103.85208220385952,
       },
     },
+  },
+  {
+    id: "nanhuachang",
+    name: "Nan Hua Chang Fish Head Steamboat",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.",
+    category: "restaurant",
+    bestDish: ["Grouper Fish Head Steamboat", "Prawn Paste Wings"],
+    imgSource: [
+      "https://www.dropbox.com/scl/fi/wd7x9t9zl7rmj00l0wwek/nanhuachang_1.jpeg?rlkey=y19ip0jrw8t6aixhwxmozuaeb&st=vyjswdw1&raw=1",
+      "https://www.dropbox.com/scl/fi/b2u7zent64n25d5iice9z/nanhuachang_2.jpeg?rlkey=yo4i67vceqyaxmrrjasucgol2&st=3x5uvqnd&raw=1",
+      "https://www.dropbox.com/scl/fi/jp1q86nc0ot5tkdknuk4o/nanhuachang_3.jpeg?rlkey=x7xz3mwe0e5rwwhvaffsu4rox&st=b1mrtryq&raw=1",
+      "https://www.dropbox.com/scl/fi/qu9pzyb4y3rrwmcfwojvk/nanhuachang_4.jpeg?rlkey=cxkgejwpt7t7pkwycto27f6do&st=isclv53v&raw=1",
+    ],
+    location: {
+      address: "462 Crawford Ln, #01-69/71, Singapore 190462",
+      gmapUrl: "https://maps.app.goo.gl/mBPhoS7j188iqBzv9",
+      mrt: ["Lavender", "Bugis", "Nicoll Highway"],
+      geoLocation: {
+        latitude: 1.3050929262076814,
+        longitude: 103.86270769767101,
+      },
+    },
+    website: "https://nanhwachong.com.sg/",
+  },
+  {
+    id: "jixiang",
+    name: "Ji Xiang Confectionery",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.",
+    category: "dessert",
+    bestDish: ["Yam AngKuKueh", "Sweet Bean AngKuKueh"],
+    imgSource: [
+      "https://www.dropbox.com/scl/fi/gbd9n8hba3gupskgpu5hz/jixiang_1.jpeg?rlkey=qd1hdjbqwmtwm9vt9m3g89s7q&st=w2zchi3u&raw=1",
+    ],
+    location: {
+      address: "1 Everton Park, #01-33, Singapore 081001",
+      gmapUrl: "https://maps.app.goo.gl/SJmoZAJ9NkfEEoau6",
+      mrt: ["Outram Park", "Tanjong Pagar"],
+      geoLocation: {
+        latitude: 1.277494311833965,
+        longitude: 103.84025398917902,
+      },
+    },
+    website: "https://jixiangeverton.com.sg/",
+  },
+  {
+    id: "oldtree",
+    name: "99 Old Trees Durian",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.",
+    category: "dessert",
+    bestDish: ["MaoShanWang Durian Chendol", "Durian Mousse"],
+    imgSource: [
+      "https://www.dropbox.com/scl/fi/luzbn6evsjcnxu7w815lx/oldtree_3.jpeg?rlkey=7ztnpo7z8zjcne8byb51p17qd&st=m4yy8mhd&raw=1",
+      "https://www.dropbox.com/scl/fi/oypbynnlcauxj8lwsvcwl/oldtree_1.jpeg?rlkey=msncgbf4sx4lznocgyonhp4ql&st=0bb9402w&raw=1",
+      "https://www.dropbox.com/scl/fi/frx08earlaxk9ow7p93g2/oldtree_2.jpeg?rlkey=as5r1gbb0951qbzqaj8txzwep&st=4vmns3vm&raw=1",
+    ],
+    location: {
+      address: "1 Teo Hong Rd, Singapore 088321",
+      gmapUrl: "https://maps.app.goo.gl/gqcUMstgvKDpAsZ7A",
+      mrt: ["Outram Park", "Tanjong Pagar"],
+      geoLocation: {
+        latitude: 1.280484583904037,
+        longitude: 103.84097249373312,
+      },
+    },
+    website: "https://www.99oldtrees.com/",
   },
 ];

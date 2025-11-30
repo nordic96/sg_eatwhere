@@ -52,7 +52,7 @@ export default function Sidebar() {
           </div>
           {/** Title Container */}
           <div className="flex flex-col items-center w-full">
-            <label className="text-3xl font-bold">{data.name}</label>
+            <label className="text-3xl font-bold text-center">{data.name}</label>
             <label className="text-md">{data.location.address}</label>
             <Divider />
             {/** Secondary Info Container */}
@@ -90,7 +90,13 @@ export default function Sidebar() {
             <label>{"Nearest MRT Station"}</label>
             <span className="flex justify-center items-center gap-1">
               <SubwayOutlined />
-              <label className="font-public-sans font-bold text-md">{data.location.mrt}</label>
+              <div className="flex flex-col">
+                {data.location.mrt.map((val, i) => (
+                  <label key={i} className="font-public-sans font-bold text-md">
+                    {val}
+                  </label>
+                ))}
+              </div>
             </span>
           </div>
           {/** Description Container */}
