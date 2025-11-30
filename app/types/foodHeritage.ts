@@ -6,6 +6,7 @@ export interface GeoLocation {
 export interface Location {
   address: string;
   gmapUrl: string;
+  mrt: string[];
   geoLocation: GeoLocation;
 }
 
@@ -18,10 +19,9 @@ export interface FoodHeritage {
   id: string;
   name: string;
   desc: string;
+  bestDish: string[];
   category: EateryCategory;
-  imgSource: string;
+  imgSource: string[];
   location: Location;
   website?: string;
-  keywords?: Keyword[];
-  awards?: string[];
 }
