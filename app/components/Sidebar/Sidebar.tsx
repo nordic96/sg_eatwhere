@@ -29,7 +29,7 @@ export default function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      className="fixed flex flex-col gap-2 right-0 bg-white rounded-xl shadow-xl top-[58px] grow p-4 w-[384px] h-[85vh] max-h-[800px] transform translate-x-full opacity-0 transition-transform duration-500 ease-in-out"
+      className="absolute flex flex-col gap-2 right-0 bg-white rounded-xl shadow-xl grow p-4 w-[384px] h-[85vh] max-h-[800px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
     >
       <div className="flex justify-end">
         <CloseButton onClick={onClose} />
