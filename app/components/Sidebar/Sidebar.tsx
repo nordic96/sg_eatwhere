@@ -13,7 +13,7 @@ import HighlightedText from "../HighlightText/HighlightText";
 
 export default function Sidebar() {
   const target = useRef(null);
-  const { closeMore, heritageId } = useHeritageStore();
+  const { closeMore, heritageId, getThemeStyle } = useHeritageStore();
 
   useClickOutside(target, closeMore);
   const data = useMemo(() => {
@@ -32,7 +32,7 @@ export default function Sidebar() {
       className="absolute flex flex-col gap-2 right-0 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
     >
       <div className="flex justify-end">
-        <CloseButton onClick={onClose} />
+        <CloseButton onClick={onClose} customClass={getThemeStyle()} />
       </div>
       {/* <PlaceContent /> */}
       {data && (

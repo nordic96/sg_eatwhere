@@ -1,1 +1,1 @@
-export type ThemeColor = "primary" | "goldenmile" | "orange" | "green" | "grey";
+export type ThemeColor = "primary" | "goldenmile" | "orange" | "green" | "grey" | "blue";

@@ -1,14 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { cn } from "@/app/utils";
 import { East, West } from "@mui/icons-material";
+import { ClassValue } from "clsx";
 import { useCallback, useState, useEffect } from "react";
 
 interface ImageCarouselProps {
   img: string[];
+  customClass?: string | ClassValue;
 }
 
-export default function ImageCarousel({ img }: ImageCarouselProps) {
+export default function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [currImg, setCurrImg] = useState<number>(0);
 
   useEffect(() => {
@@ -30,8 +33,12 @@ export default function ImageCarousel({ img }: ImageCarouselProps) {
     setCurrImg((index) => (index + 1) % img.length);
   }, [img]);
 
+  const containerBaseStyle = "w-full h-full relative overflow-x-hidden bg-monsoongrey";
+  const navBtnBaseStyle = "absolute top-[50%] opacity-80 text-white rounded-3xl cursor-pointer";
+  const currImgIndicatorBaseStyle = "absolute px-1 top-0 right-0 opacity-80 rounded-xl text-white";
+
   return (
-    <div className="w-full h-full relative bg-monsoongrey overflow-x-hidden">
+    <div className={cn(containerBaseStyle)}>
       <div
         id="carousel-wrapper"
         style={{ width: `${img.length * 100}%` }}
@@ -49,19 +56,15 @@ export default function ImageCarousel({ img }: ImageCarouselProps) {
           );
         })}
       </div>
-      <div
-        className="absolute left-0 top-[50%] opacity-80 text-white bg-primary rounded-3xl cursor-pointer"
-        onClick={onClickLeft}
-      >
+      <div className={cn(navBtnBaseStyle, { "left-0": true }, customClass)} onClick={onClickLeft}>
         <West fontSize={"medium"} />
       </div>
-      <div
-        className="absolute right-0 top-[50%] opacity-80 text-white bg-primary rounded-3xl cursor-pointer"
-        onClick={onClickRight}
-      >
+      <div className={cn(navBtnBaseStyle, { "right-0": true }, customClass)} onClick={onClickRight}>
         <East fontSize={"medium"} />
       </div>
-      <div className="absolute px-1 top-0 right-0 opacity-80 rounded-xl bg-primary text-white">{`${currImg + 1} / ${img.length}`}</div>
+      <div
+        className={cn(currImgIndicatorBaseStyle, customClass)}
+      >{`${currImg + 1} / ${img.length}`}</div>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export const FloatingMarker = ({
   data,
   ...props
 }: FloatingMarkerProps) => {
-  const { heritageId, setHeritageId, unSelect, clickedMore } = useHeritageStore();
+  const { heritageId, setHeritageId, unSelect, clickedMore, getThemeStyle } = useHeritageStore();
   const riceBowl = useRiceBowlModel();
   const floatRef = useRef<THREE.Group>(null);
 
@@ -53,7 +53,7 @@ export const FloatingMarker = ({
         <Billboard position={[0, floatHeight + 15, 0]}>
           <Html>
             <div className={"flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2"}>
-              <CloseButton onClick={unSelect} />
+              <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
               <PlaceContent />
             </div>
           </Html>

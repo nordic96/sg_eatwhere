@@ -8,9 +8,10 @@ import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from "@mui/icons-materia
 import React, { useMemo } from "react";
 import HighlightedText from "../HighlightText/HighlightText";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
+import { cn } from "@/app/utils";
 
 export default function PlaceContent() {
-  const { openMore } = useHeritageStore();
+  const { openMore, getThemeStyle } = useHeritageStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
   const data = useMemo(() => {
@@ -21,11 +22,13 @@ export default function PlaceContent() {
     return <div>No data selected</div>;
   }
 
+  const learnMoreBtnBaseStyle =
+    "bg-primary py-0.5 px-4 rounded-lg text-white cursor-pointer text-md font-bold";
   return (
     <div className="w-full flex flex-col gap-2">
       {/** Carousel Container */}
       <div className={"relative w-full h-[280px]"}>
-        <ImageCarousel img={data.imgSource} />
+        <ImageCarousel img={data.imgSource} customClass={getThemeStyle()} />
         <span className="absolute bottom-0 left-[50%] translate-x-[-50%] text-center text-white">
           <p className="text-4xl w-[300px] font-bold">{data.name}</p>
           <p>{data.location.address}</p>
@@ -60,10 +63,7 @@ export default function PlaceContent() {
       </div>
       {/** Learn More Btn Container */}
       <div className="flex justify-center">
-        <button
-          className="bg-primary py-0.5 px-4 rounded-lg text-white cursor-pointer text-md font-bold"
-          onClick={openMore}
-        >
+        <button className={cn(learnMoreBtnBaseStyle, getThemeStyle())} onClick={openMore}>
           Learn More
         </button>
       </div>

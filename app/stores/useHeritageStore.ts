@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { create } from "zustand";
-import { EateryCategory } from "../types";
+import { EateryCategory, ThemeColor } from "../types";
+import { ClassValue } from "clsx";
+import { ThemeRecord } from "../constants/theme";
+import { data } from "../constants/data";
 
 type State = {
   heritageId: string | null;
@@ -12,6 +15,7 @@ type Actions = {
   setHeritageId: (newId: string) => void;
   setFilter: (cat: EateryCategory) => void;
   unsetFilter: (cat: EateryCategory) => void;
+  getThemeStyle: () => ClassValue;
   openMore: () => void;
   closeMore: () => void;
   unSelect: () => void;
@@ -31,7 +35,7 @@ export function closeSidebar() {
   }
 }
 
-export const useHeritageStore = create<State & Actions>((set) => ({
+export const useHeritageStore = create<State & Actions>((set, get) => ({
   heritageId: null,
   filter: ["hawker", "dessert", "restaurant"],
   clickedMore: false,
@@ -49,4 +53,21 @@ export const useHeritageStore = create<State & Actions>((set) => ({
     closeSidebar();
   },
   unSelect: () => set({ heritageId: null }),
+  getThemeStyle: () => {
+    const heritageId = get().heritageId;
+    let theme: ThemeColor = "primary";
+    if (heritageId) {
+      const heritage = data.find((v) => v.id === heritageId);
+      if (heritage) {
+        theme = ThemeRecord[heritage.category];
+      }
+    }
+    const themeStyle: ClassValue = {
+      "bg-primary": !theme || theme === "primary",
+      "bg-gardengreen": theme && theme === "green",
+      "bg-monsoongrey": theme && theme === "grey",
+      "bg-outramorange": theme && theme === "orange",
+    };
+    return themeStyle;
+  },
 }));
