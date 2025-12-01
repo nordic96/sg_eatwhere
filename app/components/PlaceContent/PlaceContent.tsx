@@ -2,19 +2,12 @@
 "use client";
 
 import { useHeritageStore } from "@/app/stores";
-import { data as foodData } from "@/app/constants/data";
+import { CAT_ASSET_MAP, data as foodData } from "@/app/constants/data";
 import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from "@mui/icons-material";
 
 import React, { useMemo } from "react";
-import { EateryCategory } from "@/app/types";
 import HighlightedText from "../HighlightText/HighlightText";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
-
-const CAT_ASSET_MAP: Record<EateryCategory, string> = {
-  hawker: "/images/hawker_bowl.svg",
-  restaurant: "/images/rooter_bowl.svg",
-  dessert: "/images/hawker_bowl.svg",
-};
 
 export default function PlaceContent() {
   const { openMore } = useHeritageStore();

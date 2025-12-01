@@ -3,7 +3,7 @@
 
 import useClickOutside from "@/app/hooks/useClickOutside";
 import { useMemo, useRef } from "react";
-import { data as foodData } from "@/app/constants/data";
+import { CAT_ASSET_MAP, data as foodData } from "@/app/constants/data";
 
 import CloseButton from "../CloseButton/CloseButton";
 import { useHeritageStore } from "@/app/stores";
@@ -29,7 +29,7 @@ export default function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      className="absolute flex flex-col gap-2 right-0 bg-white rounded-xl shadow-xl grow p-4 w-[384px] h-[85vh] max-h-[800px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
+      className="absolute flex flex-col gap-2 right-0 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[750px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
     >
       <div className="flex justify-end">
         <CloseButton onClick={onClose} />
@@ -54,6 +54,10 @@ export default function Sidebar() {
           <div className="flex flex-col items-center w-full">
             <label className="text-3xl font-bold text-center">{data.name}</label>
             <label className="text-md">{data.location.address}</label>
+            <span className="flex gap-1 items-center">
+              <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={"icon"} />
+              <p>{data.category}</p>
+            </span>
             <Divider />
             {/** Secondary Info Container */}
             <div className="flex items-center gap-1">
