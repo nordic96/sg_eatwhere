@@ -97,12 +97,10 @@ export default function Sidebar() {
               <SubwayOutlined />
               <div className="flex gap-1">
                 {data.location.mrt.map((val, i) => (
-                  <>
-                    <label key={i} className="font-public-sans font-bold text-md">
-                      {val}
-                    </label>
+                  <div key={i}>
+                    <label className="font-public-sans font-bold text-md pr-1">{val}</label>
                     {i < data.location.mrt.length - 1 ? <VerticalDivider /> : undefined}
-                  </>
+                  </div>
                 ))}
               </div>
             </span>
