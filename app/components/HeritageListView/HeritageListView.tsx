@@ -19,7 +19,7 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-medium text-[16px]">{`${region} Region`}</label>
+      <label className="font-medium text-[14px]">{`${region} Region`}</label>
       <div className="flex flex-col gap-2">
         {heritageDataByRegion.map((location) => {
           return (
@@ -31,10 +31,10 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
               <img src={CAT_ASSET_MAP[location.category]} className={"h-8"} alt={"category-icon"} />
               {location.id === heritageId ? (
                 <HighlightedText>
-                  <label className="text-sm">{location.name}</label>
+                  <label className="text-[12px]">{location.name}</label>
                 </HighlightedText>
               ) : (
-                <label className="text-sm cursor-pointer">{location.name}</label>
+                <label className="text-[12px] cursor-pointer">{location.name}</label>
               )}
             </div>
           );

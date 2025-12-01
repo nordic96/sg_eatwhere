@@ -8,6 +8,7 @@ import hawkerBowl from "@/public/images/hawker_bowl.svg";
 import { useHeritageStore } from "@/app/stores";
 import { EateryCategory, EateryCategoryValues } from "@/app/types";
 import { useEffect } from "react";
+import { cn } from "@/app/utils";
 
 type ToggleFuncMap = Record<EateryCategory, (bool?: boolean) => void>;
 
@@ -77,17 +78,17 @@ export default function FilterBar({ labels }: FilterBarProps) {
     };
   }, [filter]);
 
+  const labelBaseStyle =
+    "rounded-xl px-2 py-1 shadow-lg font-regular border-[0.5px] hover:cursor-pointer";
   return (
     <div>
       <div className="py-2 flex gap-2">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 text-xs">
           <Image src={hawkerBowl} height={35} width={50} alt={"hawker_bowl"} />
           <div
             id={"filter_label_hawker"}
             onClick={onSelectFilter("hawker")}
-            className={
-              "rounded-xl px-2 py-1 shadow-lg font-bold border-[0.5px] hover:text-primary hover:cursor-pointer"
-            }
+            className={cn(labelBaseStyle, "hover:text-primary hover:cursor-pointer")}
           >
             <p>{labels.hawker}</p>
           </div>
@@ -97,9 +98,7 @@ export default function FilterBar({ labels }: FilterBarProps) {
           <div
             id={"filter_label_restaurant"}
             onClick={onSelectFilter("restaurant")}
-            className={
-              "rounded-xl px-2 py-1 shadow-lg font-bold border-[0.5px] hover:cursor-pointer"
-            }
+            className={labelBaseStyle}
           >
             <p>{labels.restaurant}</p>
           </div>
@@ -109,9 +108,7 @@ export default function FilterBar({ labels }: FilterBarProps) {
           <div
             id={"filter_label_dessert"}
             onClick={onSelectFilter("dessert")}
-            className={
-              "rounded-xl px-2 py-1 shadow-lg font-bold border-[0.5px] hover:cursor-pointer"
-            }
+            className={labelBaseStyle}
           >
             <p>{labels.dessert}</p>
           </div>

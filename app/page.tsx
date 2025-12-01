@@ -29,7 +29,7 @@ function Home() {
           "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
         }
       </p>
-      <div className="flex grow justify-between">
+      <div className="flex grow justify-between mt-8">
         {/** Food List Container */}
         <div className="grid grid-cols-4 w-[60%]">
           <HeritageListView region={"central"} />
