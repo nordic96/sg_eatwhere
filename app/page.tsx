@@ -7,7 +7,7 @@ import withSuspense from "./functions/withSuspense";
 function Home() {
   const lsInstance = LabelContainer.getInstance();
   return (
-    <div className={"flex flex-col grow h-[85vh] max-h-[800px] overflow-hiden pb-8"}>
+    <div className={"relative flex flex-col grow h-[85vh] max-h-[900px] overflow-hiden pb-8"}>
       <FilterBar
         labels={{
           hawker: lsInstance.getLabel("filter_hawker"),
@@ -17,6 +17,11 @@ function Home() {
       />
       <MapScene />
       <Sidebar />
+      <p className="italic text-[#333]">
+        {
+          "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
+        }
+      </p>
     </div>
   );
 }
