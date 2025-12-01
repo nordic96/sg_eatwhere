@@ -2,7 +2,7 @@
 import { Suspense, useState } from "react";
 
 import { Canvas } from "@react-three/fiber";
-import { MapControls } from "@react-three/drei";
+import { Cloud, MapControls, Sky, Stars } from "@react-three/drei";
 
 import TextureMap from "@/app/mapmodels/TextureMap";
 
@@ -31,9 +31,29 @@ export default function MapScene() {
       <Canvas camera={{ position: [0, 70, 8], fov: 45 }}>
         <Suspense fallback={null}>
           {/* Lighting */}
-          <ambientLight intensity={1} />
-          <directionalLight position={[5, 10, 5]} intensity={1} />
+          <ambientLight intensity={2.5} />
+          {/* The Cloud component can effectively act as a cloud plane or environment */}
+          <Sky
+            distance={4500}
+            sunPosition={[20, 10, -20]}
+            inclination={0}
+            azimuth={0.25}
+            mieDirectionalG={0.01}
+          />
 
+          {/* Optional: Add basic lighting or a black background */}
+          {/* <color attach="background" args={["#000000"]} /> */}
+
+          {/* Drei Stars component */}
+          <Stars
+            radius={100} // Sphere radius the stars are distributed on
+            depth={50} // Depth of the stars (distance from camera)
+            count={5000} // Number of stars
+            factor={4} // Size factor of the stars
+            saturation={0} // Saturation level (0 = white stars)
+            fade={true} // Fades stars in and out
+            speed={1} // Speed of the slight animation/movement
+          />
           {/* The Map Plane */}
           <TextureMap />
           {/* Song Fa Bak Kut Teh Placeholder */}
