@@ -46,7 +46,7 @@ export default function Sidebar() {
             />
             <div className="flex flex-wrap justify-center">
               {data.imgSource.slice(1).map((src, index) => (
-                <img className="w-24 h-[70px] object-cover" key={index} src={src} alt={""} />
+                <img className="w-[110px] h-[110px] object-cover" key={index} src={src} alt={""} />
               ))}
             </div>
           </div>
