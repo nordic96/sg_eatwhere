@@ -59,7 +59,7 @@ export default function Sidebar() {
               <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} />
               <p>{data.category}</p>
             </span>
-            <Divider />
+            <Divider className={getThemeStyle()} />
             {/** Secondary Info Container */}
             <div className="flex items-center gap-1">
               <a href={data.location.gmapUrl} target="_blank">
