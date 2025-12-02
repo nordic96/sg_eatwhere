@@ -16,6 +16,7 @@ import { useTranslations } from 'next-intl';
 export default function Sidebar() {
   const target = useRef(null);
   const t = useTranslations('Sidebar');
+  const mrtT = useTranslations('MRT');
   const catT = useTranslations('FoodCategory');
   const { closeMore, heritageId, getThemeStyle } = useHeritageStore();
 
@@ -99,9 +100,11 @@ export default function Sidebar() {
             <span className="flex justify-center items-center gap-1">
               <SubwayOutlined />
               <div className="flex gap-1">
-                {data.location.mrt.map((val, i) => (
+                {data.location.mrt.map((station, i) => (
                   <div key={i}>
-                    <label className="font-public-sans font-bold text-md pr-1">{val}</label>
+                    <label className="font-public-sans font-bold text-md pr-1 max-w-5 break-all">
+                      {mrtT(station)}
+                    </label>
                     {i < data.location.mrt.length - 1 ? <VerticalDivider /> : undefined}
                   </div>
                 ))}

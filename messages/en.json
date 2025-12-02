@@ -4,11 +4,19 @@
         "hawker": "Hawker Stall",
         "restaurant": "Restaurant"
     },
+    "MRT": {
+        "tanjong_pagar": "Tanjong Pagar",
+        "outram_park": "Outram Park",
+        "bencoolen": "Bencoolen",
+        "little_india": "Little India",
+        "lavender": "Lavender",
+        "bugis": "Bugis",
+        "nicoll_highway": "Nicoll Highway"
+    },
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
     },
     "HomePage": {
-        "title": "Hello World!",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
     },
     "FilterBar": {

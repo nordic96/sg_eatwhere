@@ -21,7 +21,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: '76 Serangoon Rd, Singapore 217981',
       gmapUrl: 'https://maps.app.goo.gl/k7tFGxx6g8q9ooL49',
-      mrt: ['Little India'],
+      mrt: ['little_india'],
       region: 'central',
       geoLocation: {
         latitude: 1.307901,
@@ -44,7 +44,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: '7 Maxwell Rd, Amoy St, Food Centre, 02-119, 069111',
       gmapUrl: 'https://maps.app.goo.gl/hmquZSaXGugMDH4q8',
-      mrt: ['Tanjong Pagar'],
+      mrt: ['tanjong_pagar'],
       region: 'central',
       geoLocation: {
         latitude: 1.2792477058866272,
@@ -67,7 +67,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: '190 Middle Rd, #02-08 Fortune Centre, Singapore 188979',
       gmapUrl: 'https://maps.app.goo.gl/kAc8EuW5MqgZDbWQA',
-      mrt: ['Bencoolen'],
+      mrt: ['bencoolen'],
       region: 'central',
       geoLocation: {
         latitude: 1.3007023528612611,
@@ -90,7 +90,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: '462 Crawford Ln, #01-69/71, Singapore 190462',
       gmapUrl: 'https://maps.app.goo.gl/mBPhoS7j188iqBzv9',
-      mrt: ['Lavender', 'Bugis', 'Nicoll Highway'],
+      mrt: ['lavender', 'bugis', 'nicoll_highway'],
       region: 'central',
       geoLocation: {
         latitude: 1.3050929262076814,
@@ -111,7 +111,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: '1 Everton Park, #01-33, Singapore 081001',
       gmapUrl: 'https://maps.app.goo.gl/SJmoZAJ9NkfEEoau6',
-      mrt: ['Outram Park', 'Tanjong Pagar'],
+      mrt: ['outram_park', 'tanjong_pagar'],
       region: 'central',
       geoLocation: {
         latitude: 1.277494311833965,
@@ -134,7 +134,7 @@ export const data: FoodHeritage[] = [
     location: {
       address: '1 Teo Hong Rd, Singapore 088321',
       gmapUrl: 'https://maps.app.goo.gl/gqcUMstgvKDpAsZ7A',
-      mrt: ['Outram Park', 'Tanjong Pagar'],
+      mrt: ['outram_park', 'tanjong_pagar'],
       region: 'central',
       geoLocation: {
         latitude: 1.280484583904037,

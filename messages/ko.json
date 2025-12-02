@@ -2,13 +2,21 @@
     "FoodCategory": {
         "dessert": "디저트",
         "hawker": "호커 점포",
-        "restaurant": "음식점"
+        "restaurant": "일반 음식점"
+    },
+    "MRT": {
+        "tanjong_pagar": "탄종파가",
+        "outram_park": "아우트람 파크",
+        "little_india": "리틀 인디아",
+        "bencoolen": "벤쿨랜",
+        "lavender": "라벤더",
+        "bugis": "부기스",
+        "nicoll_highway": "니콜 하이웨이"
     },
     "Banner": {
         "banner_msg": "이 웹사이트는 개인 웹사이트입니다. 개발자의 지독히 주관적인 기준과 현지 친구들의 추천, 개인 방문 경험등으로 선택해 소개하는 웹사이트니 가볍게 참고용으로 봐주시기 바랍니다!"
     },
     "HomePage": {
-        "title": "Hello World!",
         "map_disclaimer": "**지도의 척도와 음식점들의 위치는 다소 상이할수 있습니다, 참고용으로 보시기 바랍니다"
     },
     "FilterBar": {
