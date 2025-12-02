@@ -11,7 +11,8 @@ export interface Location {
 
 export type Keyword = "halal" | "pork" | "chicken" | "seafood" | "dessert";
 
-export type EateryCategory = "restaurant" | "dessert" | "hawker";
+export const EateryCategoryValues = ["restaurant", "dessert", "hawker"] as const;
+export type EateryCategory = (typeof EateryCategoryValues)[number];
 
 export interface FoodHeritage {
   id: string;

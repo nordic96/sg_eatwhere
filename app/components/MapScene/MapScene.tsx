@@ -10,6 +10,7 @@ import { FloatingMarker } from "../markers/FloatingMarker/FloatingMarker";
 import { data } from "@/app/constants/data";
 import { geoConverter } from "@/app/utils/geographyUtil";
 import dynamic from "next/dynamic";
+import { useHeritageStore } from "@/app/stores";
 
 const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
   ssr: false,
@@ -17,6 +18,7 @@ const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
 
 export default function MapScene() {
   const [ready, setReady] = useState(false);
+  const { filter } = useHeritageStore();
 
   function dummyOnReady() {
     setTimeout(() => {
@@ -35,21 +37,28 @@ export default function MapScene() {
           {/* The Map Plane */}
           <TextureMap />
           {/* Song Fa Bak Kut Teh Placeholder */}
-          {data.map((val) => {
-            return (
-              <FloatingMarker
-                key={val.id}
-                position={geoConverter(val.location.geoLocation)}
-                floatHeight={5}
-                data={val}
-              >
-                <mesh>
-                  <boxGeometry args={[0.5, 0.5, 0.5]} />
-                  <meshStandardMaterial color={["#c44"]} />
-                </mesh>
-              </FloatingMarker>
-            );
-          })}
+          {data
+            .filter((v) => {
+              if (filter.length === 0) {
+                return true;
+              }
+              return filter.includes(v.category);
+            })
+            .map((val) => {
+              return (
+                <FloatingMarker
+                  key={val.id}
+                  position={geoConverter(val.location.geoLocation)}
+                  floatHeight={5}
+                  data={val}
+                >
+                  <mesh>
+                    <boxGeometry args={[0.5, 0.5, 0.5]} />
+                    <meshStandardMaterial color={["#c44"]} />
+                  </mesh>
+                </FloatingMarker>
+              );
+            })}
           {/* Camera controls */}
           <MapControls
             enableRotate={true}

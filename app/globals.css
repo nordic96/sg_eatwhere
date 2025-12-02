@@ -21,6 +21,11 @@
 @theme {
   --color-primary: #A7292C;
   --color-goldenmile: #F8D64F;
+  --color-outramorange: #E15F2B;
+  --color-merlionwhite: #EBEBE9;
+  --color-gardengreen: #406E3B;
+  --color-marinablue: #0194FE;
+  --color-monsoongrey: #7F8B9B;
   --animate-fill: fill 2s linear forwards;
   @keyframes fill {
     0% {
