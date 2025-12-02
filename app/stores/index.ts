@@ -1,1 +1,1 @@
-export * from "./useHeritageStore";
+export * from './useHeritageStore';

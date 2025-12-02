@@ -28,7 +28,7 @@ export function createConverterTwoPoint(
 
   // guard for zero delta
   if (Math.abs(dLng) < 1e-12 || Math.abs(dLat) < 1e-12) {
-    console.warn("Calibration points are too close or share same lat/lng.");
+    console.warn('Calibration points are too close or share same lat/lng.');
   }
 
   // scales: scene-units per degree

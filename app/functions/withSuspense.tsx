@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense } from 'react';
 
 function withSuspense<P extends object>(
   Component: React.ComponentType<P>,

@@ -1,5 +1,5 @@
 // utils/calcEnvironment.ts
-import { Vector3Tuple } from "three";
+import { Vector3Tuple } from 'three';
 
 export interface EnvironmentState {
   isDay: boolean;
@@ -13,10 +13,10 @@ export interface EnvironmentState {
 export function calculateEnvironment(): EnvironmentState {
   // Get hour in Singapore time
   const hrs = Number(
-    new Date().toLocaleString("en-US", {
-      hour: "numeric",
+    new Date().toLocaleString('en-US', {
+      hour: 'numeric',
       hour12: false,
-      timeZone: "Asia/Singapore",
+      timeZone: 'Asia/Singapore',
     }),
   );
 

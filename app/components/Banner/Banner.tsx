@@ -1,5 +1,5 @@
-"use client";
-import Close from "@mui/icons-material/Close";
+'use client';
+import Close from '@mui/icons-material/Close';
 
 export interface BannerProps {
   msg?: string;
@@ -7,8 +7,8 @@ export interface BannerProps {
 
 export default function Banner({ msg }: BannerProps) {
   const onClose = () => {
-    const bannerEl = document.getElementById("banner");
-    bannerEl?.classList.toggle("hidden");
+    const bannerEl = document.getElementById('banner');
+    bannerEl?.classList.toggle('hidden');
   };
 
   return (
@@ -16,7 +16,7 @@ export default function Banner({ msg }: BannerProps) {
       <div className="flex grow px-8 py-0.5 max-w-[1440px] justify-between items-center">
         {msg}
         <div onClick={onClose}>
-          <Close fontSize={"small"} />
+          <Close fontSize={'small'} />
         </div>
       </div>
     </div>

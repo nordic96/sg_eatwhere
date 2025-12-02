@@ -1,3 +1,3 @@
-import HeaderLabel from "./HeaderLabel";
+import HeaderLabel from './HeaderLabel';
 
 export default HeaderLabel;

@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
-import { create } from "zustand";
-import { EateryCategory, ThemeColor } from "../types";
-import { ClassValue } from "clsx";
-import { ThemeRecord } from "../constants/theme";
-import { data } from "../constants/data";
+import { create } from 'zustand';
+import { EateryCategory, ThemeColor } from '../types';
+import { ClassValue } from 'clsx';
+import { ThemeRecord } from '../constants/theme';
+import { data } from '../constants/data';
 
 type State = {
   heritageId: string | null;
@@ -22,22 +21,22 @@ type Actions = {
 };
 
 export function openSidebar() {
-  const sidebar = document.getElementById("list-sidebar");
-  sidebar?.classList.remove("translate-y-[-120%]", "opacity-0");
-  sidebar?.classList.add("translate-y-0", "opacity-100");
+  const sidebar = document.getElementById('list-sidebar');
+  sidebar?.classList.remove('translate-y-[-120%]', 'opacity-0');
+  sidebar?.classList.add('translate-y-0', 'opacity-100');
 }
 
 export function closeSidebar() {
-  const toggleButton = document.getElementById("list-sidebar");
+  const toggleButton = document.getElementById('list-sidebar');
   if (toggleButton !== null) {
-    toggleButton.classList.remove("translate-y-0", "opacity-100");
-    toggleButton.classList.add("translate-y-[-120%]", "optacity-0");
+    toggleButton.classList.remove('translate-y-0', 'opacity-100');
+    toggleButton.classList.add('translate-y-[-120%]', 'optacity-0');
   }
 }
 
 export const useHeritageStore = create<State & Actions>((set, get) => ({
   heritageId: null,
-  filter: ["hawker", "dessert", "restaurant"],
+  filter: ['hawker', 'dessert', 'restaurant'],
   clickedMore: false,
   setHeritageId: (newId: string) => set({ heritageId: newId }),
   setFilter: (newFilter: EateryCategory) =>
@@ -55,7 +54,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
   unSelect: () => set({ heritageId: null }),
   getThemeStyle: () => {
     const heritageId = get().heritageId;
-    let theme: ThemeColor = "primary";
+    let theme: ThemeColor = 'primary';
     if (heritageId) {
       const heritage = data.find((v) => v.id === heritageId);
       if (heritage) {
@@ -63,10 +62,10 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
       }
     }
     const themeStyle: ClassValue = {
-      "bg-primary": !theme || theme === "primary",
-      "bg-gardengreen": theme && theme === "green",
-      "bg-monsoongrey": theme && theme === "grey",
-      "bg-outramorange": theme && theme === "orange",
+      'bg-primary': !theme || theme === 'primary',
+      'bg-gardengreen': theme && theme === 'green',
+      'bg-monsoongrey': theme && theme === 'grey',
+      'bg-outramorange': theme && theme === 'orange',
     };
     return themeStyle;
   },

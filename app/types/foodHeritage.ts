@@ -11,11 +11,11 @@ export interface Location {
   geoLocation: GeoLocation;
 }
 
-export type Region = "central" | "east" | "west" | "north";
+export type Region = 'central' | 'east' | 'west' | 'north';
 
-export type Keyword = "halal" | "pork" | "chicken" | "seafood" | "dessert";
+export type Keyword = 'halal' | 'pork' | 'chicken' | 'seafood' | 'dessert';
 
-export const EateryCategoryValues = ["restaurant", "dessert", "hawker"] as const;
+export const EateryCategoryValues = ['restaurant', 'dessert', 'hawker'] as const;
 export type EateryCategory = (typeof EateryCategoryValues)[number];
 
 export interface FoodHeritage {

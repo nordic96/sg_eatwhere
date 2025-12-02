@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/refs */
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from 'react';
 
 export default function useClickOutside<T extends HTMLElement>(
   ref: RefObject<T | null>,
   handler: (event: MouseEvent | TouchEvent | FocusEvent) => void,
-  eventType: "mousedown" | "touchstart" = "mousedown",
+  eventType: 'mousedown' | 'touchstart' = 'mousedown',
   eventListenerOptions?: boolean | AddEventListenerOptions,
 ) {
   const latestHandler = useRef(handler);
