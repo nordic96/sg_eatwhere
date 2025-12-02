@@ -5,7 +5,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <>
-      <footer className={"flex grow pt-8 justify-center"}>
+      <footer className={"flex grow pt-8 justify-center max-h-[200px]"}>
         <div className="flex flex-col grow max-w-[1440px] px-8 justify-between">
           <div className="gap-8 flex">
             <div className="w-[200px]">

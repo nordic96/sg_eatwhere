@@ -2,7 +2,7 @@
 
 import { data } from "@/app/constants/data";
 import useClickOutside from "@/app/hooks/useClickOutside";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import PlaceContent from "../PlaceContent/PlaceContent";
 
 export function openSidebar() {
@@ -23,10 +23,6 @@ export default function Sidebar() {
   const target = useRef(null);
   useClickOutside(target, () => closeSidebar());
   const selectedData = data.filter((x) => x.id === "songfa")[0];
-
-  useEffect(() => {
-    openSidebar();
-  }, []);
 
   const onClose = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
