@@ -6,8 +6,12 @@ export interface GeoLocation {
 export interface Location {
   address: string;
   gmapUrl: string;
+  mrt: string[];
+  region: Region;
   geoLocation: GeoLocation;
 }
+
+export type Region = "central" | "east" | "west" | "north";
 
 export type Keyword = "halal" | "pork" | "chicken" | "seafood" | "dessert";
 
@@ -18,10 +22,9 @@ export interface FoodHeritage {
   id: string;
   name: string;
   desc: string;
+  bestDish: string[];
   category: EateryCategory;
-  imgSource: string;
+  imgSource: string[];
   location: Location;
   website?: string;
-  keywords?: Keyword[];
-  awards?: string[];
 }

@@ -12,11 +12,11 @@ export default function Banner({ msg }: BannerProps) {
   };
 
   return (
-    <div id="banner" className="flex bg-goldenmile justify-center font-bold">
-      <div className="flex grow px-8 py-1 max-w-[1440px] justify-between items-center">
+    <div id="banner" className="flex bg-goldenmile justify-center font-medium text-xs">
+      <div className="flex grow px-8 py-0.5 max-w-[1440px] justify-between items-center">
         {msg}
         <div onClick={onClose}>
-          <Close />
+          <Close fontSize={"small"} />
         </div>
       </div>
     </div>

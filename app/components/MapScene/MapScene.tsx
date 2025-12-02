@@ -4,13 +4,12 @@ import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { MapControls } from "@react-three/drei";
 
-import TextureMap from "@/app/mapmodels/TextureMap";
-
 import { FloatingMarker } from "../markers/FloatingMarker/FloatingMarker";
 import { data } from "@/app/constants/data";
 import { geoConverter } from "@/app/utils/geographyUtil";
 import dynamic from "next/dynamic";
 import { useHeritageStore } from "@/app/stores";
+import MapEnvironment from "@/app/mapmodels/MapEnvironment";
 
 const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
   ssr: false,
@@ -19,31 +18,18 @@ const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
 export default function MapScene() {
   const [ready, setReady] = useState(false);
   const { filter } = useHeritageStore();
-
   function dummyOnReady() {
-    setTimeout(() => {
-      setReady(true);
-    }, 2000);
+    setTimeout(() => setReady(true), 2000);
   }
 
   return (
     <>
-      <Canvas camera={{ position: [0, 70, 8], fov: 45 }}>
+      <Canvas camera={{ position: [0, 70, 8], fov: 45 }} onClick={(e) => e.stopPropagation()}>
         <Suspense fallback={null}>
-          {/* Lighting */}
-          <ambientLight intensity={1} />
-          <directionalLight position={[5, 10, 5]} intensity={1} />
-
-          {/* The Map Plane */}
-          <TextureMap />
-          {/* Song Fa Bak Kut Teh Placeholder */}
+          <MapEnvironment />
+          {/* --- Markers --- */}
           {data
-            .filter((v) => {
-              if (filter.length === 0) {
-                return true;
-              }
-              return filter.includes(v.category);
-            })
+            .filter((v) => filter.length === 0 || filter.includes(v.category))
             .map((val) => {
               return (
                 <FloatingMarker
@@ -59,11 +45,12 @@ export default function MapScene() {
                 </FloatingMarker>
               );
             })}
-          {/* Camera controls */}
+
+          {/* --- Camera Controls --- */}
           <MapControls
-            enableRotate={true}
-            enablePan={true}
-            enableZoom={true}
+            enableRotate
+            enablePan
+            enableZoom
             panSpeed={0.8}
             rotateSpeed={0.4}
             minPolarAngle={Math.PI / 6}
@@ -71,11 +58,13 @@ export default function MapScene() {
             minDistance={10}
             maxDistance={80}
             zoomSpeed={0.6}
-            enableDamping={true}
+            enableDamping
+            makeDefault
             dampingFactor={0.08}
           />
         </Suspense>
       </Canvas>
+
       {!ready && <DynamicPortalLoader onReady={dummyOnReady} />}
     </>
   );
