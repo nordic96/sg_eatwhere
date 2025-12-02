@@ -1,0 +1,25 @@
+{
+    "FilterBar": {
+        "hawker": "호커",
+        "restaurant": "음식점",
+        "dessert": "디저트"
+    },
+    "HeritageListView": {
+        "central": "중부 지역",
+        "east": "동부 지역",
+        "west": "서부 지역",
+        "north": "북부 지역"
+    },
+    "CardView": {
+        "learnmore": "더 보기"
+    },
+    "Sidebar": {
+        "dessert": "디저트",
+        "hawker": "호커 점포",
+        "restaurant": "음식점",
+        "map": "지도",
+        "website": "웹사이트",
+        "must-try": "강력 추천 메뉴",
+        "nearest-mrt": "근처 MRT(지하철)역"
+    }
+}

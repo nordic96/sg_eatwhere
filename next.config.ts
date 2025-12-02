@@ -1,10 +1,12 @@
 import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ['songfa.com.sg', 'www.komalavilas.com.sg', 'danielfooddiary.com', 'sethlui.com'],
+    domains: [],
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);

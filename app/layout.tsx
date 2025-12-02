@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import LabelContainer from 'labelcontainer';
 import { labelData } from './constants/label';
 import Banner from './components/Banner/Banner';
+import { NextIntlClientProvider } from 'next-intl';
 
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
@@ -38,14 +39,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} ${publicSans.variable} antialiased`}>
-        <div id="root">
-          <Header />
-          <Banner msg={lsInstance.getLabel('banner_text')} />
-          <div className={'flex justify-center grow h-scren'}>
-            <div className="flex grow flex-col max-w-[1440px] px-8">{children}</div>
+        <NextIntlClientProvider>
+          <div id="root">
+            <Header />
+            <Banner msg={lsInstance.getLabel('banner_text')} />
+            <div className={'flex justify-center grow h-scren'}>
+              <div className="flex grow flex-col max-w-[1440px] px-8">{children}</div>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

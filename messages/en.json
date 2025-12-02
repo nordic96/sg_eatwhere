@@ -1,0 +1,28 @@
+{
+    "HomePage": {
+        "title": "Hello World!"
+    },
+    "FilterBar": {
+        "hawker": "Hawker Stalls",
+        "restaurant": "Restaurants",
+        "dessert": "Dessert"
+    },
+    "HeritageListView": {
+        "central": "Central Region",
+        "east": "East Region",
+        "west": "West Region",
+        "north": "North Region"
+    },
+    "CardView": {
+        "learnmore": "Learn More"
+    },
+    "Sidebar": {
+        "dessert": "Dessert",
+        "hawker": "Hawker Stall",
+        "restaurant": "Restaurant",
+        "map": "Map",
+        "website": "Website",
+        "must-try": "Must Try Dish",
+        "nearest-mrt": "Nearest MRT Station"
+    }
+}
