@@ -1,16 +1,16 @@
+/* eslint-disable react-hooks/purity */
 "use client";
 import { Suspense, useState } from "react";
 
 import { Canvas } from "@react-three/fiber";
-import { Cloud, MapControls, Sky, Stars } from "@react-three/drei";
-
-import TextureMap from "@/app/mapmodels/TextureMap";
+import { MapControls } from "@react-three/drei";
 
 import { FloatingMarker } from "../markers/FloatingMarker/FloatingMarker";
 import { data } from "@/app/constants/data";
 import { geoConverter } from "@/app/utils/geographyUtil";
 import dynamic from "next/dynamic";
 import { useHeritageStore } from "@/app/stores";
+import MapEnvironment from "@/app/mapmodels/MapEnvironment";
 
 const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
   ssr: false,
@@ -19,51 +19,18 @@ const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
 export default function MapScene() {
   const [ready, setReady] = useState(false);
   const { filter } = useHeritageStore();
-
   function dummyOnReady() {
-    setTimeout(() => {
-      setReady(true);
-    }, 2000);
+    setTimeout(() => setReady(true), 2000);
   }
 
   return (
     <>
-      <Canvas camera={{ position: [0, 70, 8], fov: 45 }}>
+      <Canvas camera={{ position: [0, 70, 8], fov: 45 }} onClick={(e) => e.stopPropagation()}>
         <Suspense fallback={null}>
-          {/* Lighting */}
-          <ambientLight intensity={2.5} />
-          {/* The Cloud component can effectively act as a cloud plane or environment */}
-          <Sky
-            distance={4500}
-            sunPosition={[20, 10, -20]}
-            inclination={0}
-            azimuth={0.25}
-            mieDirectionalG={0.01}
-          />
-
-          {/* Optional: Add basic lighting or a black background */}
-          {/* <color attach="background" args={["#000000"]} /> */}
-
-          {/* Drei Stars component */}
-          <Stars
-            radius={100} // Sphere radius the stars are distributed on
-            depth={50} // Depth of the stars (distance from camera)
-            count={5000} // Number of stars
-            factor={4} // Size factor of the stars
-            saturation={0} // Saturation level (0 = white stars)
-            fade={true} // Fades stars in and out
-            speed={1} // Speed of the slight animation/movement
-          />
-          {/* The Map Plane */}
-          <TextureMap />
-          {/* Song Fa Bak Kut Teh Placeholder */}
+          <MapEnvironment />
+          {/* --- Markers --- */}
           {data
-            .filter((v) => {
-              if (filter.length === 0) {
-                return true;
-              }
-              return filter.includes(v.category);
-            })
+            .filter((v) => filter.length === 0 || filter.includes(v.category))
             .map((val) => {
               return (
                 <FloatingMarker
@@ -79,11 +46,12 @@ export default function MapScene() {
                 </FloatingMarker>
               );
             })}
-          {/* Camera controls */}
+
+          {/* --- Camera Controls --- */}
           <MapControls
-            enableRotate={true}
-            enablePan={true}
-            enableZoom={true}
+            enableRotate
+            enablePan
+            enableZoom
             panSpeed={0.8}
             rotateSpeed={0.4}
             minPolarAngle={Math.PI / 6}
@@ -91,11 +59,13 @@ export default function MapScene() {
             minDistance={10}
             maxDistance={80}
             zoomSpeed={0.6}
-            enableDamping={true}
+            enableDamping
+            makeDefault
             dampingFactor={0.08}
           />
         </Suspense>
       </Canvas>
+
       {!ready && <DynamicPortalLoader onReady={dummyOnReady} />}
     </>
   );
