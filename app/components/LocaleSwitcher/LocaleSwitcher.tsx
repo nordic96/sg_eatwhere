@@ -1,22 +1,44 @@
-'use client';
+import { useRef } from 'react';
 
-import { LocaleIconMap } from '@/app/constants/localeIconMap';
+import { useLocale } from 'next-intl';
 import useLangNames from '@/i18n/useLangNames';
 
-export default function LocaleSwitcher({ locale }: { locale: string }) {
-  const langNames = useLangNames(locale);
-  function onClick(e: React.MouseEvent<HTMLDivElement>) {
-    e.preventDefault();
-    cookieStore.set('locale', locale);
-    location.reload();
-  }
+import { useAppStore } from '@/app/stores';
+
+import Translate from '@mui/icons-material/Translate';
+import LocaleSwitch from '../LocaleSwitch/LocaleSwitch';
+import useClickOutside from '@/app/hooks/useClickOutside';
+import { LocaleIconMap } from '@/app/constants/localeIconMap';
+
+export default function LocaleSwitcher() {
+  const currentLocale = useLocale();
+  const ref = useRef(null);
+  const { localeOpen, openLocale, closeLocale } = useAppStore();
+  const localeNames = useLangNames(currentLocale);
+  useClickOutside(ref, closeLocale);
+
   return (
-    <div
-      onClick={onClick}
-      className="flex gap-4 items-center justify-between text-lg cursor-pointer"
-    >
-      <span className={LocaleIconMap[locale]}></span>
-      <label className="text-sm hover:text-primary cursor-pointer">{langNames.of(locale)}</label>
+    <div className="relative w-[100px]">
+      <div className="flex gap-4 justify-between items-center">
+        <Translate fontSize="small" />
+        <div className="text-sm items-center flex flex-1">
+          <span className={LocaleIconMap[currentLocale]}></span>
+          <label onClick={openLocale} className="text-sm p-1 cursor-pointer">
+            {localeNames.of(currentLocale)}
+          </label>
+        </div>
+      </div>
+      {localeOpen && (
+        <div
+          ref={ref}
+          id="locale-swticher"
+          className="absolute shadow-xl border-[#333] border top-[38px] right-0 z-999 bg-[#f3f3f3] text-black rounded-b-lg w-[116px] flex flex-col p-2 gap-1"
+        >
+          <LocaleSwitch locale={'en'} />
+          <LocaleSwitch locale={'ko'} />
+          <LocaleSwitch locale={'ja'} />
+        </div>
+      )}
     </div>
   );
 }
