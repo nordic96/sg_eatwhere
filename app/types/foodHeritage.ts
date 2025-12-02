@@ -7,8 +7,11 @@ export interface Location {
   address: string;
   gmapUrl: string;
   mrt: string[];
+  region: Region;
   geoLocation: GeoLocation;
 }
+
+export type Region = "central" | "east" | "west" | "north";
 
 export type Keyword = "halal" | "pork" | "chicken" | "seafood" | "dessert";
 

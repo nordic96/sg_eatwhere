@@ -9,6 +9,7 @@ import React, { useMemo } from "react";
 import HighlightedText from "../HighlightText/HighlightText";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import { cn } from "@/app/utils";
+import VerticalDivider from "../VerticalDivider/VerticalDivider";
 
 export default function PlaceContent() {
   const { openMore, getThemeStyle } = useHeritageStore();
@@ -59,7 +60,10 @@ export default function PlaceContent() {
             ))}
           </div>
         </span>
-        <p>{data.desc.substring(0, Math.min(data.desc.length, 100))}</p>
+        <p className="font-light text-xs">
+          {data.desc.substring(0, Math.min(data.desc.length, 100))}
+          {data.desc.length > 100 ? "..." : ""}
+        </p>
       </div>
       {/** Learn More Btn Container */}
       <div className="flex justify-center">
@@ -69,10 +73,6 @@ export default function PlaceContent() {
       </div>
     </div>
   );
-}
-
-function VerticalDivider() {
-  return <span className="border-r-[0.1px] border-[#555] h-6"></span>;
 }
 
 export function MrtLabel({ mrt }: { mrt: string }) {

@@ -13,6 +13,8 @@ import CloseButton from "../../CloseButton/CloseButton";
 
 import { useHeritageStore } from "@/app/stores";
 import { FoodHeritage } from "@/app/types";
+import { Glow } from "@/app/mapmodels/GlowSprite";
+import { useEnvironmentStore } from "@/app/stores/useEnvironmentStore";
 
 type FloatingMarkerProps = ThreeElements["group"] & {
   children: ReactNode;
@@ -27,6 +29,7 @@ export const FloatingMarker = ({
   data,
   ...props
 }: FloatingMarkerProps) => {
+  const { isNight } = useEnvironmentStore();
   const { heritageId, setHeritageId, unSelect, clickedMore, getThemeStyle } = useHeritageStore();
   const riceBowl = useRiceBowlModel();
   const floatRef = useRef<THREE.Group>(null);
@@ -42,15 +45,23 @@ export const FloatingMarker = ({
   return (
     <group position={position} {...props}>
       {/* Base object (e.g., SongFa, MBS) */}
-      <group>{children}</group>
+      <group>
+        {children}
+        {isNight && (
+          <Glow
+            color="#ffcc88"
+            intensity={2}
+            scale={[3, 3]} // oval
+          />
+        )}
+      </group>
 
       {/* Floating indicator above */}
       <group ref={floatRef} scale={1} onClick={() => setHeritageId(data.id)}>
         <primitive object={riceBowl} />
-        <meshStandardMaterial emissive={"hotpink"} emissiveIntensity={2} toneMapped={false} />
       </group>
       {heritageId === data.id && !clickedMore && (
-        <Billboard position={[0, floatHeight + 15, 0]}>
+        <Billboard position={[0, floatHeight + 10, 0]}>
           <Html>
             <div className={"flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2"}>
               <CloseButton onClick={unSelect} customClass={getThemeStyle()} />

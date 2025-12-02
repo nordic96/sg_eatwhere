@@ -10,6 +10,7 @@ import { useHeritageStore } from "@/app/stores";
 import Divider from "../Divider";
 import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from "@mui/icons-material";
 import HighlightedText from "../HighlightText/HighlightText";
+import VerticalDivider from "../VerticalDivider/VerticalDivider";
 
 export default function Sidebar() {
   const target = useRef(null);
@@ -53,7 +54,7 @@ export default function Sidebar() {
           {/** Title Container */}
           <div className="flex flex-col items-center w-full">
             <label className="text-3xl font-bold text-center">{data.name}</label>
-            <label className="text-md">{data.location.address}</label>
+            <label className="text-xs font-light">{data.location.address}</label>
             <span className="flex gap-1 items-center">
               <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={"icon"} />
               <p>{data.category}</p>
@@ -94,18 +95,19 @@ export default function Sidebar() {
             <label>{"Nearest MRT Station"}</label>
             <span className="flex justify-center items-center gap-1">
               <SubwayOutlined />
-              <div className="flex flex-col">
+              <div className="flex gap-1">
                 {data.location.mrt.map((val, i) => (
-                  <label key={i} className="font-public-sans font-bold text-md">
-                    {val}
-                  </label>
+                  <div key={i}>
+                    <label className="font-public-sans font-bold text-md pr-1">{val}</label>
+                    {i < data.location.mrt.length - 1 ? <VerticalDivider /> : undefined}
+                  </div>
                 ))}
               </div>
             </span>
           </div>
           {/** Description Container */}
           <div>
-            <p>{data.desc}</p>
+            <p className="font-light text-xs">{data.desc}</p>
           </div>
         </div>
       )}
