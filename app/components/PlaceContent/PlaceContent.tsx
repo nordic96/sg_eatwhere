@@ -10,8 +10,10 @@ import HighlightedText from '../HighlightText/HighlightText';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import { cn } from '@/app/utils';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
+import { useTranslations } from 'next-intl';
 
 export default function PlaceContent() {
+  const t = useTranslations('CardView');
   const { openMore, getThemeStyle } = useHeritageStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
@@ -68,7 +70,7 @@ export default function PlaceContent() {
       {/** Learn More Btn Container */}
       <div className="flex justify-center">
         <button className={cn(learnMoreBtnBaseStyle, getThemeStyle())} onClick={openMore}>
-          Learn More
+          {t('learnmore')}
         </button>
       </div>
     </div>
