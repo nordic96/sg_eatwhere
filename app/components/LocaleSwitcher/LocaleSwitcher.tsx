@@ -19,12 +19,12 @@ export default function LocaleSwitcher() {
   useClickOutside(ref, closeLocale);
 
   return (
-    <div className="relative w-[100px]">
+    <div className="relative w-[130px]">
       <div className="flex grow justify-between items-center">
         <Translate fontSize="small" />
         <div className="text-sm items-center flex justify-end gap-1">
           <span className={LocaleIconMap[currentLocale]}></span>
-          <label onClick={openLocale} className="text-sm cursor-pointer">
+          <label onClick={openLocale} className="text-sm cursor-pointer pr-2">
             {localeNames.of(currentLocale)}
           </label>
         </div>
@@ -33,7 +33,7 @@ export default function LocaleSwitcher() {
         <div
           ref={ref}
           id="locale-swticher"
-          className="absolute shadow-xl border-[#333] border top-[38px] right-0 z-999 bg-[#f3f3f3] text-black rounded-b-lg w-[116px] flex flex-col p-2 gap-1"
+          className="absolute shadow-xl border-[#333] border top-[38px] right-0 z-999 bg-[#f3f3f3] text-black rounded-b-lg w-[146px] flex flex-col p-2 gap-1"
         >
           {AvailableLocales.map((locale, id) => (
             <LocaleSwitch key={id} locale={locale} />
