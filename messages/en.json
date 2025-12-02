@@ -30,5 +30,8 @@
         "website": "Website",
         "must-try": "Must Try Dish",
         "nearest-mrt": "Nearest MRT Station"
+    },
+    "Footer": {
+        "changelanguage": "Change Language"
     }
 }

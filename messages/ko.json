@@ -30,5 +30,8 @@
         "website": "웹사이트",
         "must-try": "강력 추천 메뉴",
         "nearest-mrt": "근처 MRT(지하철)역"
+    },
+    "Footer": {
+        "changelanguage": "언어 변경"
     }
 }

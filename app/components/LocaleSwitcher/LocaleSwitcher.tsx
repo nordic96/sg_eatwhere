@@ -9,6 +9,7 @@ import Translate from '@mui/icons-material/Translate';
 import LocaleSwitch from '../LocaleSwitch/LocaleSwitch';
 import useClickOutside from '@/app/hooks/useClickOutside';
 import { LocaleIconMap } from '@/app/constants/localeIconMap';
+import { AvailableLocales } from '@/i18n/locales';
 
 export default function LocaleSwitcher() {
   const currentLocale = useLocale();
@@ -19,11 +20,11 @@ export default function LocaleSwitcher() {
 
   return (
     <div className="relative w-[100px]">
-      <div className="flex gap-4 justify-between items-center">
+      <div className="flex grow justify-between items-center">
         <Translate fontSize="small" />
-        <div className="text-sm items-center flex flex-1">
+        <div className="text-sm items-center flex justify-end gap-1">
           <span className={LocaleIconMap[currentLocale]}></span>
-          <label onClick={openLocale} className="text-sm p-1 cursor-pointer">
+          <label onClick={openLocale} className="text-sm cursor-pointer">
             {localeNames.of(currentLocale)}
           </label>
         </div>
@@ -34,9 +35,9 @@ export default function LocaleSwitcher() {
           id="locale-swticher"
           className="absolute shadow-xl border-[#333] border top-[38px] right-0 z-999 bg-[#f3f3f3] text-black rounded-b-lg w-[116px] flex flex-col p-2 gap-1"
         >
-          <LocaleSwitch locale={'en'} />
-          <LocaleSwitch locale={'ko'} />
-          <LocaleSwitch locale={'ja'} />
+          {AvailableLocales.map((locale, id) => (
+            <LocaleSwitch key={id} locale={locale} />
+          ))}
         </div>
       )}
     </div>
