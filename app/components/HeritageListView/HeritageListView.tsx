@@ -30,7 +30,12 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
               className="flex items-center gap-1 cursor-pointer"
               onClick={() => setHeritageId(location.id)}
             >
-              <img src={CAT_ASSET_MAP[location.category]} className={'h-8'} alt={'category-icon'} />
+              <img
+                src={CAT_ASSET_MAP[location.category]}
+                className={'h-8'}
+                alt={'category-icon'}
+                draggable="false"
+              />
               {location.id === heritageId ? (
                 <HighlightedText>
                   <label className="text-[12px]">{location.name}</label>

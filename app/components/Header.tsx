@@ -14,7 +14,7 @@ const Header = () => {
           <div className="flex gap-1 items-center">
             <div className="">
               <Link href={'/'}>
-                <Image src={horizontalImage} alt="logo" height={50} />
+                <Image src={horizontalImage} alt="logo" height={50} draggable={false} />
               </Link>
             </div>
           </div>

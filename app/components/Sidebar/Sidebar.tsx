@@ -47,11 +47,18 @@ export default function Sidebar() {
             <img
               className="object-cover h-[250px] w-full"
               src={data.imgSource[0]}
+              draggable="false"
               alt={'main_photo'}
             />
             <div className="flex flex-wrap justify-center">
               {data.imgSource.slice(1).map((src, index) => (
-                <img className="w-[110px] h-[110px] object-cover" key={index} src={src} alt={''} />
+                <img
+                  className="w-[110px] h-[110px] object-cover"
+                  key={index}
+                  src={src}
+                  alt={''}
+                  draggable="false"
+                />
               ))}
             </div>
           </div>
@@ -60,7 +67,12 @@ export default function Sidebar() {
             <label className="text-3xl font-bold text-center">{data.name}</label>
             <label className="text-xs font-light">{data.location.address}</label>
             <span className="flex gap-1 items-center">
-              <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} />
+              <img
+                className="h-6"
+                src={CAT_ASSET_MAP[data.category]}
+                alt={'icon'}
+                draggable="false"
+              />
               <p>{catT(data.category)}</p>
             </span>
             <Divider className={getThemeStyle()} />

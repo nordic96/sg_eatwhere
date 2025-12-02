@@ -52,6 +52,7 @@ export default function ImageCarousel({ img, customClass }: ImageCarouselProps) 
               className={'h-full object-cover'}
               src={src}
               alt={'main_photo'}
+              draggable="false"
             />
           );
         })}
