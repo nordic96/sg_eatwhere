@@ -1,1 +1,1 @@
-export const AvailableLocales = ['en-UK', 'de', 'nl', 'ko-KR', 'zh-CN', 'zh-TW', 'ja'];
+export const AvailableLocales = ['en', 'th', 'zh-CN', 'ko', 'de', 'ja', 'nl', 'zh-TW'];
