@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 
 import Banner from './components/Banner/Banner';
 import { NextIntlClientProvider, useTranslations } from 'next-intl';
+import Script from 'next/script';
 
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
@@ -40,6 +41,7 @@ export default function RootLayout({
   const t = useTranslations('Banner');
   return (
     <html lang="en">
+      <Script type={'module'} src="cdn.jsdelivr.net" />
       <body className={`${roboto.variable} ${publicSans.variable} antialiased`}>
         <NextIntlClientProvider>
           <div id="root">

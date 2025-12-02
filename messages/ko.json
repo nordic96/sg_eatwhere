@@ -4,6 +4,9 @@
         "hawker": "호커 점포",
         "restaurant": "일반 음식점"
     },
+    "Heritage": {
+        "oldtree_desc": "Outram MRT역에서 1분거리인 곳에 위치한 이곳은 이미 Central Business District 구역 사무직원들 사이에서 유명한 곳입니다!"
+    },
     "MRT": {
         "tanjong_pagar": "탄종파가",
         "outram_park": "아우트람 파크",

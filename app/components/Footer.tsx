@@ -1,19 +1,13 @@
 'use client';
 
-import { AvailableLocales } from '@/i18n/locales';
 /* eslint-disable @next/next/no-img-element */
-import useLangNames from '@/i18n/useLangNames';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import React from 'react';
+import dynamic from 'next/dynamic';
+const FooterLocaleSwitcher = dynamic(() => import('./LocaleSwitcher/FooterLocaleSwitcher'));
 
 const Footer = () => {
   const year = new Date().getFullYear();
-  const currentLocale = useLocale();
-  const localeNames = useLangNames(currentLocale);
-  const onChangeLocale = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    cookieStore.set('locale', e.target.value);
-    location.reload();
-  };
 
   const t = useTranslations('Footer');
 
@@ -50,17 +44,7 @@ const Footer = () => {
               </div>
               <div className="">
                 <p className="font-bold">{t('changelanguage')}</p>
-                <select
-                  className="border border-[#333] py-1 w-[120px] mt-1"
-                  value={currentLocale}
-                  onChange={onChangeLocale}
-                >
-                  {AvailableLocales.map((locale, id) => (
-                    <option value={locale} key={id}>
-                      {localeNames.of(locale)}
-                    </option>
-                  ))}
-                </select>
+                <FooterLocaleSwitcher />
               </div>
             </div>
           </div>

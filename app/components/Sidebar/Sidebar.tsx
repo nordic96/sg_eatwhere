@@ -15,15 +15,17 @@ import { useTranslations } from 'next-intl';
 
 export default function Sidebar() {
   const target = useRef(null);
-  const t = useTranslations('Sidebar');
-  const mrtT = useTranslations('MRT');
-  const catT = useTranslations('FoodCategory');
   const { closeMore, heritageId, getThemeStyle } = useHeritageStore();
-
-  useClickOutside(target, closeMore);
   const data = useMemo(() => {
     return foodData.find((item) => item.id === heritageId) || null;
   }, [heritageId]);
+
+  const t = useTranslations('Sidebar');
+  const mrtT = useTranslations('MRT');
+  const catT = useTranslations('FoodCategory');
+  const heritageT = useTranslations('Heritage');
+
+  useClickOutside(target, closeMore);
 
   const onClose = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -113,8 +115,11 @@ export default function Sidebar() {
               <SubwayOutlined />
               <div className="flex gap-1">
                 {data.location.mrt.map((station, i) => (
-                  <div key={i}>
-                    <label className="font-public-sans font-bold text-md pr-1 max-w-5 break-all">
+                  <div
+                    key={i}
+                    className="wrap-word-break max-w-18 flex justify-center items-center text-center"
+                  >
+                    <label className="font-public-sans font-bold text-md pr-1">
                       {mrtT(station)}
                     </label>
                     {i < data.location.mrt.length - 1 ? <VerticalDivider /> : undefined}
@@ -125,7 +130,7 @@ export default function Sidebar() {
           </div>
           {/** Description Container */}
           <div>
-            <p className="font-light text-xs">{data.desc}</p>
+            <p className="font-light text-xs">{heritageT(`${data.id}_desc`)}</p>
           </div>
         </div>
       )}
