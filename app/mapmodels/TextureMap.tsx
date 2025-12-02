@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/immutability */
-import { useTexture } from "@react-three/drei";
-import React from "react";
-import * as THREE from "three";
+import { useTexture } from '@react-three/drei';
+import React from 'react';
+import * as THREE from 'three';
 
 export default function TextureMap() {
-  const texture = useTexture("/textures/singapore_map.png");
+  const texture = useTexture('/textures/singapore_map.png');
   texture.wrapS = THREE.ClampToEdgeWrapping;
   texture.wrapT = THREE.ClampToEdgeWrapping;
   texture.repeat.set(1, 1);

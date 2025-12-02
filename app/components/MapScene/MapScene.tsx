@@ -1,17 +1,17 @@
-"use client";
-import { Suspense, useState } from "react";
+'use client';
+import { Suspense, useState } from 'react';
 
-import { Canvas } from "@react-three/fiber";
-import { MapControls } from "@react-three/drei";
+import { Canvas } from '@react-three/fiber';
+import { MapControls } from '@react-three/drei';
 
-import { FloatingMarker } from "../markers/FloatingMarker/FloatingMarker";
-import { data } from "@/app/constants/data";
-import { geoConverter } from "@/app/utils/geographyUtil";
-import dynamic from "next/dynamic";
-import { useHeritageStore } from "@/app/stores";
-import MapEnvironment from "@/app/mapmodels/MapEnvironment";
+import { FloatingMarker } from '../markers/FloatingMarker/FloatingMarker';
+import { data } from '@/app/constants/data';
+import { geoConverter } from '@/app/utils/geographyUtil';
+import dynamic from 'next/dynamic';
+import { useHeritageStore } from '@/app/stores';
+import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
-const DynamicPortalLoader = dynamic(() => import("@/app/FullScreenLoader"), {
+const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
 });
 
@@ -40,7 +40,7 @@ export default function MapScene() {
                 >
                   <mesh>
                     <boxGeometry args={[0.5, 0.5, 0.5]} />
-                    <meshStandardMaterial color={["#c44"]} />
+                    <meshStandardMaterial color={['#c44']} />
                   </mesh>
                 </FloatingMarker>
               );

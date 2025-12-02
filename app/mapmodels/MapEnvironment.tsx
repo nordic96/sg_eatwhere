@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Vector3 } from "three";
-import * as THREE from "three";
+import { Vector3 } from 'three';
+import * as THREE from 'three';
 
-import { useEnvironmentStore } from "../stores/useEnvironmentStore";
-import { Cloud, Clouds, Sky, Stars } from "@react-three/drei";
-import TextureMap from "./TextureMap";
+import { useEnvironmentStore } from '../stores/useEnvironmentStore';
+import { Cloud, Clouds, Sky, Stars } from '@react-three/drei';
+import TextureMap from './TextureMap';
 
 export default function MapEnvironment() {
   const { isNight, sunPosition, moonPosition, ambientIntensity, sunIntensity } =
@@ -19,7 +19,7 @@ export default function MapEnvironment() {
       <directionalLight
         position={new Vector3(...sunPosition)}
         intensity={sunIntensity}
-        color={"#ffffff"}
+        color={'#ffffff'}
       />
 
       {/* --- Moon Light (only visible at night) --- */}
@@ -27,7 +27,7 @@ export default function MapEnvironment() {
         <directionalLight
           position={new Vector3(...moonPosition)}
           intensity={0.3}
-          color={"#bcd4ff"}
+          color={'#bcd4ff'}
         />
       )}
 

@@ -1,13 +1,13 @@
-import * as THREE from "three";
-import { useMemo } from "react";
-import { AdditiveBlending } from "three";
+import * as THREE from 'three';
+import { useMemo } from 'react';
+import { AdditiveBlending } from 'three';
 
 export function generateGlowTexture() {
   const size = 256;
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = size;
   canvas.height = size;
-  const ctx = canvas.getContext("2d")!;
+  const ctx = canvas.getContext('2d')!;
 
   // radial gradient but stretched to oval later
   const grd = ctx.createRadialGradient(
@@ -19,9 +19,9 @@ export function generateGlowTexture() {
     size * 0.5,
   );
 
-  grd.addColorStop(0, "rgba(255,220,160,1)");
-  grd.addColorStop(0.4, "rgba(255,180,120,0.7)");
-  grd.addColorStop(1, "rgba(255,150,80,0)");
+  grd.addColorStop(0, 'rgba(255,220,160,1)');
+  grd.addColorStop(0.4, 'rgba(255,180,120,0.7)');
+  grd.addColorStop(1, 'rgba(255,150,80,0)');
 
   ctx.fillStyle = grd;
   ctx.fillRect(0, 0, size, size);
@@ -31,7 +31,7 @@ export function generateGlowTexture() {
   return texture;
 }
 
-export function Glow({ color = "#ffcc88", intensity = 1, scale = [3, 2] }) {
+export function Glow({ color = '#ffcc88', intensity = 1, scale = [3, 2] }) {
   const texture = useMemo(() => generateGlowTexture(), []);
 
   return (

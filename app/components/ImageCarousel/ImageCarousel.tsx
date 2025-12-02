@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+'use client';
 
-import { cn } from "@/app/utils";
-import { East, West } from "@mui/icons-material";
-import { ClassValue } from "clsx";
-import { useCallback, useState, useEffect } from "react";
+import { cn } from '@/app/utils';
+import { East, West } from '@mui/icons-material';
+import { ClassValue } from 'clsx';
+import { useCallback, useState, useEffect } from 'react';
 
 interface ImageCarouselProps {
   img: string[];
@@ -16,7 +16,7 @@ export default function ImageCarousel({ img, customClass }: ImageCarouselProps) 
 
   useEffect(() => {
     function updatePosition() {
-      const el = document.getElementById("carousel-wrapper");
+      const el = document.getElementById('carousel-wrapper');
       const offset = 100 / img.length;
       if (el) {
         el.style.transform = `translateX(${-currImg * offset}%)`;
@@ -33,9 +33,9 @@ export default function ImageCarousel({ img, customClass }: ImageCarouselProps) 
     setCurrImg((index) => (index + 1) % img.length);
   }, [img]);
 
-  const containerBaseStyle = "w-full h-full relative overflow-x-hidden bg-monsoongrey";
-  const navBtnBaseStyle = "absolute top-[50%] opacity-80 text-white rounded-3xl cursor-pointer";
-  const currImgIndicatorBaseStyle = "absolute px-1 top-0 right-0 opacity-80 rounded-xl text-white";
+  const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-monsoongrey';
+  const navBtnBaseStyle = 'absolute top-[50%] opacity-80 text-white rounded-3xl cursor-pointer';
+  const currImgIndicatorBaseStyle = 'absolute px-1 top-0 right-0 opacity-80 rounded-xl text-white';
 
   return (
     <div className={cn(containerBaseStyle)}>
@@ -49,18 +49,18 @@ export default function ImageCarousel({ img, customClass }: ImageCarouselProps) 
             <img
               key={i}
               style={{ width: `${100 / img.length}%` }}
-              className={"h-full object-cover"}
+              className={'h-full object-cover'}
               src={src}
-              alt={"main_photo"}
+              alt={'main_photo'}
             />
           );
         })}
       </div>
-      <div className={cn(navBtnBaseStyle, { "left-0": true }, customClass)} onClick={onClickLeft}>
-        <West fontSize={"medium"} />
+      <div className={cn(navBtnBaseStyle, { 'left-0': true }, customClass)} onClick={onClickLeft}>
+        <West fontSize={'medium'} />
       </div>
-      <div className={cn(navBtnBaseStyle, { "right-0": true }, customClass)} onClick={onClickRight}>
-        <East fontSize={"medium"} />
+      <div className={cn(navBtnBaseStyle, { 'right-0': true }, customClass)} onClick={onClickRight}>
+        <East fontSize={'medium'} />
       </div>
       <div
         className={cn(currImgIndicatorBaseStyle, customClass)}
