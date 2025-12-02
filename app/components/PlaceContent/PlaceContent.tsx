@@ -14,6 +14,7 @@ import { useTranslations } from 'next-intl';
 
 export default function PlaceContent() {
   const t = useTranslations('CardView');
+  const catT = useTranslations('FoodCategory');
   const { openMore, getThemeStyle } = useHeritageStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
@@ -41,7 +42,7 @@ export default function PlaceContent() {
       <div className={'flex grow justify-start items-center gap-1 text-md'}>
         <span className="flex gap-1 items-center">
           <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} />
-          <p>{data.category}</p>
+          <p>{catT(data.category)}</p>
         </span>
         <VerticalDivider />
         <MrtLabel mrt={data.location.mrt[0]} />

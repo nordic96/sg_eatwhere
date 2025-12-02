@@ -16,6 +16,7 @@ import { useTranslations } from 'next-intl';
 export default function Sidebar() {
   const target = useRef(null);
   const t = useTranslations('Sidebar');
+  const catT = useTranslations('FoodCategory');
   const { closeMore, heritageId, getThemeStyle } = useHeritageStore();
 
   useClickOutside(target, closeMore);
@@ -59,7 +60,7 @@ export default function Sidebar() {
             <label className="text-xs font-light">{data.location.address}</label>
             <span className="flex gap-1 items-center">
               <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} />
-              <p>{t(data.category)}</p>
+              <p>{catT(data.category)}</p>
             </span>
             <Divider className={getThemeStyle()} />
             {/** Secondary Info Container */}

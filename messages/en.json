@@ -1,4 +1,9 @@
 {
+    "FoodCategory": {
+        "dessert": "Dessert",
+        "hawker": "Hawker Stall",
+        "restaurant": "Restaurant"
+    },
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
     },
@@ -21,9 +26,6 @@
         "learnmore": "Learn More"
     },
     "Sidebar": {
-        "dessert": "Dessert",
-        "hawker": "Hawker Stall",
-        "restaurant": "Restaurant",
         "map": "Map",
         "website": "Website",
         "must-try": "Must Try Dish",
