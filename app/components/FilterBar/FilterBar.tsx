@@ -53,8 +53,10 @@ export default function FilterBar({ labels }: FilterBarProps) {
     const el = document.getElementById('filter_label_dessert');
     if (activate) {
       el?.classList.add('bg-gardengreen', 'text-white');
+      el?.classList.remove('hover:text-gardengreen');
     } else {
       el?.classList.remove('bg-gardengreen', 'text-white');
+      el?.classList.add('hover:text-gardengreen');
     }
   }
 

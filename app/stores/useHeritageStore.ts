@@ -63,9 +63,13 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
     }
     const themeStyle: ClassValue = {
       'bg-primary': !theme || theme === 'primary',
+      'border-primary': theme && theme === 'primary',
       'bg-gardengreen': theme && theme === 'green',
+      'border-gardengreen': theme && theme === 'green',
       'bg-monsoongrey': theme && theme === 'grey',
+      'border-monsoongrey': theme && theme === 'grey',
       'bg-outramorange': theme && theme === 'orange',
+      'border-outramorange': theme && theme === 'orange',
     };
     return themeStyle;
   },
