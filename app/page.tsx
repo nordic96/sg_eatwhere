@@ -1,6 +1,5 @@
 'use client';
 
-import LabelContainer from 'labelcontainer';
 import FilterBar from './components/FilterBar/FilterBar';
 import MapScene from './components/MapScene/MapScene';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -9,17 +8,10 @@ import { useHeritageStore } from './stores';
 import HeritageListView from './components/HeritageListView/HeritageListView';
 
 function Home() {
-  const lsInstance = LabelContainer.getInstance();
   const {} = useHeritageStore();
   return (
     <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
-      <FilterBar
-        labels={{
-          hawker: lsInstance.getLabel('filter_hawker'),
-          restaurant: lsInstance.getLabel('filter_restaurants'),
-          dessert: lsInstance.getLabel('filter_dessert'),
-        }}
-      />
+      <FilterBar />
       <div className="h-[75vh] max-h-[800px]">
         <MapScene />
       </div>

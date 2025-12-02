@@ -11,9 +11,11 @@ import Divider from '../Divider';
 import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 import HighlightedText from '../HighlightText/HighlightText';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
+import { useTranslations } from 'next-intl';
 
 export default function Sidebar() {
   const target = useRef(null);
+  const t = useTranslations('Sidebar');
   const { closeMore, heritageId, getThemeStyle } = useHeritageStore();
 
   useClickOutside(target, closeMore);
@@ -57,19 +59,19 @@ export default function Sidebar() {
             <label className="text-xs font-light">{data.location.address}</label>
             <span className="flex gap-1 items-center">
               <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} />
-              <p>{data.category}</p>
+              <p>{t(data.category)}</p>
             </span>
             <Divider className={getThemeStyle()} />
             {/** Secondary Info Container */}
             <div className="flex items-center gap-1">
               <a href={data.location.gmapUrl} target="_blank">
                 <MapOutlined fontSize={'small'} />
-                <label>{'Map'}</label>
+                <label>{t('map')}</label>
               </a>
               {data.website && (
                 <a href={data.website} target={'_blank'}>
                   <Public fontSize={'small'} />
-                  <label>{'Website'}</label>
+                  <label>{t('website')}</label>
                 </a>
               )}
               <span>
@@ -80,7 +82,7 @@ export default function Sidebar() {
           </div>
           {/** Tertiary Info Container */}
           <div className="flex flex-col items-center gap-1">
-            <label>{'Must Try Dish'}</label>
+            <label>{t('must-try')}</label>
             <span className="flex justify-center items-center gap-1">
               <ThumbUpOutlined />
               <div>
@@ -92,7 +94,7 @@ export default function Sidebar() {
           </div>
           {/** MRT Container */}
           <div className="flex flex-col items-center gap-1">
-            <label>{'Nearest MRT Station'}</label>
+            <label>{t('nearest-mrt')}</label>
             <span className="flex justify-center items-center gap-1">
               <SubwayOutlined />
               <div className="flex gap-1">
