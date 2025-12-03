@@ -15,6 +15,8 @@ import { useTranslations } from 'next-intl';
 export default function PlaceContent() {
   const t = useTranslations('CardView');
   const catT = useTranslations('FoodCategory');
+  const heritageT = useTranslations('Heritage');
+
   const { openMore, getThemeStyle } = useHeritageStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
@@ -58,14 +60,17 @@ export default function PlaceContent() {
         <span className="flex justify-center items-center gap-1">
           <ThumbUpOutlined />
           <div>
-            {data.bestDish.map((dish, i) => (
+            {data.recommendations.map((dish, i) => (
               <HighlightedText key={i}>{dish}</HighlightedText>
             ))}
           </div>
         </span>
         <p className="font-light text-xs">
-          {data.desc.substring(0, Math.min(data.desc.length, 100))}
-          {data.desc.length > 100 ? '...' : ''}
+          {heritageT(`${data.id}_desc`).substring(
+            0,
+            Math.min(heritageT(`${data.id}_desc`).length, 100),
+          )}
+          {heritageT(`${data.id}_desc`).length > 100 ? '...' : ''}
         </p>
       </div>
       {/** Learn More Btn Container */}

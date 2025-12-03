@@ -10,9 +10,8 @@ export const data: FoodHeritage[] = [
   {
     id: 'komalas_vilas',
     name: 'Komala Vilas',
-    desc: 'One of Singapore’s oldest Indian vegetarian restaurants, established in 1947 and beloved for its traditional South Indian cuisine.',
     category: 'restaurant',
-    bestDish: ['Masla Dosai'],
+    recommendations: ['Masla Dosai'],
     imgSource: [
       'https://www.dropbox.com/scl/fi/b80ge1updxlqpypo3wjdi/komalavilla_1.jpeg?rlkey=5xmrck0m2ooj574c7jah3kvn6&st=q1ecwz63&raw=1',
       'https://www.dropbox.com/scl/fi/0xzheor1cefaamhvclc8h/komalavilla_2.jpeg?rlkey=x32h374aswbnp66ewxaudx6xo&st=hw8jd6z3&raw=1',
@@ -33,9 +32,8 @@ export const data: FoodHeritage[] = [
   {
     id: 'spicy_wife',
     name: 'Spicy Wife Nasi Lemak',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.',
     category: 'hawker',
-    bestDish: ['aroma_chicken'],
+    recommendations: ['aroma_chicken'],
     imgSource: [
       'https://www.dropbox.com/scl/fi/kvk8jwx6vjg5179btr05i/spicy_wife_1.jpeg?rlkey=mce4jjtvp34xartf2ji3i9ymb&st=bp1yqc6m&raw=1',
       'https://www.dropbox.com/scl/fi/jj7y8hliluv2mrwis8ncg/spicy_wife_2.jpeg?rlkey=ppegoqv5e4hgpn6z0jvkqi7vr&st=i66tss1d&raw=1',
@@ -55,9 +53,8 @@ export const data: FoodHeritage[] = [
   {
     id: 'yatkayan',
     name: 'Yat Ka Yan Dessert',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.',
     category: 'dessert',
-    bestDish: ['Durian Chendol', 'Purple Rice with Icecream'],
+    recommendations: ['Durian Chendol', 'Purple Rice with Icecream'],
     imgSource: [
       'https://www.dropbox.com/scl/fi/jtmyupd7bdu1665epxqmc/yatkayan_1.jpeg?rlkey=66gqlgfyc19852542e0uixd1n&st=ppikkcnu&raw=1',
       'https://www.dropbox.com/scl/fi/8ve3tapsitlhxeye1n617/yatkayan_2.jpeg?rlkey=ide4d8nipj2srolxdcjbn65ln&st=ew5jvt7j&raw=1',
@@ -78,9 +75,8 @@ export const data: FoodHeritage[] = [
   {
     id: 'nanhuachang',
     name: 'Nan Hua Chang Fish Head Steamboat',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.',
     category: 'restaurant',
-    bestDish: ['Grouper Fish Head Steamboat', 'Prawn Paste Wings'],
+    recommendations: ['Grouper Fish Head Steamboat', 'Prawn Paste Wings'],
     imgSource: [
       'https://www.dropbox.com/scl/fi/wd7x9t9zl7rmj00l0wwek/nanhuachang_1.jpeg?rlkey=y19ip0jrw8t6aixhwxmozuaeb&st=vyjswdw1&raw=1',
       'https://www.dropbox.com/scl/fi/b2u7zent64n25d5iice9z/nanhuachang_2.jpeg?rlkey=yo4i67vceqyaxmrrjasucgol2&st=3x5uvqnd&raw=1',
@@ -102,9 +98,8 @@ export const data: FoodHeritage[] = [
   {
     id: 'jixiang',
     name: 'Ji Xiang Confectionery',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.',
     category: 'dessert',
-    bestDish: ['Yam AngKuKueh', 'Sweet Bean AngKuKueh'],
+    recommendations: ['Yam AngKuKueh', 'Sweet Bean AngKuKueh'],
     imgSource: [
       'https://www.dropbox.com/scl/fi/gbd9n8hba3gupskgpu5hz/jixiang_1.jpeg?rlkey=qd1hdjbqwmtwm9vt9m3g89s7q&st=w2zchi3u&raw=1',
     ],
@@ -123,9 +118,8 @@ export const data: FoodHeritage[] = [
   {
     id: 'oldtree',
     name: '99 Old Trees Durian',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium mattis lobortis. Sed vulputate urna id mauris pellentesque, a pharetra lacus eleifend. Proin congue odio ut magna aliquam blandit. Aenean ultrices metus nec velit suscipit malesuada. Curabitur lobortis enim vel turpis lacinia, et iaculis dui ornare. Integer neque ex, feugiat et nibh a, posuere vestibulum felis. Sed sed ultrices tellus.',
     category: 'dessert',
-    bestDish: ['MaoShanWang Durian Chendol', 'Durian Mousse'],
+    recommendations: ['MaoShanWang Durian Chendol', 'Durian Mousse'],
     imgSource: [
       'https://www.dropbox.com/scl/fi/luzbn6evsjcnxu7w815lx/oldtree_3.jpeg?rlkey=7ztnpo7z8zjcne8byb51p17qd&st=m4yy8mhd&raw=1',
       'https://www.dropbox.com/scl/fi/oypbynnlcauxj8lwsvcwl/oldtree_1.jpeg?rlkey=msncgbf4sx4lznocgyonhp4ql&st=0bb9402w&raw=1',

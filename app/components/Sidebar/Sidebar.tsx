@@ -102,7 +102,7 @@ export default function Sidebar() {
             <span className="flex justify-center items-center gap-1">
               <ThumbUpOutlined />
               <div>
-                {data.bestDish.map((dish, i) => (
+                {data.recommendations.map((dish, i) => (
                   <HighlightedText key={i}>{dish}</HighlightedText>
                 ))}
               </div>
@@ -117,9 +117,9 @@ export default function Sidebar() {
                 {data.location.mrt.map((station, i) => (
                   <div
                     key={i}
-                    className="wrap-word-break max-w-21 flex justify-center items-center text-center"
+                    className="wrap-word-break flex justify-center items-center text-center"
                   >
-                    <label className="font-public-sans font-bold text-md pr-1">
+                    <label className="font-public-sans font-bold text-md pr-1 min-w-10 max-w-25">
                       {mrtT(station)}
                     </label>
                     {i < data.location.mrt.length - 1 ? <VerticalDivider /> : undefined}
