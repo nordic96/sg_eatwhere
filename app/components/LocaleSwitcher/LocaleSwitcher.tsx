@@ -20,8 +20,8 @@ export default function LocaleSwitcher() {
 
   return (
     <div className="relative w-[130px]">
-      <div className="flex grow justify-between items-center">
-        <Translate fontSize="small" />
+      <div onClick={openLocale} className="flex grow justify-between items-center">
+        <Translate fontSize="small" className="cursor-pointer hover:text-[#f3f3f3]" />
         <div className="text-sm items-center flex justify-end gap-1">
           <span className={LocaleIconMap[currentLocale]}></span>
           <label onClick={openLocale} className="text-xs cursor-pointer pr-2">
