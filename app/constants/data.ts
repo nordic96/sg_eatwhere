@@ -37,7 +37,6 @@ export const data: FoodHeritage[] = [
     imgSource: [
       'https://www.dropbox.com/scl/fi/kvk8jwx6vjg5179btr05i/spicy_wife_1.jpeg?rlkey=mce4jjtvp34xartf2ji3i9ymb&st=bp1yqc6m&raw=1',
       'https://www.dropbox.com/scl/fi/jj7y8hliluv2mrwis8ncg/spicy_wife_2.jpeg?rlkey=ppegoqv5e4hgpn6z0jvkqi7vr&st=i66tss1d&raw=1',
-      'https://www.dropbox.com/scl/fi/0d2pi8nmaw5b1yoieo8wb/spicy_wife_3.jpeg?rlkey=72ooea12admvt6221riqma2nn&st=bp06g11o&raw=1',
     ],
     location: {
       address: '7 Maxwell Rd, Amoy St, Food Centre, 02-119, 069111',
@@ -74,14 +73,13 @@ export const data: FoodHeritage[] = [
   },
   {
     id: 'nanhuachang',
-    name: 'Nan Hua Chang Fish Head Steamboat',
+    name: 'Nan Hua Chang SeaFood',
     category: 'restaurant',
     recommendations: ['Grouper Fish Head Steamboat', 'Prawn Paste Wings'],
     imgSource: [
       'https://www.dropbox.com/scl/fi/wd7x9t9zl7rmj00l0wwek/nanhuachang_1.jpeg?rlkey=y19ip0jrw8t6aixhwxmozuaeb&st=vyjswdw1&raw=1',
       'https://www.dropbox.com/scl/fi/b2u7zent64n25d5iice9z/nanhuachang_2.jpeg?rlkey=yo4i67vceqyaxmrrjasucgol2&st=3x5uvqnd&raw=1',
       'https://www.dropbox.com/scl/fi/jp1q86nc0ot5tkdknuk4o/nanhuachang_3.jpeg?rlkey=x7xz3mwe0e5rwwhvaffsu4rox&st=b1mrtryq&raw=1',
-      'https://www.dropbox.com/scl/fi/qu9pzyb4y3rrwmcfwojvk/nanhuachang_4.jpeg?rlkey=cxkgejwpt7t7pkwycto27f6do&st=isclv53v&raw=1',
     ],
     location: {
       address: '462 Crawford Ln, #01-69/71, Singapore 190462',
@@ -123,7 +121,6 @@ export const data: FoodHeritage[] = [
     imgSource: [
       'https://www.dropbox.com/scl/fi/luzbn6evsjcnxu7w815lx/oldtree_3.jpeg?rlkey=7ztnpo7z8zjcne8byb51p17qd&st=m4yy8mhd&raw=1',
       'https://www.dropbox.com/scl/fi/oypbynnlcauxj8lwsvcwl/oldtree_1.jpeg?rlkey=msncgbf4sx4lznocgyonhp4ql&st=0bb9402w&raw=1',
-      'https://www.dropbox.com/scl/fi/frx08earlaxk9ow7p93g2/oldtree_2.jpeg?rlkey=as5r1gbb0951qbzqaj8txzwep&st=4vmns3vm&raw=1',
     ],
     location: {
       address: '1 Teo Hong Rd, Singapore 088321',
