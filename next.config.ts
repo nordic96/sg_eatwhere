@@ -4,7 +4,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: [],
+    domains: ['cdn.jsdelivr.net'],
   },
 };
 
