@@ -53,7 +53,6 @@ export default function PlaceContent() {
           <MapOutlined fontSize={'small'} />
         </a>
         <VerticalDivider />
-        <p>{'$$ 10 - 20 pax'}</p>
       </div>
       {/** Desc Container */}
       <div className="flex flex-col mt-2 justify-center items-center gap-4">
