@@ -1,23 +1,32 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { Suspense, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
-import { MapControls } from '@react-three/drei';
-
+import { Billboard, Html, MapControls } from '@react-three/drei';
 import { FloatingMarker } from '../markers/FloatingMarker/FloatingMarker';
+import MapEnvironment from '@/app/mapmodels/MapEnvironment';
+
 import { data } from '@/app/constants/data';
 import { geoConverter } from '@/app/utils/geographyUtil';
-import dynamic from 'next/dynamic';
 import { useHeritageStore } from '@/app/stores';
-import MapEnvironment from '@/app/mapmodels/MapEnvironment';
+
+import CloseButton from '../CloseButton/CloseButton';
+import PlaceContent from '../PlaceContent/PlaceContent';
+import CanvasIntlProvider from '../CanvasIntlProvider';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
 });
 
-export default function MapScene() {
+type Props = {
+  messages: Record<string, string>;
+  locale?: string;
+};
+
+export default function MapScene({ messages, locale = 'en' }: Props) {
   const [ready, setReady] = useState(false);
-  const { filter } = useHeritageStore();
+  const { heritageId, filter, unSelect, clickedMore, getThemeStyle } = useHeritageStore();
   function dummyOnReady() {
     setTimeout(() => setReady(true), 2000);
   }
@@ -27,6 +36,20 @@ export default function MapScene() {
       <Canvas camera={{ position: [0, 70, 8], fov: 45 }} onClick={(e) => e.stopPropagation()}>
         <Suspense fallback={null}>
           <MapEnvironment />
+          {heritageId && !clickedMore && (
+            <Billboard position={[10, 15, 0]}>
+              <Html>
+                <CanvasIntlProvider messages={messages} locale={locale}>
+                  <div
+                    className={'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2'}
+                  >
+                    <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
+                    <PlaceContent />
+                  </div>
+                </CanvasIntlProvider>
+              </Html>
+            </Billboard>
+          )}
           {/* --- Markers --- */}
           {data
             .filter((v) => filter.length === 0 || filter.includes(v.category))

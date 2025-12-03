@@ -4,12 +4,7 @@ import * as THREE from 'three';
 import { ReactNode, useRef } from 'react';
 
 import { ThreeElements, useFrame } from '@react-three/fiber';
-import { Billboard, Html } from '@react-three/drei';
 import { useRiceBowlModel } from '../RiceBowlModel';
-
-/** HTML */
-import PlaceContent from '../../PlaceContent/PlaceContent';
-import CloseButton from '../../CloseButton/CloseButton';
 
 import { useHeritageStore } from '@/app/stores';
 import { FoodHeritage } from '@/app/types';
@@ -30,7 +25,7 @@ export const FloatingMarker = ({
   ...props
 }: FloatingMarkerProps) => {
   const { isNight } = useEnvironmentStore();
-  const { heritageId, setHeritageId, unSelect, clickedMore, getThemeStyle } = useHeritageStore();
+  const { setHeritageId } = useHeritageStore();
   const riceBowl = useRiceBowlModel();
   const floatRef = useRef<THREE.Group>(null);
 
@@ -60,16 +55,6 @@ export const FloatingMarker = ({
       <group ref={floatRef} scale={1} onClick={() => setHeritageId(data.id)}>
         <primitive object={riceBowl} />
       </group>
-      {heritageId === data.id && !clickedMore && (
-        <Billboard position={[0, floatHeight + 10, 0]}>
-          <Html>
-            <div className={'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2'}>
-              <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
-              <PlaceContent />
-            </div>
-          </Html>
-        </Billboard>
-      )}
     </group>
   );
 };

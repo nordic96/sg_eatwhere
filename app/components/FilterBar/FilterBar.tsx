@@ -8,14 +8,12 @@ import { useHeritageStore } from '@/app/stores';
 import { EateryCategory, EateryCategoryValues } from '@/app/types';
 import { useEffect } from 'react';
 import { cn } from '@/app/utils';
+import { useTranslations } from 'next-intl';
 
 type ToggleFuncMap = Record<EateryCategory, (bool?: boolean) => void>;
 
-interface FilterBarProps {
-  labels: Record<EateryCategory, string>;
-}
-
-export default function FilterBar({ labels }: FilterBarProps) {
+export default function FilterBar() {
+  const t = useTranslations('FilterBar');
   const { filter, setFilter, unsetFilter } = useHeritageStore();
 
   const onSelectFilter = (id: EateryCategory) => (e: React.MouseEvent<HTMLDivElement>) => {
@@ -91,7 +89,7 @@ export default function FilterBar({ labels }: FilterBarProps) {
             onClick={onSelectFilter('hawker')}
             className={cn(labelBaseStyle, 'hover:text-primary hover:cursor-pointer')}
           >
-            <p>{labels.hawker}</p>
+            <p>{t('hawker')}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -101,7 +99,7 @@ export default function FilterBar({ labels }: FilterBarProps) {
             onClick={onSelectFilter('restaurant')}
             className={labelBaseStyle}
           >
-            <p>{labels.restaurant}</p>
+            <p>{t('restaurant')}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -111,7 +109,7 @@ export default function FilterBar({ labels }: FilterBarProps) {
             onClick={onSelectFilter('dessert')}
             className={labelBaseStyle}
           >
-            <p>{labels.dessert}</p>
+            <p>{t('dessert')}</p>
           </div>
         </div>
       </div>

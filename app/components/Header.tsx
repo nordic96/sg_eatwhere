@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import horizontalImage from '@/public/images/header_icon.svg';
+import Link from 'next/link';
+import LocaleSwitcher from './LocaleSwitcher/LocaleSwitcher';
 
 const Header = () => {
   return (
@@ -11,13 +14,11 @@ const Header = () => {
           <div className="flex gap-1 items-center">
             <div className="">
               <Link href={'/'}>
-                <Image src={horizontalImage} alt="logo" height={50} />
+                <Image src={horizontalImage} alt="logo" height={50} draggable={false} />
               </Link>
             </div>
           </div>
-          <div>
-            <Link href={'/about'}>About</Link>
-          </div>
+          <LocaleSwitcher />
         </div>
       </header>
     </div>

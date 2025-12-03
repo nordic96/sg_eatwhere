@@ -10,8 +10,11 @@ import HighlightedText from '../HighlightText/HighlightText';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import { cn } from '@/app/utils';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
+import { useTranslations } from 'next-intl';
 
 export default function PlaceContent() {
+  const t = useTranslations('CardView');
+  const catT = useTranslations('FoodCategory');
   const { openMore, getThemeStyle } = useHeritageStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
@@ -38,8 +41,8 @@ export default function PlaceContent() {
       {/** Info Container */}
       <div className={'flex grow justify-start items-center gap-1 text-md'}>
         <span className="flex gap-1 items-center">
-          <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} />
-          <p>{data.category}</p>
+          <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} draggable="false" />
+          <p>{catT(data.category)}</p>
         </span>
         <VerticalDivider />
         <MrtLabel mrt={data.location.mrt[0]} />
@@ -68,7 +71,7 @@ export default function PlaceContent() {
       {/** Learn More Btn Container */}
       <div className="flex justify-center">
         <button className={cn(learnMoreBtnBaseStyle, getThemeStyle())} onClick={openMore}>
-          Learn More
+          {t('learnmore')}
         </button>
       </div>
     </div>
@@ -76,10 +79,11 @@ export default function PlaceContent() {
 }
 
 export function MrtLabel({ mrt }: { mrt: string }) {
+  const mrtT = useTranslations('MRT');
   return (
     <span className="flex gap-1 items-center">
       <SubwayOutlined fontSize="small" />
-      <p className="font-public-sans font-medium">{mrt}</p>
+      <p className="font-public-sans font-medium max-w-22 wrap-break-word">{mrtT(mrt)}</p>
     </span>
   );
 }

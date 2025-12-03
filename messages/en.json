@@ -1,0 +1,45 @@
+{
+    "FoodCategory": {
+        "dessert": "Dessert",
+        "hawker": "Hawker Stall",
+        "restaurant": "Restaurant"
+    },
+    "MRT": {
+        "tanjong_pagar": "Tanjong Pagar",
+        "outram_park": "Outram Park",
+        "bencoolen": "Bencoolen",
+        "little_india": "Little India",
+        "lavender": "Lavender",
+        "bugis": "Bugis",
+        "nicoll_highway": "Nicoll Highway"
+    },
+    "Banner": {
+        "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
+    },
+    "HomePage": {
+        "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
+    },
+    "FilterBar": {
+        "hawker": "Hawker Stalls",
+        "restaurant": "Restaurants",
+        "dessert": "Dessert"
+    },
+    "HeritageListView": {
+        "central": "Central Region",
+        "east": "East Region",
+        "west": "West Region",
+        "north": "North Region"
+    },
+    "CardView": {
+        "learnmore": "Learn More"
+    },
+    "Sidebar": {
+        "map": "Map",
+        "website": "Website",
+        "must-try": "Must Try Dish",
+        "nearest-mrt": "Nearest MRT Station"
+    },
+    "Footer": {
+        "changelanguage": "Change Language"
+    }
+}
