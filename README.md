@@ -1,34 +1,29 @@
-# create-my-website
-## Install
-```bash
-npx create-next-website
-```
+# The Foodie's Trail - SG
+<img src="./documentation/images/logo.svg" width="150">
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-website`](https://github.com/nordic96/create-my-website). The template is built on top with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+*Logo - designed by Gihun Ko*
 
-![Project Layout](public/images/layout.png "Optional Title Text")
+## 0. NextJS App with Three.js
+The purpose of this application is to brush my frontend development skills, as well as to introduce local food places of Singapore by allowing users to interact in the virtual 3D map of Singapore to explore new hidden gems and locations for food.
 
-The purpose of this template is to provide an easy-to-begin-with structure and initial React Components who are new to React, Typescript and Next.js, and to those who wish to build their own website to display their technical skills over the web.
+![img](/documentation/images/screenshot.png)
+*Map Image from wikimedia("Singpaore Planning Area Map) was used for reference [3.1]*
 
-## Running on Dev Mode
+It was an opportunity for me to pick up new tech stacks such as three.js + DREI components,
+as well as to apply the best frontend development practices that I learned while prepraing for my job search. More detailed research and analysis is written below.
 
-```bash
-npm run dev
-```
+## 1. Technical Implementations
+* [next-intl](https://next-intl.dev/) used for i18n implementation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 2. UI/UX & Research
+### 2.1 Colour Theme
+I found an article from Straits Times, which shows an data analysis of the pictures taken in Singapore, and used computer algorithms to produce the most [3.2]
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2.2 CopyRights
 
-## Features
-* ⚡ Next.js + React 19 + TypeScript
 
-* 🎨 TailwindCSS ready
-
-* 🧩 Modular component structure
-
-* 🧠 SEO-friendly and responsive
-
+## 3. References Used:
+* 3.1 Map Image used for plane texture [Wikimedia] [Singapore Planning Areas Map](https://commons.wikimedia.org/wiki/File:Singapore_Planning_Areas_map.svg)
+* 3.2 "Singapore in Colour" - by Straits Times [article](https://www.straitstimes.com/multimedia/graphics/2023/08/singapore-in-colour/index.html)
 
 ## Disclaimer
-This template includes brand logos (GitHub, LinkedIn) under their respective trademark guidelines for UI referencing only. These companies do not endorse or sponsor this project.
