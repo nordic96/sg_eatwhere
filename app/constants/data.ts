@@ -81,7 +81,6 @@ export const data: FoodHeritage[] = [
       'https://www.dropbox.com/scl/fi/wd7x9t9zl7rmj00l0wwek/nanhuachang_1.jpeg?rlkey=y19ip0jrw8t6aixhwxmozuaeb&st=vyjswdw1&raw=1',
       'https://www.dropbox.com/scl/fi/b2u7zent64n25d5iice9z/nanhuachang_2.jpeg?rlkey=yo4i67vceqyaxmrrjasucgol2&st=3x5uvqnd&raw=1',
       'https://www.dropbox.com/scl/fi/jp1q86nc0ot5tkdknuk4o/nanhuachang_3.jpeg?rlkey=x7xz3mwe0e5rwwhvaffsu4rox&st=b1mrtryq&raw=1',
-      'https://www.dropbox.com/scl/fi/qu9pzyb4y3rrwmcfwojvk/nanhuachang_4.jpeg?rlkey=cxkgejwpt7t7pkwycto27f6do&st=isclv53v&raw=1',
     ],
     location: {
       address: '462 Crawford Ln, #01-69/71, Singapore 190462',
