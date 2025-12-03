@@ -20,6 +20,7 @@
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
     },
     "HomePage": {
+        "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
     },
     "FilterBar": {

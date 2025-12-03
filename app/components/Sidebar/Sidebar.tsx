@@ -90,10 +90,6 @@ export default function Sidebar() {
                   <label>{t('website')}</label>
                 </a>
               )}
-              <span>
-                <label className="font-bold">{'$$'}</label>
-                <label>{'10-20 pax'}</label>
-              </span>
             </div>
           </div>
           {/** Tertiary Info Container */}

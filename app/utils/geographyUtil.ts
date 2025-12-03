@@ -42,10 +42,13 @@ export function createConverterTwoPoint(
   };
 }
 
-const songfa = { latitude: 1.2890347925294459, longitude: 103.84776780251772 };
-const songfaScene: [number, number, number] = [2, 0, 13.1];
-
-const taihwa = { latitude: 1.3053195659241765, longitude: 103.86303995673765 };
-const taihwaScene: [number, number, number] = [10.5, 0, 4];
-
-export const geoConverter = createConverterTwoPoint(songfa, songfaScene, taihwa, taihwaScene);
+const hollandV = { latitude: 1.3111927720357135, longitude: 103.79626167383837 };
+const hollandVScene = [-31, 0, 20];
+const tampinesV = { latitude: 1.3533165106123863, longitude: 103.94507710989102 };
+const tampinesVScene = [58, 0, -9];
+export const geoConverter = createConverterTwoPoint(
+  hollandV,
+  hollandVScene,
+  tampinesV,
+  tampinesVScene,
+);
