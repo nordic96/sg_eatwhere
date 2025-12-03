@@ -3,8 +3,18 @@
 
 *Logo - designed by Gihun Ko*
 
+## Introduction
+![landing_page](/documentation/images/landing_page.png)
+*The Landing Page gives adequent explanation to my purpose of building this web app*
+
+This website was created for only one purpose - to introduce tourists who are visiting Singapore hidden local restaurants/dessert/hawker stalls that Singaporeans often visit, but not really known by tourists.
+
+I consider myself a foodie, and whenever I am travelling to a new country, I value experiencing local dishes and places that are frequently visited by the local people. I believe such experience is valuable to me, and it gives me new inspiration that I could not think of at my home country.
+
+To travellers who are like me out there around the globe, I would like to present my findings of food lists, not just in a format of google map bookmarks, but in a rather more interesting way of presentation; using 3D map representations
+
 ## 0. NextJS App with Three.js
-The purpose of this application is to brush my frontend development skills, as well as to introduce local food places of Singapore by allowing users to interact in the virtual 3D map of Singapore to explore new hidden gems and locations for food.
+This web app also serves purpose for me to brush my frontend development skills, in addition to introducing local food places of Singapore by allowing users to interact in the virtual 3D map of Singapore to explore new hidden gems and locations for food.
 
 ![img](/documentation/images/screenshot.png)
 *Map Image from wikimedia("Singpaore Planning Area Map) was used for reference [3.1]*
