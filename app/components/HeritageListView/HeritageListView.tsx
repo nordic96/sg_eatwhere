@@ -34,8 +34,9 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
               >
                 <Image
                   src={CAT_ASSET_MAP[location.category]}
-                  width={40}
-                  height={40}
+                  className={'w-10'}
+                  width={'0'}
+                  height={'0'}
                   alt={'category-icon'}
                   draggable="false"
                 />

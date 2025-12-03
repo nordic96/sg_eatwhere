@@ -17,11 +17,12 @@ const Footer = () => {
         <div className="flex flex-col grow max-w-[1440px] px-8 justify-between">
           <div className="gap-8 flex">
             <Image
+              className={'w-[150]'}
               src={'/images/logo.svg'}
               alt={'logo'}
               draggable="false"
-              width={150}
-              height={100}
+              width={'0'}
+              height={'0'}
             />
             <div className="box-border grid grid-cols-3 w-[500px] gap-8">
               <div className="">
