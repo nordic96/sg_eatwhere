@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
+import Image from 'next/image';
 import { CAT_ASSET_MAP, data } from '@/app/constants/data';
 import { useHeritageStore } from '@/app/stores';
 import { Region } from '@/app/types';
@@ -32,9 +32,11 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                 className="flex items-center gap-1 cursor-pointer"
                 onClick={() => setHeritageId(location.id)}
               >
-                <img
+                <Image
                   src={CAT_ASSET_MAP[location.category]}
-                  className={'h-8'}
+                  className={'w-10'}
+                  width={'0'}
+                  height={'0'}
                   alt={'category-icon'}
                   draggable="false"
                 />

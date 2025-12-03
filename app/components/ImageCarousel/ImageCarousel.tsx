@@ -4,14 +4,14 @@
 import { cn } from '@/app/utils';
 import { East, West } from '@mui/icons-material';
 import { ClassValue } from 'clsx';
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, memo } from 'react';
 
 interface ImageCarouselProps {
   img: string[];
   customClass?: string | ClassValue;
 }
 
-export default function ImageCarousel({ img, customClass }: ImageCarouselProps) {
+function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [currImg, setCurrImg] = useState<number>(0);
 
   useEffect(() => {
@@ -69,3 +69,5 @@ export default function ImageCarousel({ img, customClass }: ImageCarouselProps) 
     </div>
   );
 }
+
+export default memo(ImageCarousel);
