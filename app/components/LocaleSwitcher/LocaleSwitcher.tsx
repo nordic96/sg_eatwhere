@@ -24,7 +24,7 @@ export default function LocaleSwitcher() {
         <Translate fontSize="small" />
         <div className="text-sm items-center flex justify-end gap-1">
           <span className={LocaleIconMap[currentLocale]}></span>
-          <label onClick={openLocale} className="text-sm cursor-pointer pr-2">
+          <label onClick={openLocale} className="text-xs cursor-pointer pr-2">
             {localeNames.of(currentLocale)}
           </label>
         </div>
