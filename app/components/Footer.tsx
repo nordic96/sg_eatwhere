@@ -1,19 +1,13 @@
 'use client';
 
-import { AvailableLocales } from '@/i18n/locales';
 /* eslint-disable @next/next/no-img-element */
-import useLangNames from '@/i18n/useLangNames';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import React from 'react';
+import dynamic from 'next/dynamic';
+const FooterLocaleSwitcher = dynamic(() => import('./LocaleSwitcher/FooterLocaleSwitcher'));
 
 const Footer = () => {
   const year = new Date().getFullYear();
-  const currentLocale = useLocale();
-  const localeNames = useLangNames(currentLocale);
-  const onChangeLocale = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    cookieStore.set('locale', e.target.value);
-    location.reload();
-  };
 
   const t = useTranslations('Footer');
 
@@ -22,12 +16,8 @@ const Footer = () => {
       <footer className={'flex grow pt-8 justify-center max-h-[200px]'}>
         <div className="flex flex-col grow max-w-[1440px] px-8 justify-between">
           <div className="gap-8 flex">
-            <div className="w-[200px]">
-              <img
-                src={'/images/foodies_trail_sg_header_icon.svg'}
-                alt={'logo'}
-                draggable="false"
-              />
+            <div className="w-[150px]">
+              <img src={'/images/logo.svg'} alt={'logo'} draggable="false" />
             </div>
             <div className="box-border grid grid-cols-3 w-[500px] gap-8">
               <div className="">
@@ -50,17 +40,7 @@ const Footer = () => {
               </div>
               <div className="">
                 <p className="font-bold">{t('changelanguage')}</p>
-                <select
-                  className="border border-[#333] py-1 w-[120px] mt-1"
-                  value={currentLocale}
-                  onChange={onChangeLocale}
-                >
-                  {AvailableLocales.map((locale, id) => (
-                    <option value={locale} key={id}>
-                      {localeNames.of(locale)}
-                    </option>
-                  ))}
-                </select>
+                <FooterLocaleSwitcher />
               </div>
             </div>
           </div>

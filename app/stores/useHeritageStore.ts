@@ -42,7 +42,12 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
   setFilter: (newFilter: EateryCategory) =>
     set((state) => ({ filter: state.filter.concat([newFilter]) })),
   unsetFilter: (filter: EateryCategory) =>
-    set((state) => ({ filter: state.filter.filter((x) => x !== filter) })),
+    set((state) => {
+      if (state.filter.length <= 1) {
+        return state;
+      }
+      return { filter: state.filter.filter((x) => x !== filter) };
+    }),
   openMore: () => {
     set({ clickedMore: true });
     openSidebar();

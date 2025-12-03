@@ -4,6 +4,9 @@
         "hawker": "Hawker Stall",
         "restaurant": "Restaurant"
     },
+    "Heritage": {
+        "oldtree_desc": "Located only just 1 minute away from Outram Park MRT Station, this corner place has been one of the hidden gems of selling delicious durian desserts to office workers from Central Business District. Staff prepares durian fresh from raw infront of the customers, and there are variety of durian desserts to try out. We highly recommend trying the Durian Mousse with Extra Shot! If you are keen to try out chendol, one of the traditional Singaporean dessert, try the MaoShanWang durian chendol too!"
+    },
     "MRT": {
         "tanjong_pagar": "Tanjong Pagar",
         "outram_park": "Outram Park",
