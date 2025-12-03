@@ -117,7 +117,7 @@ export default function Sidebar() {
                 {data.location.mrt.map((station, i) => (
                   <div
                     key={i}
-                    className="wrap-word-break max-w-20 flex justify-center items-center text-center"
+                    className="wrap-word-break max-w-21 flex justify-center items-center text-center"
                   >
                     <label className="font-public-sans font-bold text-md pr-1">
                       {mrtT(station)}
