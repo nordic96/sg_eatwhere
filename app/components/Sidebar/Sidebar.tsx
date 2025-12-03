@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import useClickOutside from '@/app/hooks/useClickOutside';
@@ -6,6 +5,8 @@ import { useMemo, useRef } from 'react';
 import { CAT_ASSET_MAP, data as foodData } from '@/app/constants/data';
 
 import CloseButton from '../CloseButton/CloseButton';
+import Image from 'next/image';
+
 import { useHeritageStore } from '@/app/stores';
 import Divider from '../Divider';
 import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
@@ -46,19 +47,23 @@ export default function Sidebar() {
         <div className="flex flex-col gap-4 items-center">
           {/** Img Container */}
           <div className="flex flex-col grow w-full">
-            <img
-              className="object-cover h-[250px] w-full"
+            <Image
+              className={'h-[250px] object-cover'}
+              width={350}
+              height={250}
               src={data.imgSource[0]}
               draggable="false"
               alt={'main_photo'}
             />
             <div className="flex flex-wrap justify-center">
               {data.imgSource.slice(1).map((src, index) => (
-                <img
+                <Image
                   className="w-[110px] h-[110px] object-cover"
                   key={index}
                   src={src}
                   alt={''}
+                  width={110}
+                  height={110}
                   draggable="false"
                 />
               ))}
@@ -69,9 +74,11 @@ export default function Sidebar() {
             <label className="text-3xl font-bold text-center">{data.name}</label>
             <label className="text-xs font-light">{data.location.address}</label>
             <span className="flex gap-1 items-center">
-              <img
+              <Image
                 className="h-6"
                 src={CAT_ASSET_MAP[data.category]}
+                width={32}
+                height={32}
                 alt={'icon'}
                 draggable="false"
               />

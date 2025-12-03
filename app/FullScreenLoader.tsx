@@ -1,6 +1,6 @@
 'use client';
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect } from 'react';
+import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { useProgress } from '@react-three/drei';
 
@@ -39,7 +39,7 @@ export default function FullScreenLoader(props: ScreenLoaderProps) {
       <div className={'absolute left-[50%] translate-x-[-50%] top-[40%] translate-y-[-40%]'}>
         <div className="flex flex-col gap-8 justify-center items-center">
           <div className={'w-[200px]'}>
-            <img src={'/images/logo.svg'} alt="logo" draggable="false" />
+            <Image src={'/images/logo.svg'} alt="logo" draggable="false" width={200} height={200} />
           </div>
           <div className={'w-[50vw]'}>
             <ProgressBar progress={progress.toFixed(0)} />

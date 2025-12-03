@@ -1,9 +1,9 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element */
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 const FooterLocaleSwitcher = dynamic(() => import('./LocaleSwitcher/FooterLocaleSwitcher'));
 
 const Footer = () => {
@@ -16,9 +16,13 @@ const Footer = () => {
       <footer className={'flex grow pt-8 justify-center max-h-[200px]'}>
         <div className="flex flex-col grow max-w-[1440px] px-8 justify-between">
           <div className="gap-8 flex">
-            <div className="w-[150px]">
-              <img src={'/images/logo.svg'} alt={'logo'} draggable="false" />
-            </div>
+            <Image
+              src={'/images/logo.svg'}
+              alt={'logo'}
+              draggable="false"
+              width={150}
+              height={100}
+            />
             <div className="box-border grid grid-cols-3 w-[500px] gap-8">
               <div className="">
                 <p className="font-bold">View Restaurant List</p>
