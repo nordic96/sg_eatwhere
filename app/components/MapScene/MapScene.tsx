@@ -28,7 +28,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const [ready, setReady] = useState(false);
   const { heritageId, filter, unSelect, clickedMore, getThemeStyle } = useHeritageStore();
   function dummyOnReady() {
-    setTimeout(() => setReady(true), 2000);
+    setTimeout(() => setReady(true), 1000);
   }
 
   return (
