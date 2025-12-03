@@ -7,6 +7,8 @@ import withSuspense from './functions/withSuspense';
 import HeritageListView from './components/HeritageListView/HeritageListView';
 import { useTranslations } from 'next-intl';
 
+const MAP_COPYRIGHT_URL =
+  'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
 function ClientHome({ locale, messages }: { locale: string; messages: Record<string, string> }) {
   const t = useTranslations('HomePage');
   return (
@@ -16,6 +18,13 @@ function ClientHome({ locale, messages }: { locale: string; messages: Record<str
         <MapScene locale={locale} messages={messages} />
       </div>
       <Sidebar />
+      <a
+        className="italic hover:text-primary"
+        href={'https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg'}
+        target={'_blank'}
+      >
+        {`${t('map_by')} ${MAP_COPYRIGHT_URL}`}
+      </a>
       <p className="italic text-[#333]">{t('map_disclaimer')}</p>
       <div className="flex grow justify-between mt-8">
         {/** Food List Container */}
