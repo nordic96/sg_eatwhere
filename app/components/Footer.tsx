@@ -16,12 +16,8 @@ const Footer = () => {
       <footer className={'flex grow pt-8 justify-center max-h-[200px]'}>
         <div className="flex flex-col grow max-w-[1440px] px-8 justify-between">
           <div className="gap-8 flex">
-            <div className="w-[200px]">
-              <img
-                src={'/images/foodies_trail_sg_header_icon.svg'}
-                alt={'logo'}
-                draggable="false"
-              />
+            <div className="w-[150px]">
+              <img src={'/images/logo.svg'} alt={'logo'} draggable="false" />
             </div>
             <div className="box-border grid grid-cols-3 w-[500px] gap-8">
               <div className="">
