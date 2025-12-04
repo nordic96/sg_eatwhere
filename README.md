@@ -42,5 +42,6 @@ I referenced a Straits Times article, which shows an data analysis of the pictur
 ## 3. References Used:
 * 3.1 Map Image used for plane texture [Wikimedia] [Singapore_MRT_Network_(with_Hume)](https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg)
 * 3.2 "Singapore in Colour" - by Straits Times [article](https://www.straitstimes.com/multimedia/graphics/2023/08/singapore-in-colour/index.html)
+* 3.3 *"[Daily Models 9-24: Bowl of Rice](https://sketchfab.com/3d-models/daily-models-9-24-bowl-of-rice-270655e54e0d412895b2424a01829338)"* 3D Model by bonguyen-um
 
 ## Disclaimer
