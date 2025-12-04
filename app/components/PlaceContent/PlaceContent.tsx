@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useHeritageStore } from '@/app/stores';
@@ -6,6 +5,7 @@ import { CAT_ASSET_MAP, data as foodData } from '@/app/constants/data';
 import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 
 import React, { useMemo } from 'react';
+import Image from 'next/image';
 import HighlightedText from '../HighlightText/HighlightText';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import { cn } from '@/app/utils';
@@ -43,7 +43,14 @@ export default function PlaceContent() {
       {/** Info Container */}
       <div className={'flex grow justify-start items-center gap-1 text-md'}>
         <span className="flex gap-1 items-center">
-          <img className="h-6" src={CAT_ASSET_MAP[data.category]} alt={'icon'} draggable="false" />
+          <Image
+            className="h-6"
+            width={32}
+            height={32}
+            src={CAT_ASSET_MAP[data.category]}
+            alt={'icon'}
+            draggable="false"
+          />
           <p>{catT(data.category)}</p>
         </span>
         <VerticalDivider />
