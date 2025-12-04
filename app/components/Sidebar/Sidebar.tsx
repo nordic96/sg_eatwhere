@@ -133,7 +133,9 @@ export default function Sidebar() {
           </div>
           {/** Description Container */}
           <div>
-            <p className="font-light text-xs">{heritageT(`${data.id}_desc`)}</p>
+            <span className="font-light text-xs whitespace-pre-line">
+              {heritageT(`${data.id}_desc`)}
+            </span>
           </div>
         </div>
       )}

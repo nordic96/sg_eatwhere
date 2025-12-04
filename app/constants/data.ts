@@ -11,7 +11,7 @@ export const data: FoodHeritage[] = [
     id: 'komala',
     name: 'Komala Vilas',
     category: 'restaurant',
-    recommendations: ['Masla Dosai'],
+    recommendations: ['Masla Dosai', 'Masala Chai'],
     imgSource: [
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/komala/komalavilla_1.jpeg',
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/komala/komalavilla_2.jpeg',
@@ -33,7 +33,7 @@ export const data: FoodHeritage[] = [
     id: 'spicy_wife',
     name: 'Spicy Wife Nasi Lemak',
     category: 'hawker',
-    recommendations: ['aroma_chicken'],
+    recommendations: ['Aromatic Chicken'],
     imgSource: [
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/spicy/spicy_wife_1.jpeg',
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/spicy/spicy_wife_2.jpeg',
@@ -53,7 +53,7 @@ export const data: FoodHeritage[] = [
     id: 'yatkayan',
     name: 'Yat Ka Yan Dessert',
     category: 'dessert',
-    recommendations: ['Durian Chendol', 'Purple Rice with Icecream'],
+    recommendations: ['Yam Chendol', 'Purple Rice with Icecream'],
     imgSource: [
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/yatkayan/yatkayan_1.jpeg',
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/yatkayan/yatkayan_2.jpeg',
@@ -117,7 +117,7 @@ export const data: FoodHeritage[] = [
     id: 'oldtree',
     name: '99 Old Trees Durian',
     category: 'dessert',
-    recommendations: ['MaoShanWang Durian Chendol', 'Durian Mousse'],
+    recommendations: ['Stinky Bowl (with Extra Shot)', 'MaoShanWang Durian Chendol'],
     imgSource: [
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/oldtree/oldtree_3.jpeg',
       'https://cdn.jsdelivr.net/gh/nordic96/sg_eatwhere/resources/oldtree/oldtree_1.jpeg',
