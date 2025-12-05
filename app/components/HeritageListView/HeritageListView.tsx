@@ -1,10 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { CAT_ASSET_MAP, data } from '@/app/constants/data';
+import { CAT_ASSET_MAP } from '@/app/constants/data';
 import { useHeritageStore } from '@/app/stores';
 import { Region } from '@/app/types';
-import { useMemo } from 'react';
 import HighlightedText from '../HighlightText/HighlightText';
 import { useTranslations } from 'next-intl';
 
@@ -13,11 +12,9 @@ interface HeritageListViewProps {
 }
 
 export default function HeritageListView({ region }: HeritageListViewProps) {
-  const { heritageId, setHeritageId, filter } = useHeritageStore();
+  const { heritageId, setHeritageId, filter, getFoodData } = useHeritageStore();
   const t = useTranslations('HeritageListView');
-  const heritageDataByRegion = useMemo(() => {
-    return data.filter((v) => v.location.region === region);
-  }, [region]);
+  const heritageDataByRegion = getFoodData().filter((v) => v.location.region === region);
 
   return (
     <div className="flex flex-col gap-2">

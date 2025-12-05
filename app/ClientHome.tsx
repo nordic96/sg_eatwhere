@@ -6,11 +6,26 @@ import Sidebar from './components/Sidebar/Sidebar';
 import withSuspense from './functions/withSuspense';
 import HeritageListView from './components/HeritageListView/HeritageListView';
 import { useTranslations } from 'next-intl';
+import { FoodHeritage } from './types';
+import { useHeritageStore } from './stores';
+import { useEffect } from 'react';
+
+type ClientHomeProps = {
+  locale: string;
+  messages: Record<string, string>;
+  foods: FoodHeritage[];
+};
 
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
-function ClientHome({ locale, messages }: { locale: string; messages: Record<string, string> }) {
+function ClientHome({ locale, messages, foods }: ClientHomeProps) {
+  const { setFoodData } = useHeritageStore();
   const t = useTranslations('HomePage');
+
+  useEffect(() => {
+    setFoodData(foods);
+  }, [foods, setFoodData]);
+
   return (
     <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
       <FilterBar />

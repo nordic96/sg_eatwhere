@@ -1,11 +1,11 @@
 import { create } from 'zustand';
-import { EateryCategory, ThemeColor } from '../types';
+import { EateryCategory, FoodHeritage, ThemeColor } from '../types';
 import { ClassValue } from 'clsx';
 import { ThemeRecord } from '../constants/theme';
-import { data } from '../constants/data';
 
 type State = {
   heritageId: string | null;
+  foodData: FoodHeritage[];
   filter: EateryCategory[];
   clickedMore: boolean;
 };
@@ -18,6 +18,9 @@ type Actions = {
   openMore: () => void;
   closeMore: () => void;
   unSelect: () => void;
+  setFoodData: (data: FoodHeritage[]) => void;
+  getFoodData: () => FoodHeritage[];
+  getSelectedFoodData: () => FoodHeritage | null;
 };
 
 export function openSidebar() {
@@ -36,6 +39,7 @@ export function closeSidebar() {
 
 export const useHeritageStore = create<State & Actions>((set, get) => ({
   heritageId: null,
+  foodData: [],
   filter: ['hawker', 'dessert', 'restaurant'],
   clickedMore: false,
   setHeritageId: (newId: string) => set({ heritageId: newId }),
@@ -59,9 +63,10 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
   unSelect: () => set({ heritageId: null }),
   getThemeStyle: () => {
     const heritageId = get().heritageId;
+    const foodData = get().foodData;
     let theme: ThemeColor = 'primary';
     if (heritageId) {
-      const heritage = data.find((v) => v.id === heritageId);
+      const heritage = foodData.find((v) => v.id === heritageId);
       if (heritage) {
         theme = ThemeRecord[heritage.category];
       }
@@ -77,5 +82,14 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
       'border-outramorange': theme && theme === 'orange',
     };
     return themeStyle;
+  },
+  setFoodData: (data: FoodHeritage[]) => set({ foodData: data }),
+  getFoodData: () => get().foodData,
+  getSelectedFoodData: () => {
+    const id = get().heritageId;
+    const data = get().foodData;
+    if (!id) return null;
+
+    return data.find((i) => i.id === id) || null;
   },
 }));

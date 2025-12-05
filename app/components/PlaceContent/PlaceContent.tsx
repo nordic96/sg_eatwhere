@@ -1,10 +1,9 @@
 'use client';
 
 import { useHeritageStore } from '@/app/stores';
-import { CAT_ASSET_MAP, data as foodData } from '@/app/constants/data';
+import { CAT_ASSET_MAP } from '@/app/constants/data';
 import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 
-import React, { useMemo } from 'react';
 import Image from 'next/image';
 import HighlightedText from '../HighlightText/HighlightText';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
@@ -17,12 +16,10 @@ export default function PlaceContent() {
   const catT = useTranslations('FoodCategory');
   const heritageT = useTranslations('Heritage');
 
-  const { openMore, getThemeStyle } = useHeritageStore();
+  const { openMore, getThemeStyle, getSelectedFoodData } = useHeritageStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
-  const data = useMemo(() => {
-    return foodData.find((item) => item.id === heritageId) || null;
-  }, [heritageId]);
+  const data = getSelectedFoodData();
 
   if (!heritageId || !data) {
     return <div>No data selected</div>;
