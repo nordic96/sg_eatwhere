@@ -1,8 +1,8 @@
 'use client';
 
 import useClickOutside from '@/app/hooks/useClickOutside';
-import { useMemo, useRef } from 'react';
-import { CAT_ASSET_MAP, data as foodData } from '@/app/constants/data';
+import { useRef } from 'react';
+import { CAT_ASSET_MAP } from '@/app/constants/data';
 
 import CloseButton from '../CloseButton/CloseButton';
 import Image from 'next/image';
@@ -16,10 +16,8 @@ import { useTranslations } from 'next-intl';
 
 export default function Sidebar() {
   const target = useRef(null);
-  const { closeMore, heritageId, getThemeStyle } = useHeritageStore();
-  const data = useMemo(() => {
-    return foodData.find((item) => item.id === heritageId) || null;
-  }, [heritageId]);
+  const { closeMore, getThemeStyle, getSelectedFoodData } = useHeritageStore();
+  const data = getSelectedFoodData();
 
   const t = useTranslations('Sidebar');
   const mrtT = useTranslations('MRT');
