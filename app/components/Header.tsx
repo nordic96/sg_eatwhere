@@ -7,8 +7,10 @@ import LocaleSwitcher from './LocaleSwitcher/LocaleSwitcher';
 import { cn } from '../utils';
 import { baseLayoutStyle } from '../constants/theme';
 import AppLink from './AppLink';
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
+  const t = useTranslations('Header');
   return (
     <div>
       <header className="bg-primary text-white flex justify-center">
@@ -20,7 +22,7 @@ const Header = () => {
               </AppLink>
             </div>
             <div className="">
-              <AppLink route={'/mapview'}>{'MapView'}</AppLink>
+              <AppLink route={'/mapview'}>{t(`link_mapview`)}</AppLink>
             </div>
           </div>
           <LocaleSwitcher />
