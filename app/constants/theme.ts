@@ -6,4 +6,5 @@ export const ThemeRecord: Record<EateryCategory, ThemeColor> = {
   restaurant: 'orange',
 };
 
-export const baseLayoutStyle = 'max-w-[1440px] max-sm:max-w-[100vw] px-8 max-sm:px-4 md:px-4';
+export const baseLayoutStyle =
+  'max-w-[1440px] max-sm:max-w-[100vw] xl:px-8 lg:px-4 max-sm:px-4 md:px-4';
