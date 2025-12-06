@@ -41,13 +41,13 @@ export default function FullScreenLoader(props: ScreenLoaderProps) {
           <Image
             loading={'eager'}
             src={'/images/logo.svg'}
-            className={'w-[200px]'}
+            className={'xl:w-[300px] lg:w-[200px] max-sm:w-[200px]'}
             alt="logo"
             draggable="false"
             width={'0'}
             height={'0'}
           />
-          <div className={'w-[50vw]'}>
+          <div className={'xl:w-[50vw] lg:w-[80vw] max-sm:w-[80vw]'}>
             <ProgressBar progress={progress.toFixed(0)} />
           </div>
         </div>

@@ -83,7 +83,13 @@ export default function FilterBar() {
     <div>
       <div className="py-2 flex gap-2">
         <div className="flex items-center gap-2 text-xs">
-          <Image src={hawkerBowl} className={'w-12'} height={'0'} width={'0'} alt={'hawker_bowl'} />
+          <Image
+            src={hawkerBowl}
+            className={'w-12 max-sm:w-10'}
+            height={'0'}
+            width={'0'}
+            alt={'hawker_bowl'}
+          />
           <div
             id={'filter_label_hawker'}
             onClick={onSelectFilter('hawker')}
@@ -95,7 +101,7 @@ export default function FilterBar() {
         <div className="flex items-center gap-2">
           <Image
             src={roosterBowl}
-            className={'w-12'}
+            className={'w-12 max-sm:w-10'}
             height={'0'}
             width={'0'}
             alt={'restaurant_bowl'}
@@ -111,7 +117,7 @@ export default function FilterBar() {
         <div className="flex items-center gap-2">
           <Image
             src={roosterBowl}
-            className={'w-12'}
+            className={'w-12 max-sm:w-10'}
             height={'0'}
             width={'0'}
             alt={'dessert_filter'}
