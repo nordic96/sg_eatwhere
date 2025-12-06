@@ -1,13 +1,13 @@
 'use client';
 
-import FilterBar from './components/FilterBar/FilterBar';
-import MapScene from './components/MapScene/MapScene';
-import Sidebar from './components/Sidebar/Sidebar';
-import withSuspense from './functions/withSuspense';
-import HeritageListView from './components/HeritageListView/HeritageListView';
+import FilterBar from '../components/FilterBar/FilterBar';
+import MapScene from '../components/MapScene/MapScene';
+import Sidebar from '../components/Sidebar/Sidebar';
+import withSuspense from '../functions/withSuspense';
+import HeritageListView from '../components/HeritageListView/HeritageListView';
 import { useTranslations } from 'next-intl';
-import { FoodHeritage } from './types';
-import { useHeritageStore } from './stores';
+import { FoodHeritage } from '../types';
+import { useHeritageStore } from '../stores';
 import { useEffect } from 'react';
 
 type ClientHomeProps = {
