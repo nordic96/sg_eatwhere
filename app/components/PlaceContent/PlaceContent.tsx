@@ -41,9 +41,12 @@ export default function PlaceContent() {
       <div className={'flex grow justify-start items-center gap-1 text-md'}>
         <span className="flex gap-1 items-center">
           <Image
-            className="h-6"
-            width={32}
-            height={32}
+            className={cn({
+              'w-10': data.category !== 'dessert',
+              'w-7': data.category === 'dessert',
+            })}
+            width={'0'}
+            height={'0'}
             src={CAT_ASSET_MAP[data.category]}
             alt={'icon'}
             draggable="false"

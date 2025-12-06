@@ -13,6 +13,7 @@ import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons
 import HighlightedText from '../HighlightText/HighlightText';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
+import { cn } from '@/app/utils';
 
 export default function Sidebar() {
   const target = useRef(null);
@@ -69,19 +70,22 @@ export default function Sidebar() {
           </div>
           {/** Title Container */}
           <div className="flex flex-col items-center w-full">
-            <label className="text-3xl font-bold text-center">{data.name}</label>
-            <label className="text-xs font-light">{data.location.address}</label>
             <span className="flex gap-1 items-center">
               <Image
-                className="h-6"
+                className={cn({
+                  'w-10': data.category !== 'dessert',
+                  'w-7': data.category === 'dessert',
+                })}
                 src={CAT_ASSET_MAP[data.category]}
-                width={32}
-                height={32}
+                width={'0'}
+                height={'0'}
                 alt={'icon'}
                 draggable="false"
               />
               <p>{catT(data.category)}</p>
             </span>
+            <label className="text-3xl font-bold text-center">{data.name}</label>
+            <label className="text-xs font-light">{data.location.address}</label>
             <Divider className={getThemeStyle()} />
             {/** Secondary Info Container */}
             <div className="flex items-center gap-1">
