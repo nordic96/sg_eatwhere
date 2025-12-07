@@ -30,9 +30,11 @@ export default function StorySection() {
             src={'/images/film_canister.png'}
             alt={'film_canister'}
             draggable={false}
-            className={'h-[200px] max-sm:h-[140px] w-auto absolute right-0 top-[105px]'}
+            className={
+              'h-[200px] max-sm:h-[140px] w-auto absolute right-0 top-[105px] max-sm:top-[115px]'
+            }
           />
-          <div className="absolute overflow-x-hidden top-[120px] w-[800px] max-sm:w-[95vw] right-[115px] max-sm:right-20 block">
+          <div className="absolute overflow-x-hidden top-[120px] max-sm:top-[130px] w-[800px] max-sm:w-[95vw] right-[115px] max-sm:right-20 block">
             <div className="flex animate-marquee">
               <img
                 className={'lg:w-[800px] max-sm:w-[95vw]'}
