@@ -10,7 +10,7 @@ import { h1BaseStyle, microTextBaseStyle } from '@/app/constants';
 export default function HeroSection() {
   const t = useTranslations('LandingPage');
   return (
-    <div className="mt-40 max-sm:mt-20">
+    <div className="mt-30 max-sm:mt-20">
       <div className="flex justify-between items-center">
         <div className="lg:w-[760px] max-sm:w-full flex flex-col gap-4 items-start">
           <FadeIn>

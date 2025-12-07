@@ -8,7 +8,7 @@ import { PhotoCamera } from '@mui/icons-material';
 export default function StorySection() {
   const t = useTranslations('LandingPage');
   return (
-    <div className="mt-20">
+    <div>
       <div className="flex justify-between items-center max-sm:flex-col">
         <div className="relative flex grow flex-col gap-4 items-start min-h-[400px]">
           <FadeIn className="w-[760px] max-sm:w-full">
