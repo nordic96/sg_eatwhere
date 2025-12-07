@@ -40,8 +40,8 @@ export default function HeroSection() {
           </div>
         </div>
         <Image
-          className={'w-[250px] max-sm:w-[150px]'}
-          src={'/images/chendol.svg'}
+          className={'w-[390px] max-sm:w-[200px]'}
+          src={'/images/hero_img.svg'}
           width={'0'}
           height={'0'}
           draggable={false}
