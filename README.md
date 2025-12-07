@@ -1,5 +1,5 @@
 # The Foodie's Trail - SG
-<img src="./app/images/logo.svg" width="150">
+<img src="./documentation/images/logo.svg" width="150">
 
 *Logo - designed by Gihun Ko*
 
