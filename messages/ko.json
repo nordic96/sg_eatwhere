@@ -20,12 +20,22 @@
         "bugis": "부기스",
         "nicoll_highway": "니콜 하이웨이"
     },
+    "Header": {
+        "link_mapview": "맛집지도"
+    },
     "Banner": {
         "banner_msg": "이 웹사이트는 개인 웹사이트입니다. 개발자의 지독히 주관적인 기준과 현지 친구들의 추천, 개인 방문 경험등으로 선택해 소개하는 웹사이트니 가볍게 참고용으로 봐주시기 바랍니다!"
     },
     "HomePage": {
         "map_by": "지도 저작권: ",
         "map_disclaimer": "**지도의 척도와 음식점들의 위치는 다소 상이할수 있습니다, 참고용으로 보시기 바랍니다"
+    },
+    "LandingPage": {
+        "landing_desc": "<primary>싱가폴</primary>에서 가장 로컬스러운\n <primary>맛집 경험</primary>을 \n원하시나요??",
+        "landing_desc_2": "현지 싱가포리언들이 즐겨 먹는 곳을 알고 싶으신가요?",
+        "landing2_desc": "<primary>나시르막</primary>부터 <orange>마살라 도사이</orange>까지, <red>앙 쿠 쿠에</red>부터 <green>첸돌</green>까지!",
+        "landing2_desc_2": "10년넘게 싱가포리언 친구들과 같이 모은 이 맛집리스트를 여러분께 공개합니다",
+        "explore_more": "더 알아보기"
     },
     "FilterBar": {
         "hawker": "호커 음식점",
