@@ -1,1 +1,1 @@
-export type AppRoute = '/' | '/mapview';
+export type AppRoute = '/' | '/mapview' | '/about';

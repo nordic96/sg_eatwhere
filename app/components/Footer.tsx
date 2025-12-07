@@ -6,11 +6,12 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { cn } from '../utils';
 import { baseLayoutStyle } from '../constants/theme';
+import AppLink from './AppLink';
 const FooterLocaleSwitcher = dynamic(() => import('./LocaleSwitcher/FooterLocaleSwitcher'));
 
 const Footer = () => {
   const year = new Date().getFullYear();
-
+  const headerT = useTranslations('Header');
   const t = useTranslations('Footer');
 
   return (
@@ -28,11 +29,11 @@ const Footer = () => {
             />
             <div className="box-border grid grid-cols-3 w-[500px] max-sm:w-full gap-8 max-sm:gap-2">
               <div className="">
-                <p className="font-bold">View Restaurant List</p>
-                <div className="">
-                  <p>Foodie Trail</p>
-                  <p>Dessert Trail</p>
-                  <p>Heritage Trail</p>
+                <p className="font-bold">{t('column_website')}</p>
+                <div className="flex flex-col">
+                  <AppLink route={'/'}>{headerT('link_landing')}</AppLink>
+                  <AppLink route={'/mapview'}>{headerT('link_mapview')}</AppLink>
+                  <AppLink route={'/about'}>{headerT('link_about')}</AppLink>
                 </div>
               </div>
               <div className="">

@@ -16,14 +16,11 @@ const Header = () => {
       <header className="bg-primary text-white flex justify-center">
         <div className={cn('flex items-center justify-between grow py-1', baseLayoutStyle)}>
           <div className="flex gap-8 items-center">
-            <div className="">
-              <AppLink route={'/'}>
-                <Image src={horizontalImage} alt="logo" height={50} draggable={false} />
-              </AppLink>
-            </div>
-            <div className="">
-              <AppLink route={'/mapview'}>{t(`link_mapview`)}</AppLink>
-            </div>
+            <AppLink route={'/'}>
+              <Image src={horizontalImage} alt="logo" height={50} draggable={false} />
+            </AppLink>
+            <AppLink route={'/mapview'}>{t(`link_mapview`)}</AppLink>
+            <AppLink route={'/about'}>{t(`link_about`)}</AppLink>
           </div>
           <LocaleSwitcher />
         </div>

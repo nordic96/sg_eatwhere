@@ -22,7 +22,9 @@
         "nicoll_highway": "Nicoll Highway"
     },
     "Header": {
-        "link_mapview": "MapView"
+        "link_mapview": "MapView",
+        "link_landing": "Home",
+        "link_about": "About Us"
     },
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
@@ -61,6 +63,7 @@
         "nearest-mrt": "Nearest MRT Station"
     },
     "Footer": {
-        "changelanguage": "Change Language"
+        "changelanguage": "Change Language",
+        "column_website": "Website"
     }
 }
