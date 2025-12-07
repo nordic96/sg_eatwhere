@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -38,6 +39,7 @@
     "eslint-config-next": "16.0.3",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.4",
+    "husky": "^9.1.7",
     "prettier": "3.6.2",
     "tailwindcss": "^4",
     "typescript": "^5"
