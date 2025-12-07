@@ -10,7 +10,7 @@ export default function PrimaryButton({
   return (
     <button
       className={cn(
-        'bg-primary text-white hover:bg-red-700 cursor-pointer py-2 px-4 rounded-2xl text-md',
+        'bg-primary text-white hover:bg-red-700 cursor-pointer py-2 px-4 gap-1 max-sm:px-2 rounded-3xl text-md',
         className,
       )}
       {...props}
