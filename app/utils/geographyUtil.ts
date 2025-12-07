@@ -43,9 +43,9 @@ export function createConverterTwoPoint(
 }
 
 const hollandV = { latitude: 1.3111927720357135, longitude: 103.79626167383837 };
-const hollandVScene = [-31, 0, 20];
+const hollandVScene = [-31, 0, 20] as Vec3;
 const tampinesV = { latitude: 1.3533165106123863, longitude: 103.94507710989102 };
-const tampinesVScene = [58, 0, -9];
+const tampinesVScene = [58, 0, -9] as Vec3;
 export const geoConverter = createConverterTwoPoint(
   hollandV,
   hollandVScene,
