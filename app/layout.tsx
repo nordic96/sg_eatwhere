@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 
 import Banner from './components/Banner/Banner';
 import { NextIntlClientProvider, useTranslations } from 'next-intl';
+import { cn } from './utils';
+import { baseLayoutStyle } from './constants/theme';
 
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
@@ -46,7 +48,7 @@ export default function RootLayout({
             <Header />
             <Banner msg={t('banner_msg')} />
             <div className={'flex justify-center grow h-scren'}>
-              <div className="flex grow flex-col max-w-[1440px] px-8">{children}</div>
+              <div className={cn('flex grow flex-col', baseLayoutStyle)}>{children}</div>
             </div>
             <Footer />
           </div>
