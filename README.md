@@ -4,7 +4,7 @@
 *Logo - designed by Gihun Ko*
 
 ## Introduction
-![landing_page](/documentation/images/landing_page.png)
+![landing_page](./app/opengraph-image.png)
 *The Landing Page gives adequent explanation to my purpose of building this web app*
 
 This website was created for only one purpose - to introduce tourists who are visiting Singapore hidden local restaurants/dessert/hawker stalls that Singaporeans often visit, but not really known by tourists.

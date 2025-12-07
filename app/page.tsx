@@ -1,10 +1,13 @@
-import { geti18nConfig } from '@/i18n/request';
-import ClientHome from './ClientHome';
-import { FoodHeritage } from './types';
-import { fetchApi } from './utils';
+import HeroSection from './components/HeroSection/HeroSection';
+import StorySection from './components/StorySection/StorySection';
 
-export default async function Page() {
-  const { messages, locale } = await geti18nConfig();
-  const data = await fetchApi<FoodHeritage[]>(process.env.DATA_URL || '');
-  return <ClientHome messages={messages} locale={locale} foods={data.data || []} />;
+export default function Page() {
+  return (
+    <div className="flex flex-col gap-40 mb-40">
+      {/** Hero Section */}
+      <HeroSection />
+      {/** Story Section */}
+      <StorySection />
+    </div>
+  );
 }

@@ -27,12 +27,21 @@
   --color-marinablue: #0194FE;
   --color-monsoongrey: #7F8B9B;
   --animate-fill: fill 1s linear forwards;
+  --animate-marquee: marquee 25s linear infinite;
   @keyframes fill {
     0% {
       transform: scaleX(0);
     }
     100% {
       transform: scaleX(1);
+    }
+  }
+  @keyframes marquee {
+    0%: {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
     }
   }
 }
@@ -62,11 +71,6 @@ header {
 
 footer {
   border-top: 0.5px solid #999;
-}
-
-h1 {
-  font-size: 48px;
-  font-weight: bolder;
 }
 
 h3 {

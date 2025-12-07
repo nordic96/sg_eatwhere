@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import roosterBowl from '@/public/images/rooter_bowl.svg';
 import hawkerBowl from '@/public/images/hawker_bowl.svg';
+import chendol from '@/public/images/chendol.svg';
 
 import { useHeritageStore } from '@/app/stores';
 import { EateryCategory, EateryCategoryValues } from '@/app/types';
@@ -116,8 +117,8 @@ export default function FilterBar() {
         </div>
         <div className="flex items-center gap-2">
           <Image
-            src={roosterBowl}
-            className={'w-12 max-sm:w-10'}
+            src={chendol}
+            className={'w-8 max-sm:h-7'}
             height={'0'}
             width={'0'}
             alt={'dessert_filter'}

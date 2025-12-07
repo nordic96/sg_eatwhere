@@ -6,6 +6,7 @@ import { useHeritageStore } from '@/app/stores';
 import { Region } from '@/app/types';
 import HighlightedText from '../HighlightText/HighlightText';
 import { useTranslations } from 'next-intl';
+import { cn } from '@/app/utils';
 
 interface HeritageListViewProps {
   region: Region;
@@ -29,14 +30,19 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                 className="flex items-center gap-1 cursor-pointer"
                 onClick={() => setHeritageId(location.id)}
               >
-                <Image
-                  src={CAT_ASSET_MAP[location.category]}
-                  className={'w-10'}
-                  width={'0'}
-                  height={'0'}
-                  alt={'category-icon'}
-                  draggable="false"
-                />
+                <div className="w-10 flex justify-center">
+                  <Image
+                    src={CAT_ASSET_MAP[location.category]}
+                    className={cn({
+                      'w-10': location.category !== 'dessert',
+                      'w-7': location.category === 'dessert',
+                    })}
+                    width={'0'}
+                    height={'0'}
+                    alt={'category-icon'}
+                    draggable="false"
+                  />
+                </div>
                 {location.id === heritageId ? (
                   <HighlightedText>
                     <label className="text-[12px]">{location.name}</label>
