@@ -11,4 +11,4 @@ export const baseLayoutStyle =
 
 export const h1BaseStyle =
   'text-5xl max-sm:text-4xl whitespace-pre-line font-extrabold leading-none';
-export const microTextBaseStyle = 'font-light text-xl max-sm:text-lg';
+export const microTextBaseStyle = 'font-light text-xl whitespace-pre-line max-sm:text-lg';

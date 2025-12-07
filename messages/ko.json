@@ -31,11 +31,13 @@
         "map_disclaimer": "**지도의 척도와 음식점들의 위치는 다소 상이할수 있습니다, 참고용으로 보시기 바랍니다"
     },
     "LandingPage": {
-        "landing_desc": "<primary>싱가폴</primary>에서 가장 로컬스러운\n <primary>맛집 경험</primary>을 \n원하시나요??",
-        "landing_desc_2": "현지 싱가포리언들이 즐겨 먹는 곳을 알고 싶으신가요?",
-        "landing2_desc": "<primary>나시르막</primary>부터 <orange>마살라 도사이</orange>까지, <red>앙 쿠 쿠에</red>부터 <green>첸돌</green>까지!",
-        "landing2_desc_2": "10년넘게 싱가포리언 친구들과 같이 모은 이 맛집리스트를 여러분께 공개합니다",
-        "explore_more": "더 알아보기"
+        "hero_desc": "<green>10</green>년동안. <green>100</green>곳이 넘는 맛집 방문.\n저는 현지음식을 사랑하는 외국인입니다.\n\n제가 모아온 <primary>싱가폴</primary>에서\n <primary>꼭 먹어봐야 할 맛집</primary>리스트를 소개합니다",
+        "hero_micro_desc": "10년동안 현지 친구들과 같이 동고동락을 지내며 축적해온 이 맛집 지도를 통해\n 싱가포리언들의 \"최애\" 맛집을 알아보세요!",
+        "explore_more": "맛집 지도보기",
+        "discover_why": "이 웹사이트에 대하여",
+        "landing2_desc": "그저 단순한 맛집 북마크가 아닙니다",
+        "landing2_desc_2": "\"싱가폴에서의 10년이 넘는 시간동안 저의 친구들,가족들이랑 같이 쌓아온 추억들이 고스란히 묻힌 \n음식점들을 다른 분들도 좋은 추억을 쌓을 수 있길 바라며 공유합니다\"",
+        "photo_disclaimer": "모든 사진은 개발자 본인이 촬영했습니다"
     },
     "FilterBar": {
         "hawker": "호커 음식점",
