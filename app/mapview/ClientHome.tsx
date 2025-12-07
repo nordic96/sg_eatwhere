@@ -1,16 +1,31 @@
 'use client';
 
-import FilterBar from './components/FilterBar/FilterBar';
-import MapScene from './components/MapScene/MapScene';
-import Sidebar from './components/Sidebar/Sidebar';
-import withSuspense from './functions/withSuspense';
-import HeritageListView from './components/HeritageListView/HeritageListView';
+import FilterBar from '../components/FilterBar/FilterBar';
+import MapScene from '../components/MapScene/MapScene';
+import Sidebar from '../components/Sidebar/Sidebar';
+import withSuspense from '../functions/withSuspense';
+import HeritageListView from '../components/HeritageListView/HeritageListView';
 import { useTranslations } from 'next-intl';
+import { FoodHeritage } from '../types';
+import { useHeritageStore } from '../stores';
+import { useEffect } from 'react';
+
+type ClientHomeProps = {
+  locale: string;
+  messages: Record<string, string>;
+  foods: FoodHeritage[];
+};
 
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
-function ClientHome({ locale, messages }: { locale: string; messages: Record<string, string> }) {
+function ClientHome({ locale, messages, foods }: ClientHomeProps) {
+  const { setFoodData } = useHeritageStore();
   const t = useTranslations('HomePage');
+
+  useEffect(() => {
+    setFoodData(foods);
+  }, [foods, setFoodData]);
+
   return (
     <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
       <FilterBar />
@@ -28,7 +43,7 @@ function ClientHome({ locale, messages }: { locale: string; messages: Record<str
       <p className="italic text-[#333]">{t('map_disclaimer')}</p>
       <div className="flex grow justify-between mt-8">
         {/** Food List Container */}
-        <div className="grid grid-cols-4 w-[60%]">
+        <div className="grid grid-cols-4 w-[60%] max-sm:w-full">
           <HeritageListView region={'central'} />
           <HeritageListView region={'east'} />
           <HeritageListView region={'west'} />

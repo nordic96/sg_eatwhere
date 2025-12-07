@@ -1,7 +1,13 @@
-import { geti18nConfig } from '@/i18n/request';
-import ClientHome from './ClientHome';
+import HeroSection from './components/HeroSection/HeroSection';
+import StorySection from './components/StorySection/StorySection';
 
-export default async function Page() {
-  const { messages, locale } = await geti18nConfig();
-  return <ClientHome messages={messages} locale={locale} />;
+export default function Page() {
+  return (
+    <div className="flex flex-col gap-40 mb-40">
+      {/** Hero Section */}
+      <HeroSection />
+      {/** Story Section */}
+      <StorySection />
+    </div>
+  );
 }

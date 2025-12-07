@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import roosterBowl from '@/public/images/rooter_bowl.svg';
 import hawkerBowl from '@/public/images/hawker_bowl.svg';
+import chendol from '@/public/images/chendol.svg';
 
 import { useHeritageStore } from '@/app/stores';
 import { EateryCategory, EateryCategoryValues } from '@/app/types';
@@ -83,7 +84,13 @@ export default function FilterBar() {
     <div>
       <div className="py-2 flex gap-2">
         <div className="flex items-center gap-2 text-xs">
-          <Image src={hawkerBowl} className={'w-12'} height={'0'} width={'0'} alt={'hawker_bowl'} />
+          <Image
+            src={hawkerBowl}
+            className={'w-12 max-sm:w-10'}
+            height={'0'}
+            width={'0'}
+            alt={'hawker_bowl'}
+          />
           <div
             id={'filter_label_hawker'}
             onClick={onSelectFilter('hawker')}
@@ -95,7 +102,7 @@ export default function FilterBar() {
         <div className="flex items-center gap-2">
           <Image
             src={roosterBowl}
-            className={'w-12'}
+            className={'w-12 max-sm:w-10'}
             height={'0'}
             width={'0'}
             alt={'restaurant_bowl'}
@@ -110,8 +117,8 @@ export default function FilterBar() {
         </div>
         <div className="flex items-center gap-2">
           <Image
-            src={roosterBowl}
-            className={'w-12'}
+            src={chendol}
+            className={'w-8 max-sm:h-7'}
             height={'0'}
             width={'0'}
             alt={'dessert_filter'}

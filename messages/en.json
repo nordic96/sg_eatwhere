@@ -21,8 +21,22 @@
         "bugis": "Bugis",
         "nicoll_highway": "Nicoll Highway"
     },
+    "Header": {
+        "link_mapview": "MapView",
+        "link_landing": "Home",
+        "link_about": "About Us"
+    },
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
+    },
+    "LandingPage": {
+        "hero_desc": "<green>10</green> Years. <green>100+</green> Places.\nA foreigner who eats like a local.\n\nNow sharing <primary>Singapore's</primary> real\n <primary>Must Try Food</primary>",
+        "hero_micro_desc": "Discover the real places where Singaporeans actually eat -curated through a decade of living and sharing meals with my local friends.",
+        "explore_more": "Explore Foodie's Trail",
+        "discover_why": "Why I made this guide",
+        "landing2_desc": "This is not just a Food List",
+        "landing2_desc_2": "\"I moved to Singapore more than 10 years ago. It depicts my personal memories with over hundreds of local meals ... friend by friend\"",
+        "photo_disclaimer": "All photos were taken by me!"
     },
     "HomePage": {
         "map_by": "Map Credit: ",
@@ -49,6 +63,7 @@
         "nearest-mrt": "Nearest MRT Station"
     },
     "Footer": {
-        "changelanguage": "Change Language"
+        "changelanguage": "Change Language",
+        "column_website": "Website"
     }
 }

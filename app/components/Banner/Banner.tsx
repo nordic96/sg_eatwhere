@@ -1,4 +1,6 @@
 'use client';
+import { baseLayoutStyle } from '@/app/constants/theme';
+import { cn } from '@/app/utils';
 import Close from '@mui/icons-material/Close';
 
 export interface BannerProps {
@@ -13,7 +15,7 @@ export default function Banner({ msg }: BannerProps) {
 
   return (
     <div id="banner" className="flex bg-goldenmile justify-center font-medium text-xs">
-      <div className="flex grow px-8 py-0.5 max-w-[1440px] justify-between items-center">
+      <div className={cn('flex grow py-0.5 justify-between items-center', baseLayoutStyle)}>
         {msg}
         <div onClick={onClose}>
           <Close fontSize={'small'} />

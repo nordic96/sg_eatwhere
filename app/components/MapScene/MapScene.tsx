@@ -7,7 +7,6 @@ import { Billboard, Html, MapControls } from '@react-three/drei';
 import { FloatingMarker } from '../markers/FloatingMarker/FloatingMarker';
 import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
-import { data } from '@/app/constants/data';
 import { geoConverter } from '@/app/utils/geographyUtil';
 import { useHeritageStore } from '@/app/stores';
 
@@ -26,7 +25,8 @@ type Props = {
 
 export default function MapScene({ messages, locale = 'en' }: Props) {
   const [ready, setReady] = useState(false);
-  const { heritageId, filter, unSelect, clickedMore, getThemeStyle } = useHeritageStore();
+  const { heritageId, filter, unSelect, clickedMore, getThemeStyle, getFoodData } =
+    useHeritageStore();
   function dummyOnReady() {
     setTimeout(() => setReady(true), 1000);
   }
@@ -51,7 +51,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
             </Billboard>
           )}
           {/* --- Markers --- */}
-          {data
+          {getFoodData()
             .filter((v) => filter.length === 0 || filter.includes(v.category))
             .map((val) => {
               return (

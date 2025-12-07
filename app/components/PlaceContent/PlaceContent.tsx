@@ -1,10 +1,9 @@
 'use client';
 
 import { useHeritageStore } from '@/app/stores';
-import { CAT_ASSET_MAP, data as foodData } from '@/app/constants/data';
+import { CAT_ASSET_MAP } from '@/app/constants/data';
 import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 
-import React, { useMemo } from 'react';
 import Image from 'next/image';
 import HighlightedText from '../HighlightText/HighlightText';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
@@ -17,12 +16,10 @@ export default function PlaceContent() {
   const catT = useTranslations('FoodCategory');
   const heritageT = useTranslations('Heritage');
 
-  const { openMore, getThemeStyle } = useHeritageStore();
+  const { openMore, getThemeStyle, getSelectedFoodData } = useHeritageStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
-  const data = useMemo(() => {
-    return foodData.find((item) => item.id === heritageId) || null;
-  }, [heritageId]);
+  const data = getSelectedFoodData();
 
   if (!heritageId || !data) {
     return <div>No data selected</div>;
@@ -44,9 +41,12 @@ export default function PlaceContent() {
       <div className={'flex grow justify-start items-center gap-1 text-md'}>
         <span className="flex gap-1 items-center">
           <Image
-            className="h-6"
-            width={32}
-            height={32}
+            className={cn({
+              'w-10': data.category !== 'dessert',
+              'w-7': data.category === 'dessert',
+            })}
+            width={'0'}
+            height={'0'}
             src={CAT_ASSET_MAP[data.category]}
             alt={'icon'}
             draggable="false"
