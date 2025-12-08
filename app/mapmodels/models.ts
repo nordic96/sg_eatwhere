@@ -6,6 +6,7 @@ export const MODELS = {
   riceBowl: '/models/rice_bowl.glb',
   hawkerStall: '/models/hawker_d.glb',
   shophouse: '/models/shophouse_d.glb',
+  locationpin: '/models/location_pin.glb',
 };
 
 export function useModel(name: keyof typeof MODELS) {

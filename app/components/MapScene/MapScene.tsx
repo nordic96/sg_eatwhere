@@ -14,6 +14,7 @@ import CanvasIntlProvider from '../CanvasIntlProvider';
 import { InstancedBuildings } from '@/app/mapmodels/InstancedBuildings';
 import GlowInstances from '@/app/mapmodels/GlowInstances';
 import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
+import LocationPin from '@/app/mapmodels/LocationPin';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -52,6 +53,8 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
               </Html>
             </Billboard>
           )}
+          {/** Location Pin Logic */}
+          <LocationPin />
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
           <GlowInstances buildings={foodData} isNight={isNight} />
