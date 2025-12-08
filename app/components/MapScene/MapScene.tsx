@@ -12,6 +12,8 @@ import CloseButton from '../CloseButton/CloseButton';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import CanvasIntlProvider from '../CanvasIntlProvider';
 import { InstancedBuildings } from '@/app/mapmodels/InstancedBuildings';
+import GlowInstances from '@/app/mapmodels/GlowInstances';
+import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -24,7 +26,8 @@ type Props = {
 
 export default function MapScene({ messages, locale = 'en' }: Props) {
   const [ready, setReady] = useState(false);
-  const { heritageId, unSelect, clickedMore, getThemeStyle, getFoodData } = useHeritageStore();
+  const { isNight } = useEnvironmentStore();
+  const { heritageId, unSelect, clickedMore, getThemeStyle, foodData } = useHeritageStore();
 
   function dummyOnReady() {
     setTimeout(() => setReady(true), 1000);
@@ -50,8 +53,8 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
             </Billboard>
           )}
           {/* --- Markers --- */}
-          <InstancedBuildings locations={getFoodData()} />
-
+          <InstancedBuildings locations={foodData} />
+          <GlowInstances buildings={foodData} isNight={isNight} />
           {/* --- Camera Controls --- */}
           <MapControls
             enableRotate
