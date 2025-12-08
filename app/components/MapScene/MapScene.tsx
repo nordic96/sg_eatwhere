@@ -4,15 +4,14 @@ import { Suspense, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
 import { Billboard, Html, MapControls } from '@react-three/drei';
-import { FloatingMarker } from '../markers/FloatingMarker/FloatingMarker';
 import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
-import { geoConverter } from '@/app/utils/geographyUtil';
 import { useHeritageStore } from '@/app/stores';
 
 import CloseButton from '../CloseButton/CloseButton';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import CanvasIntlProvider from '../CanvasIntlProvider';
+import FoodBlock from '@/app/mapmodels/FoodBlock';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -27,6 +26,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const [ready, setReady] = useState(false);
   const { heritageId, filter, unSelect, clickedMore, getThemeStyle, getFoodData } =
     useHeritageStore();
+
   function dummyOnReady() {
     setTimeout(() => setReady(true), 1000);
   }
@@ -54,19 +54,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           {getFoodData()
             .filter((v) => filter.length === 0 || filter.includes(v.category))
             .map((val) => {
-              return (
-                <FloatingMarker
-                  key={val.id}
-                  position={geoConverter(val.location.geoLocation)}
-                  floatHeight={5}
-                  data={val}
-                >
-                  <mesh>
-                    <boxGeometry args={[0.5, 0.5, 0.5]} />
-                    <meshStandardMaterial color={['#c44']} />
-                  </mesh>
-                </FloatingMarker>
-              );
+              return <FoodBlock key={val.id} data={val} />;
             })}
 
           {/* --- Camera Controls --- */}

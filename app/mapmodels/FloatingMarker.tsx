@@ -1,0 +1,63 @@
+'use client';
+
+import * as THREE from 'three';
+import { ReactNode, useMemo, useRef } from 'react';
+
+import { ThreeElements, useFrame } from '@react-three/fiber';
+import { useModel } from './models';
+
+import { useHeritageStore } from '@/app/stores';
+import { FoodHeritage } from '@/app/types';
+import { Glow } from '@/app/mapmodels/GlowSprite';
+import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
+import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
+
+type FloatingMarkerProps = ThreeElements['group'] & {
+  children: ReactNode;
+  data: FoodHeritage;
+  floatHeight?: number; // how high above the base model the indicator floats
+};
+
+export const FloatingMarker = ({
+  children,
+  position = [0, 0, 0],
+  floatHeight = 2,
+  data,
+  ...props
+}: FloatingMarkerProps) => {
+  const { isNight } = useEnvironmentStore();
+  const { setHeritageId } = useHeritageStore();
+  const { scene } = useModel('riceBowl');
+  const riceBowl = useMemo(() => clone(scene), [scene]);
+
+  const floatRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (!floatRef.current) return;
+    const t = state.clock.elapsedTime;
+
+    floatRef.current.position.y = floatHeight + Math.sin(t * 1.4) * 0.3;
+    floatRef.current.rotation.y = Math.sin(t * 0.8) * 0.3;
+  });
+
+  return (
+    <group position={position} {...props}>
+      {/* Base object (e.g., SongFa, MBS) */}
+      <group>
+        {children}
+        {isNight && (
+          <Glow
+            color="#ffcc88"
+            intensity={2}
+            scale={[3, 3]} // oval
+          />
+        )}
+      </group>
+
+      {/* Floating indicator above */}
+      <group ref={floatRef} scale={1} onClick={() => setHeritageId(data.id)}>
+        <primitive object={riceBowl} />
+      </group>
+    </group>
+  );
+};
