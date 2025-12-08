@@ -11,7 +11,7 @@ import { useHeritageStore } from '@/app/stores';
 import CloseButton from '../CloseButton/CloseButton';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import CanvasIntlProvider from '../CanvasIntlProvider';
-import FoodBlock from '@/app/mapmodels/FoodBlock';
+import { InstancedBuildings } from '@/app/mapmodels/InstancedBuildings';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -24,8 +24,7 @@ type Props = {
 
 export default function MapScene({ messages, locale = 'en' }: Props) {
   const [ready, setReady] = useState(false);
-  const { heritageId, filter, unSelect, clickedMore, getThemeStyle, getFoodData } =
-    useHeritageStore();
+  const { heritageId, unSelect, clickedMore, getThemeStyle, getFoodData } = useHeritageStore();
 
   function dummyOnReady() {
     setTimeout(() => setReady(true), 1000);
@@ -51,11 +50,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
             </Billboard>
           )}
           {/* --- Markers --- */}
-          {getFoodData()
-            .filter((v) => filter.length === 0 || filter.includes(v.category))
-            .map((val) => {
-              return <FoodBlock key={val.id} data={val} />;
-            })}
+          <InstancedBuildings locations={getFoodData()} />
 
           {/* --- Camera Controls --- */}
           <MapControls
