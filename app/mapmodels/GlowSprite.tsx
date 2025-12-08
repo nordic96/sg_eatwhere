@@ -31,11 +31,21 @@ export function generateGlowTexture() {
   return texture;
 }
 
-export function Glow({ color = '#ffcc88', intensity = 1, scale = [3, 2] }) {
+export function Glow({
+  color = '#ffcc88',
+  intensity = 1,
+  scale = [2, 2],
+  position,
+}: {
+  color?: string;
+  intensity?: number;
+  scale?: number[];
+  position?: THREE.Vector3;
+}) {
   const texture = useMemo(() => generateGlowTexture(), []);
 
   return (
-    <sprite scale={new THREE.Vector3(...scale)}>
+    <sprite scale={new THREE.Vector3(...scale)} position={position}>
       <spriteMaterial
         attach="material"
         map={texture}
