@@ -10,7 +10,7 @@ export default function StorySection() {
   return (
     <div>
       <div className="flex justify-between items-center max-sm:flex-col">
-        <div className="relative flex grow flex-col gap-4 items-start min-h-[400px]">
+        <div className="relative flex grow flex-col gap-4 items-start min-h-[400px] overflow-x-hidden">
           <FadeIn className="w-[760px] max-sm:w-full">
             <h1 className={cn(h1BaseStyle)}>
               {t.rich('landing2_desc', {
@@ -31,19 +31,19 @@ export default function StorySection() {
             alt={'film_canister'}
             draggable={false}
             className={
-              'h-[200px] max-sm:h-[140px] w-auto absolute right-0 top-[105px] max-sm:top-[115px]'
+              'h-[275px] w-auto absolute right-10 max-sm:-right-[20vw] top-[105px] max-sm:top-[110px] z-999'
             }
           />
-          <div className="absolute overflow-x-hidden top-[120px] max-sm:top-[130px] w-[800px] max-sm:w-[95vw] right-[115px] max-sm:right-20 block">
+          <div className="absolute overflow-x-hidden top-[125px] max-sm:top-[130px] w-[1100px] max-sm:w-[200vw] right-[198px] max-sm:right-12 block">
             <div className="flex animate-marquee">
               <img
-                className={'lg:w-[800px] max-sm:w-[95vw]'}
+                className={'lg:w-[1100px] max-sm:w-[200vw]'}
                 src={'/images/landing_film.png'}
                 alt={'landing_logo'}
                 draggable={false}
               />
               <img
-                className={'lg:w-[800px] max-sm:w-[95vw]'}
+                className={'lg:w-[1100px] max-sm:w-[200vw]'}
                 src={'/images/landing_film.png'}
                 alt={'landing_logo'}
                 draggable={false}
@@ -51,7 +51,7 @@ export default function StorySection() {
             </div>
             <div className="flex items-center gap-2 justify-end">
               <PhotoCamera />
-              <p className="font-light text-base max-sm:text-md">{t('photo_disclaimer')}</p>
+              <p className="font-light italic text-sm">{t('photo_disclaimer')}</p>
             </div>
           </div>
         </div>

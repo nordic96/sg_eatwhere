@@ -11,6 +11,7 @@ import Banner from './components/Banner/Banner';
 import { NextIntlClientProvider, useTranslations } from 'next-intl';
 import { cn } from './utils';
 import { baseLayoutStyle } from './constants/theme';
+import { Analytics } from '@vercel/analytics/next';
 
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
@@ -53,6 +54,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
