@@ -40,7 +40,6 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
     return locations.map((loc) => {
       const { latitude, longitude } = loc.location.geoLocation;
       const pos = geoConverter({ latitude, longitude });
-      pos[1] += 1.5;
       return pos;
     });
   }, [locations]);
@@ -62,12 +61,11 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
     locations.forEach((loc) => {
       const { latitude, longitude } = loc.location.geoLocation;
       const position = geoConverter({ latitude, longitude });
-      position[1] += 1.5;
 
       temp.compose(
         new THREE.Vector3(...position),
         new THREE.Quaternion(),
-        new THREE.Vector3(1.5, 1.5, 1.5),
+        new THREE.Vector3(0.5, 0.5, 0.5),
       );
 
       switch (loc.category) {
