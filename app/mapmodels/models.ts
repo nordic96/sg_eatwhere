@@ -4,8 +4,8 @@ import { useGLTF } from '@react-three/drei';
 
 export const MODELS = {
   riceBowl: '/models/rice_bowl.glb',
-  hawkerStall: '/models/hawker_d.glb',
-  shophouse: '/models/shophouse_d.glb',
+  hawkerStall: '/models/hawker_stall_opt.glb',
+  shophouse: '/models/shophouse_A_opt.glb',
   locationpin: '/models/location_pin.glb',
 };
 
