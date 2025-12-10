@@ -14,6 +14,7 @@ import HighlightedText from '../HighlightText/HighlightText';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/app/utils';
+import HelpTooltip from '../Tooltip/HelpTooltip';
 
 export default function Sidebar() {
   const target = useRef(null);
@@ -82,7 +83,10 @@ export default function Sidebar() {
                 alt={'icon'}
                 draggable="false"
               />
-              <p>{catT(data.category)}</p>
+              <span>{catT(data.category)}</span>
+              {data.category === 'hawker' && (
+                <HelpTooltip msgKey={'what_is_hawker'} iconProps={{ fontSize: 'inherit' }} />
+              )}
             </span>
             <label className="text-3xl font-bold text-center">{data.name}</label>
             <label className="text-xs font-light">{data.location.address}</label>
