@@ -1,19 +1,11 @@
 'use client';
-
-import Image from 'next/image';
-
-import roosterBowl from '@/public/images/rooter_bowl.svg';
-import hawkerBowl from '@/public/images/hawker_bowl.svg';
-import chendol from '@/public/images/chendol.svg';
-
 import { useHeritageStore } from '@/app/stores';
 import { EateryCategory, EateryCategoryValues } from '@/app/types';
 import { MouseEventHandler, useEffect } from 'react';
 import { cn } from '@/app/utils';
 import { useTranslations } from 'next-intl';
 import HelpTooltip from '../Tooltip/HelpTooltip';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import { ClassValue } from 'clsx';
+import CategoryIcon from '../CategoryIcon/CategoryIcon';
 
 type ToggleFuncMap = Record<EateryCategory, (bool?: boolean) => void>;
 
@@ -90,45 +82,26 @@ export default function FilterBar() {
           tooltipKey={'what_is_hawker'}
         />
         <Filter category={'restaurant'} onSelect={onSelectFilter('restaurant')} />
-        <Filter
-          category={'dessert'}
-          onSelect={onSelectFilter('dessert')}
-          customIconClass={'h-5 max-sm:h-7'}
-        />
+        <Filter category={'dessert'} onSelect={onSelectFilter('dessert')} />
       </div>
     </div>
   );
 }
 
-const IconMap: Record<EateryCategory, StaticImport> = {
-  dessert: chendol,
-  restaurant: roosterBowl,
-  hawker: hawkerBowl,
-};
-
 type FilterProps = {
   category: EateryCategory;
   onSelect: MouseEventHandler<HTMLDivElement>;
   tooltipKey?: string;
-  customIconClass?: string | ClassValue;
+  customIconClass?: string;
 };
 
 function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps) {
   const t = useTranslations('FilterBar');
-  const iconContainerStyle = 'w-10 rounded-4xl bg-white p-1';
   const labelBaseStyle =
     'rounded-xl px-2 py-1 shadow-lg font-regular border-[0.5px] hover:cursor-pointer flex items-center gap-1';
   return (
     <div className="flex items-center gap-2 text-xs">
-      <div className={cn(iconContainerStyle)}>
-        <Image
-          src={IconMap[category]}
-          className={cn('w-9 max-sm:w-10', customIconClass)}
-          height={'0'}
-          width={'0'}
-          alt={'filter_icon'}
-        />
-      </div>
+      <CategoryIcon cat={category} alt={'filter_icon'} className={customIconClass} />
       <div
         id={`filter_label_${category}`}
         className={cn(labelBaseStyle, 'hover:cursor-pointer', {

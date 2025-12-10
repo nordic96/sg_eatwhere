@@ -2,7 +2,6 @@
 
 import useClickOutside from '@/app/hooks/useClickOutside';
 import { useRef } from 'react';
-import { CAT_ASSET_MAP } from '@/app/constants/data';
 
 import CloseButton from '../CloseButton/CloseButton';
 import Image from 'next/image';
@@ -13,8 +12,8 @@ import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons
 import HighlightedText from '../HighlightText/HighlightText';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
-import { cn } from '@/app/utils';
 import HelpTooltip from '../Tooltip/HelpTooltip';
+import CategoryIcon from '../CategoryIcon/CategoryIcon';
 
 export default function Sidebar() {
   const target = useRef(null);
@@ -72,17 +71,7 @@ export default function Sidebar() {
           {/** Title Container */}
           <div className="flex flex-col items-center w-full">
             <span className="flex gap-1 items-center">
-              <Image
-                className={cn({
-                  'w-10': data.category !== 'dessert',
-                  'w-7': data.category === 'dessert',
-                })}
-                src={CAT_ASSET_MAP[data.category]}
-                width={'0'}
-                height={'0'}
-                alt={'icon'}
-                draggable="false"
-              />
+              <CategoryIcon alt={'sidebar_category_icon'} cat={data.category} />
               <span>{catT(data.category)}</span>
               {data.category === 'hawker' && (
                 <HelpTooltip msgKey={'what_is_hawker'} iconProps={{ fontSize: 'inherit' }} />

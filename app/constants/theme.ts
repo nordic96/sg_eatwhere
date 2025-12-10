@@ -1,3 +1,4 @@
+import { ClassValue } from 'clsx';
 import { EateryCategory, ThemeColor } from '../types';
 
 export const ThemeRecord: Record<EateryCategory, ThemeColor> = {
@@ -12,3 +13,10 @@ export const baseLayoutStyle =
 export const h1BaseStyle =
   'lg:text-5xl md:text-4xl max-sm:text-4xl whitespace-pre-line font-black leading-none';
 export const microTextBaseStyle = 'font-light text-xl whitespace-pre-line max-sm:text-lg';
+
+export const catIconContainerStyle =
+  'w-10 rounded-full bg-white p-1 border-solid border-[#333] border';
+export const catIconStyle = (cat: EateryCategory): ClassValue => ({
+  'w-9': true,
+  'h-5': cat === 'dessert',
+});
