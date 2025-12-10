@@ -28,7 +28,9 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
 
   return (
     <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
-      <FilterBar />
+      <div className={'absolute top-0 z-100'}>
+        <FilterBar />
+      </div>
       <div className="h-[75vh] max-h-[800px]">
         <MapScene locale={locale} messages={messages} />
       </div>
