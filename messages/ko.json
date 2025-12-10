@@ -46,6 +46,9 @@
         "restaurant": "일반 음식점",
         "dessert": "스낵/디저트"
     },
+    "Tooltip": {
+        "what_is_hawker": "호커(Hawker) 점포는 주로 호커센터에 위치한 작은 개인 포장마차라고 생각하시면 됩니다\n 정부의 식품위생인증을 받아 먹기에 안전하고 싱가포리언들이 일상생활에서 저렴하게 먹을 수 있는 곳이기도 하죠."
+    },
     "HeritageListView": {
         "central": "중부 지역",
         "east": "동부 지역",
