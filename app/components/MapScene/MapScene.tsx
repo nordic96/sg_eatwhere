@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { Activity, Suspense, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
-import { Billboard, Html, MapControls } from '@react-three/drei';
+import { Billboard, Html } from '@react-three/drei';
 import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
 import { useHeritageStore } from '@/app/stores';
@@ -15,6 +15,7 @@ import { InstancedBuildings } from '@/app/mapmodels/InstancedBuildings';
 import GlowInstances from '@/app/mapmodels/GlowInstances';
 import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
 import LocationPin from '@/app/mapmodels/LocationPin';
+import MapController from '../MapController/MapController';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -58,27 +59,14 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
           <GlowInstances buildings={foodData} isNight={isNight} />
-          {/* --- Camera Controls --- */}
-          <MapControls
-            enableRotate
-            enablePan
-            enableZoom
-            panSpeed={0.8}
-            rotateSpeed={0.4}
-            minPolarAngle={Math.PI / 6}
-            maxPolarAngle={Math.PI / 2.2}
-            minDistance={10}
-            maxDistance={80}
-            zoomSpeed={0.6}
-            enableDamping
-            makeDefault
-            dampingFactor={0.08}
-          />
         </Suspense>
       </Canvas>
       <Activity mode={!ready ? 'visible' : 'hidden'}>
         <DynamicPortalLoader onReady={dummyOnReady} />
       </Activity>
+      <div className="absolute bottom-0 right-0 z-90">
+        <MapController />
+      </div>
     </>
   );
 }
