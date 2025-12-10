@@ -131,14 +131,13 @@ function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps
       </div>
       <div
         id={`filter_label_${category}`}
-        onClick={onSelect}
         className={cn(labelBaseStyle, 'hover:cursor-pointer', {
           'hover:text-primary': category === 'hawker',
           'hover:text-gardengreen': category === 'dessert',
           'hover:text-outramorange': category === 'restaurant',
         })}
       >
-        {t(category)}
+        <div onClick={onSelect}>{t(category)}</div>
         {tooltipKey !== undefined && (
           <HelpTooltip
             msgKey={tooltipKey || ''}
