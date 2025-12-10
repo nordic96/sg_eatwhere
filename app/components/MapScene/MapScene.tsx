@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { Suspense, useState } from 'react';
+import { Activity, Suspense, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
 import { Billboard, Html, MapControls } from '@react-three/drei';
@@ -76,8 +76,9 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           />
         </Suspense>
       </Canvas>
-
-      {!ready && <DynamicPortalLoader onReady={dummyOnReady} />}
+      <Activity mode={!ready ? 'visible' : 'hidden'}>
+        <DynamicPortalLoader onReady={dummyOnReady} />
+      </Activity>
     </>
   );
 }

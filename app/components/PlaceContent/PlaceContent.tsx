@@ -51,7 +51,7 @@ export default function PlaceContent() {
             alt={'icon'}
             draggable="false"
           />
-          <p>{catT(data.category)}</p>
+          {catT(data.category)}
         </span>
         <VerticalDivider />
         <MrtLabel mrt={data.location.mrt[0]} />
