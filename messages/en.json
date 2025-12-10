@@ -42,6 +42,9 @@
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
     },
+    "Tooltip": {
+        "what_is_hawker": "Hawker Stall refers to a small food shop that serves affordable dish at hawker centres.\nA hawker centre usually consists of multiple independent hawker stalls hence making the place a cultural melting pot for variety of food.\nIt is where normally Singaporeans and residents love to eat to obtain an affordable meal."
+    },
     "FilterBar": {
         "hawker": "Hawker Stalls",
         "restaurant": "Restaurants",

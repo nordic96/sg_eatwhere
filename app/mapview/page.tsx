@@ -5,6 +5,12 @@ import { fetchApi } from '../utils';
 
 export default async function Page() {
   const { messages, locale } = await geti18nConfig();
-  const data = await fetchApi<FoodHeritage[]>(process.env.DATA_URL || '');
-  return <ClientHome messages={messages} locale={locale} foods={data.data || []} />;
+  const response = await fetchApi<FoodHeritage[]>(process.env.DATA_URL || '');
+  return (
+    <ClientHome
+      messages={messages}
+      locale={locale}
+      foods={response.error || response.data === null ? [] : response.data}
+    />
+  );
 }

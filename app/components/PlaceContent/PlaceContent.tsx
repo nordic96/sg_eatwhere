@@ -1,15 +1,14 @@
 'use client';
 
 import { useHeritageStore } from '@/app/stores';
-import { CAT_ASSET_MAP } from '@/app/constants/data';
 import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 
-import Image from 'next/image';
 import HighlightedText from '../HighlightText/HighlightText';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import { cn } from '@/app/utils';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
+import CategoryIcon from '../CategoryIcon/CategoryIcon';
 
 export default function PlaceContent() {
   const t = useTranslations('CardView');
@@ -40,18 +39,13 @@ export default function PlaceContent() {
       {/** Info Container */}
       <div className={'flex grow justify-start items-center gap-1 text-md'}>
         <span className="flex gap-1 items-center">
-          <Image
-            className={cn({
-              'w-10': data.category !== 'dessert',
-              'w-7': data.category === 'dessert',
-            })}
-            width={'0'}
-            height={'0'}
-            src={CAT_ASSET_MAP[data.category]}
-            alt={'icon'}
-            draggable="false"
+          <CategoryIcon
+            alt={'card-cat-icon'}
+            cat={data.category}
+            iconClass={'h-4'}
+            className={'py-0.5 w-8'}
           />
-          <p>{catT(data.category)}</p>
+          {catT(data.category)}
         </span>
         <VerticalDivider />
         <MrtLabel mrt={data.location.mrt[0]} />

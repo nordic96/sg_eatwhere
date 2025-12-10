@@ -1,20 +1,15 @@
 'use client';
-
-import Image from 'next/image';
-import roosterBowl from '@/public/images/rooter_bowl.svg';
-import hawkerBowl from '@/public/images/hawker_bowl.svg';
-import chendol from '@/public/images/chendol.svg';
-
 import { useHeritageStore } from '@/app/stores';
 import { EateryCategory, EateryCategoryValues } from '@/app/types';
-import { useEffect } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 import { cn } from '@/app/utils';
 import { useTranslations } from 'next-intl';
+import HelpTooltip from '../Tooltip/HelpTooltip';
+import CategoryIcon from '../CategoryIcon/CategoryIcon';
 
 type ToggleFuncMap = Record<EateryCategory, (bool?: boolean) => void>;
 
 export default function FilterBar() {
-  const t = useTranslations('FilterBar');
   const { filter, setFilter, unsetFilter } = useHeritageStore();
 
   const onSelectFilter = (id: EateryCategory) => (e: React.MouseEvent<HTMLDivElement>) => {
@@ -40,11 +35,11 @@ export default function FilterBar() {
   function activateRestaurant(activate = true) {
     const el = document.getElementById('filter_label_restaurant');
     if (activate) {
-      el?.classList.add('bg-merlionwhite');
-      el?.classList.remove('hover:text-monsoongrey');
+      el?.classList.add('bg-outramorange', 'text-white');
+      el?.classList.remove('hover:text-outramorange');
     } else {
-      el?.classList.remove('bg-merlionwhite');
-      el?.classList.add('hover:text-monsoongrey');
+      el?.classList.remove('bg-outramorange', 'text-white');
+      el?.classList.add('hover:text-outramorange');
     }
   }
 
@@ -78,59 +73,51 @@ export default function FilterBar() {
     };
   }, [filter]);
 
-  const labelBaseStyle =
-    'rounded-xl px-2 py-1 shadow-lg font-regular border-[0.5px] hover:cursor-pointer';
   return (
     <div>
       <div className="py-2 flex gap-2">
-        <div className="flex items-center gap-2 text-xs">
-          <Image
-            src={hawkerBowl}
-            className={'w-12 max-sm:w-10'}
-            height={'0'}
-            width={'0'}
-            alt={'hawker_bowl'}
+        <Filter
+          category={'hawker'}
+          onSelect={onSelectFilter('hawker')}
+          tooltipKey={'what_is_hawker'}
+        />
+        <Filter category={'restaurant'} onSelect={onSelectFilter('restaurant')} />
+        <Filter category={'dessert'} onSelect={onSelectFilter('dessert')} />
+      </div>
+    </div>
+  );
+}
+
+type FilterProps = {
+  category: EateryCategory;
+  onSelect: MouseEventHandler<HTMLDivElement>;
+  tooltipKey?: string;
+  customIconClass?: string;
+};
+
+function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps) {
+  const t = useTranslations('FilterBar');
+  const labelBaseStyle =
+    'rounded-xl px-2 py-1 shadow-lg font-regular border-[0.5px] hover:cursor-pointer flex items-center gap-1';
+  return (
+    <div className="flex items-center gap-2 text-xs">
+      <CategoryIcon cat={category} alt={'filter_icon'} className={customIconClass} />
+      <div
+        id={`filter_label_${category}`}
+        className={cn(labelBaseStyle, 'hover:cursor-pointer', {
+          'hover:text-primary': category === 'hawker',
+          'hover:text-gardengreen': category === 'dessert',
+          'hover:text-outramorange': category === 'restaurant',
+        })}
+      >
+        <div onClick={onSelect}>{t(category)}</div>
+        {tooltipKey !== undefined && (
+          <HelpTooltip
+            msgKey={tooltipKey || ''}
+            iconProps={{ fontSize: 'inherit' }}
+            className={'min-w-[250px]'}
           />
-          <div
-            id={'filter_label_hawker'}
-            onClick={onSelectFilter('hawker')}
-            className={cn(labelBaseStyle, 'hover:text-primary hover:cursor-pointer')}
-          >
-            <p>{t('hawker')}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Image
-            src={roosterBowl}
-            className={'w-12 max-sm:w-10'}
-            height={'0'}
-            width={'0'}
-            alt={'restaurant_bowl'}
-          />
-          <div
-            id={'filter_label_restaurant'}
-            onClick={onSelectFilter('restaurant')}
-            className={labelBaseStyle}
-          >
-            <p>{t('restaurant')}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Image
-            src={chendol}
-            className={'w-8 max-sm:h-7'}
-            height={'0'}
-            width={'0'}
-            alt={'dessert_filter'}
-          />
-          <div
-            id={'filter_label_dessert'}
-            onClick={onSelectFilter('dessert')}
-            className={labelBaseStyle}
-          >
-            <p>{t('dessert')}</p>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
