@@ -16,7 +16,7 @@ export default function Tooltip({ children, content, className }: PropsWithChild
         id={id}
         role={'tooltip'}
         className={cn(
-          'absolute top-8 transition-opacity ease-in duration-200 opacity-0 group-hover:opacity-100 z-999',
+          'absolute top-8 transition-opacity ease-in duration-200 opacity-0 group-hover:opacity-100 max-sm:group-active:opacity-100 z-999',
           className,
         )}
       >
