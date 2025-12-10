@@ -39,7 +39,12 @@ export default function PlaceContent() {
       {/** Info Container */}
       <div className={'flex grow justify-start items-center gap-1 text-md'}>
         <span className="flex gap-1 items-center">
-          <CategoryIcon alt={'card-cat-icon'} cat={data.category} />
+          <CategoryIcon
+            alt={'card-cat-icon'}
+            cat={data.category}
+            iconClass={'h-4'}
+            className={'py-0.5 w-8'}
+          />
           {catT(data.category)}
         </span>
         <VerticalDivider />

@@ -15,7 +15,7 @@ export const h1BaseStyle =
 export const microTextBaseStyle = 'font-light text-xl whitespace-pre-line max-sm:text-lg';
 
 export const catIconContainerStyle =
-  'w-10 rounded-full bg-white p-1 border-solid border-[#333] border';
+  'w-10 rounded-full bg-white p-1 border-solid border-[#333] border flex justify-center';
 export const catIconStyle = (cat: EateryCategory): ClassValue => ({
   'w-9': true,
   'h-5': cat === 'dessert',

@@ -36,7 +36,7 @@ export default function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      className="absolute flex flex-col gap-2 right-0 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
+      className="absolute flex z-101 flex-col gap-2 right-0 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
     >
       <div className="flex justify-end">
         <CloseButton onClick={onClose} customClass={getThemeStyle()} />
@@ -70,12 +70,14 @@ export default function Sidebar() {
           </div>
           {/** Title Container */}
           <div className="flex flex-col items-center w-full">
-            <span className="flex gap-1 items-center">
+            <span className="flex flex-col gap-1 items-center">
               <CategoryIcon alt={'sidebar_category_icon'} cat={data.category} />
-              <span>{catT(data.category)}</span>
-              {data.category === 'hawker' && (
-                <HelpTooltip msgKey={'what_is_hawker'} iconProps={{ fontSize: 'inherit' }} />
-              )}
+              <span className={'flex items-center gap-1'}>
+                {catT(data.category)}
+                {data.category === 'hawker' && (
+                  <HelpTooltip msgKey={'what_is_hawker'} iconProps={{ fontSize: 'small' }} />
+                )}
+              </span>
             </span>
             <label className="text-3xl font-bold text-center">{data.name}</label>
             <label className="text-xs font-light">{data.location.address}</label>

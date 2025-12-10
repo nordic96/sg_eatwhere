@@ -27,7 +27,11 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                 className="flex items-center gap-1 cursor-pointer"
                 onClick={() => setHeritageId(location.id)}
               >
-                <CategoryIcon cat={location.category} alt={'listview_category_icon'} />
+                <CategoryIcon
+                  cat={location.category}
+                  alt={'listview_category_icon'}
+                  className={'max-sm:min-w-10'}
+                />
                 {location.id === heritageId ? (
                   <HighlightedText>
                     <label className="text-[12px]">{location.name}</label>
