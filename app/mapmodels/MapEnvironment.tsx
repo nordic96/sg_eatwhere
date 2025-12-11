@@ -4,7 +4,7 @@ import { Vector3 } from 'three';
 import * as THREE from 'three';
 
 import { useEnvironmentStore } from '../stores/useEnvironmentStore';
-import { Cloud, Clouds, MapControls, Sky, Stars } from '@react-three/drei';
+import { Cloud, Clouds, Sky, Stars } from '@react-three/drei';
 import TextureMap from './TextureMap';
 
 export default function MapEnvironment() {
@@ -64,22 +64,6 @@ export default function MapEnvironment() {
           fade={100}
         />
       </Clouds>
-      {/* --- Camera Controls --- */}
-      <MapControls
-        enableRotate
-        enablePan
-        enableZoom
-        panSpeed={0.8}
-        rotateSpeed={0.4}
-        minPolarAngle={Math.PI / 6}
-        maxPolarAngle={Math.PI / 2.2}
-        minDistance={10}
-        maxDistance={80}
-        zoomSpeed={0.6}
-        enableDamping
-        makeDefault
-        dampingFactor={0.08}
-      />
     </>
   );
 }

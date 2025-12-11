@@ -1,9 +1,11 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { Activity, Suspense, useState } from 'react';
+import { Activity, Suspense, useRef, useState } from 'react';
 
+import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
-import { Billboard, Html } from '@react-three/drei';
+import { Billboard, Html, MapControls } from '@react-three/drei';
+import { MapControls as MapControlsImpl } from 'three-stdlib';
 import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
 import { useHeritageStore } from '@/app/stores';
@@ -27,6 +29,8 @@ type Props = {
 };
 
 export default function MapScene({ messages, locale = 'en' }: Props) {
+  const controllerRef = useRef<MapControlsImpl>(null);
+  const cameraRef = useRef<THREE.Camera>(null);
   const [ready, setReady] = useState(false);
   const { isNight } = useEnvironmentStore();
   const { heritageId, unSelect, clickedMore, getThemeStyle, foodData } = useHeritageStore();
@@ -37,7 +41,13 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
 
   return (
     <>
-      <Canvas camera={{ position: [0, 70, 8], fov: 45 }} onClick={(e) => e.stopPropagation()}>
+      <Canvas
+        camera={{ position: [0, 70, 8], fov: 45 }}
+        onClick={(e) => e.stopPropagation()}
+        onCreated={({ camera }) => {
+          cameraRef.current = camera;
+        }}
+      >
         <Suspense fallback={null}>
           <MapEnvironment />
           {heritageId && !clickedMore && (
@@ -59,13 +69,31 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
           <GlowInstances buildings={foodData} isNight={isNight} />
+          {/* --- Camera Controls --- */}
+          <MapControls
+            ref={controllerRef}
+            enableRotate
+            enablePan
+            enableZoom
+            panSpeed={0.8}
+            rotateSpeed={0.4}
+            minPolarAngle={Math.PI / 6}
+            maxPolarAngle={Math.PI / 2.2}
+            minDistance={10}
+            maxDistance={80}
+            zoomSpeed={0.6}
+            enableDamping
+            dampingFactor={0.08}
+            makeDefault
+          />
         </Suspense>
       </Canvas>
       <Activity mode={!ready ? 'visible' : 'hidden'}>
         <DynamicPortalLoader onReady={dummyOnReady} />
       </Activity>
       <div className="absolute bottom-0 right-0 z-90">
-        <MapController />
+        {/** Map Controller UI, not wired with control logic */}
+        <MapController controls={controllerRef} camera={cameraRef} />
       </div>
     </>
   );
