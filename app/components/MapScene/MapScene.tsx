@@ -1,9 +1,11 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { Activity, Suspense, useState } from 'react';
+import { Activity, Suspense, useRef, useState } from 'react';
 
+import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { Billboard, Html, MapControls } from '@react-three/drei';
+import { MapControls as MapControlsImpl } from 'three-stdlib';
 import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
 import { useHeritageStore } from '@/app/stores';
@@ -15,6 +17,7 @@ import { InstancedBuildings } from '@/app/mapmodels/InstancedBuildings';
 import GlowInstances from '@/app/mapmodels/GlowInstances';
 import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
 import LocationPin from '@/app/mapmodels/LocationPin';
+import MapController from '../MapController/MapController';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -26,6 +29,8 @@ type Props = {
 };
 
 export default function MapScene({ messages, locale = 'en' }: Props) {
+  const controllerRef = useRef<MapControlsImpl>(null);
+  const cameraRef = useRef<THREE.Camera>(null);
   const [ready, setReady] = useState(false);
   const { isNight } = useEnvironmentStore();
   const { heritageId, unSelect, clickedMore, getThemeStyle, foodData } = useHeritageStore();
@@ -36,7 +41,13 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
 
   return (
     <>
-      <Canvas camera={{ position: [0, 70, 8], fov: 45 }} onClick={(e) => e.stopPropagation()}>
+      <Canvas
+        camera={{ position: [0, 70, 8], fov: 45 }}
+        onClick={(e) => e.stopPropagation()}
+        onCreated={({ camera }) => {
+          cameraRef.current = camera;
+        }}
+      >
         <Suspense fallback={null}>
           <MapEnvironment />
           {heritageId && !clickedMore && (
@@ -60,6 +71,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           <GlowInstances buildings={foodData} isNight={isNight} />
           {/* --- Camera Controls --- */}
           <MapControls
+            ref={controllerRef}
             enableRotate
             enablePan
             enableZoom
@@ -71,14 +83,18 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
             maxDistance={80}
             zoomSpeed={0.6}
             enableDamping
-            makeDefault
             dampingFactor={0.08}
+            makeDefault
           />
         </Suspense>
       </Canvas>
       <Activity mode={!ready ? 'visible' : 'hidden'}>
         <DynamicPortalLoader onReady={dummyOnReady} />
       </Activity>
+      <div className="absolute bottom-0 right-0 z-90">
+        {/** Map Controller UI, not wired with control logic */}
+        <MapController controls={controllerRef} camera={cameraRef} />
+      </div>
     </>
   );
 }
