@@ -24,7 +24,7 @@
     "Header": {
         "link_mapview": "MapView",
         "link_landing": "Home",
-        "link_about": "About Us"
+        "link_about": "About"
     },
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
@@ -41,6 +41,13 @@
     "HomePage": {
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
+    },
+    "AboutPage": {
+        "intro": "Frontend Software Engineer | Web Developer",
+        "food_code_desc": "Back in 2024-2025, I went back to my home country, South Korea to complete my national service. As I was working as a software engineer before enlistment, I missed working on software development.\n\nI realised that there was one more thing that I missed; food in Singapore. Scrolling down the food pictures I took with my Singapore friends, I thought that I could make my own food blog with the technical skills I currently possess, but maybe in a more interesting way; with 3D map where users can interact more with the story that I wish to deliver to others.",
+        "food_code": "Food & Code",
+        "about_project": "About this Project",
+        "about_project_desc": "This project is a personal project, made for a purpose to provide my own list of food places I gathered for the past 10 years while I built up my life in Singapore. It would be my humble pleasure if I could share my personal favourite food locations I enjoy eating with my Singaporean friends and families together to potential visitors who plan to visit Singapore."
     },
     "Tooltip": {
         "what_is_hawker": "Hawker Stall refers to a small food shop that serves affordable dish at hawker centres.\nA hawker centre usually consists of multiple independent hawker stalls hence making the place a cultural melting pot for variety of food.\nIt is where normally Singaporeans and residents love to eat to obtain an affordable meal."

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { cn } from '../utils';
 import { baseLayoutStyle } from '../constants/theme';
 import AppLink from './AppLink';
+import NameCard from './NameCard/NameCard';
 const FooterLocaleSwitcher = dynamic(() => import('./LocaleSwitcher/FooterLocaleSwitcher'));
 
 const Footer = () => {
@@ -34,6 +35,7 @@ const Footer = () => {
                   <AppLink route={'/'}>{headerT('link_landing')}</AppLink>
                   <AppLink route={'/mapview'}>{headerT('link_mapview')}</AppLink>
                   <AppLink route={'/about'}>{headerT('link_about')}</AppLink>
+                  <NameCard />
                 </div>
               </div>
               <div className="">
