@@ -21,6 +21,7 @@ type Actions = {
   setFoodData: (data: FoodHeritage[]) => void;
   getFoodData: () => FoodHeritage[];
   getSelectedFoodData: () => FoodHeritage | null;
+  reset: () => void;
 };
 
 export function openSidebar() {
@@ -42,6 +43,14 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
   foodData: [],
   filter: ['hawker', 'dessert', 'restaurant'],
   clickedMore: false,
+  reset: () => {
+    set({
+      heritageId: null,
+      foodData: [],
+      filter: ['hawker', 'dessert', 'restaurant'],
+      clickedMore: false,
+    });
+  },
   setHeritageId: (newId: string) => set({ heritageId: newId }),
   setFilter: (newFilter: EateryCategory) =>
     set((state) => ({ filter: state.filter.concat([newFilter]) })),
