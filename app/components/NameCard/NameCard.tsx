@@ -6,7 +6,7 @@ export default function NameCard() {
     <div className={'py-2 flex grow gap-1 items-center'}>
       <a href={'https://www.linkedin.com/in/gi-hun-ko-863619184/'} target={'_blank'}>
         <Image
-          src={'/brands/inBug-Black.png'}
+          src={'/brands/InBug-Black.png'}
           className={'w-6 h-5'}
           width={'0'}
           height={'0'}

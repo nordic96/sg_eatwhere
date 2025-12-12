@@ -41,7 +41,7 @@ export default function Page() {
               </p>
             </div>
             <div>
-              <h3>{'About this Project'}</h3>
+              <h3>{t('about_project')}</h3>
               <p className={'whitespace-pre-line font-light text-base'}>
                 {t('about_project_desc')}
               </p>
