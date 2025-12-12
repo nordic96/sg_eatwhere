@@ -34,7 +34,7 @@ export default function HeroSection() {
               <Explore />
             </PrimaryButton>
             <PrimaryButton className="flex bg-gardengreen hover:bg-green-600 items-center">
-              <AppLink route={'/mapview'}>{t('discover_why')}</AppLink>
+              <AppLink route={'/about'}>{t('discover_why')}</AppLink>
               <ArrowRightAlt />
             </PrimaryButton>
           </div>
