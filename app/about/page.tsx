@@ -33,7 +33,12 @@ export default function Page() {
           <div className={'flex flex-col gap-8 w-[80%]'}>
             <div>
               <h3>{t('food_code')}</h3>
-              <p className={'whitespace-pre-line font-light text-base'}>{t('food_code_desc')}</p>
+              <p className={'whitespace-pre-line font-light text-base'}>
+                {t.rich('food_code_desc', {
+                  b: (chunks) => <span className={'font-bold'}>{chunks}</span>,
+                  i: (chunks) => <span className={'italic'}>{chunks}</span>,
+                })}
+              </p>
             </div>
             <div>
               <h3>{'About this Project'}</h3>
