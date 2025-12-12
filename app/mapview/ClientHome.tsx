@@ -19,17 +19,24 @@ type ClientHomeProps = {
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
 function ClientHome({ locale, messages, foods }: ClientHomeProps) {
-  const { setFoodData } = useHeritageStore();
+  const { setFoodData, reset } = useHeritageStore();
   const t = useTranslations('HomePage');
 
   useEffect(() => {
     setFoodData(foods);
   }, [foods, setFoodData]);
 
+  useEffect(() => {
+    return () => reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
-      <FilterBar />
-      <div className="h-[75vh] max-h-[800px]">
+      <div className={'absolute top-0 z-100'}>
+        <FilterBar />
+      </div>
+      <div className="relative h-[75vh] max-h-[800px] overflow-y-hidden select-none">
         <MapScene locale={locale} messages={messages} />
       </div>
       <Sidebar />

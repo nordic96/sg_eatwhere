@@ -24,7 +24,7 @@
     "Header": {
         "link_mapview": "MapView",
         "link_landing": "Home",
-        "link_about": "About Us"
+        "link_about": "About"
     },
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
@@ -41,6 +41,16 @@
     "HomePage": {
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
+    },
+    "AboutPage": {
+        "intro": "Frontend Software Engineer | Web Developer",
+        "food_code_desc": "Back in 2024-2025, I went back to my home country, South Korea to complete my national service.\nBefore enlisting, I worked as a Software Engineer - and during service, I found myself missing the joy of builindg things with code.\n\nThere was something else I missed just as much: the <b>food in Singapore</b>.\n\nWhile scrolling through old photos of meals shared with my Singaporean friends, I felt inspired. I wanted to create something more than a simple food blog - something interactive, something that lets people explore the memories behind each place.\nThat became the idea for the <b>Foodie's Trail</b>; A <i>3D food map</i>, combining the two things I love most: food and code.",
+        "food_code": "Food & Code",
+        "about_project": "About this Project",
+        "about_project_desc": "This website is a personal passion project. It's a collection of food places I've discovered and loved over the past 10 years living in Singapore - a small archive of the meals, memories, and moments shared with friends and family.\n\nMy hope is that this map becomes useful not only to future visitors, but to anyone curious about Singapore's food culture.\nIf these recommendations help even one person find a memorable meal, or let someone feel the warmth I experienced eating here, then I'll be more than happy."
+    },
+    "Tooltip": {
+        "what_is_hawker": "Hawker Stall refers to a small food shop that serves affordable dish at hawker centres.\nA hawker centre usually consists of multiple independent hawker stalls hence making the place a cultural melting pot for variety of food.\nIt is where normally Singaporeans and residents love to eat to obtain an affordable meal."
     },
     "FilterBar": {
         "hawker": "Hawker Stalls",

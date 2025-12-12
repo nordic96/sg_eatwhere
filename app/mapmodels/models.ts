@@ -1,6 +1,7 @@
 'use client';
 
 import { useGLTF } from '@react-three/drei';
+import { isProductionMode } from '../utils';
 
 export const MODELS = {
   riceBowl: '/models/rice_bowl.glb',
@@ -13,6 +14,8 @@ export function useModel(name: keyof typeof MODELS) {
   return useGLTF(MODELS[name]);
 }
 
-Object.values(MODELS).forEach((path) => {
-  useGLTF.preload(path);
-});
+if (isProductionMode()) {
+  Object.values(MODELS).forEach((path) => {
+    useGLTF.preload(path);
+  });
+}
