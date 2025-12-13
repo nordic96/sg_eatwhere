@@ -11,7 +11,7 @@ type State = {
 };
 
 type Actions = {
-  setHeritageId: (newId: string) => void;
+  setHeritageId: (newId: string | null) => void;
   setFilter: (cat: EateryCategory) => void;
   unsetFilter: (cat: EateryCategory) => void;
   getThemeStyle: () => ClassValue;
@@ -51,7 +51,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
       clickedMore: false,
     });
   },
-  setHeritageId: (newId: string) => set({ heritageId: newId }),
+  setHeritageId: (newId: string | null) => set({ heritageId: newId }),
   setFilter: (newFilter: EateryCategory) =>
     set((state) => ({ filter: state.filter.concat([newFilter]) })),
   unsetFilter: (filter: EateryCategory) =>

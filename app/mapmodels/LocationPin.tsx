@@ -5,8 +5,8 @@ import { geoConverter } from '../utils';
 import { Vector3 } from 'three';
 import { Glow } from './GlowSprite';
 import { useEnvironmentStore } from '../stores/useEnvironmentStore';
+import { FLOAT_OFFSET } from '../constants';
 
-const FLOAT_OFFSET = 5;
 const SCALE_OFFSET = [1.5, 1.5];
 export default function LocationPin() {
   const { getSelectedFoodData, heritageId } = useHeritageStore();
@@ -18,7 +18,7 @@ export default function LocationPin() {
     if (data === null || heritageId === null) return null;
 
     const pos = geoConverter(data.location.geoLocation);
-    pos[1] += FLOAT_OFFSET;
+    pos[1] += FLOAT_OFFSET + 0.5;
     return pos;
   }, [getSelectedFoodData, heritageId]);
 

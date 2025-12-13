@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // utils/geographyCalibrator.ts
+import * as THREE from 'three';
 
 export type LatLng = { latitude: number; longitude: number };
 export type Vec3 = [number, number, number];
@@ -52,3 +54,30 @@ export const geoConverter = createConverterTwoPoint(
   tampinesV,
   tampinesVScene,
 );
+
+function findCentroid(points: Vec3[]): Vec3 {
+  if (points.length === 0) {
+    return [0, 0, 0];
+  }
+  let xSum = 0,
+    ySum = 0,
+    zSum = 0;
+  for (const [x, y, z] of points) {
+    xSum += x;
+    ySum += y;
+    zSum += z;
+  }
+  const n = points.length;
+  return [xSum / n, ySum / n, zSum / n];
+}
+
+export function sortByNearestFromCentroid(vectors: Vec3[]): THREE.Vector3[] {
+  const [cx, cy, cz] = findCentroid(vectors);
+  return vectors
+    .map(([x, y, z]) => {
+      const angle = Math.atan2(z + cz, x + cx);
+      return [x, y, z, angle];
+    })
+    .sort((a, b) => a[3] - b[3])
+    .map((a) => new THREE.Vector3(a[0], a[1], a[2]));
+}
