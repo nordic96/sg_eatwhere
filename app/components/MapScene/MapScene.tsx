@@ -34,7 +34,8 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const cameraRef = useRef<THREE.Camera>(null);
   const [ready, setReady] = useState(false);
   const { isNight } = useEnvironmentStore();
-  const { heritageId, unSelect, clickedMore, getThemeStyle, foodData } = useHeritageStore();
+  const { heritageId, unSelect, clickedMore, getThemeStyle, foodData, trailMode } =
+    useHeritageStore();
 
   return (
     <>
@@ -69,7 +70,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
           {/** Trail Lines (Curved) */}
-          <TrailPath />
+          <TrailPath visible={trailMode} />
           <GlowInstances buildings={foodData} isNight={isNight} />
           {/* --- Camera Controls --- */}
           <MapControls

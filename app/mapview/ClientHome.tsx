@@ -11,6 +11,7 @@ import { useHeritageStore } from '../stores';
 import { useEffect } from 'react';
 import ToggleButton from '../components/ToggleButton/ToggleButton';
 import { Explore } from '@mui/icons-material';
+import { cn } from '../utils';
 
 type ClientHomeProps = {
   locale: string;
@@ -21,7 +22,7 @@ type ClientHomeProps = {
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
 function ClientHome({ locale, messages, foods }: ClientHomeProps) {
-  const { setFoodData, reset } = useHeritageStore();
+  const { setFoodData, reset, trailMode, toggleTrailMode } = useHeritageStore();
   const t = useTranslations('HomePage');
 
   useEffect(() => {
@@ -40,12 +41,26 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
       >
         <div className={'flex grow'}>
           <ToggleButton
+            on={trailMode}
+            onToggle={toggleTrailMode}
             className={'max-sm:flex-col max-sm:gap-3'}
             label={
-              <span className={'bg-primary text-white py-1 px-2 rounded-full border border-[#333]'}>
-                <Explore fontSize={'small'} />
-                <span>{'Trail Mode'}</span>
-              </span>
+              <div
+                className={
+                  'flex gap-1 items-center bg-primary text-white py-1 px-2 rounded-full border border-[#333]'
+                }
+              >
+                <span>
+                  <Explore fontSize={'inherit'} />
+                  <span>{'Trail Mode '}</span>
+                </span>
+                <div
+                  className={cn(
+                    'w-2 h-2 rounded-full',
+                    trailMode ? 'bg-green-400' : 'bg-monsoongrey',
+                  )}
+                ></div>
+              </div>
             }
           />
         </div>

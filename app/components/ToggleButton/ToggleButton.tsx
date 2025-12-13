@@ -2,20 +2,18 @@
 
 import { cn } from '@/app/utils';
 import { ClassValue } from 'clsx';
-import React, { Activity, useId, useState } from 'react';
+import React, { Activity, useId } from 'react';
 
 type ToggleButtonProps = {
   label?: string | React.JSX.Element;
   className?: string | ClassValue;
+  on: boolean;
   onToggle?: () => void;
 };
-export default function ToggleButton({ label, className, onToggle }: ToggleButtonProps) {
+export default function ToggleButton({ label, className, onToggle, on }: ToggleButtonProps) {
   const toggleId = useId();
-  const [toggle, setToggle] = useState(false);
-
   function handleToggle() {
     if (onToggle) onToggle();
-    setToggle((t) => !t);
   }
 
   return (
@@ -23,17 +21,17 @@ export default function ToggleButton({ label, className, onToggle }: ToggleButto
       <div
         id={toggleId}
         role={'button'}
-        aria-pressed={toggle}
+        aria-pressed={on}
         className={cn(
           'w-11 p-0.5 rounded-full cursor-pointer border border-[#333] shadow-lg',
-          toggle ? 'bg-gray-100' : 'bg-gray-200',
+          on ? 'bg-gray-100' : 'bg-monsoongrey',
         )}
         onClick={handleToggle}
       >
         <div
           className={cn(
             'w-5 h-5 rounded-full  hover:bg-red-700 shadow-2xl transition-transform ease-in-out border border-[#333]',
-            toggle ? 'bg-red-700 translate-x-full' : 'bg-primary translate-x-0',
+            on ? 'bg-red-700 translate-x-full' : 'bg-primary translate-x-0',
           )}
         ></div>
       </div>

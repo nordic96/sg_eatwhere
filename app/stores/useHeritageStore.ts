@@ -8,6 +8,7 @@ type State = {
   foodData: FoodHeritage[];
   filter: EateryCategory[];
   clickedMore: boolean;
+  trailMode: boolean;
 };
 
 type Actions = {
@@ -18,6 +19,7 @@ type Actions = {
   openMore: () => void;
   closeMore: () => void;
   unSelect: () => void;
+  toggleTrailMode: () => void;
   setFoodData: (data: FoodHeritage[]) => void;
   getFoodData: () => FoodHeritage[];
   getSelectedFoodData: () => FoodHeritage | null;
@@ -43,6 +45,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
   foodData: [],
   filter: ['hawker', 'dessert', 'restaurant'],
   clickedMore: false,
+  trailMode: true,
   reset: () => {
     set({
       heritageId: null,
@@ -70,6 +73,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
     closeSidebar();
   },
   unSelect: () => set({ heritageId: null }),
+  toggleTrailMode: () => set((state) => ({ trailMode: !state.trailMode })),
   getThemeStyle: () => {
     const heritageId = get().heritageId;
     const foodData = get().foodData;
