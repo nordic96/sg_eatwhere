@@ -41,7 +41,7 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
       </div>
       <Sidebar />
       <a
-        className="italic hover:text-primary"
+        className="italic hover:text-primary w-fit"
         href={'https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg'}
         target={'_blank'}
       >
