@@ -18,6 +18,7 @@ import GlowInstances from '@/app/mapmodels/GlowInstances';
 import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
 import LocationPin from '@/app/mapmodels/LocationPin';
 import MapController from '../MapController/MapController';
+import TrailPath from '@/app/mapmodels/TrailPath';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -68,6 +69,8 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           <LocationPin />
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
+          {/** Trail Lines (Curved) */}
+          <TrailPath />
           <GlowInstances buildings={foodData} isNight={isNight} />
           {/* --- Camera Controls --- */}
           <MapControls
