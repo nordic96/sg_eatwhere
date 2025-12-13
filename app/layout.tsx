@@ -11,7 +11,9 @@ import Banner from './components/Banner/Banner';
 import { NextIntlClientProvider, useTranslations } from 'next-intl';
 import { cn } from './utils';
 import { baseLayoutStyle } from './constants/theme';
+/** Speed & Insights Analytics */
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
@@ -55,6 +57,7 @@ export default function RootLayout({
           </div>
         </NextIntlClientProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
