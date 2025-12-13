@@ -102,7 +102,7 @@ function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps
   const labelBaseStyle =
     'rounded-xl px-2 py-1 shadow-lg font-regular border-[0.5px] hover:cursor-pointer flex items-center gap-1';
   return (
-    <div className="flex items-center gap-2 text-xs">
+    <div className="flex max-sm:flex-col items-center gap-2 text-xs">
       <CategoryIcon cat={category} alt={'filter_icon'} className={customIconClass} />
       <div
         id={`filter_label_${category}`}

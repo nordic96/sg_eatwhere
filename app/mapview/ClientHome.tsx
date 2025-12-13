@@ -9,6 +9,8 @@ import { useTranslations } from 'next-intl';
 import { FoodHeritage } from '../types';
 import { useHeritageStore } from '../stores';
 import { useEffect } from 'react';
+import ToggleButton from '../components/ToggleButton/ToggleButton';
+import { Explore } from '@mui/icons-material';
 
 type ClientHomeProps = {
   locale: string;
@@ -33,7 +35,20 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
 
   return (
     <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
-      <div className={'absolute top-0 z-100'}>
+      <div
+        className={'absolute flex w-full overflow-hidden justify-between items-center top-0 z-100'}
+      >
+        <div className={'flex grow'}>
+          <ToggleButton
+            className={'max-sm:flex-col max-sm:gap-3'}
+            label={
+              <span className={'bg-primary text-white py-1 px-2 rounded-full border border-[#333]'}>
+                <Explore fontSize={'small'} />
+                <span>{'Trail Mode'}</span>
+              </span>
+            }
+          />
+        </div>
         <FilterBar />
       </div>
       <div className="relative h-[75vh] max-h-[800px] overflow-y-hidden select-none">
