@@ -34,7 +34,8 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   }, [img]);
 
   const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-monsoongrey';
-  const navBtnBaseStyle = 'absolute top-[50%] opacity-80 text-white rounded-3xl cursor-pointer';
+  const navBtnBaseStyle =
+    'absolute top-[50%] opacity-80 text-white rounded-full cursor-pointer text-3xl max-sm:text-4xl flex';
   const currImgIndicatorBaseStyle = 'absolute px-1 top-0 right-0 opacity-80 rounded-xl text-white';
 
   return (
@@ -58,10 +59,10 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         })}
       </div>
       <div className={cn(navBtnBaseStyle, { 'left-0': true }, customClass)} onClick={onClickLeft}>
-        <West fontSize={'medium'} />
+        <West fontSize={'inherit'} />
       </div>
       <div className={cn(navBtnBaseStyle, { 'right-0': true }, customClass)} onClick={onClickRight}>
-        <East fontSize={'medium'} />
+        <East fontSize={'inherit'} />
       </div>
       <div
         className={cn(currImgIndicatorBaseStyle, customClass)}

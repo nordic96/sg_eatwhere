@@ -20,3 +20,6 @@ export const catIconStyle = (cat: EateryCategory): ClassValue => ({
   'w-9': true,
   'h-5': cat === 'dessert',
 });
+
+export const primaryButtonStyle =
+  'bg-primary text-white hover:bg-red-700 active:bg-red-700 cursor-pointer py-2 px-4 flex gap-1 max-sm:px-2 rounded-3xl text-md items-center';
