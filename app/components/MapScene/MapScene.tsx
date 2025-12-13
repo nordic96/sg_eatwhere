@@ -36,10 +36,6 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const { isNight } = useEnvironmentStore();
   const { heritageId, unSelect, clickedMore, getThemeStyle, foodData } = useHeritageStore();
 
-  function dummyOnReady() {
-    setTimeout(() => setReady(true), 1000);
-  }
-
   return (
     <>
       <Canvas
@@ -92,7 +88,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
         </Suspense>
       </Canvas>
       <Activity mode={!ready ? 'visible' : 'hidden'}>
-        <DynamicPortalLoader onReady={dummyOnReady} />
+        <DynamicPortalLoader onReady={() => setReady(true)} />
       </Activity>
       <div className="absolute bottom-0 right-0 z-90">
         {/** Map Controller UI, not wired with control logic */}
