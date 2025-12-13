@@ -39,6 +39,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   return (
     <>
       <Canvas
+        className={'border border-[#333]'}
         camera={{ position: [0, 70, 8], fov: 45 }}
         onClick={(e) => e.stopPropagation()}
         onCreated={({ camera }) => {
@@ -52,7 +53,9 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
               <Html>
                 <CanvasIntlProvider messages={messages} locale={locale}>
                   <div
-                    className={'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2'}
+                    className={
+                      'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
+                    }
                   >
                     <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
                     <PlaceContent />
