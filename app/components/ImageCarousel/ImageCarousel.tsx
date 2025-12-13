@@ -15,6 +15,10 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [currImg, setCurrImg] = useState<number>(0);
 
   useEffect(() => {
+    return () => setCurrImg(0);
+  }, [img]);
+
+  useEffect(() => {
     function updatePosition() {
       const el = document.getElementById('carousel-wrapper');
       const offset = 100 / img.length;

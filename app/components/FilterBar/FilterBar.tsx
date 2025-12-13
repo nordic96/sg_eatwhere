@@ -10,12 +10,14 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 type ToggleFuncMap = Record<EateryCategory, (bool?: boolean) => void>;
 
 export default function FilterBar() {
-  const { filter, setFilter, unsetFilter } = useHeritageStore();
+  const { filter, setFilter, unsetFilter, closeMore, unSelect } = useHeritageStore();
 
   const onSelectFilter = (id: EateryCategory) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (filter.includes(id)) {
       unsetFilter(id);
+      unSelect();
+      closeMore();
       return;
     }
     setFilter(id);
