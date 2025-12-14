@@ -1,0 +1,282 @@
+[
+  {
+    "id": "fh-001",
+    "name": "Maxwell Hainanese Chicken Rice",
+    "recommendations": ["Steamed chicken", "Roasted chicken"],
+    "category": "hawker",
+    "imgSource": ["/maxwell-1.jpg"],
+    "location": {
+      "address": "1 Kadayanallur St, Singapore",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Chinatown"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.2800, "longitude": 103.8443 }
+    }
+  },
+  {
+    "id": "fh-002",
+    "name": "Tiong Bahru Bakery",
+    "recommendations": ["Croissant", "Kouign-amann"],
+    "category": "dessert",
+    "imgSource": ["/tbb-1.jpg"],
+    "location": {
+      "address": "56 Eng Hoon St",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Tiong Bahru"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.2847, "longitude": 103.8320 }
+    }
+  },
+  {
+    "id": "fh-003",
+    "name": "Lau Pa Sat Satay Street",
+    "recommendations": ["Satay", "Chilli crab"],
+    "category": "hawker",
+    "imgSource": ["/laupasat-1.jpg"],
+    "location": {
+      "address": "18 Raffles Quay",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Downtown"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.2803, "longitude": 103.8500 }
+    }
+  },
+  {
+    "id": "fh-004",
+    "name": "Burnt Ends",
+    "recommendations": ["Sanger burger", "Wood-fired steak"],
+    "category": "restaurant",
+    "imgSource": ["/burntends-1.jpg"],
+    "location": {
+      "address": "7 Dempsey Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Napier"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.3050, "longitude": 103.8090 }
+    }
+  },
+  {
+    "id": "fh-005",
+    "name": "Chinatown Complex Food Centre",
+    "recommendations": ["Char kway teow", "Bak chor mee"],
+    "category": "hawker",
+    "imgSource": ["/chinatownfc-1.jpg"],
+    "location": {
+      "address": "335 Smith St",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Chinatown"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.2832, "longitude": 103.8437 }
+    }
+  },
+  {
+    "id": "fh-006",
+    "name": "Old Airport Road Food Centre",
+    "recommendations": ["Lor mee", "Hokkien mee"],
+    "category": "hawker",
+    "imgSource": ["/oldairport-1.jpg"],
+    "location": {
+      "address": "51 Old Airport Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Dakota"],
+      "region": "east",
+      "geoLocation": { "latitude": 1.3081, "longitude": 103.8850 }
+    }
+  },
+  {
+    "id": "fh-007",
+    "name": "Atlas",
+    "recommendations": ["Cocktails", "Afternoon tea"],
+    "category": "restaurant",
+    "imgSource": ["/atlas-1.jpg"],
+    "location": {
+      "address": "600 North Bridge Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Bugis"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.2988, "longitude": 103.8555 }
+    }
+  },
+  {
+    "id": "fh-008",
+    "name": "Ya Kun Kaya Toast",
+    "recommendations": ["Kaya toast", "Soft-boiled eggs"],
+    "category": "restaurant",
+    "imgSource": ["/yakun-1.jpg"],
+    "location": {
+      "address": "18 China St",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Raffles Place"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.2843, "longitude": 103.8510 }
+    }
+  },
+  {
+    "id": "fh-009",
+    "name": "Bedok Interchange Hawker Centre",
+    "recommendations": ["Fried carrot cake", "Mee rebus"],
+    "category": "hawker",
+    "imgSource": ["/bedok-1.jpg"],
+    "location": {
+      "address": "208 New Upper Changi Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Bedok"],
+      "region": "east",
+      "geoLocation": { "latitude": 1.3244, "longitude": 103.9300 }
+    }
+  },
+  {
+    "id": "fh-010",
+    "name": "Odette",
+    "recommendations": ["Seasonal tasting menu"],
+    "category": "restaurant",
+    "imgSource": ["/odette-1.jpg"],
+    "location": {
+      "address": "1 St Andrew's Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["City Hall"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.2905, "longitude": 103.8519 }
+    }
+  },
+  {
+    "id": "fh-011",
+    "name": "Changi Village Hawker Centre",
+    "recommendations": ["Nasi lemak"],
+    "category": "hawker",
+    "imgSource": ["/changi-1.jpg"],
+    "location": {
+      "address": "2 Changi Village Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Tanah Merah"],
+      "region": "east",
+      "geoLocation": { "latitude": 1.3894, "longitude": 103.9886 }
+    }
+  },
+  {
+    "id": "fh-012",
+    "name": "Seletar Aerospace Park Bistro",
+    "recommendations": ["Western brunch"],
+    "category": "restaurant",
+    "imgSource": ["/seletar-1.jpg"],
+    "location": {
+      "address": "1 The Oval",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Yio Chu Kang"],
+      "region": "north",
+      "geoLocation": { "latitude": 1.4167, "longitude": 103.8670 }
+    }
+  },
+  {
+    "id": "fh-013",
+    "name": "Springleaf Prata Place",
+    "recommendations": ["Plain prata", "Egg prata"],
+    "category": "restaurant",
+    "imgSource": ["/springleaf-1.jpg"],
+    "location": {
+      "address": "1 Springleaf Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Springleaf"],
+      "region": "north",
+      "geoLocation": { "latitude": 1.3987, "longitude": 103.8187 }
+    }
+  },
+  {
+    "id": "fh-014",
+    "name": "Jurong West 505 Market",
+    "recommendations": ["Wanton mee"],
+    "category": "hawker",
+    "imgSource": ["/jurong-1.jpg"],
+    "location": {
+      "address": "505 Jurong West St 52",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Lakeside"],
+      "region": "west",
+      "geoLocation": { "latitude": 1.3497, "longitude": 103.7187 }
+    }
+  },
+  {
+    "id": "fh-015",
+    "name": "Hillview Cafe",
+    "recommendations": ["Pasta", "Coffee"],
+    "category": "dessert",
+    "imgSource": ["/hillview-1.jpg"],
+    "location": {
+      "address": "Hillview Rise",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Hillview"],
+      "region": "west",
+      "geoLocation": { "latitude": 1.3622, "longitude": 103.7646 }
+    }
+  },
+  {
+    "id": "fh-016",
+    "name": "Beauty World Centre Food Court",
+    "recommendations": ["Laksa"],
+    "category": "hawker",
+    "imgSource": ["/beautyworld-1.jpg"],
+    "location": {
+      "address": "144 Upper Bukit Timah Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Beauty World"],
+      "region": "west",
+      "geoLocation": { "latitude": 1.3416, "longitude": 103.7750 }
+    }
+  },
+  {
+    "id": "fh-017",
+    "name": "Punggol Container Park",
+    "recommendations": ["Street desserts"],
+    "category": "dessert",
+    "imgSource": ["/punggol-1.jpg"],
+    "location": {
+      "address": "50 Punggol East",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Punggol"],
+      "region": "north",
+      "geoLocation": { "latitude": 1.4052, "longitude": 103.9020 }
+    }
+  },
+  {
+    "id": "fh-018",
+    "name": "Toa Payoh Lorong 8 Hawker",
+    "recommendations": ["Chicken rice"],
+    "category": "hawker",
+    "imgSource": ["/toapayoh-1.jpg"],
+    "location": {
+      "address": "210 Lor 8 Toa Payoh",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Toa Payoh"],
+      "region": "central",
+      "geoLocation": { "latitude": 1.3314, "longitude": 103.8564 }
+    }
+  },
+  {
+    "id": "fh-019",
+    "name": "Kovan Ice Cream Bar",
+    "recommendations": ["Waffles", "Ice cream"],
+    "category": "dessert",
+    "imgSource": ["/kovan-1.jpg"],
+    "location": {
+      "address": "Kovan Rd",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Kovan"],
+      "region": "north",
+      "geoLocation": { "latitude": 1.3604, "longitude": 103.8858 }
+    }
+  },
+  {
+    "id": "fh-020",
+    "name": "East Coast Lagoon Food Village",
+    "recommendations": ["BBQ seafood"],
+    "category": "hawker",
+    "imgSource": ["/eastcoast-1.jpg"],
+    "location": {
+      "address": "1220 East Coast Pkwy",
+      "gmapUrl": "https://maps.google.com",
+      "mrt": ["Bedok"],
+      "region": "east",
+      "geoLocation": { "latitude": 1.3059, "longitude": 103.9230 }
+    }
+  }
+]
