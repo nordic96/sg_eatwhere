@@ -8,17 +8,17 @@ import { FLOAT_OFFSET, TRAIL_LINE_WIDTH } from '../constants';
 
 type TrailPathProps = Omit<LineProps, 'points' | 'color'>;
 export default function TrailPath(lineProps: TrailPathProps) {
-  const { filter } = useHeritageStore();
+  const { filter, trailIds } = useHeritageStore();
   const locations = useHeritageStore((state) => state.foodData);
   const points = useMemo(() => {
     const vectors: Vec3[] = locations
-      .filter((a) => filter.includes(a.category))
+      .filter((a) => filter.includes(a.category) && trailIds.includes(a.id))
       .map((l) => {
         const [x, y, z] = geoConverter(l.location.geoLocation);
         return [x, y + FLOAT_OFFSET, z];
       });
     return sortByNearestFromCentroid(vectors);
-  }, [locations, filter]);
+  }, [locations, filter, trailIds]);
 
   const curvePoints = useMemo(() => {
     if (points.length < 2) return points;
