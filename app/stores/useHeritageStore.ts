@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from 'zustand';
 import { EateryCategory, FoodHeritage, ThemeColor } from '../types';
 import { ClassValue } from 'clsx';
@@ -87,9 +86,14 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
     const randomData = generateRandomArr(get().foodData, 10);
     const randomIds = randomData.map((a) => a.id);
     if (!get().trailMode) {
-      set((state) => ({ trailMode: !state.trailMode, trailIds: randomIds }));
+      set((state) => ({
+        trailMode: !state.trailMode,
+        trailIds: randomIds,
+        heritageId: randomIds[0] !== undefined ? randomIds[0] : null,
+      }));
     } else {
       set((state) => ({ trailMode: !state.trailMode, trailIds: [] }));
+      get().unSelect();
     }
   },
   getFilteredTrails: () => {
