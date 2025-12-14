@@ -4,7 +4,7 @@ import { Line, LineProps } from '@react-three/drei';
 import { useMemo } from 'react';
 import { useHeritageStore } from '../stores';
 import { geoConverter, sortByNearestFromCentroid, Vec3 } from '../utils';
-import { FLOAT_OFFSET } from '../constants';
+import { FLOAT_OFFSET, TRAIL_LINE_WIDTH } from '../constants';
 
 type TrailPathProps = Omit<LineProps, 'points' | 'color'>;
 export default function TrailPath(lineProps: TrailPathProps) {
@@ -29,7 +29,7 @@ export default function TrailPath(lineProps: TrailPathProps) {
     <Line
       points={curvePoints}
       color={'#A7292C'}
-      lineWidth={15}
+      lineWidth={TRAIL_LINE_WIDTH}
       transparent
       opacity={0.9}
       {...lineProps}
