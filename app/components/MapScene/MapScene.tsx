@@ -10,7 +10,6 @@ import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
 import { useHeritageStore } from '@/app/stores';
 
-import CloseButton from '../CloseButton/CloseButton';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import CanvasIntlProvider from '../CanvasIntlProvider';
 import { InstancedBuildings } from '@/app/mapmodels/InstancedBuildings';
@@ -34,8 +33,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const cameraRef = useRef<THREE.Camera>(null);
   const [ready, setReady] = useState(false);
   const { isNight } = useEnvironmentStore();
-  const { heritageId, unSelect, clickedMore, getThemeStyle, foodData, trailMode } =
-    useHeritageStore();
+  const { heritageId, clickedMore, foodData, trailMode } = useHeritageStore();
 
   return (
     <>
@@ -53,14 +51,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
             <Billboard position={[10, 15, 0]}>
               <Html>
                 <CanvasIntlProvider messages={messages} locale={locale}>
-                  <div
-                    className={
-                      'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
-                    }
-                  >
-                    <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
-                    <PlaceContent />
-                  </div>
+                  <PlaceContent />
                 </CanvasIntlProvider>
               </Html>
             </Billboard>
@@ -70,7 +61,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
           {/** Trail Lines (Curved) */}
-          <TrailPath visible={trailMode} />
+          {trailMode && <TrailPath />}
           <GlowInstances buildings={foodData} isNight={isNight} />
           {/* --- Camera Controls --- */}
           <MapControls
