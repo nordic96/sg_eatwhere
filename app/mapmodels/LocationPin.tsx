@@ -18,7 +18,7 @@ export default function LocationPin() {
     if (data === null || heritageId === null) return null;
 
     const pos = geoConverter(data.location.geoLocation);
-    pos[1] += FLOAT_OFFSET + 0.5;
+    pos[1] += FLOAT_OFFSET + 2;
     return pos;
   }, [getSelectedFoodData, heritageId]);
 
