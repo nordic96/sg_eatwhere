@@ -8,10 +8,8 @@ import HeritageListView from '../components/HeritageListView/HeritageListView';
 import { useTranslations } from 'next-intl';
 import { FoodHeritage } from '../types';
 import { useHeritageStore } from '../stores';
-import { useEffect } from 'react';
-import ToggleButton from '../components/ToggleButton/ToggleButton';
-import { Explore } from '@mui/icons-material';
-import { cn } from '../utils';
+import { Activity, useEffect } from 'react';
+import TrailMode from '../components/TrailMode/TrailMode';
 
 type ClientHomeProps = {
   locale: string;
@@ -22,7 +20,7 @@ type ClientHomeProps = {
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
 function ClientHome({ locale, messages, foods }: ClientHomeProps) {
-  const { setFoodData, reset, trailMode, toggleTrailMode } = useHeritageStore();
+  const { setFoodData, reset } = useHeritageStore();
   const t = useTranslations('HomePage');
 
   useEffect(() => {
@@ -37,31 +35,9 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
   return (
     <div className={'relative flex flex-col grow pb-8'}>
       <div className={'absolute flex w-full justify-between items-center top-0 z-100'}>
-        <div className={'flex grow'}>
-          <ToggleButton
-            on={trailMode}
-            onToggle={toggleTrailMode}
-            className={'max-sm:flex-col max-sm:gap-3'}
-            label={
-              <div
-                className={
-                  'flex gap-1 items-center bg-primary text-white py-1 px-2 rounded-full border border-[#333]'
-                }
-              >
-                <span>
-                  <Explore fontSize={'inherit'} />
-                  <span>{'Trail Mode '}</span>
-                </span>
-                <div
-                  className={cn(
-                    'w-2 h-2 rounded-full',
-                    trailMode ? 'bg-green-400' : 'bg-monsoongrey',
-                  )}
-                ></div>
-              </div>
-            }
-          />
-        </div>
+        <Activity mode={'hidden'}>
+          <TrailMode />
+        </Activity>
         <FilterBar />
       </div>
       <div className="relative h-[75vh] max-h-[800px] overflow-y-hidden select-none">
