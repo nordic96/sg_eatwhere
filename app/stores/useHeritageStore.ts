@@ -45,7 +45,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
   foodData: [],
   filter: ['hawker', 'dessert', 'restaurant'],
   clickedMore: false,
-  trailMode: true,
+  trailMode: false,
   reset: () => {
     set({
       heritageId: null,
