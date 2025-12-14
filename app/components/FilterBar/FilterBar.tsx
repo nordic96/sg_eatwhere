@@ -115,6 +115,7 @@ function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps
         <div onClick={onSelect}>{t(category)}</div>
         {tooltipKey !== undefined && (
           <HelpTooltip
+            direction={'left'}
             msgKey={tooltipKey || ''}
             iconProps={{ fontSize: 'inherit' }}
             className={'min-w-[250px]'}

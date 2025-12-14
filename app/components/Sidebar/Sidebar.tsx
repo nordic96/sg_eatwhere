@@ -75,7 +75,11 @@ export default function Sidebar() {
               <span className={'flex items-center gap-1'}>
                 {catT(data.category)}
                 {data.category === 'hawker' && (
-                  <HelpTooltip msgKey={'what_is_hawker'} iconProps={{ fontSize: 'small' }} />
+                  <HelpTooltip
+                    direction={'right'}
+                    msgKey={'what_is_hawker'}
+                    iconProps={{ fontSize: 'small' }}
+                  />
                 )}
               </span>
             </span>
