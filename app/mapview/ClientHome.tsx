@@ -8,7 +8,8 @@ import HeritageListView from '../components/HeritageListView/HeritageListView';
 import { useTranslations } from 'next-intl';
 import { FoodHeritage } from '../types';
 import { useHeritageStore } from '../stores';
-import { useEffect } from 'react';
+import { Activity, useEffect } from 'react';
+import TrailMode from '../components/TrailMode/TrailMode';
 
 type ClientHomeProps = {
   locale: string;
@@ -32,8 +33,11 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
   }, []);
 
   return (
-    <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
-      <div className={'absolute top-0 z-100'}>
+    <div className={'relative flex flex-col grow pb-8'}>
+      <div className={'absolute flex w-full justify-between items-center top-0 z-100'}>
+        <Activity mode={'hidden'}>
+          <TrailMode />
+        </Activity>
         <FilterBar />
       </div>
       <div className="relative h-[75vh] max-h-[800px] overflow-y-hidden select-none">

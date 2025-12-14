@@ -36,7 +36,7 @@ export default function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      className="absolute flex z-101 flex-col gap-2 -right-4 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
+      className="absolute flex z-101 flex-col gap-2 -right-4 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out border border-[#333]"
     >
       <div className="flex justify-end">
         <CloseButton onClick={onClose} customClass={getThemeStyle()} />
@@ -75,7 +75,11 @@ export default function Sidebar() {
               <span className={'flex items-center gap-1'}>
                 {catT(data.category)}
                 {data.category === 'hawker' && (
-                  <HelpTooltip msgKey={'what_is_hawker'} iconProps={{ fontSize: 'small' }} />
+                  <HelpTooltip
+                    direction={'right'}
+                    msgKey={'what_is_hawker'}
+                    iconProps={{ fontSize: 'small' }}
+                  />
                 )}
               </span>
             </span>

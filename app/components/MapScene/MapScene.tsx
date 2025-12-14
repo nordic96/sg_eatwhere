@@ -18,6 +18,7 @@ import GlowInstances from '@/app/mapmodels/GlowInstances';
 import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
 import LocationPin from '@/app/mapmodels/LocationPin';
 import MapController from '../MapController/MapController';
+import TrailPath from '@/app/mapmodels/TrailPath';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -33,15 +34,13 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const cameraRef = useRef<THREE.Camera>(null);
   const [ready, setReady] = useState(false);
   const { isNight } = useEnvironmentStore();
-  const { heritageId, unSelect, clickedMore, getThemeStyle, foodData } = useHeritageStore();
-
-  function dummyOnReady() {
-    setTimeout(() => setReady(true), 1000);
-  }
+  const { heritageId, unSelect, clickedMore, getThemeStyle, foodData, trailMode } =
+    useHeritageStore();
 
   return (
     <>
       <Canvas
+        className={'border border-[#333]'}
         camera={{ position: [0, 70, 8], fov: 45 }}
         onClick={(e) => e.stopPropagation()}
         onCreated={({ camera }) => {
@@ -55,7 +54,9 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
               <Html>
                 <CanvasIntlProvider messages={messages} locale={locale}>
                   <div
-                    className={'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2'}
+                    className={
+                      'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
+                    }
                   >
                     <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
                     <PlaceContent />
@@ -68,6 +69,8 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           <LocationPin />
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
+          {/** Trail Lines (Curved) */}
+          <TrailPath visible={trailMode} />
           <GlowInstances buildings={foodData} isNight={isNight} />
           {/* --- Camera Controls --- */}
           <MapControls
@@ -89,7 +92,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
         </Suspense>
       </Canvas>
       <Activity mode={!ready ? 'visible' : 'hidden'}>
-        <DynamicPortalLoader onReady={dummyOnReady} />
+        <DynamicPortalLoader onReady={() => setReady(true)} />
       </Activity>
       <div className="absolute bottom-0 right-0 z-90">
         {/** Map Controller UI, not wired with control logic */}

@@ -8,16 +8,18 @@ type State = {
   foodData: FoodHeritage[];
   filter: EateryCategory[];
   clickedMore: boolean;
+  trailMode: boolean;
 };
 
 type Actions = {
-  setHeritageId: (newId: string) => void;
+  setHeritageId: (newId: string | null) => void;
   setFilter: (cat: EateryCategory) => void;
   unsetFilter: (cat: EateryCategory) => void;
   getThemeStyle: () => ClassValue;
   openMore: () => void;
   closeMore: () => void;
   unSelect: () => void;
+  toggleTrailMode: () => void;
   setFoodData: (data: FoodHeritage[]) => void;
   getFoodData: () => FoodHeritage[];
   getSelectedFoodData: () => FoodHeritage | null;
@@ -43,6 +45,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
   foodData: [],
   filter: ['hawker', 'dessert', 'restaurant'],
   clickedMore: false,
+  trailMode: false,
   reset: () => {
     set({
       heritageId: null,
@@ -51,7 +54,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
       clickedMore: false,
     });
   },
-  setHeritageId: (newId: string) => set({ heritageId: newId }),
+  setHeritageId: (newId: string | null) => set({ heritageId: newId }),
   setFilter: (newFilter: EateryCategory) =>
     set((state) => ({ filter: state.filter.concat([newFilter]) })),
   unsetFilter: (filter: EateryCategory) =>
@@ -70,6 +73,7 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
     closeSidebar();
   },
   unSelect: () => set({ heritageId: null }),
+  toggleTrailMode: () => set((state) => ({ trailMode: !state.trailMode })),
   getThemeStyle: () => {
     const heritageId = get().heritageId;
     const foodData = get().foodData;

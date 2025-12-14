@@ -10,12 +10,14 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 type ToggleFuncMap = Record<EateryCategory, (bool?: boolean) => void>;
 
 export default function FilterBar() {
-  const { filter, setFilter, unsetFilter } = useHeritageStore();
+  const { filter, setFilter, unsetFilter, closeMore, unSelect } = useHeritageStore();
 
   const onSelectFilter = (id: EateryCategory) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (filter.includes(id)) {
       unsetFilter(id);
+      unSelect();
+      closeMore();
       return;
     }
     setFilter(id);
@@ -98,9 +100,9 @@ type FilterProps = {
 function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps) {
   const t = useTranslations('FilterBar');
   const labelBaseStyle =
-    'rounded-xl px-2 py-1 shadow-lg font-regular border-[0.5px] hover:cursor-pointer flex items-center gap-1';
+    'rounded-xl px-2 py-1 shadow-lg font-regular border border-[#333] hover:cursor-pointer flex items-center gap-1';
   return (
-    <div className="flex items-center gap-2 text-xs">
+    <div className="flex max-sm:flex-col items-center gap-2 text-xs">
       <CategoryIcon cat={category} alt={'filter_icon'} className={customIconClass} />
       <div
         id={`filter_label_${category}`}
@@ -113,6 +115,7 @@ function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps
         <div onClick={onSelect}>{t(category)}</div>
         {tooltipKey !== undefined && (
           <HelpTooltip
+            direction={'left'}
             msgKey={tooltipKey || ''}
             iconProps={{ fontSize: 'inherit' }}
             className={'min-w-[250px]'}
