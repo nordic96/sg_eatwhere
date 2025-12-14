@@ -35,10 +35,8 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
   }, []);
 
   return (
-    <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
-      <div
-        className={'absolute flex w-full overflow-hidden justify-between items-center top-0 z-100'}
-      >
+    <div className={'relative flex flex-col grow pb-8'}>
+      <div className={'absolute flex w-full justify-between items-center top-0 z-100'}>
         <div className={'flex grow'}>
           <ToggleButton
             on={trailMode}

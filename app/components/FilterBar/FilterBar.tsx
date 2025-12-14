@@ -100,7 +100,7 @@ type FilterProps = {
 function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps) {
   const t = useTranslations('FilterBar');
   const labelBaseStyle =
-    'rounded-xl px-2 py-1 shadow-lg font-regular border-[0.5px] hover:cursor-pointer flex items-center gap-1';
+    'rounded-xl px-2 py-1 shadow-lg font-regular border border-[#333] hover:cursor-pointer flex items-center gap-1';
   return (
     <div className="flex max-sm:flex-col items-center gap-2 text-xs">
       <CategoryIcon cat={category} alt={'filter_icon'} className={customIconClass} />
