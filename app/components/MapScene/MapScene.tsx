@@ -8,7 +8,7 @@ import { Billboard, Html, MapControls } from '@react-three/drei';
 import { MapControls as MapControlsImpl } from 'three-stdlib';
 import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
-import { useHeritageStore } from '@/app/stores';
+import { useAppStore, useHeritageStore, useTrailStore } from '@/app/stores';
 
 import PlaceContent from '../PlaceContent/PlaceContent';
 import CanvasIntlProvider from '../CanvasIntlProvider';
@@ -33,7 +33,9 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const cameraRef = useRef<THREE.Camera>(null);
   const [ready, setReady] = useState(false);
   const { isNight } = useEnvironmentStore();
-  const { heritageId, clickedMore, foodData, trailMode } = useHeritageStore();
+  const clickedMore = useAppStore((state) => state.clickedMore);
+  const trailMode = useTrailStore((state) => state.trailMode);
+  const { heritageId, foodData } = useHeritageStore();
 
   return (
     <>

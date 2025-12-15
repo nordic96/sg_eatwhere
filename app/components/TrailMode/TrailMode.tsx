@@ -1,4 +1,4 @@
-import { useHeritageStore } from '@/app/stores';
+import { useTrailStore } from '@/app/stores';
 import ToggleButton from '../ToggleButton/ToggleButton';
 import { Explore } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
@@ -6,7 +6,7 @@ import { cn } from '@/app/utils/cn';
 
 export default function TrailMode() {
   const t = useTranslations('HomePage');
-  const { trailMode, toggleTrailMode } = useHeritageStore();
+  const { trailMode, toggleTrailMode } = useTrailStore();
   return (
     <div className={'flex grow'}>
       <ToggleButton

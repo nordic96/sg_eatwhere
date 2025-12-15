@@ -1,6 +1,6 @@
 'use client';
 
-import { useHeritageStore } from '@/app/stores';
+import { useAppStore, useHeritageStore } from '@/app/stores';
 import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 
 import HighlightedText from '../HighlightText/HighlightText';
@@ -16,7 +16,8 @@ export default function PlaceContent() {
   const catT = useTranslations('FoodCategory');
   const heritageT = useTranslations('Heritage');
 
-  const { openMore, getThemeStyle, getSelectedFoodData } = useHeritageStore();
+  const { getThemeStyle, getSelectedFoodData } = useHeritageStore();
+  const { openMore } = useAppStore();
   const heritageId = useHeritageStore((state) => state.heritageId);
 
   const data = getSelectedFoodData();

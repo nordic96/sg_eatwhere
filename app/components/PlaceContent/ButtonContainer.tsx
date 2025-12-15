@@ -1,12 +1,14 @@
 'use client';
-import { useHeritageStore } from '@/app/stores';
+import { useHeritageStore, useTrailStore } from '@/app/stores';
 import { Redo, Undo } from '@mui/icons-material';
 import { Activity } from 'react';
 import CloseButton from '../CloseButton/CloseButton';
 import { cn } from '@/app/utils';
 
 export default function ButtonContainer() {
-  const { unSelect, getThemeStyle, trailMode, moveToNextTrail } = useHeritageStore();
+  const { unSelect, getThemeStyle } = useHeritageStore();
+  const trailMode = useTrailStore((state) => state.trailMode);
+  const moveToNextTrail = useTrailStore((state) => state.moveToNextTrail);
   const trailButtonStyle =
     'h-6 w-6 bg-primary text-white hover:bg-red-700 rounded-full cursor-pointer flex items-center justify-center';
   return (

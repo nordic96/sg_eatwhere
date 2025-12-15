@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import CloseButton from '../CloseButton/CloseButton';
 import Image from 'next/image';
 
-import { useHeritageStore } from '@/app/stores';
+import { useAppStore, useHeritageStore } from '@/app/stores';
 import Divider from '../Divider';
 import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 import HighlightedText from '../HighlightText/HighlightText';
@@ -17,7 +17,8 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 
 export default function Sidebar() {
   const target = useRef(null);
-  const { closeMore, getThemeStyle, getSelectedFoodData } = useHeritageStore();
+  const { closeMore } = useAppStore();
+  const { getThemeStyle, getSelectedFoodData } = useHeritageStore();
   const data = getSelectedFoodData();
 
   const t = useTranslations('Sidebar');
