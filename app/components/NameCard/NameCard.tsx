@@ -1,20 +1,14 @@
+import { GitHub, LinkedIn } from '@mui/icons-material';
 import Home from '@mui/icons-material/Home';
-import Image from 'next/image';
 
 export default function NameCard() {
   return (
     <div className={'py-2 flex grow gap-1 items-center'}>
       <a href={'https://www.linkedin.com/in/gi-hun-ko-863619184/'} target={'_blank'}>
-        <Image src={'/brands/InBug-Black.png'} width={20} height={24} alt={'linkedin'} />
+        <LinkedIn />
       </a>
       <a href={'https://github.com/nordic96'} target={'_blank'}>
-        <Image
-          src={'/brands/github-mark.svg'}
-          className={'w-5'}
-          alt={'github'}
-          width={'0'}
-          height={'0'}
-        />
+        <GitHub />
       </a>
       <a href={'https://stephenghk.com'} target={'_blank'}>
         <Home />
