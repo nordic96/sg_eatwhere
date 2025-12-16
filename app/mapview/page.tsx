@@ -1,13 +1,13 @@
 import { geti18nConfig } from '@/i18n/request';
 import ClientHome from './ClientHome';
 import { AppResponse, FoodHeritage } from '../types';
-import { fetchApi } from '../utils';
+import { fetchApi, isTrailMode, isUsingTestData } from '../utils';
 import data from '@/resources/devData.json';
 
 export default async function Page() {
   const { messages, locale } = await geti18nConfig();
   let response: AppResponse<FoodHeritage[]> = { data: [] };
-  if (process.env.USE_TEST_DATA === 'true') {
+  if (isUsingTestData()) {
     response = await new Promise((res) => {
       setTimeout(() => {
         res({ data: JSON.parse(JSON.stringify(data)) });
@@ -20,6 +20,7 @@ export default async function Page() {
     <ClientHome
       messages={messages}
       locale={locale}
+      trailMode={isTrailMode()}
       foods={response.error || response.data === null ? [] : response.data}
     />
   );

@@ -55,7 +55,7 @@ export const geoConverter = createConverterTwoPoint(
   tampinesVScene,
 );
 
-function findCentroid(points: Vec3[]): Vec3 {
+export function findCentroid(points: Vec3[]): Vec3 {
   if (points.length === 0) {
     return [0, 0, 0];
   }

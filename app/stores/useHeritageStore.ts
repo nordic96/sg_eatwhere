@@ -7,8 +7,6 @@ type State = {
   heritageId: string | null;
   foodData: FoodHeritage[];
   filter: EateryCategory[];
-  clickedMore: boolean;
-  trailMode: boolean;
 };
 
 type Actions = {
@@ -16,42 +14,23 @@ type Actions = {
   setFilter: (cat: EateryCategory) => void;
   unsetFilter: (cat: EateryCategory) => void;
   getThemeStyle: () => ClassValue;
-  openMore: () => void;
-  closeMore: () => void;
   unSelect: () => void;
-  toggleTrailMode: () => void;
+  getFilteredFood: () => FoodHeritage[];
   setFoodData: (data: FoodHeritage[]) => void;
   getFoodData: () => FoodHeritage[];
   getSelectedFoodData: () => FoodHeritage | null;
   reset: () => void;
 };
 
-export function openSidebar() {
-  const sidebar = document.getElementById('list-sidebar');
-  sidebar?.classList.remove('translate-y-[-120%]', 'opacity-0');
-  sidebar?.classList.add('translate-y-0', 'opacity-100');
-}
-
-export function closeSidebar() {
-  const toggleButton = document.getElementById('list-sidebar');
-  if (toggleButton !== null) {
-    toggleButton.classList.remove('translate-y-0', 'opacity-100');
-    toggleButton.classList.add('translate-y-[-120%]', 'optacity-0');
-  }
-}
-
 export const useHeritageStore = create<State & Actions>((set, get) => ({
   heritageId: null,
   foodData: [],
   filter: ['hawker', 'dessert', 'restaurant'],
-  clickedMore: false,
-  trailMode: false,
   reset: () => {
     set({
       heritageId: null,
       foodData: [],
       filter: ['hawker', 'dessert', 'restaurant'],
-      clickedMore: false,
     });
   },
   setHeritageId: (newId: string | null) => set({ heritageId: newId }),
@@ -64,16 +43,10 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
       }
       return { filter: state.filter.filter((x) => x !== filter) };
     }),
-  openMore: () => {
-    set({ clickedMore: true });
-    openSidebar();
-  },
-  closeMore: () => {
-    set({ clickedMore: false });
-    closeSidebar();
-  },
   unSelect: () => set({ heritageId: null }),
-  toggleTrailMode: () => set((state) => ({ trailMode: !state.trailMode })),
+  getFilteredFood: () => {
+    return get().foodData.filter((x) => get().filter.includes(x.category));
+  },
   getThemeStyle: () => {
     const heritageId = get().heritageId;
     const foodData = get().foodData;

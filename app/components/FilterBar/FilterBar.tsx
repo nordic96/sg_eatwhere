@@ -1,5 +1,5 @@
 'use client';
-import { useHeritageStore } from '@/app/stores';
+import { useAppStore, useHeritageStore } from '@/app/stores';
 import { EateryCategory, EateryCategoryValues } from '@/app/types';
 import { MouseEventHandler, useEffect } from 'react';
 import { cn } from '@/app/utils';
@@ -10,7 +10,8 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 type ToggleFuncMap = Record<EateryCategory, (bool?: boolean) => void>;
 
 export default function FilterBar() {
-  const { filter, setFilter, unsetFilter, closeMore, unSelect } = useHeritageStore();
+  const { closeMore } = useAppStore();
+  const { filter, setFilter, unsetFilter, unSelect } = useHeritageStore();
 
   const onSelectFilter = (id: EateryCategory) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -115,7 +116,7 @@ function Filter({ category, onSelect, tooltipKey, customIconClass }: FilterProps
         <div onClick={onSelect}>{t(category)}</div>
         {tooltipKey !== undefined && (
           <HelpTooltip
-            direction={'left'}
+            direction={'middle'}
             msgKey={tooltipKey || ''}
             iconProps={{ fontSize: 'inherit' }}
             className={'min-w-[250px]'}

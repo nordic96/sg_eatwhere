@@ -15,11 +15,12 @@ type ClientHomeProps = {
   locale: string;
   messages: Record<string, string>;
   foods: FoodHeritage[];
+  trailMode?: boolean;
 };
 
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
-function ClientHome({ locale, messages, foods }: ClientHomeProps) {
+function ClientHome({ trailMode, locale, messages, foods }: ClientHomeProps) {
   const { setFoodData, reset } = useHeritageStore();
   const t = useTranslations('HomePage');
 
@@ -35,7 +36,7 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
   return (
     <div className={'relative flex flex-col grow pb-8'}>
       <div className={'absolute flex w-full justify-between items-center top-0 z-100'}>
-        <Activity mode={'hidden'}>
+        <Activity mode={trailMode ? 'visible' : 'hidden'}>
           <TrailMode />
         </Activity>
         <FilterBar />
