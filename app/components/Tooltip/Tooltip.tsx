@@ -22,7 +22,7 @@ export default function Tooltip({
         id={id}
         role={'tooltip'}
         className={cn(
-          'absolute top-8 w-[200px] transition-opacity ease-in duration-200 opacity-0 group-hover:opacity-100 max-sm:group-active:opacity-100 z-999',
+          'absolute top-8 w-[200px] transition-opacity ease-in duration-200 opacity-0 hidden group-hover:block group-hover:opacity-100 max-sm:group-active:opacity-100 z-999',
           {
             'left-0': direction === 'left',
             '-right-[60px]': direction === 'middle',
