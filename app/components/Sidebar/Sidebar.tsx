@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import CloseButton from '../CloseButton/CloseButton';
 import Image from 'next/image';
 
-import { useHeritageStore } from '@/app/stores';
+import { useAppStore, useHeritageStore } from '@/app/stores';
 import Divider from '../Divider';
 import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 import HighlightedText from '../HighlightText/HighlightText';
@@ -17,7 +17,8 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 
 export default function Sidebar() {
   const target = useRef(null);
-  const { closeMore, getThemeStyle, getSelectedFoodData } = useHeritageStore();
+  const { closeMore } = useAppStore();
+  const { getThemeStyle, getSelectedFoodData } = useHeritageStore();
   const data = getSelectedFoodData();
 
   const t = useTranslations('Sidebar');
@@ -36,7 +37,7 @@ export default function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      className="absolute flex z-101 flex-col gap-2 -right-4 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
+      className="absolute flex z-101 flex-col gap-2 -right-4 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out border border-[#333]"
     >
       <div className="flex justify-end">
         <CloseButton onClick={onClose} customClass={getThemeStyle()} />
@@ -75,7 +76,11 @@ export default function Sidebar() {
               <span className={'flex items-center gap-1'}>
                 {catT(data.category)}
                 {data.category === 'hawker' && (
-                  <HelpTooltip msgKey={'what_is_hawker'} iconProps={{ fontSize: 'small' }} />
+                  <HelpTooltip
+                    direction={'right'}
+                    msgKey={'what_is_hawker'}
+                    iconProps={{ fontSize: 'small' }}
+                  />
                 )}
               </span>
             </span>

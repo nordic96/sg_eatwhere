@@ -39,6 +39,7 @@
         "photo_disclaimer": "All photos were taken by me!"
     },
     "HomePage": {
+        "trail_mode": "Trail Mode",
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
     },

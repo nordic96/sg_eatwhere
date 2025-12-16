@@ -1,11 +1,10 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import FadeIn from '../FadeIn/FadeIn';
-import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import AppLink from '../AppLink';
 import { cn } from '@/app/utils';
 import { ArrowRightAlt, Explore } from '@mui/icons-material';
-import { h1BaseStyle, microTextBaseStyle } from '@/app/constants';
+import { h1BaseStyle, microTextBaseStyle, primaryButtonStyle } from '@/app/constants';
 
 export default function HeroSection() {
   const t = useTranslations('LandingPage');
@@ -29,14 +28,20 @@ export default function HeroSection() {
             <p className={cn(microTextBaseStyle)}>{t('hero_micro_desc')}</p>
           </FadeIn>
           <div className="flex gap-4 max-sm:gap-1">
-            <PrimaryButton className="flex items-center">
-              <AppLink route={'/mapview'}>{t('explore_more')}</AppLink>
+            <AppLink route={'/mapview'} className={cn(primaryButtonStyle)}>
+              {t('explore_more')}
               <Explore />
-            </PrimaryButton>
-            <PrimaryButton className="flex bg-gardengreen hover:bg-green-600 items-center">
-              <AppLink route={'/about'}>{t('discover_why')}</AppLink>
+            </AppLink>
+            <AppLink
+              route={'/about'}
+              className={cn(
+                primaryButtonStyle,
+                'bg-gardengreen hover:bg-green-600 active:bg-green-600',
+              )}
+            >
+              {t('discover_why')}
               <ArrowRightAlt />
-            </PrimaryButton>
+            </AppLink>
           </div>
         </div>
         <Image

@@ -8,9 +8,8 @@ import { Billboard, Html, MapControls } from '@react-three/drei';
 import { MapControls as MapControlsImpl } from 'three-stdlib';
 import MapEnvironment from '@/app/mapmodels/MapEnvironment';
 
-import { useHeritageStore } from '@/app/stores';
+import { useAppStore, useHeritageStore, useTrailStore } from '@/app/stores';
 
-import CloseButton from '../CloseButton/CloseButton';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import CanvasIntlProvider from '../CanvasIntlProvider';
 import { InstancedBuildings } from '@/app/mapmodels/InstancedBuildings';
@@ -18,6 +17,7 @@ import GlowInstances from '@/app/mapmodels/GlowInstances';
 import { useEnvironmentStore } from '@/app/stores/useEnvironmentStore';
 import LocationPin from '@/app/mapmodels/LocationPin';
 import MapController from '../MapController/MapController';
+import TrailPath from '@/app/mapmodels/TrailPath';
 
 const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
   ssr: false,
@@ -33,15 +33,14 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
   const cameraRef = useRef<THREE.Camera>(null);
   const [ready, setReady] = useState(false);
   const { isNight } = useEnvironmentStore();
-  const { heritageId, unSelect, clickedMore, getThemeStyle, foodData } = useHeritageStore();
-
-  function dummyOnReady() {
-    setTimeout(() => setReady(true), 1000);
-  }
+  const clickedMore = useAppStore((state) => state.clickedMore);
+  const trailMode = useTrailStore((state) => state.trailMode);
+  const { heritageId, foodData } = useHeritageStore();
 
   return (
     <>
       <Canvas
+        className={'border border-[#333]'}
         camera={{ position: [0, 70, 8], fov: 45 }}
         onClick={(e) => e.stopPropagation()}
         onCreated={({ camera }) => {
@@ -54,12 +53,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
             <Billboard position={[10, 15, 0]}>
               <Html>
                 <CanvasIntlProvider messages={messages} locale={locale}>
-                  <div
-                    className={'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2'}
-                  >
-                    <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
-                    <PlaceContent />
-                  </div>
+                  <PlaceContent />
                 </CanvasIntlProvider>
               </Html>
             </Billboard>
@@ -68,6 +62,8 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           <LocationPin />
           {/* --- Markers --- */}
           <InstancedBuildings locations={foodData} />
+          {/** Trail Lines (Curved) */}
+          {trailMode && <TrailPath />}
           <GlowInstances buildings={foodData} isNight={isNight} />
           {/* --- Camera Controls --- */}
           <MapControls
@@ -89,7 +85,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
         </Suspense>
       </Canvas>
       <Activity mode={!ready ? 'visible' : 'hidden'}>
-        <DynamicPortalLoader onReady={dummyOnReady} />
+        <DynamicPortalLoader onReady={() => setReady(true)} />
       </Activity>
       <div className="absolute bottom-0 right-0 z-90">
         {/** Map Controller UI, not wired with control logic */}

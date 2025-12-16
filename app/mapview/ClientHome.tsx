@@ -8,17 +8,19 @@ import HeritageListView from '../components/HeritageListView/HeritageListView';
 import { useTranslations } from 'next-intl';
 import { FoodHeritage } from '../types';
 import { useHeritageStore } from '../stores';
-import { useEffect } from 'react';
+import { Activity, useEffect } from 'react';
+import TrailMode from '../components/TrailMode/TrailMode';
 
 type ClientHomeProps = {
   locale: string;
   messages: Record<string, string>;
   foods: FoodHeritage[];
+  trailMode?: boolean;
 };
 
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
-function ClientHome({ locale, messages, foods }: ClientHomeProps) {
+function ClientHome({ trailMode, locale, messages, foods }: ClientHomeProps) {
   const { setFoodData, reset } = useHeritageStore();
   const t = useTranslations('HomePage');
 
@@ -32,8 +34,11 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
   }, []);
 
   return (
-    <div className={'relative flex flex-col grow overflow-hiden pb-8'}>
-      <div className={'absolute top-0 z-100'}>
+    <div className={'relative flex flex-col grow pb-8'}>
+      <div className={'absolute flex w-full justify-between items-center top-0 z-100'}>
+        <Activity mode={trailMode ? 'visible' : 'hidden'}>
+          <TrailMode />
+        </Activity>
         <FilterBar />
       </div>
       <div className="relative h-[75vh] max-h-[800px] overflow-y-hidden select-none">
@@ -41,7 +46,7 @@ function ClientHome({ locale, messages, foods }: ClientHomeProps) {
       </div>
       <Sidebar />
       <a
-        className="italic hover:text-primary"
+        className="italic hover:text-primary w-fit"
         href={'https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg'}
         target={'_blank'}
       >
