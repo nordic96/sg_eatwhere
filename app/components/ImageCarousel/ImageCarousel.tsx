@@ -4,7 +4,7 @@
 import { cn } from '@/app/utils';
 import { East, West } from '@mui/icons-material';
 import { ClassValue } from 'clsx';
-import { useCallback, useState, useEffect, memo } from 'react';
+import { useCallback, useState, useEffect, memo, useRef, useMemo } from 'react';
 
 interface ImageCarouselProps {
   img: string[];
@@ -13,29 +13,27 @@ interface ImageCarouselProps {
 
 function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [currImg, setCurrImg] = useState<number>(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return () => setCurrImg(0);
   }, [img]);
 
+  const offset = useMemo(() => 100 / img.length, [img.length]);
+
   useEffect(() => {
-    function updatePosition() {
-      const el = document.getElementById('carousel-wrapper');
-      const offset = 100 / img.length;
-      if (el) {
-        el.style.transform = `translateX(${-currImg * offset}%)`;
-      }
+    if (wrapperRef.current) {
+      wrapperRef.current.style.transform = `translateX(${-currImg * offset}%)`;
     }
-    updatePosition();
-  }, [currImg, img]);
+  }, [currImg, offset]);
 
   const onClickLeft = useCallback(() => {
     setCurrImg((index) => (index - 1 + img.length) % img.length);
-  }, [img]);
+  }, [img.length]);
 
   const onClickRight = useCallback(() => {
     setCurrImg((index) => (index + 1) % img.length);
-  }, [img]);
+  }, [img.length]);
 
   const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-monsoongrey';
   const navBtnBaseStyle =
@@ -45,7 +43,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   return (
     <div className={cn(containerBaseStyle)} role="region" aria-label="Image carousel">
       <div
-        id="carousel-wrapper"
+        ref={wrapperRef}
         style={{ width: `${img.length * 100}%` }}
         className="flex h-full transition-transform ease-in-out"
         aria-live="polite"

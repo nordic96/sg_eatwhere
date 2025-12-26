@@ -10,8 +10,9 @@ import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
+import { memo, useMemo } from 'react';
 
-export default function PlaceContent() {
+function PlaceContent() {
   const t = useTranslations('CardView');
   const catT = useTranslations('FoodCategory');
   const heritageT = useTranslations('Heritage');
@@ -21,6 +22,11 @@ export default function PlaceContent() {
   const heritageId = useHeritageStore((state) => state.heritageId);
 
   const data = getSelectedFoodData();
+
+  const description = useMemo(
+    () => (data ? heritageT(`${data.id}_desc`) : ''),
+    [data, heritageT],
+  );
 
   if (!heritageId || !data) {
     return <div>No data selected</div>;
@@ -76,11 +82,8 @@ export default function PlaceContent() {
             </div>
           </span>
           <p className="font-light text-xs">
-            {heritageT(`${data.id}_desc`).substring(
-              0,
-              Math.min(heritageT(`${data.id}_desc`).length, 100),
-            )}
-            {heritageT(`${data.id}_desc`).length > 100 ? '...' : ''}
+            {description.substring(0, Math.min(description.length, 100))}
+            {description.length > 100 ? '...' : ''}
           </p>
         </div>
         {/** Learn More Btn Container */}
@@ -97,6 +100,8 @@ export default function PlaceContent() {
     </article>
   );
 }
+
+export default memo(PlaceContent);
 
 export function MrtLabel({ mrt }: { mrt: string }) {
   const mrtT = useTranslations('MRT');
