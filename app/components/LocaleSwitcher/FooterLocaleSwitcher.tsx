@@ -1,15 +1,20 @@
 'use client';
 
 import { AvailableLocales } from '@/i18n/locales';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import useLangNames from '@/i18n/useLangNames';
 import { useLocale } from 'next-intl';
 
 export default function FooterLocaleSwitcher() {
   const currentLocale = useLocale();
   const localeNames = useLangNames(currentLocale);
+
+  const pathname = usePathname();
+  const router = useRouter();
+
   const onChangeLocale = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    cookieStore.set('locale', e.target.value);
-    location.reload();
+    e.preventDefault();
+    router.replace(pathname, { locale: e.target.value });
   };
 
   return (

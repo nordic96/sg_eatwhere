@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 import { AppRoute } from '../routes';
-import Link from 'next/link';
 import { ClassValue } from 'clsx';
 import { cn } from '../utils';
+import { Link } from '@/i18n/navigation';
 
 type AppLinkProps = {
   route: AppRoute;

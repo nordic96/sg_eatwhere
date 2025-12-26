@@ -1,5 +1,5 @@
-import HeroSection from './components/HeroSection/HeroSection';
-import StorySection from './components/StorySection/StorySection';
+import HeroSection from '../components/HeroSection/HeroSection';
+import StorySection from '../components/StorySection/StorySection';
 
 export default function Page() {
   return (
