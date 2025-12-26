@@ -1,7 +1,7 @@
 'use client';
 
 import useClickOutside from '@/app/hooks/useClickOutside';
-import { useRef } from 'react';
+import { useRef, memo } from 'react';
 
 import CloseButton from '../CloseButton/CloseButton';
 import Image from 'next/image';
@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl';
 import HelpTooltip from '../Tooltip/HelpTooltip';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 
-export default function Sidebar() {
+function Sidebar() {
   const target = useRef(null);
   const { closeMore } = useAppStore();
   const { getThemeStyle, getSelectedFoodData } = useHeritageStore();
@@ -144,3 +144,5 @@ export default function Sidebar() {
     </div>
   );
 }
+
+export default memo(Sidebar);

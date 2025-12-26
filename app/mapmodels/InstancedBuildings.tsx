@@ -23,26 +23,10 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
   const hawkerRef = useRef<InstancedMesh>(null);
   const dessertRef = useRef<InstancedMesh>(null);
 
-  // Store hover state
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [hovered, setHovered] = useState<{ type: EateryCategory | ''; index: number | null }>({
-    type: '',
-    index: null,
-  });
-
   // ⭐ NEW: Map instanceId → real FoodHeritage.id
   const restaurantIdMap = useRef<Record<number, string>>({});
   const hawkerIdMap = useRef<Record<number, string>>({});
   const dessertIdMap = useRef<Record<number, string>>({});
-
-  // Precompute instance positions once
-  const instancePositions = useMemo(() => {
-    return locations.map((loc) => {
-      const { latitude, longitude } = loc.location.geoLocation;
-      const pos = geoConverter({ latitude, longitude });
-      return pos;
-    });
-  }, [locations]);
 
   // Build instanced meshes
   useLayoutEffect(() => {
@@ -89,7 +73,7 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
     restaurantRef.current.instanceMatrix.needsUpdate = true;
     hawkerRef.current.instanceMatrix.needsUpdate = true;
     dessertRef.current.instanceMatrix.needsUpdate = true;
-  }, [locations, instancePositions]);
+  }, [locations]);
 
   // Filter visibility
   useLayoutEffect(() => {
@@ -104,17 +88,15 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
   const countDessert = locations.filter((l) => l.category === 'dessert').length;
 
   // Pointer handlers
-  const handlePointerMove = (type: EateryCategory) => (e: ThreeEvent<PointerEvent>) => {
+  const handlePointerMove = () => (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     if (e.instanceId != null) {
       document.body.style.cursor = 'pointer';
-      setHovered({ type, index: e.instanceId });
     }
   };
 
   const handlePointerOut = () => {
     document.body.style.cursor = 'auto';
-    setHovered({ type: '', index: null });
   };
 
   const handleClick = (type: EateryCategory) => (e: ThreeEvent<PointerEvent>) => {
@@ -138,7 +120,7 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
       <instancedMesh
         ref={restaurantRef}
         args={[restaurantModel.geometry, restaurantModel.material, countRestaurant]}
-        onPointerMove={handlePointerMove('restaurant')}
+        onPointerMove={handlePointerMove()}
         onPointerOut={handlePointerOut}
         onClick={handleClick('restaurant')}
       />
@@ -147,7 +129,7 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
       <instancedMesh
         ref={hawkerRef}
         args={[hawkerModel.geometry, hawkerModel.material, countHawker]}
-        onPointerMove={handlePointerMove('hawker')}
+        onPointerMove={handlePointerMove()}
         onPointerOut={handlePointerOut}
         onClick={handleClick('hawker')}
       />
@@ -156,7 +138,7 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
       <instancedMesh
         ref={dessertRef}
         args={[dessertModel.geometry, dessertModel.material, countDessert]}
-        onPointerMove={handlePointerMove('dessert')}
+        onPointerMove={handlePointerMove()}
         onPointerOut={handlePointerOut}
         onClick={handleClick('dessert')}
       />
