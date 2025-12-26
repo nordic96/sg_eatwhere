@@ -1,9 +1,8 @@
+import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
-import { cookies } from 'next/headers';
+import { routing } from './routing';
 
-export async function geti18nConfig() {
-  const store = await cookies();
-  const locale = store.get('locale')?.value || 'en';
+export async function geti18nConfig(locale: string) {
   let message;
   try {
     message = (await import(`@/messages/${locale}.json`)).default;
@@ -18,4 +17,13 @@ export async function geti18nConfig() {
   };
 }
 
-export default getRequestConfig(async () => geti18nConfig());
+export default getRequestConfig(async ({ requestLocale }) => {
+  const requested = await requestLocale;
+  const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
+  const { messages } = await geti18nConfig(locale);
+
+  return {
+    locale,
+    messages: messages,
+  };
+});

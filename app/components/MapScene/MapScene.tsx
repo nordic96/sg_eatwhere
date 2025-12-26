@@ -19,7 +19,7 @@ import LocationPin from '@/app/mapmodels/LocationPin';
 import MapController from '../MapController/MapController';
 import TrailPath from '@/app/mapmodels/TrailPath';
 
-const DynamicPortalLoader = dynamic(() => import('@/app/FullScreenLoader'), {
+const DynamicPortalLoader = dynamic(() => import('@/app/[locale]/FullScreenLoader'), {
   ssr: false,
 });
 

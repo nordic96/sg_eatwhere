@@ -1,15 +1,20 @@
 'use client';
 
 import { LocaleIconMap } from '@/app/constants/localeIconMap';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import useLangNames from '@/i18n/useLangNames';
 
 export default function LocaleSwitch({ locale }: { locale: string }) {
   const langNames = useLangNames(locale);
+
+  const pathname = usePathname();
+  const router = useRouter();
+
   function onClick(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault();
-    cookieStore.set('locale', locale);
-    location.reload();
+    router.replace(pathname, { locale: locale });
   }
+
   return (
     <div
       onClick={onClick}
