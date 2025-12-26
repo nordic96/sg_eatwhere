@@ -25,7 +25,7 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
 
   return (
     <nav className="flex flex-col gap-2" aria-label={`${t(region)} locations`}>
-      <h3 className="font-medium text-[14px]">{t(region)}</h3>
+      <span className="font-medium text-[14px]">{t(region)}</span>
       <ul className="flex flex-col gap-2" role="list">
         {filteredLocations
           .filter((val) => filter.includes(val.category))
