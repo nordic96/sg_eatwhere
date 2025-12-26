@@ -1,11 +1,12 @@
 import { geti18nConfig } from '@/i18n/request';
 import ClientHome from './ClientHome';
-import { AppResponse, FoodHeritage } from '../types';
-import { fetchApi, isTrailMode, isUsingTestData } from '../utils';
+import { AppResponse, FoodHeritage } from '../../types';
+import { fetchApi, isTrailMode, isUsingTestData } from '../../utils';
 import data from '@/resources/devData.json';
 
-export default async function Page() {
-  const { messages, locale } = await geti18nConfig();
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const { messages } = await geti18nConfig(locale);
   let response: AppResponse<FoodHeritage[]> = { data: [] };
   if (isUsingTestData()) {
     response = await new Promise((res) => {

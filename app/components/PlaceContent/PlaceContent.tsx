@@ -10,8 +10,9 @@ import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
+import { memo, useMemo } from 'react';
 
-export default function PlaceContent() {
+function PlaceContent() {
   const t = useTranslations('CardView');
   const catT = useTranslations('FoodCategory');
   const heritageT = useTranslations('Heritage');
@@ -22,6 +23,11 @@ export default function PlaceContent() {
 
   const data = getSelectedFoodData();
 
+  const description = useMemo(
+    () => (data ? heritageT(`${data.id}_desc`) : ''),
+    [data, heritageT],
+  );
+
   if (!heritageId || !data) {
     return <div>No data selected</div>;
   }
@@ -29,7 +35,9 @@ export default function PlaceContent() {
   const learnMoreBtnBaseStyle =
     'bg-primary py-0.5 px-4 rounded-lg text-white cursor-pointer text-md font-bold';
   return (
-    <div
+    <article
+      role="article"
+      aria-label="Selected location details"
       className={
         'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
       }
@@ -74,23 +82,26 @@ export default function PlaceContent() {
             </div>
           </span>
           <p className="font-light text-xs">
-            {heritageT(`${data.id}_desc`).substring(
-              0,
-              Math.min(heritageT(`${data.id}_desc`).length, 100),
-            )}
-            {heritageT(`${data.id}_desc`).length > 100 ? '...' : ''}
+            {description.substring(0, Math.min(description.length, 100))}
+            {description.length > 100 ? '...' : ''}
           </p>
         </div>
         {/** Learn More Btn Container */}
         <div className="flex justify-center">
-          <button className={cn(learnMoreBtnBaseStyle, getThemeStyle())} onClick={openMore}>
+          <button
+            className={cn(learnMoreBtnBaseStyle, getThemeStyle())}
+            onClick={openMore}
+            aria-label="Learn more about this location"
+          >
             {t('learnmore')}
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
+
+export default memo(PlaceContent);
 
 export function MrtLabel({ mrt }: { mrt: string }) {
   const mrtT = useTranslations('MRT');
