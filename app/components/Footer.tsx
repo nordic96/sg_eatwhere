@@ -17,7 +17,11 @@ const Footer = () => {
 
   return (
     <>
-      <footer className={'flex grow pt-8 max-sm:pt-4 justify-center max-h-[200px]'}>
+      <footer
+        className={'flex grow pt-8 max-sm:pt-4 justify-center max-h-[200px]'}
+        role="contentinfo"
+        aria-label="Site footer"
+      >
         <div className={cn('flex flex-col justify-between grow', baseLayoutStyle)}>
           <div className="flex gap-8 max-sm:gap-4">
             <Image
@@ -29,7 +33,7 @@ const Footer = () => {
               height={'0'}
             />
             <div className="box-border grid grid-cols-2 w-[300px] max-sm:w-full gap-8 max-sm:gap-2">
-              <div className="">
+              <nav className="" aria-label="Footer navigation">
                 <p className="font-bold">{t('column_website')}</p>
                 <div className="flex flex-col">
                   <AppLink route={'/'}>{headerT('link_landing')}</AppLink>
@@ -37,7 +41,7 @@ const Footer = () => {
                   <AppLink route={'/about'}>{headerT('link_about')}</AppLink>
                   <NameCard />
                 </div>
-              </div>
+              </nav>
               <div className="">
                 <p className="font-bold">{t('changelanguage')}</p>
                 <FooterLocaleSwitcher />

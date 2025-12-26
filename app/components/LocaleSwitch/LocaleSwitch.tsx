@@ -13,6 +13,8 @@ export default function LocaleSwitch({ locale }: { locale: string }) {
   return (
     <div
       onClick={onClick}
+      role="menuitem"
+      aria-label={`Switch to ${langNames.of(locale)}`}
       className="flex gap-4 items-center justify-between text-lg cursor-pointer"
     >
       <span className={LocaleIconMap[locale]}></span>

@@ -29,7 +29,9 @@ export default function PlaceContent() {
   const learnMoreBtnBaseStyle =
     'bg-primary py-0.5 px-4 rounded-lg text-white cursor-pointer text-md font-bold';
   return (
-    <div
+    <article
+      role="article"
+      aria-label="Selected location details"
       className={
         'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
       }
@@ -83,12 +85,16 @@ export default function PlaceContent() {
         </div>
         {/** Learn More Btn Container */}
         <div className="flex justify-center">
-          <button className={cn(learnMoreBtnBaseStyle, getThemeStyle())} onClick={openMore}>
+          <button
+            className={cn(learnMoreBtnBaseStyle, getThemeStyle())}
+            onClick={openMore}
+            aria-label="Learn more about this location"
+          >
             {t('learnmore')}
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 

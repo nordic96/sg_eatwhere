@@ -28,6 +28,19 @@ export default function ControlButton({ control, camera, controls }: ControlButt
     zoomOut: cameraControls.zoomOut,
   };
 
+  const ariaLabelMap: Record<ControlType, string> = {
+    up: 'Pan up',
+    down: 'Pan down',
+    left: 'Pan left',
+    right: 'Pan right',
+    rLeft: 'Rotate left',
+    rRight: 'Rotate right',
+    rUp: 'Rotate up',
+    rDown: 'Rotate down',
+    zoomIn: 'Zoom in',
+    zoomOut: 'Zoom out',
+  };
+
   function onPress() {
     cameraControls.startHold(() => actionMap[control]());
   }
@@ -40,6 +53,7 @@ export default function ControlButton({ control, camera, controls }: ControlButt
       onMouseLeave={cameraControls.stopHold}
       onTouchStart={onPress}
       onTouchEnd={cameraControls.stopHold}
+      aria-label={ariaLabelMap[control]}
     >
       {generateIcons(control)}
     </button>

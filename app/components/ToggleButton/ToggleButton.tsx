@@ -22,6 +22,7 @@ export default function ToggleButton({ label, className, onToggle, on }: ToggleB
         id={toggleId}
         role={'button'}
         aria-pressed={on}
+        aria-label={typeof label === 'string' ? `Toggle ${label}` : 'Toggle'}
         className={cn(
           'w-11 p-0.5 rounded-full cursor-pointer border border-[#333] shadow-lg',
           on ? 'bg-gray-100' : 'bg-monsoongrey',
