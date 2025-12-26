@@ -14,13 +14,13 @@ export default function GlowInstances({
 }) {
   const { filter } = useHeritageStore();
   // Only calculate positions when building list changes
-  const positions = useMemo(
+  const glowPositions = useMemo(
     () =>
       buildings
         .filter((b) => filter.includes(b.category))
         .map((b) => {
           const [x, y, z] = geoConverter(b.location.geoLocation);
-          return [x, y + 1.5, z]; // lift glow above the model
+          return new Vector3(x, y + 1.5, z); // lift glow above the model
         }),
     [buildings, filter],
   );
@@ -28,8 +28,8 @@ export default function GlowInstances({
   return (
     <>
       {isNight &&
-        positions.map((p, index) => (
-          <Glow key={index} position={new Vector3(...p)} scale={[4, 4]} />
+        glowPositions.map((position, index) => (
+          <Glow key={index} position={position} scale={[4, 4]} />
         ))}
     </>
   );

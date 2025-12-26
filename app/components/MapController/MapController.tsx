@@ -1,10 +1,11 @@
 'use client';
 import { Expand, ThreeSixty, ZoomOutMap } from '@mui/icons-material';
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useState } from 'react';
 import * as THREE from 'three';
 import { MapControls as MapControlsImpl } from 'three-stdlib';
 import ControlButton, { buttonStyle } from './ControlButton';
 import { ControlMode } from './types';
+import { cn } from '@/app/utils';
 
 export type MapControllerProps = {
   controls: RefObject<MapControlsImpl | null>;
@@ -18,34 +19,13 @@ export default function MapController({ controls, camera }: MapControllerProps) 
     setExpanded((t) => !t);
   };
 
-  function expandControls() {
-    const el = document.getElementById('controls-container');
-    if (el === null) return;
-
-    el.classList.remove('translate-y-0');
-    el.classList.add('translate-y-[90%]');
-  }
-
-  function shrinkControls() {
-    const el = document.getElementById('controls-container');
-    if (el === null) return;
-
-    el.classList.remove('translate-y-[90%]');
-    el.classList.add('translate-y-0');
-  }
-
-  useEffect(() => {
-    if (!expanded) expandControls();
-    return () => shrinkControls();
-  }, [expanded]);
-
   return (
     <div className={'flex flex-col items-center gap-2'}>
       <div
-        id={'controls-container'}
-        className={
-          'flex flex-col gap-2 items-center transition-translate translate-y-0 duration-500 ease-in-out'
-        }
+        className={cn(
+          'flex flex-col gap-2 items-center transition-transform duration-500 ease-in-out',
+          expanded ? 'translate-y-0' : 'translate-y-[90%]',
+        )}
       >
         <button className={buttonStyle} onClick={toggleExpand}>
           <Expand />

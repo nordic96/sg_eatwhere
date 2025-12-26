@@ -7,7 +7,9 @@ import { Glow } from './GlowSprite';
 import { useEnvironmentStore } from '../stores/useEnvironmentStore';
 import { FLOAT_OFFSET } from '../constants';
 
-const SCALE_OFFSET = [1.5, 1.5];
+const SCALE_VECTOR = new Vector3(1.5, 1.5, 1.5);
+const GLOW_POSITION = new Vector3(0, 1.3, 0);
+
 export default function LocationPin() {
   const { getSelectedFoodData, heritageId } = useHeritageStore();
   const { isNight } = useEnvironmentStore();
@@ -24,9 +26,9 @@ export default function LocationPin() {
 
   if (position === null) return null;
   return (
-    <group position={position} scale={new Vector3(...SCALE_OFFSET)}>
+    <group position={position} scale={SCALE_VECTOR}>
       <primitive object={scene} />
-      {isNight && <Glow position={new Vector3(0, 1.3, 0)} scale={[1, 1]} />}
+      {isNight && <Glow position={GLOW_POSITION} scale={[1, 1]} />}
     </group>
   );
 }
