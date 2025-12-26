@@ -23,7 +23,9 @@ export default function LocaleSwitch({ locale }: { locale: string }) {
       className="flex gap-4 items-center justify-between text-lg cursor-pointer"
     >
       <span className={LocaleIconMap[locale]}></span>
-      <label className="text-xs hover:text-primary cursor-pointer">{langNames.of(locale)}</label>
+      <label className="w-10 text-xs wrap-break-word hover:text-primary cursor-pointer">
+        {langNames.of(locale)}
+      </label>
     </div>
   );
 }
