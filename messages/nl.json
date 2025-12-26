@@ -1,0 +1,80 @@
+{
+    "FoodCategory": {
+        "dessert": "Dessert",
+        "hawker": "Hawkerstal",
+        "restaurant": "Restaurant"
+    },
+    "Heritage": {
+        "oldtree_desc": "Gelegen op slechts 1 minuut van Outram Park MRT Station, is deze hoekplek een van de verborgen pareltjes voor het verkopen van heerlijke durian-desserts aan kantoormedewerkers in het Central Business District. Het personeel bereidt verse durian voor de ogen van de klanten en er zijn verschillende durian-desserts om uit te proberen.\n\nWij raden de Stinky Bowl (Durian Mousse) met Extra Shot ten zeerste aan! Zelfs voor mensen die bang zijn voor durian, zul je van gedachten veranderen na het proberen.\n\nBen je al een durian-liefhebber? De winkel verkoopt ook vers verpakte rauwe durians aan de voorkant van de winkel! Prijzen zijn seizoensgebonden",
+        "komala_desc": "Geliefd bij veel Singaporezen, serveert dit restaurant al sinds 1947 vegetarisch Indiaas eten! Gerechten worden geserveerd op bananenbladeren met een verscheidenheid aan hartige currysauzen.\n\nWij raden Dosai ten zeerste aan, een Indiase stijl van pannenkoek gemaakt met beslag van gemalen rijst en linzen. Als je van plan bent Little India te bezoeken, zou je dan de authentieke ervaring van het dineren van lokaal Indiaas vegetarisch eten omringd door geschiedenis willen uitproberen?",
+        "spicy_wife_desc": "Deze kraam verkoopt een van de lekkerste Nasi Lemak gerechten tegen een van de meest betaalbare prijzen aan kantoormedewerkers bij Amoy Street Food Centre. De hawkerstal is gespecialiseerd in het serveren van Aromatische Kip (Nasi Lemak Ayam Berempah), wat in principe betekent kokosrijst met gefrituurde kip met kruiden.\n\nHet gerecht wordt geserveerd met komkommer, een royale portie gefrituurde kip met speciale kruiden, gebakken ei, speciale sambal chilisaus, met pinda's en ikan bilis (gedroogde ansjovis). De chilisaus kan voor sommige mensen pittig zijn, dus houd dit in gedachten en geniet!\n\n[Tip] De kraam sluit om 14:00 uur en is alleen op weekdagen geopend, dus controleer de laatste openingstijden voordat je gaat bezoeken!",
+        "nanhuachang_desc": "Ben je een zeevruchtenliefhebber? Of misschien een hotpot-liefhebber? Dit restaurant serveert al sinds 1927 een van de beste viskop-stoofpotgerechten en de familie runt het bedrijf al meer dan 4 generaties. Viskop-stoofpot is een gerecht dat soep serveert met viskopvlees, een verscheidenheid aan groenten, met een speciaal ontworpen pot, waarbij het midden een houtskool heeft geplaatst in het middengat. Dit ontwerp houdt het gerecht lange tijd warm en laat de soep doordringen met houtskoolsmaak, wat je een onweerstaanbare smaak geeft.\n\nHet werd een plek waar veel Singaporezen families, goede vrienden meenemen om te bezoeken, eten en praten over bijna alles. Zou je geïnteresseerd zijn om de stoofpotcultuur op de meest heerlijke manier bij dit restaurant te ervaren?",
+        "yatkayan_desc": "Verblijf je in de buurt van Dhoby Ghaut Station? Of ben je van plan Chijmes te bezoeken? Er is een verborgen Chinese dessertwinkel niet ver van Bencoolen station, geliefd bij jonge Singaporezen. Deze dessertwinkel staat ook bekend bij studenten van nabijgelegen ontwerpscholen en universiteiten voor het verkopen van verschillende heerlijke Chinese desserts tegen een goedkope prijs.\n\nMijn persoonlijke favoriet, Chendol, een populair Singaporees ijsdessert met een royale hoeveelheid GulaMelaka (gekarameliseerde siroop) gedruppeld, of als je niet zo van 'te zoete' desserts houdt, kun je ook een paarse rijstdessert proberen gemaakt van kleverige paarse rijst geserveerd met verschillende toppings. Er zijn ook warme desserts beschikbaar!",
+        "jixiang_desc": "Weet je wat Kueh is? Deze banketbakkerij werd opgericht in 1988, gelegen bij Outram Park en Tanjong Pagar MRT station, en verkoopt vers handgemaakte heerlijke Ang Ku Kueh. Het woord 'Ang Ku Kueh' betekent letterlijk rode schildpadcake, omdat de vorm lijkt op een schildpaddenschild. Het heeft een heerlijke rijstcaketextuur, bedekt met sesamolie, en heeft verschillende vullingen.\n\nIk raad persoonlijk hun zoete bonenvullingen en yamvullingen aan"
+    },
+    "MRT": {
+        "tanjong_pagar": "Tanjong Pagar",
+        "outram_park": "Outram Park",
+        "bencoolen": "Bencoolen",
+        "little_india": "Little India",
+        "lavender": "Lavender",
+        "bugis": "Bugis",
+        "nicoll_highway": "Nicoll Highway"
+    },
+    "Header": {
+        "link_mapview": "Kaartweergave",
+        "link_landing": "Home",
+        "link_about": "Over"
+    },
+    "Banner": {
+        "banner_msg": "Let op! Dit is een persoonlijk project. Eetlocaties zijn geselecteerd op basis van persoonlijk bezoek, aanbevelingen van lokale vrienden en met subjectieve criteria"
+    },
+    "LandingPage": {
+        "hero_desc": "<green>10+</green> Jaar. <green>100+</green> Bezoeken.\nEen Koreaan die eet als een local.\n\nNu delen <primary>Singapore's</primary> echte\n<primary>Must Try Food</primary>",
+        "hero_micro_desc": "Ontdek de echte plekken waar Singaporezen daadwerkelijk eten - samengesteld door een decennium van leven en het delen van maaltijden met mijn lokale vrienden.",
+        "explore_more": "Verken Foodie's Trail",
+        "discover_why": "Waarom ik deze gids maakte",
+        "landing2_desc": "Dit is niet zomaar een voedsellijst",
+        "landing2_desc_2": "\"Ik verhuisde meer dan 10 jaar geleden naar Singapore. Het schetst mijn persoonlijke herinneringen met meer dan honderd lokale maaltijden ... vriend voor vriend\"",
+        "photo_disclaimer": "Alle foto's zijn door mij genomen!"
+    },
+    "HomePage": {
+        "trail_mode": "Trail Modus",
+        "map_by": "Kaart Credits: ",
+        "map_disclaimer": "**De schaal van de kaart is niet precies, het is voor een ruwe schatting van de locaties voor elk restaurant"
+    },
+    "AboutPage": {
+        "intro": "Frontend Software Engineer | Web Developer",
+        "food_code_desc": "In 2024-2025 keerde ik terug naar mijn thuisland, Zuid-Korea, om mijn militaire dienst te vervullen.\nVoordat ik dienst nam, werkte ik als Software Engineer - en tijdens de dienst miste ik de vreugde van het bouwen van dingen met code.\n\nEr was nog iets anders dat ik net zo erg miste: het <b>eten in Singapore</b>.\n\nTijdens het scrollen door oude foto's van maaltijden gedeeld met mijn Singaporese vrienden, voelde ik me geïnspireerd. Ik wilde iets meer creëren dan een eenvoudige foodblog - iets interactiefs, iets dat mensen laat verkennen van de herinneringen achter elke plek.\nDat werd het idee voor de <b>Foodie's Trail</b>; Een <i>3D voedselkaart</i>, die de twee dingen combineert waar ik het meest van hou: eten en code.",
+        "food_code": "Eten & Code",
+        "about_project": "Over dit Project",
+        "about_project_desc": "Deze website is een persoonlijk passieproject. Het is een verzameling van eetplekken die ik de afgelopen 10 jaar in Singapore heb ontdekt en geliefd - een klein archief van de maaltijden, herinneringen en momenten gedeeld met vrienden en familie.\n\nMijn hoop is dat deze kaart nuttig wordt, niet alleen voor toekomstige bezoekers, maar voor iedereen die nieuwsgierig is naar de eetcultuur van Singapore.\nAls deze aanbevelingen zelfs maar één persoon helpen een gedenkwaardige maaltijd te vinden, of iemand de warmte laten voelen die ik hier tijdens het eten heb ervaren, dan ben ik meer dan blij."
+    },
+    "Tooltip": {
+        "what_is_hawker": "Hawkerstal verwijst naar een kleine voedselwinkel die betaalbare gerechten serveert bij hawkercentra.\nEen hawkercentrum bestaat meestal uit meerdere onafhankelijke hawkerstallen, waardoor de plek een culturele smeltkroes wordt voor verschillende soorten voedsel.\nHet is waar Singaporezen en inwoners normaal gesproken graag eten om een betaalbare maaltijd te krijgen."
+    },
+    "FilterBar": {
+        "hawker": "Hawkerstallen",
+        "restaurant": "Restaurants",
+        "dessert": "Dessert"
+    },
+    "HeritageListView": {
+        "central": "Centrale Regio",
+        "east": "Oostelijke Regio",
+        "west": "Westelijke Regio",
+        "north": "Noordelijke Regio"
+    },
+    "CardView": {
+        "learnmore": "Meer Informatie"
+    },
+    "Sidebar": {
+        "map": "Kaart",
+        "website": "Website",
+        "must-try": "Moet Proberen Gerecht",
+        "nearest-mrt": "Dichtstbijzijnde MRT Station"
+    },
+    "Footer": {
+        "changelanguage": "Taal Wijzigen",
+        "column_website": "Website"
+    }
+}
