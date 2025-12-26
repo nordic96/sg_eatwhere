@@ -4,16 +4,18 @@ import { Public_Sans, Roboto } from 'next/font/google';
 import './globals.css';
 import '@/node_modules/flag-icons/css/flag-icons.min.css';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-import Banner from './components/Banner/Banner';
-import { NextIntlClientProvider, useTranslations } from 'next-intl';
-import { cn } from './utils';
-import { baseLayoutStyle } from './constants/theme';
+import Banner from '../components/Banner/Banner';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { cn } from '../utils';
+import { baseLayoutStyle } from '../constants/theme';
 /** Speed & Insights Analytics */
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
 
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
@@ -37,19 +39,24 @@ export const metadata: Metadata = {
     'Personal web project to introduce hidden gems of local restaurants/hawkerstalls/desserts in Singapore.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
-  const t = useTranslations('Banner');
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
   return (
     <html lang="en">
       <body className={`${roboto.variable} ${publicSans.variable} antialiased`}>
         <NextIntlClientProvider>
           <div id="root">
             <Header />
-            <Banner msg={t('banner_msg')} />
+            <Banner msg={'banner_msg'} />
             <div className={'flex justify-center grow h-scren'}>
               <div className={cn('flex grow flex-col', baseLayoutStyle)}>{children}</div>
             </div>

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { h1BaseStyle, microTextBaseStyle } from '../constants';
-import FadeIn from '../components/FadeIn/FadeIn';
-import NameCard from '../components/NameCard/NameCard';
+import { h1BaseStyle, microTextBaseStyle } from '../../constants';
+import FadeIn from '../../components/FadeIn/FadeIn';
+import NameCard from '../../components/NameCard/NameCard';
 import { useTranslations } from 'next-intl';
 
 export default function Page() {
