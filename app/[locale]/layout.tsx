@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 
 import Banner from '../components/Banner/Banner';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 import { cn } from '../utils';
 import { baseLayoutStyle } from '../constants/theme';
 /** Speed & Insights Analytics */
@@ -39,6 +40,10 @@ export const metadata: Metadata = {
     'Personal web project to introduce hidden gems of local restaurants/hawkerstalls/desserts in Singapore.',
 };
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({
   children,
   params,
@@ -50,10 +55,13 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={`${roboto.variable} ${publicSans.variable} antialiased`}>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <div id="root">
             <Header />
             <Banner msg={'banner_msg'} />

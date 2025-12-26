@@ -3,17 +3,17 @@ import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 
 export async function geti18nConfig(locale: string) {
-  let message;
+  let messages;
   try {
-    message = (await import(`@/messages/${locale}.json`)).default;
+    messages = (await import(`@/messages/${locale}.json`)).default;
   } catch (e) {
     console.error(e);
-    message = (await import('@/messages/en.json')).default;
+    messages = (await import('@/messages/en.json')).default;
   }
 
   return {
     locale,
-    messages: message,
+    messages,
   };
 }
 
