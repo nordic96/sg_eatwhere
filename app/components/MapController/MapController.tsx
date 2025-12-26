@@ -20,14 +20,19 @@ export default function MapController({ controls, camera }: MapControllerProps) 
   };
 
   return (
-    <div className={'flex flex-col items-center gap-2'}>
+    <div className={'flex flex-col items-center gap-2'} role="group" aria-label="Map controls">
       <div
         className={cn(
           'flex flex-col gap-2 items-center transition-transform duration-500 ease-in-out',
           expanded ? 'translate-y-0' : 'translate-y-[90%]',
         )}
       >
-        <button className={buttonStyle} onClick={toggleExpand}>
+        <button
+          className={buttonStyle}
+          onClick={toggleExpand}
+          aria-expanded={expanded}
+          aria-label={expanded ? 'Collapse controls' : 'Expand controls'}
+        >
           <Expand />
         </button>
         <ControlButton controls={controls} camera={camera} control={'zoomIn'} />
@@ -45,7 +50,11 @@ type ControlButtonGroupProps = MapControllerProps & {
 
 function ControlButtonGroup({ mode, controls, camera }: ControlButtonGroupProps) {
   return (
-    <div className={'grid grid-cols-3 grid-rows-3'}>
+    <div
+      className={'grid grid-cols-3 grid-rows-3'}
+      role="group"
+      aria-label={mode === 'move' ? 'Pan controls' : 'Rotate controls'}
+    >
       <div></div>
       <ControlButton controls={controls} camera={camera} control={mode === 'move' ? 'up' : 'rUp'} />
       <div></div>

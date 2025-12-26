@@ -24,15 +24,19 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
   );
 
   return (
-    <div className="flex flex-col gap-2">
-      <label className="font-medium text-[14px]">{t(region)}</label>
-      <div className="flex flex-col gap-2">
-        {filteredLocations.map((location) => {
+    <nav className="flex flex-col gap-2" aria-label={`${t(region)} locations`}>
+      <span className="font-medium text-[14px]">{t(region)}</span>
+      <ul className="flex flex-col gap-2" role="list">
+        {filteredLocations
+          .filter((val) => filter.includes(val.category))
+          .map((location) => {
             return (
-              <div
+              <li
                 key={`list-view-${location.id}`}
+                role="listitem"
                 className="flex items-center gap-1 cursor-pointer"
                 onClick={() => setHeritageId(location.id)}
+                aria-current={location.id === heritageId ? 'location' : undefined}
               >
                 <CategoryIcon
                   cat={location.category}
@@ -41,15 +45,15 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                 />
                 {location.id === heritageId ? (
                   <HighlightedText>
-                    <label className="text-[12px]">{location.name}</label>
+                    <span className="text-[12px]">{location.name}</span>
                   </HighlightedText>
                 ) : (
-                  <label className="text-[12px] cursor-pointer">{location.name}</label>
+                  <span className="text-[12px] cursor-pointer">{location.name}</span>
                 )}
-              </div>
+              </li>
             );
           })}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 }

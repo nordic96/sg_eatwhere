@@ -13,15 +13,15 @@ const Header = () => {
   const t = useTranslations('Header');
   return (
     <div>
-      <header className="bg-primary text-white flex justify-center">
+      <header className="bg-primary text-white flex justify-center" role="banner">
         <div className={cn('flex items-center justify-between grow py-1', baseLayoutStyle)}>
-          <div className="flex gap-8 items-center">
+          <nav className="flex gap-8 items-center" aria-label="Main navigation">
             <AppLink route={'/'}>
               <Image src={horizontalImage} alt="logo" height={50} draggable={false} />
             </AppLink>
             <AppLink route={'/mapview'}>{t(`link_mapview`)}</AppLink>
             <AppLink route={'/about'}>{t(`link_about`)}</AppLink>
-          </div>
+          </nav>
           <LocaleSwitcher />
         </div>
       </header>

@@ -20,19 +20,25 @@ export default function LocaleSwitcher() {
 
   return (
     <div className="relative w-[130px] max-sm:w-[100px] lg:w-[100px]">
-      <div onClick={openLocale} className="flex grow justify-between items-center">
+      <button
+        onClick={openLocale}
+        className="flex grow justify-between items-center w-full"
+        aria-expanded={localeOpen}
+        aria-haspopup="menu"
+        aria-label="Language selector"
+      >
         <Translate fontSize="small" className="cursor-pointer hover:text-[#f3f3f3]" />
         <div className="text-sm items-center flex justify-end gap-1">
           <span className={LocaleIconMap[currentLocale]}></span>
-          <label onClick={openLocale} className="text-xs cursor-pointer pr-2">
-            {localeNames.of(currentLocale)}
-          </label>
+          <span className="text-xs cursor-pointer pr-2">{localeNames.of(currentLocale)}</span>
         </div>
-      </div>
+      </button>
       {localeOpen && (
         <div
           ref={ref}
           id="locale-swticher"
+          role="menu"
+          aria-label="Language options"
           className="absolute shadow-xl border-[#333] border top-[38px] right-0 z-999 bg-[#f3f3f3] text-black rounded-b-lg w-[146px] max-sm:w-[100px] lg:w-[100px] flex flex-col p-2 gap-1"
         >
           {AvailableLocales.map((locale, id) => (

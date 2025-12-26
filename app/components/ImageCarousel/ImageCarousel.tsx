@@ -41,11 +41,12 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const currImgIndicatorBaseStyle = 'absolute px-1 top-0 right-0 opacity-80 rounded-xl text-white';
 
   return (
-    <div className={cn(containerBaseStyle)}>
+    <div className={cn(containerBaseStyle)} role="region" aria-label="Image carousel">
       <div
         ref={wrapperRef}
         style={{ width: `${img.length * 100}%` }}
         className="flex h-full transition-transform ease-in-out"
+        aria-live="polite"
       >
         {img.map((src, i) => {
           return (
@@ -54,20 +55,30 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
               style={{ width: `${100 / img.length}%` }}
               className={'h-full object-cover'}
               src={src}
-              alt={'main_photo'}
+              alt={`Image ${i + 1} of ${img.length}`}
               draggable="false"
             />
           );
         })}
       </div>
-      <div className={cn(navBtnBaseStyle, { 'left-0': true }, customClass)} onClick={onClickLeft}>
+      <button
+        className={cn(navBtnBaseStyle, { 'left-0': true }, customClass)}
+        onClick={onClickLeft}
+        aria-label="Previous image"
+      >
         <West fontSize={'inherit'} />
-      </div>
-      <div className={cn(navBtnBaseStyle, { 'right-0': true }, customClass)} onClick={onClickRight}>
+      </button>
+      <button
+        className={cn(navBtnBaseStyle, { 'right-0': true }, customClass)}
+        onClick={onClickRight}
+        aria-label="Next image"
+      >
         <East fontSize={'inherit'} />
-      </div>
+      </button>
       <div
         className={cn(currImgIndicatorBaseStyle, customClass)}
+        aria-live="polite"
+        aria-atomic="true"
       >{`${currImg + 1} / ${img.length}`}</div>
     </div>
   );

@@ -14,12 +14,17 @@ export default function Banner({ msg }: BannerProps) {
   };
 
   return (
-    <div id="banner" className="flex bg-goldenmile justify-center font-medium text-xs">
+    <div
+      id="banner"
+      role="banner"
+      aria-label="Notification banner"
+      className="flex bg-goldenmile justify-center font-medium text-xs"
+    >
       <div className={cn('flex grow py-0.5 justify-between items-center', baseLayoutStyle)}>
         {msg}
-        <div onClick={onClose}>
+        <button onClick={onClose} aria-label="Close banner" className="cursor-pointer">
           <Close fontSize={'small'} />
-        </div>
+        </button>
       </div>
     </div>
   );

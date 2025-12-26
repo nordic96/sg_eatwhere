@@ -27,7 +27,7 @@ export default function FilterBar() {
 
   return (
     <div>
-      <div className="py-2 flex gap-2">
+      <div className="py-2 flex gap-2" role="group" aria-label="Filter food categories">
         <Filter
           category={'hawker'}
           isActive={filter.includes('hawker')}
@@ -59,6 +59,9 @@ type FilterProps = {
 
 function Filter({ category, isActive, onSelect, tooltipKey, customIconClass }: FilterProps) {
   const t = useTranslations('FilterBar');
+  const { filter } = useHeritageStore();
+  const isPressed = filter.includes(category);
+
   const labelBaseStyle =
     'rounded-xl px-2 py-1 shadow-lg font-regular border border-[#333] hover:cursor-pointer flex items-center gap-1';
 
@@ -71,7 +74,13 @@ function Filter({ category, isActive, onSelect, tooltipKey, customIconClass }: F
   return (
     <div className="flex max-sm:flex-col items-center gap-2 text-xs">
       <CategoryIcon cat={category} alt={'filter_icon'} className={customIconClass} />
-      <div className={cn(labelBaseStyle, 'hover:cursor-pointer', activeStyles[category])}>
+      <div
+        id={`filter_label_${category}`}
+        role="button"
+        aria-pressed={isPressed}
+        aria-label={`Filter by ${category}`}
+        className={cn(labelBaseStyle, 'hover:cursor-pointer', activeStyles[category])}
+      >
         <div onClick={onSelect}>{t(category)}</div>
         {tooltipKey !== undefined && (
           <HelpTooltip
