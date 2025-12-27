@@ -1,24 +1,23 @@
 'use client';
 
 import useClickOutside from '@/app/hooks/useClickOutside';
-import { useRef, memo } from 'react';
+import { useRef } from 'react';
+import { CAT_ASSET_MAP } from '@/app/constants/data';
 
 import CloseButton from '../CloseButton/CloseButton';
 import Image from 'next/image';
 
-import { useAppStore, useHeritageStore } from '@/app/stores';
+import { useHeritageStore } from '@/app/stores';
 import Divider from '../Divider';
 import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
 import HighlightedText from '../HighlightText/HighlightText';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
-import HelpTooltip from '../Tooltip/HelpTooltip';
-import CategoryIcon from '../CategoryIcon/CategoryIcon';
+import { cn } from '@/app/utils';
 
-function Sidebar() {
+export default function Sidebar() {
   const target = useRef(null);
-  const { closeMore } = useAppStore();
-  const { getThemeStyle, getSelectedFoodData } = useHeritageStore();
+  const { closeMore, getThemeStyle, getSelectedFoodData } = useHeritageStore();
   const data = getSelectedFoodData();
 
   const t = useTranslations('Sidebar');
@@ -37,9 +36,7 @@ function Sidebar() {
     <div
       id="list-sidebar"
       ref={target}
-      role="complementary"
-      aria-label="Location details sidebar"
-      className="absolute flex z-101 flex-col gap-2 -right-4 max-sm:right-0 max-sm:left-0 max-sm:bottom-0 max-sm:w-full max-sm:rounded-t-xl max-sm:rounded-b-none bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] max-sm:min-h-[60vh] max-sm:max-h-[80vh] max-sm:overflow-y-auto transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out border border-[#333]"
+      className="absolute flex flex-col gap-2 right-0 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out"
     >
       <div className="flex justify-end">
         <CloseButton onClick={onClose} customClass={getThemeStyle()} />
@@ -73,18 +70,19 @@ function Sidebar() {
           </div>
           {/** Title Container */}
           <div className="flex flex-col items-center w-full">
-            <span className="flex flex-col gap-1 items-center">
-              <CategoryIcon alt={'sidebar_category_icon'} cat={data.category} />
-              <span className={'flex items-center gap-1'}>
-                {catT(data.category)}
-                {data.category === 'hawker' && (
-                  <HelpTooltip
-                    direction={'right'}
-                    msgKey={'what_is_hawker'}
-                    iconProps={{ fontSize: 'small' }}
-                  />
-                )}
-              </span>
+            <span className="flex gap-1 items-center">
+              <Image
+                className={cn({
+                  'w-10': data.category !== 'dessert',
+                  'w-7': data.category === 'dessert',
+                })}
+                src={CAT_ASSET_MAP[data.category]}
+                width={'0'}
+                height={'0'}
+                alt={'icon'}
+                draggable="false"
+              />
+              <p>{catT(data.category)}</p>
             </span>
             <label className="text-3xl font-bold text-center">{data.name}</label>
             <label className="text-xs font-light">{data.location.address}</label>
@@ -146,5 +144,3 @@ function Sidebar() {
     </div>
   );
 }
-
-export default memo(Sidebar);
