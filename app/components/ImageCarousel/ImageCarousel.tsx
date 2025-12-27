@@ -64,7 +64,6 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
       <button
         className={cn(navBtnBaseStyle, { 'left-0': true }, customClass)}
         onClick={onClickLeft}
-        data-testid="west-icon"
         aria-label="Previous image"
       >
         <West fontSize={'inherit'} />
@@ -72,7 +71,6 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
       <button
         className={cn(navBtnBaseStyle, { 'right-0': true }, customClass)}
         onClick={onClickRight}
-        data-testid="east-icon"
         aria-label="Next image"
       >
         <East fontSize={'inherit'} />
