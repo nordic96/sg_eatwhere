@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FoodHeritage, EateryCategoryValues, Region } from '@/app/types/foodHeritage';
 
 export default function AdminEditorPage() {
   const [data, setData] = useState<FoodHeritage[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ export default function AdminEditorPage() {
       setError(null);
       const response = await fetch('/api/admin/gist', {
         headers: {
-          'Authorization': `Bearer ${password}`,
+          Authorization: `Bearer ${password}`,
         },
       });
 
@@ -35,7 +35,7 @@ export default function AdminEditorPage() {
       }
 
       const result = await response.json();
-      setData(result.data);
+      setData(result.data.data);
       setAuthenticated(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch data');
@@ -52,7 +52,7 @@ export default function AdminEditorPage() {
       const response = await fetch('/api/admin/gist', {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${password}`,
+          Authorization: `Bearer ${password}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ data }),
@@ -62,7 +62,7 @@ export default function AdminEditorPage() {
         throw new Error('Failed to save data');
       }
 
-      const result = await response.json();
+      await response.json();
       alert('Data saved successfully to Gist!');
       await fetchData(); // Refresh data
     } catch (err) {
@@ -100,7 +100,7 @@ export default function AdminEditorPage() {
   // Delete entry
   const deleteEntry = (id: string) => {
     if (confirm('Are you sure you want to delete this entry?')) {
-      setData(data.filter(item => item.id !== id));
+      setData(data.filter((item) => item.id !== id));
       if (editingId === id) {
         setEditingId(null);
         setFormData({});
@@ -118,8 +118,8 @@ export default function AdminEditorPage() {
   const saveEdit = () => {
     if (!editingId || !formData) return;
 
-    const updatedData = data.map(item =>
-      item.id === editingId ? (formData as FoodHeritage) : item
+    const updatedData = data.map((item) =>
+      item.id === editingId ? (formData as FoodHeritage) : item,
     );
     setData(updatedData);
     setEditingId(null);
@@ -161,13 +161,24 @@ export default function AdminEditorPage() {
 
   return (
     <div style={{ padding: '2rem' }}>
-      <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div
+        style={{
+          marginBottom: '2rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <h1>Food Heritage Editor</h1>
         <div>
           <button onClick={addEntry} style={{ marginRight: '1rem', padding: '0.5rem 1rem' }}>
             Add New Entry
           </button>
-          <button onClick={saveData} disabled={saving} style={{ padding: '0.5rem 1rem', backgroundColor: '#4CAF50', color: 'white' }}>
+          <button
+            onClick={saveData}
+            disabled={saving}
+            style={{ padding: '0.5rem 1rem', backgroundColor: '#4CAF50', color: 'white' }}
+          >
             {saving ? 'Saving...' : 'Save to Gist'}
           </button>
         </div>
@@ -183,7 +194,14 @@ export default function AdminEditorPage() {
 
           {/* Editing Form */}
           {editingId && formData && (
-            <div style={{ border: '2px solid #2196F3', padding: '1rem', marginBottom: '2rem', backgroundColor: '#f0f8ff' }}>
+            <div
+              style={{
+                border: '2px solid #2196F3',
+                padding: '1rem',
+                marginBottom: '2rem',
+                backgroundColor: '#f0f8ff',
+              }}
+            >
               <h2>Editing: {formData.name || 'New Entry'}</h2>
 
               <div style={{ display: 'grid', gap: '1rem', marginTop: '1rem' }}>
@@ -193,7 +211,12 @@ export default function AdminEditorPage() {
                     type="text"
                     value={formData.name || ''}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   />
                 </label>
 
@@ -201,11 +224,19 @@ export default function AdminEditorPage() {
                   Category:
                   <select
                     value={formData.category || 'hawker'}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   >
-                    {EateryCategoryValues.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
+                    {EateryCategoryValues.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
                     ))}
                   </select>
                 </label>
@@ -215,8 +246,18 @@ export default function AdminEditorPage() {
                   <input
                     type="text"
                     value={formData.recommendations?.join(', ') || ''}
-                    onChange={(e) => setFormData({ ...formData, recommendations: e.target.value.split(',').map(s => s.trim()) })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        recommendations: e.target.value.split(',').map((s) => s.trim()),
+                      })
+                    }
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   />
                 </label>
 
@@ -225,8 +266,18 @@ export default function AdminEditorPage() {
                   <input
                     type="text"
                     value={formData.imgSource?.join(', ') || ''}
-                    onChange={(e) => setFormData({ ...formData, imgSource: e.target.value.split(',').map(s => s.trim()) })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        imgSource: e.target.value.split(',').map((s) => s.trim()),
+                      })
+                    }
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   />
                 </label>
 
@@ -235,11 +286,18 @@ export default function AdminEditorPage() {
                   <input
                     type="text"
                     value={formData.location?.address || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      location: { ...formData.location!, address: e.target.value }
-                    })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        location: { ...formData.location!, address: e.target.value },
+                      })
+                    }
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   />
                 </label>
 
@@ -248,11 +306,18 @@ export default function AdminEditorPage() {
                   <input
                     type="text"
                     value={formData.location?.gmapUrl || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      location: { ...formData.location!, gmapUrl: e.target.value }
-                    })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        location: { ...formData.location!, gmapUrl: e.target.value },
+                      })
+                    }
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   />
                 </label>
 
@@ -261,11 +326,21 @@ export default function AdminEditorPage() {
                   <input
                     type="text"
                     value={formData.location?.mrt?.join(', ') || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      location: { ...formData.location!, mrt: e.target.value.split(',').map(s => s.trim()) }
-                    })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        location: {
+                          ...formData.location!,
+                          mrt: e.target.value.split(',').map((s) => s.trim()),
+                        },
+                      })
+                    }
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   />
                 </label>
 
@@ -273,11 +348,18 @@ export default function AdminEditorPage() {
                   Region:
                   <select
                     value={formData.location?.region || 'central'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      location: { ...formData.location!, region: e.target.value as Region }
-                    })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        location: { ...formData.location!, region: e.target.value as Region },
+                      })
+                    }
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   >
                     <option value="central">Central</option>
                     <option value="east">East</option>
@@ -293,17 +375,24 @@ export default function AdminEditorPage() {
                       type="number"
                       step="any"
                       value={formData.location?.geoLocation?.latitude || 0}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        location: {
-                          ...formData.location!,
-                          geoLocation: {
-                            ...formData.location!.geoLocation,
-                            latitude: parseFloat(e.target.value)
-                          }
-                        }
-                      })}
-                      style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          location: {
+                            ...formData.location!,
+                            geoLocation: {
+                              ...formData.location!.geoLocation,
+                              latitude: parseFloat(e.target.value),
+                            },
+                          },
+                        })
+                      }
+                      style={{
+                        display: 'block',
+                        marginTop: '0.25rem',
+                        padding: '0.5rem',
+                        width: '100%',
+                      }}
                     />
                   </label>
 
@@ -313,17 +402,24 @@ export default function AdminEditorPage() {
                       type="number"
                       step="any"
                       value={formData.location?.geoLocation?.longitude || 0}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        location: {
-                          ...formData.location!,
-                          geoLocation: {
-                            ...formData.location!.geoLocation,
-                            longitude: parseFloat(e.target.value)
-                          }
-                        }
-                      })}
-                      style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          location: {
+                            ...formData.location!,
+                            geoLocation: {
+                              ...formData.location!.geoLocation,
+                              longitude: parseFloat(e.target.value),
+                            },
+                          },
+                        })
+                      }
+                      style={{
+                        display: 'block',
+                        marginTop: '0.25rem',
+                        padding: '0.5rem',
+                        width: '100%',
+                      }}
                     />
                   </label>
                 </div>
@@ -334,13 +430,26 @@ export default function AdminEditorPage() {
                     type="text"
                     value={formData.website || ''}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    style={{ display: 'block', marginTop: '0.25rem', padding: '0.5rem', width: '100%' }}
+                    style={{
+                      display: 'block',
+                      marginTop: '0.25rem',
+                      padding: '0.5rem',
+                      width: '100%',
+                    }}
                   />
                 </label>
               </div>
 
               <div style={{ marginTop: '1rem' }}>
-                <button onClick={saveEdit} style={{ marginRight: '1rem', padding: '0.5rem 1rem', backgroundColor: '#4CAF50', color: 'white' }}>
+                <button
+                  onClick={saveEdit}
+                  style={{
+                    marginRight: '1rem',
+                    padding: '0.5rem 1rem',
+                    backgroundColor: '#4CAF50',
+                    color: 'white',
+                  }}
+                >
                   Save Changes
                 </button>
                 <button onClick={cancelEdit} style={{ padding: '0.5rem 1rem' }}>
@@ -365,12 +474,19 @@ export default function AdminEditorPage() {
               </thead>
               <tbody>
                 {data.map((item) => (
-                  <tr key={item.id} style={{ backgroundColor: editingId === item.id ? '#ffffcc' : 'white' }}>
+                  <tr
+                    key={item.id}
+                    style={{ backgroundColor: editingId === item.id ? '#ffffcc' : 'white' }}
+                  >
                     <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.id}</td>
                     <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.name}</td>
                     <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.category}</td>
-                    <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.location.region}</td>
-                    <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.location.address}</td>
+                    <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                      {item.location.region}
+                    </td>
+                    <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                      {item.location.address}
+                    </td>
                     <td style={{ border: '1px solid #ddd', padding: '8px' }}>
                       <button
                         onClick={() => startEdit(item)}
@@ -381,7 +497,11 @@ export default function AdminEditorPage() {
                       </button>
                       <button
                         onClick={() => deleteEntry(item.id)}
-                        style={{ padding: '0.25rem 0.5rem', backgroundColor: '#f44336', color: 'white' }}
+                        style={{
+                          padding: '0.25rem 0.5rem',
+                          backgroundColor: '#f44336',
+                          color: 'white',
+                        }}
                         disabled={editingId !== null}
                       >
                         Delete
