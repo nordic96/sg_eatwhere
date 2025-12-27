@@ -2,12 +2,6 @@ import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import ImageCarousel from '@/app/components/ImageCarousel/ImageCarousel';
 
-// Mock MUI icons
-jest.mock('@mui/icons-material', () => ({
-  East: () => <div data-testid="east-icon">East</div>,
-  West: () => <div data-testid="west-icon">West</div>,
-}));
-
 describe('ImageCarousel', () => {
   const mockImages = [
     'https://example.com/image1.jpg',
@@ -183,7 +177,7 @@ describe('ImageCarousel', () => {
   test('navigation buttons contain icon components', () => {
     render(<ImageCarousel img={mockImages} />);
 
-    expect(screen.getByTestId('west-icon')).toBeInTheDocument();
-    expect(screen.getByTestId('east-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('WestIcon')).toBeInTheDocument();
+    expect(screen.getByTestId('EastIcon')).toBeInTheDocument();
   });
 });
