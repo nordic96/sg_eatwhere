@@ -26,7 +26,7 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
   return (
     <nav className="flex flex-col gap-2" aria-label={`${t(region)} locations`}>
       <span className="font-medium text-[14px]">{t(region)}</span>
-      <ul className="flex flex-col gap-2" role="list">
+      <ul className="flex flex-col gap-2 max-sm:flex-row max-sm:overflow-x-auto max-sm:pb-2" role="list">
         {filteredLocations
           .filter((val) => filter.includes(val.category))
           .map((location) => {
@@ -34,7 +34,7 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
               <li
                 key={`list-view-${location.id}`}
                 role="listitem"
-                className="flex items-center gap-1 cursor-pointer"
+                className="flex items-center gap-1 cursor-pointer max-sm:flex-shrink-0 max-sm:min-w-[150px] max-sm:flex-col max-sm:p-2 max-sm:border max-sm:border-[#ddd] max-sm:rounded-lg min-h-[44px] touch-manipulation"
                 onClick={() => setHeritageId(location.id)}
                 aria-current={location.id === heritageId ? 'location' : undefined}
               >
@@ -45,10 +45,10 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                 />
                 {location.id === heritageId ? (
                   <HighlightedText>
-                    <span className="text-[12px]">{location.name}</span>
+                    <span className="text-[12px] max-sm:text-center">{location.name}</span>
                   </HighlightedText>
                 ) : (
-                  <span className="text-[12px] cursor-pointer">{location.name}</span>
+                  <span className="text-[12px] cursor-pointer max-sm:text-center">{location.name}</span>
                 )}
               </li>
             );

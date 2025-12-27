@@ -8,7 +8,7 @@ type ControlButtonProps = MapControllerProps & {
 };
 
 export const buttonStyle =
-  'w-7 h-7 max-sm:w-9 max-sm:h-9 text-white bg-primary hover:bg-red-600 active:bg-red-600 rounded-lg flex justify-center items-center cursor-pointer';
+  'w-7 h-7 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 text-white bg-primary hover:bg-red-600 active:bg-red-600 rounded-lg flex justify-center items-center cursor-pointer touch-manipulation';
 
 export default function ControlButton({ control, camera, controls }: ControlButtonProps) {
   const cameraControls = useCameraControls(controls.current, camera.current);

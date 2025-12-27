@@ -55,7 +55,7 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
       <p className="italic text-[#333]">{t('map_disclaimer')}</p>
       <div className="flex grow justify-between mt-8">
         {/** Food List Container */}
-        <div className="grid grid-cols-4 w-[60%] max-sm:w-full">
+        <div className="grid grid-cols-4 w-[60%] max-sm:w-full max-sm:grid-cols-1 max-sm:gap-4">
           <HeritageListView region={'central'} />
           <HeritageListView region={'east'} />
           <HeritageListView region={'west'} />

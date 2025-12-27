@@ -39,7 +39,7 @@ function Sidebar() {
       ref={target}
       role="complementary"
       aria-label="Location details sidebar"
-      className="absolute flex z-101 flex-col gap-2 -right-4 bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out border border-[#333]"
+      className="absolute flex z-101 flex-col gap-2 -right-4 max-sm:right-0 max-sm:left-0 max-sm:bottom-0 max-sm:w-full max-sm:rounded-t-xl max-sm:rounded-b-none bg-white rounded-xl shadow-xl grow p-4 w-[384px] min-h-[850px] max-sm:min-h-[60vh] max-sm:max-h-[80vh] max-sm:overflow-y-auto transform translate-y-0 opacity-0 transition-transform duration-500 ease-in-out border border-[#333]"
     >
       <div className="flex justify-end">
         <CloseButton onClick={onClose} customClass={getThemeStyle()} />

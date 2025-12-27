@@ -30,8 +30,9 @@ const roboto = Roboto({
 
 export const viewport: Viewport = {
   width: 'device-width',
-  initialScale: 0.7,
-  userScalable: false,
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export const metadata: Metadata = {

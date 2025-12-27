@@ -39,7 +39,7 @@ function PlaceContent() {
       role="article"
       aria-label="Selected location details"
       className={
-        'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
+        'flex flex-col items-end w-[384px] max-sm:w-[90vw] max-sm:max-w-[350px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
       }
     >
       <ButtonContainer />

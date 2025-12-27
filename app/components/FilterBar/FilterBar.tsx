@@ -27,7 +27,11 @@ export default function FilterBar() {
 
   return (
     <div>
-      <div className="py-2 flex gap-2" role="group" aria-label="Filter food categories">
+      <div
+        className="py-2 flex flex-wrap gap-2 max-sm:flex-col max-sm:gap-3"
+        role="group"
+        aria-label="Filter food categories"
+      >
         <Filter
           category={'hawker'}
           isActive={filter.includes('hawker')}
@@ -63,7 +67,7 @@ function Filter({ category, isActive, onSelect, tooltipKey, customIconClass }: F
   const isPressed = filter.includes(category);
 
   const labelBaseStyle =
-    'rounded-xl px-2 py-1 shadow-lg font-regular border border-[#333] hover:cursor-pointer flex items-center gap-1';
+    'rounded-xl px-2 py-1 shadow-lg font-regular border border-[#333] hover:cursor-pointer flex items-center gap-1 min-h-[44px] touch-manipulation';
 
   const activeStyles = {
     hawker: isActive ? 'bg-primary text-white' : 'hover:text-primary',

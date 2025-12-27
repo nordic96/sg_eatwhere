@@ -110,6 +110,10 @@ export function InstancedBuildings({ locations }: { locations: FoodHeritage[] })
     if (type === 'dessert') heritageId = dessertIdMap.current[e.instanceId];
 
     if (heritageId) {
+      // Trigger haptic feedback on mobile
+      if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+        navigator.vibrate(50);
+      }
       setHeritageId(heritageId); // ✔ now directly uses real heritage ID
     }
   };

@@ -6,10 +6,12 @@ import * as THREE from 'three';
 import { useEnvironmentStore } from '../stores/useEnvironmentStore';
 import { Cloud, Clouds, Sky, Stars } from '@react-three/drei';
 import TextureMap from './TextureMap';
+import { useMobileDetect } from '../hooks';
 
 export default function MapEnvironment() {
   const { isNight, sunPosition, moonPosition, ambientIntensity, sunIntensity } =
     useEnvironmentStore();
+  const isMobile = useMobileDetect();
   return (
     <>
       {/* --- Ambient Day/Night Light --- */}
@@ -40,30 +42,33 @@ export default function MapEnvironment() {
         azimuth={0.25}
       />
 
-      {/* --- Stars (night only) --- */}
-      {isNight && <Stars radius={200} depth={50} count={1000} factor={4} fade speed={1} />}
+      {/* --- Stars (night only, disabled on mobile for performance) --- */}
+      {isNight && !isMobile && <Stars radius={200} depth={50} count={1000} factor={4} fade speed={1} />}
 
       {/* --- The Map Plane --- */}
       <TextureMap />
 
-      <Clouds
-        material={THREE.MeshBasicMaterial}
-        position={[0, 60, 0]}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <Cloud segments={50} bounds={[300, 5, 190]} volume={50} color="#fefefe" />
-        <Cloud
-          seed={1}
-          segments={50}
-          bounds={[150, 5, 100]}
-          scale={2}
-          volume={50}
-          color="#fdfdfd"
-          fade={100}
-        />
-      </Clouds>
+      {/* --- Clouds (disabled on mobile for performance) --- */}
+      {!isMobile && (
+        <Clouds
+          material={THREE.MeshBasicMaterial}
+          position={[0, 60, 0]}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <Cloud segments={50} bounds={[300, 5, 190]} volume={50} color="#fefefe" />
+          <Cloud
+            seed={1}
+            segments={50}
+            bounds={[150, 5, 100]}
+            scale={2}
+            volume={50}
+            color="#fdfdfd"
+            fade={100}
+          />
+        </Clouds>
+      )}
     </>
   );
 }
