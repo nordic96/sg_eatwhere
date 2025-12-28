@@ -1,58 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// Mock all dependencies FIRST - before any imports
-// This is required because Jest hoists jest.mock() calls
-jest.mock('@/app/stores', () => ({
-  useHeritageStore: () => ({
-    foodData: mockFoodData,
-    setHeritageId: jest.fn(),
-  }),
-}));
-jest.mock('@/i18n/request', () => ({
-  geti18nConfig: () => ({
-    messages: {
-      Heritage: {
-        oldtree_desc: 'Durian dessert place',
-        komala_desc: 'Vegetarian Indian food',
-        spicy_wife_desc: 'Nasi Lemak stall',
-      },
-    },
-  }),
-}));
-jest.mock('next-intl', () => ({
-  useTranslations: () => (key: string) => {
-    const translations: Record<string, string> = {
-      placeholder: 'Search any Keyword',
-      no_results: 'No results found',
-    };
-    return translations[key] || key;
-  },
-}));
-
-jest.mock('@/app/hooks/useDebounce', () => ({
-  useDebounce: <T,>(value: T, _delay: number) => value,
-}));
-
-jest.mock('@/app/hooks/useClickOutside', () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
-
-// Mock the Activity component that doesn't exist in React
-jest.mock('react', () => {
-  const actualReact = jest.requireActual('react');
-  return {
-    ...actualReact,
-    Activity: ({ children, mode }: { children?: React.ReactNode; mode: string }) =>
-      mode === 'visible' ? <div data-testid="activity-indicator">{children}</div> : null,
-  };
-});
-
-// NOW import everything
-import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
-import SearchBar from '@/app/components/SearchBar/SearchBar';
 import { FoodHeritage } from '@/app/types';
 
+// Define mock data FIRST - before jest.mock() uses it
 const mockFoodData: FoodHeritage[] = [
   {
     id: 'oldtree',
@@ -110,8 +59,88 @@ const mockFoodData: FoodHeritage[] = [
   },
 ];
 
+// Mock all dependencies AFTER defining mockFoodData
+// Jest hoists these to the top, but the mockFoodData variable will be available
+const mockSetHeritageId = jest.fn();
+
+jest.mock('@/app/stores', () => ({
+  useHeritageStore: jest.fn(),
+}));
+
+jest.mock('@/i18n/request', () => ({
+  geti18nConfig: jest.fn(() => ({
+    messages: {
+      Heritage: {
+        oldtree_desc: 'Durian dessert place',
+        komala_desc: 'Vegetarian Indian food',
+        spicy_wife_desc: 'Nasi Lemak stall',
+      },
+    },
+  })),
+}));
+
+jest.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => {
+    const translations: Record<string, string> = {
+      placeholder: 'Search any Keyword',
+      no_results: 'No results found',
+    };
+    return translations[key] || key;
+  },
+}));
+
+jest.mock('@/app/hooks/useDebounce', () => ({
+  useDebounce: <T,>(value: T, _delay: number) => value,
+}));
+
+jest.mock('@/app/hooks/useClickOutside', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+// Mock the Activity component from React 19
+jest.mock('react', () => {
+  const actualReact = jest.requireActual('react');
+  return {
+    ...actualReact,
+    Activity: ({ children, mode }: { children?: React.ReactNode; mode: string }) =>
+      mode === 'visible' ? <div data-testid="activity-indicator">{children}</div> : null,
+  };
+});
+
+// Import after all mocks are defined
+import React from 'react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import SearchBar from '@/app/components/SearchBar/SearchBar';
+import { useHeritageStore } from '@/app/stores';
+
+// Setup the mock implementation
+const mockUseHeritageStore = useHeritageStore as jest.MockedFunction<typeof useHeritageStore>;
+
 describe('SearchBar Component', () => {
-  const mockSetHeritageId = jest.fn();
+  beforeEach(() => {
+    // Reset mocks before each test
+    jest.clearAllMocks();
+
+    // Setup the store mock to return our test data
+    mockUseHeritageStore.mockReturnValue({
+      // State
+      heritageId: null,
+      foodData: mockFoodData,
+      filter: ['hawker', 'dessert', 'restaurant'],
+      // Actions
+      setHeritageId: mockSetHeritageId,
+      setFilter: jest.fn(),
+      unsetFilter: jest.fn(),
+      getThemeStyle: jest.fn(() => ({})),
+      unSelect: jest.fn(),
+      getFilteredFood: jest.fn(() => mockFoodData),
+      setFoodData: jest.fn(),
+      getFoodData: jest.fn(() => mockFoodData),
+      getSelectedFoodData: jest.fn(() => null),
+      reset: jest.fn(),
+    });
+  });
 
   test('renders search input', () => {
     render(<SearchBar />);
