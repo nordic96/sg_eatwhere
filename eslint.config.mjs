@@ -19,6 +19,7 @@ const eslintConfig = defineConfig([
         { "singleQuote": true }
       ],
       'no-unused-vars': "off",
+      'react-hooks/set-state-in-effect': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { "argsIgnorePattern": "params" }]
     }
   },

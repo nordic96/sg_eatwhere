@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import { useDebounce } from '@/app/hooks';
@@ -29,12 +28,10 @@ function searchForKeyword<T extends object>(keyword: string, items: T[]): T[] {
 
 type SearchableData = FoodHeritage & { desc?: string };
 async function prepareSearchData(items: FoodHeritage[]): Promise<SearchableData[]> {
-  const localeData: Record<string, Record<string, string>>[] = [];
+  const localeDataPromises = AvailableLocales.map((locale) => geti18nConfig(locale));
+  const localeConfigs = await Promise.all(localeDataPromises);
+  const localeData = localeConfigs.map((config) => config.messages);
 
-  for (const locale of AvailableLocales) {
-    const { messages } = await geti18nConfig(locale);
-    localeData.push(messages);
-  }
   const preparedData = items.map((x) => {
     const newData: SearchableData = Object.assign({}, x);
     let descStr = '';
