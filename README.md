@@ -32,16 +32,24 @@ as well as to apply the best frontend development practices that I learned while
 * [next-intl](https://next-intl.dev/) used for i18n implementation
 * Roboto + Public Sans Fonts Used for this project
 
-## 2. UI/UX & Research
-### 2.1 Colour Theme
-I referenced a Straits Times article, which shows an data analysis of the pictures taken in Singapore, and used computer algorithms to produce the most [3.2]
+**Features:**
+- Add, edit, and delete food entries
+- Direct integration with GitHub Gist API
+- Simple password authentication
+- No database required
 
-### 2.2 CopyRights
+See [app/admin/README.md](./app/admin/README.md) for setup instructions.
+
+## 3. UI/UX & Research
+### 3.1 Colour Theme
+I referenced a Straits Times article, which shows an data analysis of the pictures taken in Singapore, and used computer algorithms to produce the most [4.2]
+
+### 3.2 CopyRights
 
 
-## 3. References Used:
-* 3.1 Map Image used for plane texture [Wikimedia] [Singapore_MRT_Network_(with_Hume)](https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg)
-* 3.2 "Singapore in Colour" - by Straits Times [article](https://www.straitstimes.com/multimedia/graphics/2023/08/singapore-in-colour/index.html)
-* 3.3 *"[Daily Models 9-24: Bowl of Rice](https://sketchfab.com/3d-models/daily-models-9-24-bowl-of-rice-270655e54e0d412895b2424a01829338)"* 3D Model by bonguyen-um
+## 4. References Used:
+* 4.1 Map Image used for plane texture [Wikimedia] [Singapore_MRT_Network_(with_Hume)](https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg)
+* 4.2 "Singapore in Colour" - by Straits Times [article](https://www.straitstimes.com/multimedia/graphics/2023/08/singapore-in-colour/index.html)
+* 4.3 *"[Daily Models 9-24: Bowl of Rice](https://sketchfab.com/3d-models/daily-models-9-24-bowl-of-rice-270655e54e0d412895b2424a01829338)"* 3D Model by bonguyen-um
 
 ## Disclaimer
