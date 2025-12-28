@@ -1,6 +1,7 @@
 'use client';
 
 import { useDebounce } from '@/app/hooks';
+import useClickOutside from '@/app/hooks/useClickOutside';
 import { useHeritageStore } from '@/app/stores';
 import { FoodHeritage } from '@/app/types';
 import { cn } from '@/app/utils';
@@ -8,6 +9,8 @@ import { AvailableLocales } from '@/i18n/locales';
 import { geti18nConfig } from '@/i18n/request';
 import { Search } from '@mui/icons-material';
 import { Activity, useEffect, useId, useRef, useState } from 'react';
+
+const DEBOUNCE_DELAY_MS = 200;
 
 function searchForKeyword<T extends object>(keyword: string, items: T[]): T[] {
   const lowerKeyword = keyword.toLowerCase();
@@ -43,17 +46,23 @@ async function prepareSearchData(items: FoodHeritage[]): Promise<SearchableData[
 }
 
 export default function SearchBar() {
-  const { foodData } = useHeritageStore();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { foodData, setHeritageId } = useHeritageStore();
   const [loading, setLoading] = useState(false);
   const [searchableData, setSearchableData] = useState<SearchableData[]>([]);
   const [keyword, setKeyword] = useState<string>('');
   const [results, setResults] = useState<FoodHeritage[]>([]);
-  const debouncedKeyword = useDebounce<string>(keyword, 300);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const debouncedKeyword = useDebounce<string>(keyword, DEBOUNCE_DELAY_MS);
 
   const resultsRef = useRef<(HTMLLIElement | null)[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const listboxId = useId();
   const inputId = useId();
+
+  useClickOutside(containerRef, () => {
+    setIsActive(false);
+  });
 
   useEffect(() => {
     async function loadSearchData() {
@@ -83,12 +92,22 @@ export default function SearchBar() {
     setSelectedIndex(-1);
   }, [debouncedKeyword, searchableData, loading]);
 
+  function resetResults() {
+    setKeyword('');
+    setSelectedIndex(-1);
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    resetResults();
+  }, [isActive]);
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (results.length <= 0) {
       return;
     }
 
-    if (e.key === 'ArrowDown') {
+    if (e.key === 'ArrowDown' || e.key === 'Tab') {
       e.preventDefault();
       setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : prev));
     } else if (e.key === 'ArrowUp') {
@@ -96,21 +115,18 @@ export default function SearchBar() {
       setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev));
     } else if (e.key === 'Enter' && selectedIndex >= 0) {
       e.preventDefault();
-      //
+      setHeritageId(results[selectedIndex].id);
+
+      resetResults();
     } else if (e.key === 'Escape') {
       resetResults();
     }
   }
 
-  function resetResults() {
-    setKeyword('');
-    setSelectedIndex(-1);
-  }
-
-  const showResults = debouncedKeyword !== '' && !loading;
+  const showResults = debouncedKeyword !== '' && !loading && isActive;
 
   return (
-    <div className={'relative'}>
+    <div ref={containerRef} className={'relative'}>
       <div className={'relative h-full flex items-center gap-1'}>
         <input
           id={inputId}
@@ -122,6 +138,8 @@ export default function SearchBar() {
           value={keyword}
           type={'text'}
           disabled={loading}
+          onFocus={() => setIsActive(true)}
+          onBlur={() => setIsActive(false)}
           role={'combobox'}
           aria-expanded={showResults}
           aria-controls={showResults ? listboxId : undefined}
@@ -147,7 +165,9 @@ export default function SearchBar() {
           role={'listbox'}
         >
           {results.length === 0 ? (
-            <li role={'listitem'}>No Search Results Found</li>
+            <li role={'listitem'} className={'px-2 py-1 rounded-lg'}>
+              No Search Results Found
+            </li>
           ) : (
             results.map((v, i) => (
               <li
