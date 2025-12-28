@@ -14,6 +14,9 @@ const customJestConfig: Config = {
   coverageProvider: 'v8',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
 };
 
 export default createJestConfig(customJestConfig);
