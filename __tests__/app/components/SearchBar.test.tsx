@@ -11,51 +11,51 @@ const mockFoodData: FoodHeritage[] = [
         latitude: 1.123,
         longitude: 103.456,
       },
-      address: '',
-      gmapUrl: '',
+      address: '123 Main Street',
+      gmapUrl: 'https://maps.google.com/oldtree',
       region: 'central',
       mrt: ['outram_park'],
     },
     imgSource: ['/images/oldtree.jpg'],
     category: 'dessert',
     website: 'https://example.com',
-    recommendations: ['Durian Mousse'],
+    recommendations: ['Durian Mousse', 'Kaya Toast'],
   },
   {
     id: 'komala',
     name: 'Komala Vilas',
     location: {
       geoLocation: {
-        latitude: 1.123,
-        longitude: 103.456,
+        latitude: 1.234,
+        longitude: 103.567,
       },
-      address: '',
-      gmapUrl: '',
+      address: '456 Little India',
+      gmapUrl: 'https://maps.google.com/komala',
       region: 'central',
-      mrt: ['outram_park'],
+      mrt: ['little_india'],
     },
-    imgSource: ['/images/oldtree.jpg'],
-    category: 'dessert',
-    website: 'https://example.com',
-    recommendations: ['Durian Mousse'],
+    imgSource: ['/images/komala.jpg'],
+    category: 'restaurant',
+    website: 'https://komala.com',
+    recommendations: ['Masala Dosa', 'Thali'],
   },
   {
     id: 'spicy_wife',
     name: 'Spicy Wife',
     location: {
       geoLocation: {
-        latitude: 1.123,
-        longitude: 103.456,
+        latitude: 1.345,
+        longitude: 103.678,
       },
-      address: '',
-      gmapUrl: '',
-      region: 'central',
-      mrt: ['outram_park'],
+      address: '789 East Coast',
+      gmapUrl: 'https://maps.google.com/spicywife',
+      region: 'east',
+      mrt: ['bedok'],
     },
-    imgSource: ['/images/oldtree.jpg'],
-    category: 'dessert',
-    website: 'https://example.com',
-    recommendations: ['Durian Mousse'],
+    imgSource: ['/images/spicywife.jpg'],
+    category: 'hawker',
+    website: 'https://spicywife.com',
+    recommendations: ['Nasi Lemak', 'Sambal Stingray'],
   },
 ];
 
@@ -68,15 +68,17 @@ jest.mock('@/app/stores', () => ({
 }));
 
 jest.mock('@/i18n/request', () => ({
-  geti18nConfig: jest.fn(() => ({
-    messages: {
-      Heritage: {
-        oldtree_desc: 'Durian dessert place',
-        komala_desc: 'Vegetarian Indian food',
-        spicy_wife_desc: 'Nasi Lemak stall',
+  geti18nConfig: jest.fn(() =>
+    Promise.resolve({
+      messages: {
+        Heritage: {
+          oldtree_desc: 'Famous for durian desserts and traditional coffee',
+          komala_desc: 'Authentic vegetarian Indian restaurant with masala dosa',
+          spicy_wife_desc: 'Popular hawker stall serving nasi lemak',
+        },
       },
-    },
-  })),
+    })
+  ),
 }));
 
 jest.mock('next-intl', () => ({
@@ -233,13 +235,16 @@ describe('SearchBar Component', () => {
 
     await act(async () => {
       fireEvent.focus(input);
-      // Search by category that exists in multiple items
-      fireEvent.change(input, { target: { value: 'restaurant' } });
+      // Search by a letter that exists in multiple items
+      fireEvent.change(input, { target: { value: 'a' } });
     });
 
     await waitFor(() => {
       const listbox = screen.getByRole('listbox');
       expect(listbox).toBeInTheDocument();
+      // Should have multiple results
+      const options = screen.getAllByRole('option');
+      expect(options.length).toBeGreaterThan(1);
     });
   });
 
