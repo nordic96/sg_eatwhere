@@ -32,10 +32,6 @@ as well as to apply the best frontend development practices that I learned while
 * [next-intl](https://next-intl.dev/) used for i18n implementation
 * Roboto + Public Sans Fonts Used for this project
 
-## 2. Admin Editor (Development Only)
-
-For managing food location data, an admin editor is available at `/admin/editor` during development. This allows CRUD operations on the GitHub Gist data without manually editing JSON files.
-
 **Features:**
 - Add, edit, and delete food entries
 - Direct integration with GitHub Gist API

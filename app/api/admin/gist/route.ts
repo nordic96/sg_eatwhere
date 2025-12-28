@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FoodHeritage } from '@/app/types/foodHeritage';
 
 // GitHub Gist API configuration
-const GIST_ID = 'e65987d6470349723919244b0b758b1e';
+const GIST_ID = process.env.GIST_ID || '';
 const GIST_FILENAME = 'food.json';
 
 // Simple authentication check
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   try {
     const gistUrl = `https://api.github.com/gists/${GIST_ID}`;
     const headers: HeadersInit = {
-      'Accept': 'application/vnd.github.v3+json',
+      Accept: 'application/vnd.github.v3+json',
     };
 
     // Add token if available (increases rate limit)
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching Gist:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to fetch Gist' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -71,10 +71,7 @@ export async function PUT(request: NextRequest) {
 
   const token = process.env.GITHUB_GIST_TOKEN;
   if (!token) {
-    return NextResponse.json(
-      { error: 'GITHUB_GIST_TOKEN not configured' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'GITHUB_GIST_TOKEN not configured' }, { status: 500 });
   }
 
   try {
@@ -97,8 +94,8 @@ export async function PUT(request: NextRequest) {
     const response = await fetch(gistUrl, {
       method: 'PATCH',
       headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'Authorization': `Bearer ${token}`,
+        Accept: 'application/vnd.github.v3+json',
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -120,13 +117,13 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Gist updated successfully',
-      url: result.html_url
+      url: result.html_url,
     });
   } catch (error) {
     console.error('Error updating Gist:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to update Gist' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
