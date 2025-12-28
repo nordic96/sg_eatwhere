@@ -79,6 +79,7 @@
     },
     "Footer": {
         "changelanguage": "言語を変更",
-        "column_website": "ウェブサイト"
+        "column_website": "ウェブサイト",
+        "app_version": "アプリのバージョン"
     }
 }

@@ -78,6 +78,7 @@
     },
     "Footer": {
         "changelanguage": "언어 변경",
-        "column_website": "웹사이트"
+        "column_website": "웹사이트",
+        "app_version": "앱 버젼"
     }
 }

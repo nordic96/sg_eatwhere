@@ -10,7 +10,7 @@ import AppLink from './AppLink';
 import NameCard from './NameCard/NameCard';
 const FooterLocaleSwitcher = dynamic(() => import('./LocaleSwitcher/FooterLocaleSwitcher'));
 
-const Footer = () => {
+const Footer = ({ version }: { version: string }) => {
   const year = new Date().getFullYear();
   const headerT = useTranslations('Header');
   const t = useTranslations('Footer');
@@ -32,7 +32,7 @@ const Footer = () => {
               width={'0'}
               height={'0'}
             />
-            <div className="box-border grid grid-cols-2 w-[300px] max-sm:w-full gap-8 max-sm:gap-2">
+            <div className="box-border grid grid-cols-3 w-[500px] max-sm:w-full gap-8 max-sm:gap-2">
               <nav className="" aria-label="Footer navigation">
                 <p className="font-bold">{t('column_website')}</p>
                 <div className="flex flex-col">
@@ -45,6 +45,10 @@ const Footer = () => {
               <div className="">
                 <p className="font-bold">{t('changelanguage')}</p>
                 <FooterLocaleSwitcher />
+              </div>
+              <div className={'flex flex-col'}>
+                <span className={'font-bold'}>{t('app_version')}</span>
+                <span>{`v${version}`}</span>
               </div>
             </div>
           </div>

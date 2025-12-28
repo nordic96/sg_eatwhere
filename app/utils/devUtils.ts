@@ -9,3 +9,7 @@ export function isTrailMode() {
 export function isUsingTestData() {
   return process.env.USE_TEST_DATA === 'true';
 }
+
+export function getAppVersion() {
+  return process.env.APP_VERSION;
+}
