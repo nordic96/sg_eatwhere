@@ -10,6 +10,9 @@ function isAuthorized(request: NextRequest): boolean {
   const authHeader = request.headers.get('authorization');
   const adminPassword = process.env.ADMIN_PASSWORD;
 
+  if (process.env.NODE_ENV === 'production') {
+    return false;
+  }
   if (!adminPassword) {
     console.warn('ADMIN_PASSWORD not set - admin routes are not protected!');
     return true; // Allow in dev if not set
