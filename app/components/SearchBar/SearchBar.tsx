@@ -151,6 +151,9 @@ export default function SearchBar() {
           type={'text'}
           disabled={loading}
           onFocus={() => setIsActive(true)}
+          onBlur={() => {
+            setTimeout(() => setIsActive(false), 150);
+          }}
           role={'combobox'}
           aria-expanded={showResults}
           aria-controls={showResults ? listboxId : undefined}
