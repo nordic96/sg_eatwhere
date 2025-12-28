@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests & Build
 
 on:
   pull_request:
@@ -25,3 +25,6 @@ jobs:
 
       - name: Run tests
         run: npm run test -- --runInBand --coverage
+
+      - name: Run Build
+        run: npm run build
