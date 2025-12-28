@@ -79,6 +79,7 @@
     },
     "Footer": {
         "changelanguage": "Change Language",
-        "column_website": "Website"
+        "column_website": "Website",
+        "app_version": "App Version"
     }
 }
