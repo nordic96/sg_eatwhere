@@ -8,6 +8,7 @@ import { cn } from '@/app/utils';
 import { AvailableLocales } from '@/i18n/locales';
 import { geti18nConfig } from '@/i18n/request';
 import { Search } from '@mui/icons-material';
+import { useTranslations } from 'next-intl';
 import { Activity, useEffect, useId, useRef, useState } from 'react';
 
 const DEBOUNCE_DELAY_MS = 200;
@@ -46,6 +47,8 @@ async function prepareSearchData(items: FoodHeritage[]): Promise<SearchableData[
 }
 
 export default function SearchBar() {
+  const t = useTranslations('SearchBar');
+
   const containerRef = useRef<HTMLDivElement>(null);
   const { foodData, setHeritageId } = useHeritageStore();
   const [loading, setLoading] = useState(false);
@@ -124,15 +127,18 @@ export default function SearchBar() {
   }
 
   const showResults = debouncedKeyword !== '' && !loading && isActive;
+  const defaultLiStyle = 'px-2 py-1 max-sm:py-4 rounded-lg';
+  const containerBaseWidthStyle = 'w-[500px] max-sm:w-full';
 
   return (
-    <div ref={containerRef} className={'relative'}>
+    <div ref={containerRef} className={'relative max-sm:w-full'}>
       <div className={'relative h-full flex items-center gap-1'}>
         <input
           id={inputId}
-          className={
-            'rounded-2xl h-6 w-[500px] border border-[#333] focus:border-primary focus:outline-none px-2'
-          }
+          className={cn(
+            containerBaseWidthStyle,
+            'rounded-2xl h-6 max-sm:h-8 border border-[#333] focus:border-primary focus:outline-none px-2',
+          )}
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
           value={keyword}
@@ -148,6 +154,7 @@ export default function SearchBar() {
           }
           aria-autocomplete={'list'}
           aria-label={'Search Food Locations'}
+          placeholder={t('placeholder')}
         />
         <div
           className={
@@ -161,12 +168,15 @@ export default function SearchBar() {
       {/** Search Result Container */}
       {debouncedKeyword !== '' && (
         <ul
-          className={'absolute w-[500px] z-999 bg-white rounded-lg flex flex-col gap-2'}
+          className={cn(
+            containerBaseWidthStyle,
+            'absolute z-999 bg-white rounded-lg flex flex-col gap-2',
+          )}
           role={'listbox'}
         >
           {results.length === 0 ? (
-            <li role={'listitem'} className={'px-2 py-1 rounded-lg'}>
-              No Search Results Found
+            <li role={'listitem'} className={cn(defaultLiStyle)}>
+              {t('no_results')}
             </li>
           ) : (
             results.map((v, i) => (
@@ -177,12 +187,16 @@ export default function SearchBar() {
                 ref={(el) => {
                   resultsRef.current[i] = el;
                 }}
-                className={cn('px-2 py-1 rounded-lg', {
+                className={cn(defaultLiStyle, {
                   'bg-primary': selectedIndex === i,
                   'text-white': selectedIndex === i,
                   'text-black': selectedIndex !== i,
                 })}
                 aria-selected={selectedIndex === i}
+                onClick={() => {
+                  setHeritageId(results[selectedIndex].id);
+                  resetResults();
+                }}
                 onMouseEnter={() => setSelectedIndex(i)}
               >
                 {v.name}

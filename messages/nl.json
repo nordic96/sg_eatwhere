@@ -29,6 +29,10 @@
     "Banner": {
         "banner_msg": "Let op! Dit is een persoonlijk project. Eetlocaties zijn geselecteerd op basis van persoonlijk bezoek, aanbevelingen van lokale vrienden en met subjectieve criteria"
     },
+    "SearchBar": {
+        "placeholder": "zoek naar een willekeurig trefwoord",
+        "no_results": "Geen resultaten gevonden"
+    },
     "LandingPage": {
         "hero_desc": "<green>10+</green> Jaar. <green>100+</green> Bezoeken.\nEen Koreaan die eet als een local.\n\nNu delen <primary>Singapore's</primary> echte\n<primary>Must Try Food</primary>",
         "hero_micro_desc": "Ontdek de echte plekken waar Singaporezen daadwerkelijk eten - samengesteld door een decennium van leven en het delen van maaltijden met mijn lokale vrienden.",

@@ -29,6 +29,10 @@
     "Banner": {
         "banner_msg": "ご注意ください！これは個人プロジェクトです。食事の場所は、個人的な訪問、地元の友人の推薦、および主観的な基準に基づいて選択されました"
     },
+    "SearchBar": {
+        "placeholder": "キーワードを検索する",
+        "no_results": "結果が見つかりませんでした"
+    },
     "LandingPage": {
         "hero_desc": "<green>10年以上</green>。<green>100回以上</green>の訪問。\n地元民のように食べる韓国人。\n\n今、<primary>シンガポール</primary>の本物の\n<primary>必食グルメ</primary>を共有",
         "hero_micro_desc": "シンガポール人が実際に食べる本物の場所を発見 - 10年間の生活と地元の友人との食事を通じてキュレーション。",
