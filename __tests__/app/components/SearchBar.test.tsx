@@ -1,22 +1,5 @@
-// Mock the Activity component that doesn't exist in React - must be first
-jest.mock('react', () => {
-  const actualReact = jest.requireActual('react');
-  return {
-    ...actualReact,
-    Activity: ({ children, mode }: { children: React.ReactNode; mode: string }) => (
-      mode === 'visible' ? <div data-testid="activity-indicator">{children}</div> : null
-    ),
-  };
-});
-
-import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
-import SearchBar from '@/app/components/SearchBar/SearchBar';
-import { useHeritageStore } from '@/app/stores';
-import { geti18nConfig } from '@/i18n/request';
-import { FoodHeritage } from '@/app/types';
-
-// Mock dependencies
+// Mock all dependencies FIRST - before any imports
+// This is required because Jest hoists jest.mock() calls
 jest.mock('@/app/stores');
 jest.mock('@/i18n/request');
 jest.mock('next-intl', () => ({
@@ -37,6 +20,25 @@ jest.mock('@/app/hooks/useClickOutside', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
+
+// Mock the Activity component that doesn't exist in React
+jest.mock('react', () => {
+  const actualReact = jest.requireActual('react');
+  return {
+    ...actualReact,
+    Activity: ({ children, mode }: { children?: React.ReactNode; mode: string }) => (
+      mode === 'visible' ? <div data-testid="activity-indicator">{children}</div> : null
+    ),
+  };
+});
+
+// NOW import everything
+import React from 'react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import SearchBar from '@/app/components/SearchBar/SearchBar';
+import { useHeritageStore } from '@/app/stores';
+import { geti18nConfig } from '@/i18n/request';
+import { FoodHeritage } from '@/app/types';
 
 const mockFoodData: FoodHeritage[] = [
   {
