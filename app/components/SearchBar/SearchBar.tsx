@@ -3,10 +3,11 @@
 import { useDebounce } from '@/app/hooks';
 import { useHeritageStore } from '@/app/stores';
 import { FoodHeritage } from '@/app/types';
+import { cn } from '@/app/utils';
 import { AvailableLocales } from '@/i18n/locales';
 import { geti18nConfig } from '@/i18n/request';
 import { Search } from '@mui/icons-material';
-import { Activity, useEffect, useState } from 'react';
+import { Activity, useEffect, useId, useRef, useState } from 'react';
 
 function searchForKeyword<T extends object>(keyword: string, items: T[]): T[] {
   const lowerKeyword = keyword.toLowerCase();
@@ -46,8 +47,13 @@ export default function SearchBar() {
   const [loading, setLoading] = useState(false);
   const [searchableData, setSearchableData] = useState<SearchableData[]>([]);
   const [keyword, setKeyword] = useState<string>('');
-  const [results, setResults] = useState<string[]>([]);
-  const debouncedKeyword = useDebounce<string>(keyword, 500);
+  const [results, setResults] = useState<FoodHeritage[]>([]);
+  const debouncedKeyword = useDebounce<string>(keyword, 300);
+
+  const resultsRef = useRef<(HTMLLIElement | null)[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const listboxId = useId();
+  const inputId = useId();
 
   useEffect(() => {
     async function loadSearchData() {
@@ -69,19 +75,61 @@ export default function SearchBar() {
     if (!debouncedKeyword || loading) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setResults([]);
+      setSelectedIndex(-1);
       return;
     }
     const res = searchForKeyword<SearchableData>(debouncedKeyword, searchableData);
-    setResults(res.map((x) => x.id));
+    setResults(res);
+    setSelectedIndex(-1);
   }, [debouncedKeyword, searchableData, loading]);
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (results.length <= 0) {
+      return;
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : prev));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev));
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      e.preventDefault();
+      //
+    } else if (e.key === 'Escape') {
+      resetResults();
+    }
+  }
+
+  function resetResults() {
+    setKeyword('');
+    setSelectedIndex(-1);
+  }
+
+  const showResults = debouncedKeyword !== '' && !loading;
 
   return (
     <div className={'relative'}>
       <div className={'relative h-full flex items-center gap-1'}>
         <input
-          className={'rounded-2xl h-6 w-[500px] border-2 border-[#333] focus:border-primary px-2'}
+          id={inputId}
+          className={
+            'rounded-2xl h-6 w-[500px] border border-[#333] focus:border-primary focus:outline-none px-2'
+          }
           onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={handleKeyDown}
+          value={keyword}
           type={'text'}
+          disabled={loading}
+          role={'combobox'}
+          aria-expanded={showResults}
+          aria-controls={showResults ? listboxId : undefined}
+          aria-activedescendant={
+            selectedIndex >= 0 ? `${listboxId}-option-${selectedIndex}` : undefined
+          }
+          aria-autocomplete={'list'}
+          aria-label={'Search Food Locations'}
         />
         <div
           className={
@@ -94,13 +142,34 @@ export default function SearchBar() {
       </div>
       {/** Search Result Container */}
       {debouncedKeyword !== '' && (
-        <div className={'absolute w-[500px] z-999 p-2 bg-white rounded-lg flex flex-col gap-4'}>
+        <ul
+          className={'absolute w-[500px] z-999 bg-white rounded-lg flex flex-col gap-2'}
+          role={'listbox'}
+        >
           {results.length === 0 ? (
-            <span>No Search Results Found</span>
+            <li role={'listitem'}>No Search Results Found</li>
           ) : (
-            results.map((v, i) => <span key={i}>{v}</span>)
+            results.map((v, i) => (
+              <li
+                key={i}
+                id={`${listboxId}-option-${i}`}
+                role={'option'}
+                ref={(el) => {
+                  resultsRef.current[i] = el;
+                }}
+                className={cn('px-2 py-1 rounded-lg', {
+                  'bg-primary': selectedIndex === i,
+                  'text-white': selectedIndex === i,
+                  'text-black': selectedIndex !== i,
+                })}
+                aria-selected={selectedIndex === i}
+                onMouseEnter={() => setSelectedIndex(i)}
+              >
+                {v.name}
+              </li>
+            ))
           )}
-        </div>
+        </ul>
       )}
     </div>
   );
