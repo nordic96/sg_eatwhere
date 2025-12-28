@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import { useDebounce } from '@/app/hooks';
@@ -7,11 +8,12 @@ import { FoodHeritage } from '@/app/types';
 import { cn } from '@/app/utils';
 import { AvailableLocales } from '@/i18n/locales';
 import { geti18nConfig } from '@/i18n/request';
-import { Search } from '@mui/icons-material';
+import { Close, Search } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import { Activity, useEffect, useId, useRef, useState } from 'react';
 
 const DEBOUNCE_DELAY_MS = 200;
+const MAX_INPUT_LEN = 100;
 
 function searchForKeyword<T extends object>(keyword: string, items: T[]): T[] {
   const lowerKeyword = keyword.toLowerCase();
@@ -74,6 +76,10 @@ export default function SearchBar() {
         .then((data) => {
           setSearchableData(data);
         })
+        .catch((error) => {
+          console.error('Failed to prepare search data:', error);
+          setSearchableData(foodData);
+        })
         .finally(() => {
           setLoading(false);
         });
@@ -85,7 +91,6 @@ export default function SearchBar() {
 
   useEffect(() => {
     if (!debouncedKeyword || loading) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResults([]);
       setSelectedIndex(-1);
       return;
@@ -101,9 +106,12 @@ export default function SearchBar() {
   }
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     resetResults();
   }, [isActive]);
+
+  useEffect(() => {
+    resultsRef.current = [];
+  }, [results]);
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (results.length <= 0) {
@@ -142,10 +150,13 @@ export default function SearchBar() {
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
           value={keyword}
+          maxLength={MAX_INPUT_LEN}
           type={'text'}
           disabled={loading}
           onFocus={() => setIsActive(true)}
-          onBlur={() => setIsActive(false)}
+          onBlur={() => {
+            setTimeout(() => setIsActive(false), 150);
+          }}
           role={'combobox'}
           aria-expanded={showResults}
           aria-controls={showResults ? listboxId : undefined}
@@ -158,15 +169,25 @@ export default function SearchBar() {
         />
         <div
           className={
-            'absolute right-0 top-[50%] translate-y-[-60%] w-6 h-6 cursor-pointer rounded-full text-primary text-xl items-center justify-center'
+            'absolute right-0 top-[50%] translate-y-[-60%] w-6 h-6 rounded-full text-primary text-xl items-center justify-center'
           }
         >
           <Search fontSize={'inherit'} />
         </div>
+        <Activity mode={debouncedKeyword.length > 0 ? 'visible' : 'hidden'}>
+          <button
+            onClick={() => setKeyword('')}
+            className={
+              'absolute right-6 top-[50%] translate-y-[-60%] w-6 h-6 cursor-pointer rounded-full text-gray-400 text-xl items-center justify-center'
+            }
+          >
+            <Close fontSize={'inherit'} />
+          </button>
+        </Activity>
         <Activity mode={loading ? 'visible' : 'hidden'}>Loading...</Activity>
       </div>
       {/** Search Result Container */}
-      {debouncedKeyword !== '' && (
+      {showResults && (
         <ul
           id={listboxId}
           className={cn(
@@ -176,7 +197,7 @@ export default function SearchBar() {
           role={'listbox'}
         >
           {results.length === 0 ? (
-            <li role={'listitem'} className={cn(defaultLiStyle)}>
+            <li role={'option'} className={cn(defaultLiStyle)} aria-selected={false}>
               {t('no_results')}
             </li>
           ) : (
@@ -195,7 +216,7 @@ export default function SearchBar() {
                 })}
                 aria-selected={selectedIndex === i}
                 onClick={() => {
-                  setHeritageId(results[selectedIndex].id);
+                  setHeritageId(v.id);
                   resetResults();
                 }}
                 onMouseEnter={() => setSelectedIndex(i)}

@@ -1,7 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Mock all dependencies FIRST - before any imports
 // This is required because Jest hoists jest.mock() calls
-jest.mock('@/app/stores');
-jest.mock('@/i18n/request');
+jest.mock('@/app/stores', () => ({
+  useHeritageStore: () => ({
+    foodData: mockFoodData,
+    setHeritageId: jest.fn(),
+  }),
+}));
+jest.mock('@/i18n/request', () => ({
+  geti18nConfig: () => ({
+    messages: {
+      Heritage: {
+        oldtree_desc: 'Durian dessert place',
+        komala_desc: 'Vegetarian Indian food',
+        spicy_wife_desc: 'Nasi Lemak stall',
+      },
+    },
+  }),
+}));
 jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {
     const translations: Record<string, string> = {
@@ -26,9 +42,8 @@ jest.mock('react', () => {
   const actualReact = jest.requireActual('react');
   return {
     ...actualReact,
-    Activity: ({ children, mode }: { children?: React.ReactNode; mode: string }) => (
-      mode === 'visible' ? <div data-testid="activity-indicator">{children}</div> : null
-    ),
+    Activity: ({ children, mode }: { children?: React.ReactNode; mode: string }) =>
+      mode === 'visible' ? <div data-testid="activity-indicator">{children}</div> : null,
   };
 });
 
@@ -36,66 +51,67 @@ jest.mock('react', () => {
 import React from 'react';
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
-import { useHeritageStore } from '@/app/stores';
-import { geti18nConfig } from '@/i18n/request';
 import { FoodHeritage } from '@/app/types';
 
 const mockFoodData: FoodHeritage[] = [
   {
     id: 'oldtree',
     name: 'Old Tree Coffee',
-    lat: 1.123,
-    lng: 103.456,
-    image: '/images/oldtree.jpg',
+    location: {
+      geoLocation: {
+        latitude: 1.123,
+        longitude: 103.456,
+      },
+      address: '',
+      gmapUrl: '',
+      region: 'central',
+      mrt: ['outram_park'],
+    },
+    imgSource: ['/images/oldtree.jpg'],
     category: 'dessert',
-    mrt_station: 'outram_park',
-    link: 'https://example.com',
-    must_try: 'Durian Mousse',
+    website: 'https://example.com',
+    recommendations: ['Durian Mousse'],
   },
   {
     id: 'komala',
     name: 'Komala Vilas',
-    lat: 1.234,
-    lng: 103.567,
-    image: '/images/komala.jpg',
-    category: 'restaurant',
-    mrt_station: 'little_india',
-    link: 'https://example.com',
-    must_try: 'Dosai',
+    location: {
+      geoLocation: {
+        latitude: 1.123,
+        longitude: 103.456,
+      },
+      address: '',
+      gmapUrl: '',
+      region: 'central',
+      mrt: ['outram_park'],
+    },
+    imgSource: ['/images/oldtree.jpg'],
+    category: 'dessert',
+    website: 'https://example.com',
+    recommendations: ['Durian Mousse'],
   },
   {
     id: 'spicy_wife',
     name: 'Spicy Wife',
-    lat: 1.345,
-    lng: 103.678,
-    image: '/images/spicy.jpg',
-    category: 'hawker',
-    mrt_station: 'tanjong_pagar',
-    link: 'https://example.com',
-    must_try: 'Nasi Lemak',
+    location: {
+      geoLocation: {
+        latitude: 1.123,
+        longitude: 103.456,
+      },
+      address: '',
+      gmapUrl: '',
+      region: 'central',
+      mrt: ['outram_park'],
+    },
+    imgSource: ['/images/oldtree.jpg'],
+    category: 'dessert',
+    website: 'https://example.com',
+    recommendations: ['Durian Mousse'],
   },
 ];
 
 describe('SearchBar Component', () => {
   const mockSetHeritageId = jest.fn();
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-    (useHeritageStore as jest.Mock).mockReturnValue({
-      foodData: mockFoodData,
-      setHeritageId: mockSetHeritageId,
-    });
-
-    (geti18nConfig as jest.Mock).mockResolvedValue({
-      messages: {
-        Heritage: {
-          oldtree_desc: 'Durian dessert place',
-          komala_desc: 'Vegetarian Indian food',
-          spicy_wife_desc: 'Nasi Lemak stall',
-        },
-      },
-    });
-  });
 
   test('renders search input', () => {
     render(<SearchBar />);
@@ -421,11 +437,6 @@ describe('SearchBar Component', () => {
   });
 
   test('input is disabled when loading', () => {
-    (useHeritageStore as jest.Mock).mockReturnValue({
-      foodData: [],
-      setHeritageId: mockSetHeritageId,
-    });
-
     render(<SearchBar />);
 
     const input = screen.getByRole('combobox');
