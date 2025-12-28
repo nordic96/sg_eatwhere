@@ -31,6 +31,10 @@
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
     },
+    "SearchBar": {
+        "placeholder": "Search any Keyword",
+        "no_results": "No results found"
+    },
     "LandingPage": {
         "hero_desc": "<green>10+</green> Years. <green>100+</green> Visits.\nA Korean who eats like a local.\n\nNow sharing <primary>Singapore's</primary> real\n <primary>Must Try Food</primary>",
         "hero_micro_desc": "Discover the real places where Singaporeans actually eat -curated through a decade of living and sharing meals with my local friends.",
@@ -77,6 +81,7 @@
     },
     "Footer": {
         "changelanguage": "Change Language",
-        "column_website": "Website"
+        "column_website": "Website",
+        "app_version": "App Version"
     }
 }
