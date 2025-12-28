@@ -68,17 +68,15 @@ jest.mock('@/app/stores', () => ({
 }));
 
 jest.mock('@/i18n/request', () => ({
-  geti18nConfig: jest.fn(() =>
-    Promise.resolve({
-      messages: {
-        Heritage: {
-          oldtree_desc: 'Famous for durian desserts and traditional coffee',
-          komala_desc: 'Authentic vegetarian Indian restaurant with masala dosa',
-          spicy_wife_desc: 'Popular hawker stall serving nasi lemak',
-        },
+  geti18nConfig: jest.fn(async () => ({
+    messages: {
+      Heritage: {
+        oldtree_desc: 'Famous for durian desserts and traditional coffee',
+        komala_desc: 'Authentic vegetarian Indian restaurant with masala dosa',
+        spicy_wife_desc: 'Popular hawker stall serving nasi lemak',
       },
-    })
-  ),
+    },
+  })),
 }));
 
 jest.mock('next-intl', () => ({
@@ -119,8 +117,20 @@ import { useHeritageStore } from '@/app/stores';
 // Setup the mock implementation
 const mockUseHeritageStore = useHeritageStore as jest.MockedFunction<typeof useHeritageStore>;
 
+// Helper function to render and wait for loading to complete
+async function renderSearchBar() {
+  const result = render(<SearchBar />);
+  // Wait for the async prepareSearchData to complete
+  await waitFor(() => {
+    // Check that the input is enabled (loading finished)
+    const input = screen.getByRole('combobox') as HTMLInputElement;
+    expect(input.disabled).toBe(false);
+  }, { timeout: 3000 });
+  return result;
+}
+
 describe('SearchBar Component', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     // Reset mocks before each test
     jest.clearAllMocks();
 
@@ -144,37 +154,37 @@ describe('SearchBar Component', () => {
     });
   });
 
-  test('renders search input', () => {
-    render(<SearchBar />);
+  test('renders search input', async () => {
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('type', 'text');
   });
 
-  test('renders with correct placeholder', () => {
-    render(<SearchBar />);
+  test('renders with correct placeholder', async () => {
+    await renderSearchBar();
 
     const input = screen.getByPlaceholderText('Search any Keyword');
     expect(input).toBeInTheDocument();
   });
 
-  test('renders search icon', () => {
-    const { container } = render(<SearchBar />);
+  test('renders search icon', async () => {
+    const { container } = await renderSearchBar();
 
     const searchIcon = container.querySelector('.MuiSvgIcon-root');
     expect(searchIcon).toBeInTheDocument();
   });
 
-  test('input is initially empty', () => {
-    render(<SearchBar />);
+  test('input is initially empty', async () => {
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox') as HTMLInputElement;
     expect(input.value).toBe('');
   });
 
-  test('updates input value on user typing', () => {
-    render(<SearchBar />);
+  test('updates input value on user typing', async () => {
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox') as HTMLInputElement;
 
@@ -184,7 +194,7 @@ describe('SearchBar Component', () => {
   });
 
   test('shows "No results found" when search yields no matches', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -199,7 +209,7 @@ describe('SearchBar Component', () => {
   });
 
   test('displays search results when keyword matches', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -214,7 +224,7 @@ describe('SearchBar Component', () => {
   });
 
   test('search is case-insensitive', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -229,7 +239,7 @@ describe('SearchBar Component', () => {
   });
 
   test('shows multiple results when multiple items match', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -249,7 +259,7 @@ describe('SearchBar Component', () => {
   });
 
   test('does not show results when input is not focused', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -261,7 +271,7 @@ describe('SearchBar Component', () => {
   });
 
   test('shows results when input is focused', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -276,7 +286,7 @@ describe('SearchBar Component', () => {
   });
 
   test('hides results when input is blurred', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -299,7 +309,7 @@ describe('SearchBar Component', () => {
   });
 
   test('handles ArrowDown key to navigate results', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -322,7 +332,7 @@ describe('SearchBar Component', () => {
   });
 
   test('handles ArrowUp key to navigate results', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -351,7 +361,7 @@ describe('SearchBar Component', () => {
   });
 
   test('handles Tab key like ArrowDown', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -373,7 +383,7 @@ describe('SearchBar Component', () => {
   });
 
   test('handles Enter key to select result', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -400,7 +410,7 @@ describe('SearchBar Component', () => {
   });
 
   test('handles Escape key to reset search', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox') as HTMLInputElement;
 
@@ -419,7 +429,7 @@ describe('SearchBar Component', () => {
   });
 
   test('handles mouse hover on result item', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -442,7 +452,7 @@ describe('SearchBar Component', () => {
   });
 
   test('handles click on result item', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -470,16 +480,16 @@ describe('SearchBar Component', () => {
     expect(mockSetHeritageId).toHaveBeenCalled();
   });
 
-  test('input is disabled when loading', () => {
-    render(<SearchBar />);
+  test('input is disabled when loading', async () => {
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
     // Initially should be enabled (loading will be true but then false after useEffect)
     expect(input).toBeInTheDocument();
   });
 
-  test('has correct ARIA attributes', () => {
-    render(<SearchBar />);
+  test('has correct ARIA attributes', async () => {
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -489,7 +499,7 @@ describe('SearchBar Component', () => {
   });
 
   test('updates aria-expanded when results are shown', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -506,7 +516,7 @@ describe('SearchBar Component', () => {
   });
 
   test('updates aria-activedescendant when navigating', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -533,7 +543,7 @@ describe('SearchBar Component', () => {
   });
 
   test('each option has unique ID', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -555,7 +565,7 @@ describe('SearchBar Component', () => {
   });
 
   test('does not navigate beyond last result with ArrowDown', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -589,7 +599,7 @@ describe('SearchBar Component', () => {
   });
 
   test('does not navigate beyond first result with ArrowUp', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -613,7 +623,7 @@ describe('SearchBar Component', () => {
   });
 
   test('Enter key does nothing when no result is selected', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -635,7 +645,7 @@ describe('SearchBar Component', () => {
   });
 
   test('keyboard navigation does nothing when no results', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -659,7 +669,7 @@ describe('SearchBar Component', () => {
   });
 
   test('resets selected index when search keyword changes', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -690,7 +700,7 @@ describe('SearchBar Component', () => {
   });
 
   test('applies correct styling to selected option', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -713,7 +723,7 @@ describe('SearchBar Component', () => {
   });
 
   test('applies correct styling to unselected options', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
@@ -738,7 +748,7 @@ describe('SearchBar Component', () => {
   });
 
   test('clears results when input becomes inactive', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox') as HTMLInputElement;
 
@@ -759,16 +769,16 @@ describe('SearchBar Component', () => {
     });
   });
 
-  test('has responsive width classes', () => {
-    const { container } = render(<SearchBar />);
+  test('has responsive width classes', async () => {
+    const { container } = await renderSearchBar();
 
     const input = container.querySelector('input');
     expect(input).toHaveClass('w-[500px]');
     expect(input).toHaveClass('max-sm:w-full');
   });
 
-  test('has responsive height classes', () => {
-    const { container } = render(<SearchBar />);
+  test('has responsive height classes', async () => {
+    const { container } = await renderSearchBar();
 
     const input = container.querySelector('input');
     expect(input).toHaveClass('h-6');
@@ -776,7 +786,7 @@ describe('SearchBar Component', () => {
   });
 
   test('result items have responsive padding', async () => {
-    render(<SearchBar />);
+    await renderSearchBar();
 
     const input = screen.getByRole('combobox');
 
