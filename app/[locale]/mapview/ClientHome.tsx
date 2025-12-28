@@ -10,6 +10,7 @@ import { FoodHeritage } from '../../types';
 import { useHeritageStore } from '../../stores';
 import { Activity, useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
+import SearchBar from '@/app/components/SearchBar/SearchBar';
 
 type ClientHomeProps = {
   locale: string;
@@ -35,12 +36,18 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
 
   return (
     <div className={'relative flex flex-col grow pb-8'}>
-      <div className={'absolute flex w-full justify-between items-center top-0 z-100'}>
+      {/** Search Bar */}
+      <div className={'h-10 py-0.5 flex items-center'}>
+        <SearchBar />
+      </div>
+      {/** Map Filters */}
+      <div className={'absolute flex w-full justify-between items-center top-10 z-100'}>
         <Activity mode={trailMode ? 'visible' : 'hidden'}>
           <TrailMode />
         </Activity>
         <FilterBar />
       </div>
+      {/** Map Content */}
       <div className="relative h-[75vh] max-h-[800px] overflow-y-hidden select-none">
         <MapScene locale={locale} messages={messages} />
       </div>
