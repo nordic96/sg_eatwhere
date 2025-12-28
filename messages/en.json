@@ -10,7 +10,8 @@
         "spicy_wife_desc": "This stall has been selling one of the tastiest Nasi Lemak dish at one of the most affordable price to office workers at Amoy Street Food Centre. The hawker stall specialises in serving Aromatic Chicken (Nasi Lemak Ayam Berempah), which basically means coconut rice with fried chicken with spices.\n\nThe dish serves with cucumber, generous portion of fried chicken with special spices, fried egg, special sambal chili sauce, with peanuts and ikan bilis (dried anchovies). The Chili sauce can be spicy to some people, so keep in mind, and enjoy!\n\n[Tip] The stall closes at 2pm and only opens during weekdays, so do check the latest opening hours before visiting!",
         "nanhuachang_desc": "Are you a seafood lover? or perhaps a hotpot lover? This restaurant has been serving one of the best fishhead steamboat dishes since 1927 and the family is running business over 4 generations. Fishhead steamboat is a dish that serves soup with fish head meat, variety of vegetables, with a specially designed pot, where the centre has a charcoal placed inside the centre hole. This design keeps the dish hot after long hours, and turns the soup infused with charcoal flavour, giving you the irresistable taste.\n\nIt became a place where many Singaporeans bring families, close friends to visit, eat, and talk almost about everything. Will you be keen to experience steamboat culture in the most delicious way at this restaurant?",
         "yatkayan_desc": "Are you staying near Dhoby Ghaut Station? or planning to visit Chijmes? there is a hidden chinese dessert shop not far from Bencoolen station, favoured by young Singaporeans. This dessert shop is also known by nearby design school and university students for selling variety of delicious chinese desserts at a cheap price.\n\nMy personal favourite, Chendol, a popular singaporean ice dessert with generous amount of GulaMelaka (charamelised syrup) drizzled, or if you are not much into 'too sweet' desserts, you can also try out a purple rice dessert made of glutinous purple rice served with variety of toppings. There are hot desserts available too!",
-        "jixiang_desc": "Do you know what Kueh is? This confectionery was founded in 1988, located near Outram Park and Tanjong Pagar MRT station, selling freshly handmade delicious Ang Ku Kueh. The word 'Ang Ku Kueh' literally means red tortoise cake, because the shape resembles a tortoise shell. It has a delicious rice cake texture, coated with sesame oil, and has variety of fillings.\n\n I personally recommend their sweet bean fillings and yam fillings"
+        "jixiang_desc": "Do you know what Kueh is? This confectionery was founded in 1988, located near Outram Park and Tanjong Pagar MRT station, selling freshly handmade delicious Ang Ku Kueh. The word 'Ang Ku Kueh' literally means red tortoise cake, because the shape resembles a tortoise shell. It has a delicious rice cake texture, coated with sesame oil, and has variety of fillings.\n\n I personally recommend their sweet bean fillings and yam fillings",
+        "donamanis_desc": "Planning to visit Joo Chiat Road? not near from the centre of the popular joo chiat road, an old institution bakes delicious pies since 1990 at Katong Shopping Centre. Once you are near this shop, you cannot resist the smell of one of the best banana pies in Singapore."
     },
     "MRT": {
         "tanjong_pagar": "Tanjong Pagar",
@@ -19,7 +20,8 @@
         "little_india": "Little India",
         "lavender": "Lavender",
         "bugis": "Bugis",
-        "nicoll_highway": "Nicoll Highway"
+        "nicoll_highway": "Nicoll Highway",
+        "marine_parade": "Marine Parade"
     },
     "Header": {
         "link_mapview": "MapView",
@@ -28,6 +30,10 @@
     },
     "Banner": {
         "banner_msg": "Please note! This is a personal project. Food Locations were selected based on personal visit, local friend's recommendation, and with subjective criterias"
+    },
+    "SearchBar": {
+        "placeholder": "Search any Keyword",
+        "no_results": "No results found"
     },
     "LandingPage": {
         "hero_desc": "<green>10+</green> Years. <green>100+</green> Visits.\nA Korean who eats like a local.\n\nNow sharing <primary>Singapore's</primary> real\n <primary>Must Try Food</primary>",
@@ -75,6 +81,7 @@
     },
     "Footer": {
         "changelanguage": "Change Language",
-        "column_website": "Website"
+        "column_website": "Website",
+        "app_version": "App Version"
     }
 }

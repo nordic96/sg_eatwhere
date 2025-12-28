@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 import Banner from '../components/Banner/Banner';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { cn } from '../utils';
+import { cn, getAppVersion } from '../utils';
 import { baseLayoutStyle } from '../constants/theme';
 /** Speed & Insights Analytics */
 import { Analytics } from '@vercel/analytics/next';
@@ -55,7 +55,7 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-
+  const appVersion = getAppVersion();
   const messages = await getMessages();
 
   return (
@@ -68,7 +68,7 @@ export default async function RootLayout({
             <div className={'flex justify-center grow h-scren'}>
               <div className={cn('flex grow flex-col', baseLayoutStyle)}>{children}</div>
             </div>
-            <Footer />
+            <Footer version={appVersion || ''} />
           </div>
         </NextIntlClientProvider>
         <Analytics />
