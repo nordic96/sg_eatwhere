@@ -168,6 +168,7 @@ export default function SearchBar() {
       {/** Search Result Container */}
       {debouncedKeyword !== '' && (
         <ul
+          id={listboxId}
           className={cn(
             containerBaseWidthStyle,
             'absolute z-999 bg-white rounded-lg flex flex-col gap-2',

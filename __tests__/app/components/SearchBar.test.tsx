@@ -1,3 +1,14 @@
+// Mock the Activity component that doesn't exist in React - must be first
+jest.mock('react', () => {
+  const actualReact = jest.requireActual('react');
+  return {
+    ...actualReact,
+    Activity: ({ children, mode }: { children: React.ReactNode; mode: string }) => (
+      mode === 'visible' ? <div data-testid="activity-indicator">{children}</div> : null
+    ),
+  };
+});
+
 import React from 'react';
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
