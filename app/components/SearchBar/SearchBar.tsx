@@ -14,6 +14,7 @@ import RichItem from './RichItem';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
+const DEFAULT_MIN_NO_RESULTS = 5;
 
 function searchForKeyword<T extends object>(keyword: string, items: T[]): T[] {
   const lowerKeyword = keyword.toLowerCase();
@@ -113,7 +114,7 @@ export default function SearchBar() {
 
   function onFocus() {
     if (debouncedKeyword === '') {
-      setResults(searchableData);
+      setResults(searchableData.slice(0, DEFAULT_MIN_NO_RESULTS));
     }
     setIsActive(true);
   }

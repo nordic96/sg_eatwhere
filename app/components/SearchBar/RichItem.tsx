@@ -2,8 +2,9 @@ import { FoodHeritage } from '@/app/types';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import { LocationPin, Subway } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 
-export default function RichItem({ data }: { data: FoodHeritage }) {
+function RichItem({ data }: { data: FoodHeritage }) {
   const t = useTranslations('HeritageListView');
   const tMrt = useTranslations('MRT');
 
@@ -30,3 +31,5 @@ export default function RichItem({ data }: { data: FoodHeritage }) {
     </div>
   );
 }
+
+export default React.memo(RichItem);

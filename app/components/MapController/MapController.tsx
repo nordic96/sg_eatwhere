@@ -16,16 +16,18 @@ export type MapControllerProps = {
 
 export default function MapController({ controls, camera }: MapControllerProps) {
   const [expanded, setExpanded] = useState(true);
-  const { heritageId, getSelectedFoodData } = useHeritageStore();
+  const heritageId = useHeritageStore((state) => state.heritageId);
+  const getSelectedFoodData = useHeritageStore((state) => state.getSelectedFoodData);
+
   const { focusOnLocation } = useCameraControls(controls.current, camera.current);
 
+  const selectedFoodData = getSelectedFoodData();
   useEffect(() => {
-    const data = getSelectedFoodData();
-    if (data !== null && heritageId) {
-      const vector = geoConverter(data.location.geoLocation);
+    if (selectedFoodData !== null && heritageId) {
+      const vector = geoConverter(selectedFoodData.location.geoLocation);
       focusOnLocation(new THREE.Vector3(...vector));
     }
-  }, [heritageId, focusOnLocation, getSelectedFoodData]);
+  }, [heritageId, focusOnLocation, selectedFoodData]);
 
   const toggleExpand = () => {
     setExpanded((t) => !t);
