@@ -37,6 +37,60 @@ export default function useCameraControls(
     requestAnimationFrame(step);
   }
 
+  /* -------------------- Location Focus with Eye-Level View ------------------- */
+  // For selecting food locations - moves camera AND target with offset
+  function focusOnLocation(
+    targetPos: THREE.Vector3,
+    duration = 1,
+    horizontalDistance = 50,
+    eyeHeight = 30,
+    lookAtHeight = 5,
+  ) {
+    if (!camera || !controls) return;
+
+    const startPos = camera.position.clone();
+    const startTarget = controls.target.clone();
+
+    // Calculate horizontal direction from current camera
+    const horizontalDirection = new THREE.Vector3(
+      startPos.x - targetPos.x,
+      0,
+      startPos.z - targetPos.z,
+    ).normalize();
+
+    // If direction is zero (directly above), use a default direction
+    if (horizontalDirection.length() === 0) {
+      horizontalDirection.set(1, 0, 0); // Default to looking from east
+    }
+
+    // Position camera at eye-level, looking horizontally
+    const finalCameraPos = new THREE.Vector3(
+      targetPos.x + horizontalDirection.x * horizontalDistance,
+      targetPos.y + eyeHeight,
+      targetPos.z + horizontalDirection.z * horizontalDistance,
+    );
+
+    // Look at target slightly above ground level
+    const finalTarget = new THREE.Vector3(targetPos.x, targetPos.y + lookAtHeight, targetPos.z);
+
+    const start = performance.now();
+
+    function step() {
+      if (!camera || !controls) return;
+      const elapsed = (performance.now() - start) / 1000;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = t * (2 - t);
+
+      camera.position.lerpVectors(startPos, finalCameraPos, eased);
+      controls.target.lerpVectors(startTarget, finalTarget, eased);
+      controls.update();
+
+      if (t < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
   /* ------------------------------ PAN (WORLD) ------------------------------ */
   function pan(direction: PanControl) {
     if (!camera || !controls) return;
@@ -134,6 +188,7 @@ export default function useCameraControls(
     zoomIn: () => zoom('zoomIn'),
     zoomOut: () => zoom('zoomOut'),
 
+    focusOnLocation,
     startHold,
     stopHold,
   };

@@ -50,7 +50,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
         <Suspense fallback={null}>
           <MapEnvironment />
           {heritageId && !clickedMore && (
-            <Billboard position={[10, 15, 0]}>
+            <Billboard position={[0, 20, 10]}>
               <Html>
                 <CanvasIntlProvider messages={messages} locale={locale}>
                   <PlaceContent />
