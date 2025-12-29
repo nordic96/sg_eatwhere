@@ -1,9 +1,8 @@
 'use client';
 
 import { useAppStore, useHeritageStore } from '@/app/stores';
-import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
+import { MapOutlined, ThumbUpOutlined } from '@mui/icons-material';
 
-import HighlightedText from '../HighlightText/HighlightText';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import { cn } from '@/app/utils';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
@@ -11,7 +10,9 @@ import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
 import { memo, useMemo } from 'react';
+import { MrtLabel } from '../MrtLabel/MrtLabel';
 
+const MIN_DESC_LEN = 50;
 function PlaceContent() {
   const t = useTranslations('CardView');
   const catT = useTranslations('FoodCategory');
@@ -22,11 +23,7 @@ function PlaceContent() {
   const heritageId = useHeritageStore((state) => state.heritageId);
 
   const data = getSelectedFoodData();
-
-  const description = useMemo(
-    () => (data ? heritageT(`${data.id}_desc`) : ''),
-    [data, heritageT],
-  );
+  const description = useMemo(() => (data ? heritageT(`${data.id}_desc`) : ''), [data, heritageT]);
 
   if (!heritageId || !data) {
     return <div>No data selected</div>;
@@ -39,57 +36,81 @@ function PlaceContent() {
       role="article"
       aria-label="Selected location details"
       className={
-        'flex flex-col items-end w-[384px] rounded-xl bg-white p-4 gap-2 border border-[#333]'
+        'relative flex flex-col items-end w-[384px] rounded-xl bg-white border border-[#333] overflow-hidden'
       }
     >
-      <ButtonContainer />
-      <div className="w-full flex flex-col gap-2">
-        {/** Carousel Container */}
-        <div className={'relative w-full h-[280px]'}>
-          <ImageCarousel img={data.imgSource} customClass={getThemeStyle()} />
-          <span className="absolute bottom-0 left-[50%] translate-x-[-50%] text-center text-white">
-            <p className="text-4xl w-[300px] font-bold">{data.name}</p>
-            <p>{data.location.address}</p>
-          </span>
+      {/** Carousel Container */}
+      <div className={'w-full h-[280px]'}>
+        <ImageCarousel img={data.imgSource} customClass={getThemeStyle()} />
+      </div>
+      <div className={'absolute top-1 w-full px-4'}>
+        <ButtonContainer />
+      </div>
+      <div className="w-full flex flex-col gap-2 px-4 py-2">
+        <div className="flex flex-col items-start">
+          <span className="text-2xl font-bold">{data.name}</span>
+          <span className={'text-[#555]'}>{data.location.address}</span>
         </div>
         {/** Info Container */}
-        <div className={'flex grow justify-start items-center gap-1 text-md'}>
-          <span className="flex gap-1 items-center">
+        <div
+          className={'flex grow justify-start items-center gap-1 text-md bg-gray-50 p-1 rounded-md'}
+        >
+          <div className="flex gap-1 items-center">
             <CategoryIcon
               alt={'card-cat-icon'}
               cat={data.category}
               iconClass={'h-4'}
               className={'py-0.5 w-8'}
             />
-            {catT(data.category)}
-          </span>
+            <span>{catT(data.category)}</span>
+          </div>
           <VerticalDivider />
           <MrtLabel mrt={data.location.mrt[0]} />
           <VerticalDivider />
-          <a href={data.location.gmapUrl} target="_blank">
-            <MapOutlined fontSize={'small'} />
-          </a>
-          <VerticalDivider />
+        </div>
+        {/** Recommended Dish Container */}
+        <div className="flex justify-between items-center gap-1 rounded-md bg-amber-50 p-1">
+          <div className={'flex items-center gap-1'}>
+            <ThumbUpOutlined fontSize={'small'} />
+            <span className={'font-bold'}>{t('must_try')}</span>
+          </div>
+          <div className={'flex gap-1 flex-col'}>
+            {data.recommendations.map((dish, i) => (
+              <span
+                key={i}
+                className={
+                  'px-1 py-0.5 flex justify-center border-goldenmile border bg-white rounded-xl'
+                }
+              >
+                {dish}
+              </span>
+            ))}
+          </div>
         </div>
         {/** Desc Container */}
-        <div className="flex flex-col mt-2 justify-center items-center gap-4">
-          <span className="flex justify-center items-center gap-1">
-            <ThumbUpOutlined />
-            <div>
-              {data.recommendations.map((dish, i) => (
-                <HighlightedText key={i}>{dish}</HighlightedText>
-              ))}
-            </div>
-          </span>
+        <div className="flex flex-col justify-start gap-4">
           <p className="font-light text-xs">
-            {description.substring(0, Math.min(description.length, 100))}
-            {description.length > 100 ? '...' : ''}
+            {description.substring(0, Math.min(description.length, MIN_DESC_LEN))}
+            {description.length > MIN_DESC_LEN ? '...' : ''}
           </p>
         </div>
         {/** Learn More Btn Container */}
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-2">
+          <a
+            className={cn(
+              'flex flex-1 justify-center items-center gap-0.5 hover:bg-red-700',
+              learnMoreBtnBaseStyle,
+            )}
+            href={data.location.gmapUrl}
+            aria-label={'Get Map Directions'}
+            target="_blank"
+            rel={'noopener noreferrer'}
+          >
+            <MapOutlined fontSize={'small'} />
+            <span>{t('directions')}</span>
+          </a>
           <button
-            className={cn(learnMoreBtnBaseStyle, getThemeStyle())}
+            className={cn('flex-1', learnMoreBtnBaseStyle, getThemeStyle())}
             onClick={openMore}
             aria-label="Learn more about this location"
           >
@@ -102,13 +123,3 @@ function PlaceContent() {
 }
 
 export default memo(PlaceContent);
-
-export function MrtLabel({ mrt }: { mrt: string }) {
-  const mrtT = useTranslations('MRT');
-  return (
-    <span className="flex gap-1 items-center">
-      <SubwayOutlined fontSize="small" />
-      <p className="font-public-sans font-medium max-w-22 wrap-break-word">{mrtT(mrt)}</p>
-    </span>
-  );
-}

@@ -71,6 +71,8 @@
         "north": "北部地域"
     },
     "CardView": {
+        "must_try": "必食メニュー",
+        "directions": "道順を調べる",
         "learnmore": "もっと見る"
     },
     "Sidebar": {
