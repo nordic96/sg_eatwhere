@@ -10,6 +10,7 @@ import { geti18nConfig } from '@/i18n/request';
 import { Close, Search } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import { Activity, useEffect, useId, useRef, useState } from 'react';
+import RichItem from './RichItem';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
@@ -110,6 +111,13 @@ export default function SearchBar() {
     resultsRef.current = [];
   }, [results]);
 
+  function onFocus() {
+    if (debouncedKeyword === '') {
+      setResults(searchableData);
+    }
+    setIsActive(true);
+  }
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (results.length <= 0) {
       return;
@@ -131,8 +139,8 @@ export default function SearchBar() {
     }
   }
 
-  const showResults = debouncedKeyword !== '' && !loading && isActive;
-  const defaultLiStyle = 'px-2 py-1 max-sm:py-4 rounded-lg';
+  const showResults = !loading && isActive;
+  const defaultLiStyle = 'px-2 py-1 rounded-lg cursor-pointer';
   const containerBaseWidthStyle = 'w-[500px] max-sm:w-full';
 
   return (
@@ -150,7 +158,7 @@ export default function SearchBar() {
           maxLength={MAX_INPUT_LEN}
           type={'text'}
           disabled={loading}
-          onFocus={() => setIsActive(true)}
+          onFocus={onFocus}
           onBlur={() => {
             setTimeout(() => setIsActive(false), 150);
           }}
@@ -189,7 +197,7 @@ export default function SearchBar() {
           id={listboxId}
           className={cn(
             containerBaseWidthStyle,
-            'absolute z-999 bg-white rounded-lg flex flex-col gap-2',
+            'absolute z-999 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
           )}
           role={'listbox'}
         >
@@ -218,7 +226,7 @@ export default function SearchBar() {
                 }}
                 onMouseEnter={() => setSelectedIndex(i)}
               >
-                {v.name}
+                <RichItem data={v} />
               </li>
             ))
           )}
