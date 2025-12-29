@@ -38,7 +38,8 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-monsoongrey';
   const navBtnBaseStyle =
     'absolute top-[50%] opacity-80 text-white rounded-full cursor-pointer text-3xl max-sm:text-4xl flex';
-  const currImgIndicatorBaseStyle = 'absolute px-1 top-0 right-0 opacity-80 rounded-xl text-white';
+  const currImgIndicatorBaseStyle =
+    'absolute px-1 bottom-1 left-[50%] translat-x-[50%] opacity-80 rounded-xl text-white';
 
   return (
     <div className={cn(containerBaseStyle)} role="region" aria-label="Image carousel">
@@ -62,14 +63,14 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         })}
       </div>
       <button
-        className={cn(navBtnBaseStyle, { 'left-0': true }, customClass)}
+        className={cn(navBtnBaseStyle, { 'left-4': true }, customClass)}
         onClick={onClickLeft}
         aria-label="Previous image"
       >
         <West fontSize={'inherit'} />
       </button>
       <button
-        className={cn(navBtnBaseStyle, { 'right-0': true }, customClass)}
+        className={cn(navBtnBaseStyle, { 'right-4': true }, customClass)}
         onClick={onClickRight}
         aria-label="Next image"
       >

@@ -71,6 +71,8 @@
         "north": "Noordelijke Regio"
     },
     "CardView": {
+        "must_try": "Moet gerechten proberen",
+        "directions": "Richtingen",
         "learnmore": "Meer Informatie"
     },
     "Sidebar": {

@@ -71,6 +71,8 @@
         "north": "North Region"
     },
     "CardView": {
+        "must_try": "Must Try Dishes",
+        "directions": "Get Directions",
         "learnmore": "Learn More"
     },
     "Sidebar": {

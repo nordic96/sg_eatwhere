@@ -70,7 +70,9 @@
         "north": "북부 지역"
     },
     "CardView": {
-        "learnmore": "더 보기"
+        "must_try": "추천 메뉴",
+        "learnmore": "더 보기",
+        "directions": "지도 보기"
     },
     "Sidebar": {
         "map": "지도",

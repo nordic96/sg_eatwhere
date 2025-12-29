@@ -12,7 +12,11 @@ export default function ButtonContainer() {
   const trailButtonStyle =
     'h-6 w-6 bg-primary text-white hover:bg-red-700 rounded-full cursor-pointer flex items-center justify-center';
   return (
-    <div className={'flex w-full justify-between items-center'} role="group" aria-label="Action buttons">
+    <div
+      className={'flex w-full justify-between items-center'}
+      role="group"
+      aria-label="Action buttons"
+    >
       <div className={'flex gap-2'} role="group" aria-label="Trail navigation">
         <Activity mode={trailMode ? 'visible' : 'hidden'}>
           <button
