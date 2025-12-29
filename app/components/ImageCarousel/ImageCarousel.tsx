@@ -39,7 +39,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const navBtnBaseStyle =
     'absolute top-[50%] opacity-80 text-white rounded-full cursor-pointer text-3xl max-sm:text-4xl flex';
   const currImgIndicatorBaseStyle =
-    'absolute px-1 bottom-1 left-[50%] translat-x-[50%] opacity-80 rounded-xl text-white';
+    'absolute px-1 bottom-1 left-[50%] -translate-x-[50%] opacity-80 rounded-xl text-white';
 
   return (
     <div className={cn(containerBaseStyle)} role="region" aria-label="Image carousel">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppStore, useHeritageStore } from '@/app/stores';
-import { MapOutlined, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
+import { MapOutlined, ThumbUpOutlined } from '@mui/icons-material';
 
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import { cn } from '@/app/utils';
@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
 import { memo, useMemo } from 'react';
+import { MrtLabel } from '../MrtLabel/MrtLabel';
 
 const MIN_DESC_LEN = 50;
 function PlaceContent() {
@@ -46,7 +47,7 @@ function PlaceContent() {
         <ButtonContainer />
       </div>
       <div className="w-full flex flex-col gap-2 px-4 py-2">
-        <div className="text-center flex flex-col items-start">
+        <div className="flex flex-col items-start">
           <span className="text-2xl font-bold">{data.name}</span>
           <span className={'text-[#555]'}>{data.location.address}</span>
         </div>
@@ -103,6 +104,7 @@ function PlaceContent() {
             href={data.location.gmapUrl}
             aria-label={'Get Map Directions'}
             target="_blank"
+            rel={'noopener noreferrer'}
           >
             <MapOutlined fontSize={'small'} />
             <span>{t('directions')}</span>
@@ -121,13 +123,3 @@ function PlaceContent() {
 }
 
 export default memo(PlaceContent);
-
-export function MrtLabel({ mrt }: { mrt: string }) {
-  const mrtT = useTranslations('MRT');
-  return (
-    <span className="flex gap-1 items-center">
-      <SubwayOutlined fontSize="small" />
-      <p className="font-public-sans font-medium max-w-22 wrap-break-word">{mrtT(mrt)}</p>
-    </span>
-  );
-}
