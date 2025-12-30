@@ -49,6 +49,8 @@
         "featured_food_spots": "Featured Food Spots",
         "play_marquee": "Play Marquee",
         "pause_marquee": "Pause Marquee",
+        "marquee_paused": "Marquee paused",
+        "marquee_playing": "Marquee playing",
         "foodlist_by_region": "Food List By Region",
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"

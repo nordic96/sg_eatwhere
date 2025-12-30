@@ -49,6 +49,8 @@
         "featured_food_spots": "注目のグルメスポット",
         "play_marquee": "マーキーを再生",
         "pause_marquee": "マーキーを一時停止",
+        "marquee_paused": "マーキーが一時停止されました",
+        "marquee_playing": "マーキーが再生中です",
         "foodlist_by_region": "地域別フードリスト",
         "map_by": "マップクレジット：",
         "map_disclaimer": "**マップの縮尺は正確ではなく、各レストランの場所の大まかな推定用です"

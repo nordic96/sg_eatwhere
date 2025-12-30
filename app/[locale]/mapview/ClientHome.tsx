@@ -60,6 +60,8 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
         className="italic hover:text-primary w-fit"
         href={'https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg'}
         target={'_blank'}
+        rel="noopener noreferrer"
+        aria-label="Map attribution: Seloloving, licensed under CC BY-SA 4.0 on Wikimedia Commons"
       >
         {`${t('map_by')} ${MAP_COPYRIGHT_URL}`}
       </a>
@@ -73,8 +75,8 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
         {/** Food List Container */}
         <div className={'flex flex-col'}>
           <div className={'flex items-center'}>
-            <LocationPin fontSize={'medium'} />
-            <span className={'font-bold text-lg'}>{t('foodlist_by_region')}</span>
+            <LocationPin fontSize={'medium'} aria-hidden="true" />
+            <h2 className={'font-bold text-lg'}>{t('foodlist_by_region')}</h2>
           </div>
           <div className="grid grid-cols-4 flex-1 mt-1">
             <HeritageListView region={'central'} />
