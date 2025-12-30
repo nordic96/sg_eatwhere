@@ -48,6 +48,12 @@
     },
     "HomePage": {
         "trail_mode": "Trail Mode",
+        "featured_food_spots": "Featured Food Spots",
+        "play_marquee": "Play Marquee",
+        "pause_marquee": "Pause Marquee",
+        "marquee_paused": "Marquee paused",
+        "marquee_playing": "Marquee playing",
+        "foodlist_by_region": "Food List By Region",
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
     },
@@ -73,6 +79,8 @@
         "north": "North Region"
     },
     "CardView": {
+        "must_try": "Must Try Dishes",
+        "directions": "Get Directions",
         "learnmore": "Learn More"
     },
     "Sidebar": {

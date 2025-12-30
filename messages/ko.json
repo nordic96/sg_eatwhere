@@ -38,6 +38,12 @@
     },
     "HomePage": {
         "trail_mode": "둘레길 모드",
+        "featured_food_spots": "추천 맛집",
+        "play_marquee": "무한롤링 재생",
+        "pause_marquee": "무한롤링 일시정지",
+        "marquee_paused": "무한롤링이 일시정지되었습니다",
+        "marquee_playing": "무한롤링이 재생중입니다",
+        "foodlist_by_region": "지역별 음식점 목록",
         "map_by": "지도 저작권: ",
         "map_disclaimer": "**지도의 척도와 음식점들의 위치는 다소 상이할수 있습니다, 참고용으로 보시기 바랍니다"
     },
@@ -72,7 +78,9 @@
         "north": "북부 지역"
     },
     "CardView": {
-        "learnmore": "더 보기"
+        "must_try": "추천 메뉴",
+        "learnmore": "더 보기",
+        "directions": "지도 보기"
     },
     "Sidebar": {
         "map": "지도",

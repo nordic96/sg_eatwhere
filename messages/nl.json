@@ -48,6 +48,12 @@
     },
     "HomePage": {
         "trail_mode": "Trail Modus",
+        "featured_food_spots": "Aanbevolen Eetgelegenheden",
+        "play_marquee": "Marquee Afspelen",
+        "pause_marquee": "Marquee Pauzeren",
+        "marquee_paused": "Marquee gepauzeerd",
+        "marquee_playing": "Marquee wordt afgespeeld",
+        "foodlist_by_region": "Voedsellijst per Regio",
         "map_by": "Kaart Credits: ",
         "map_disclaimer": "**De schaal van de kaart is niet precies, het is voor een ruwe schatting van de locaties voor elk restaurant"
     },
@@ -73,6 +79,8 @@
         "north": "Noordelijke Regio"
     },
     "CardView": {
+        "must_try": "Moet gerechten proberen",
+        "directions": "Richtingen",
         "learnmore": "Meer Informatie"
     },
     "Sidebar": {
