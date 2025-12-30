@@ -13,3 +13,7 @@ export function isUsingTestData() {
 export function getAppVersion() {
   return process.env.APP_VERSION;
 }
+
+export function getGmapUrl() {
+  return process.env.GMAP_URL;
+}

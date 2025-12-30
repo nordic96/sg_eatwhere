@@ -82,7 +82,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
       </div>
       {/** Marquee Container */}
       <div
-        className={'relative w-full flex h-48 overflow-x-hidden'}
+        className={'relative w-full flex h-40 overflow-x-hidden'}
         role="region"
         aria-label={t('featured_food_spots')}
       >

@@ -13,6 +13,7 @@ import TrailMode from '../../components/TrailMode/TrailMode';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
 import FoodMarquee from '../../components/FoodMarquee/FoodMarquee';
 import { LocationPin } from '@mui/icons-material';
+import GoogleMapsBanner from '@/app/components/GoogleMapsBanner/GoogleMapsBanner';
 
 type ClientHomeProps = {
   locale: string;
@@ -66,12 +67,13 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
         {`${t('map_by')} ${MAP_COPYRIGHT_URL}`}
       </a>
       <p className="italic text-[#333]">{t('map_disclaimer')}</p>
-      <div className="flex max-sm:flex-col grow justify-between mt-8 gap-8">
+      <div className="flex flex-col grow justify-between mt-8 gap-8">
         {/** Gmap List Container */}
-        <div className={'flex flex-1 flex-col'}>
+        <div className={'flex flex-1'}>
           {/** Food Macquee Container */}
           <FoodMarquee items={foodImages} />
         </div>
+        <GoogleMapsBanner />
         {/** Food List Container */}
         <div className={'flex flex-col'}>
           <div className={'flex items-center'}>

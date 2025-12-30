@@ -57,6 +57,12 @@
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
     },
+    "GMapBanner": {
+        "explore_complete_collection": "Explore the Complete Collection",
+        "google_maps_banner_description": "View all 100+ curated food spots on Google Maps—including hidden gems not yet on this map. Get directions, photos, and real-time updates.",
+        "view_full_list": "View Full List",
+        "google_maps_banner_sr_description": "Open complete food collection in Google Maps with over 100 curated locations, directions, and real-time information"
+    },
     "AboutPage": {
         "intro": "Frontend Software Engineer | Web Developer",
         "food_code_desc": "Back in 2024-2025, I went back to my home country, South Korea to complete my national service.\nBefore enlisting, I worked as a Software Engineer - and during service, I found myself missing the joy of builindg things with code.\n\nThere was something else I missed just as much: the <b>food in Singapore</b>.\n\nWhile scrolling through old photos of meals shared with my Singaporean friends, I felt inspired. I wanted to create something more than a simple food blog - something interactive, something that lets people explore the memories behind each place.\nThat became the idea for the <b>Foodie's Trail</b>; A <i>3D food map</i>, combining the two things I love most: food and code.",
