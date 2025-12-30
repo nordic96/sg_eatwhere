@@ -11,7 +11,7 @@ import { useHeritageStore } from '../../stores';
 import { Activity, useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
-import FoodMarquee from './FoodMarquee';
+import FoodMarquee from '../../components/FoodMarquee/FoodMarquee';
 import { LocationPin } from '@mui/icons-material';
 
 type ClientHomeProps = {
@@ -66,7 +66,7 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
         {`${t('map_by')} ${MAP_COPYRIGHT_URL}`}
       </a>
       <p className="italic text-[#333]">{t('map_disclaimer')}</p>
-      <div className="flex max-sm:flex-col grow justify-between mt-8 gap-15">
+      <div className="flex max-sm:flex-col grow justify-between mt-8 gap-8">
         {/** Gmap List Container */}
         <div className={'flex flex-1 flex-col'}>
           {/** Food Macquee Container */}

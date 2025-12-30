@@ -18,11 +18,10 @@ export function flatten<T = unknown>(value: Array<ArrayValue<T>>): Array<T> {
 }
 
 export function shuffle<T = unknown>(arr: Array<T>): Array<T> {
-  return arr.sort(() => {
-    const val = Math.floor(Math.random() * 2);
-    if (val === 0) {
-      return -1;
-    }
-    return 1;
-  });
+  const res = [...arr];
+  for (let i = res.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [res[i], res[j]] = [res[j], res[i]];
+  }
+  return res;
 }

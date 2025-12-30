@@ -3,17 +3,13 @@
 import CategoryIcon from '@/app/components/CategoryIcon/CategoryIcon';
 import Tooltip from '@/app/components/Tooltip/Tooltip';
 import { useHeritageStore } from '@/app/stores';
+import { FoodMarqueeItem } from '@/app/types';
 import { cn, shuffle } from '@/app/utils';
 import { CameraAlt, PauseCircle, PlayCircle, SubwayOutlined } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
-
-export type FoodMarqueeItem = {
-  src: string;
-  id: string;
-};
 
 interface FoodMarqueeProps {
   items: FoodMarqueeItem[];
@@ -24,6 +20,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
   const [isPaused, setIsPaused] = useState(false);
   const [announceMessage, setAnnounceMessage] = useState('');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const shuffledItems = useMemo(() => (shuffleArr ? shuffle(items) : items), [items, shuffleArr]);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
@@ -41,11 +38,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
   });
 
   function generateImages(keyPrefix: string) {
-    let arr = items;
-    if (shuffleArr) {
-      arr = shuffle(arr);
-    }
-    return arr.map(({ src, id }, i) => {
+    return shuffledItems.map(({ src, id }, i) => {
       return <FoodMarqueeItemComp key={`${keyPrefix}-${i}`} src={src} id={id} index={i} />;
     });
   }
@@ -96,7 +89,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
         <div
           {...handlers}
           ref={scrollContainerRef}
-          className="absolute flex overflow-hidden group bg-[#333] cursor-grab active:cursosr-grabbing"
+          className="absolute flex overflow-hidden group bg-[#333] cursor-grab active:cursor-grabbing"
         >
           <div
             className={cn(
@@ -116,7 +109,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

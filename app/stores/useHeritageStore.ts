@@ -1,9 +1,8 @@
 import { create } from 'zustand';
-import { EateryCategory, FoodHeritage, ThemeColor } from '../types';
+import { EateryCategory, FoodHeritage, FoodMarqueeItem, ThemeColor } from '../types';
 import { ClassValue } from 'clsx';
 import { ThemeRecord } from '../constants/theme';
 import { flatten } from '../utils';
-import { FoodMarqueeItem } from '../[locale]/mapview/FoodMarquee';
 
 type State = {
   heritageId: string | null;
@@ -91,10 +90,6 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
     return arr;
   },
   getFoodDataById: (id: string) => {
-    const data = get().foodData.filter((x) => x.id === id);
-    if (data.length === 0) {
-      return null;
-    }
-    return data[0];
+    return get().foodData.find((x) => x.id === id) ?? null;
   },
 }));
