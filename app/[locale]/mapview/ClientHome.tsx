@@ -11,6 +11,8 @@ import { useHeritageStore } from '../../stores';
 import { Activity, useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
+import FoodMarquee from '../../components/FoodMarquee/FoodMarquee';
+import { LocationPin } from '@mui/icons-material';
 
 type ClientHomeProps = {
   locale: string;
@@ -23,6 +25,8 @@ const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
 function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
   const { setFoodData, reset } = useHeritageStore();
+  const getFoodImages = useHeritageStore((state) => state.getFoodImages);
+  const foodImages = getFoodImages();
   const t = useTranslations('HomePage');
 
   useEffect(() => {
@@ -56,20 +60,31 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
         className="italic hover:text-primary w-fit"
         href={'https://commons.wikimedia.org/wiki/File:Singapore_MRT_Network_(with_Hume).svg'}
         target={'_blank'}
+        rel="noopener noreferrer"
+        aria-label="Map attribution: Seloloving, licensed under CC BY-SA 4.0 on Wikimedia Commons"
       >
         {`${t('map_by')} ${MAP_COPYRIGHT_URL}`}
       </a>
       <p className="italic text-[#333]">{t('map_disclaimer')}</p>
-      <div className="flex grow justify-between mt-8">
-        {/** Food List Container */}
-        <div className="grid grid-cols-4 w-[60%] max-sm:w-full">
-          <HeritageListView region={'central'} />
-          <HeritageListView region={'east'} />
-          <HeritageListView region={'west'} />
-          <HeritageListView region={'north'} />
-        </div>
+      <div className="flex max-sm:flex-col grow justify-between mt-8 gap-8">
         {/** Gmap List Container */}
-        <div></div>
+        <div className={'flex flex-1 flex-col'}>
+          {/** Food Macquee Container */}
+          <FoodMarquee items={foodImages} />
+        </div>
+        {/** Food List Container */}
+        <div className={'flex flex-col'}>
+          <div className={'flex items-center'}>
+            <LocationPin fontSize={'medium'} aria-hidden="true" />
+            <h2 className={'font-bold text-lg'}>{t('foodlist_by_region')}</h2>
+          </div>
+          <div className="grid grid-cols-4 flex-1 mt-1">
+            <HeritageListView region={'central'} />
+            <HeritageListView region={'east'} />
+            <HeritageListView region={'west'} />
+            <HeritageListView region={'north'} />
+          </div>
+        </div>
       </div>
     </div>
   );
