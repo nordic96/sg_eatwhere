@@ -12,7 +12,7 @@ import { Activity, useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
 import FoodMarquee from './FoodMarquee';
-import { CameraAlt } from '@mui/icons-material';
+import { LocationPin } from '@mui/icons-material';
 
 type ClientHomeProps = {
   locale: string;
@@ -68,20 +68,20 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
         {/** Gmap List Container */}
         <div className={'flex flex-1 flex-col'}>
           {/** Food Macquee Container */}
-          <div className={'flex items-center'}>
-            <CameraAlt fontSize={'medium'} />
-            <span className={'font-bold text-lg'}>{'Featured Food Spots'}</span>
-          </div>
-          <div className={'relative flex w-full h-44 overflow-x-hidden'}>
-            <FoodMarquee items={foodImages} />
-          </div>
+          <FoodMarquee items={foodImages} />
         </div>
         {/** Food List Container */}
-        <div className="grid grid-cols-4 flex-1">
-          <HeritageListView region={'central'} />
-          <HeritageListView region={'east'} />
-          <HeritageListView region={'west'} />
-          <HeritageListView region={'north'} />
+        <div className={'flex flex-col'}>
+          <div className={'flex items-center'}>
+            <LocationPin fontSize={'medium'} />
+            <span className={'font-bold text-lg'}>{t('foodlist_by_region')}</span>
+          </div>
+          <div className="grid grid-cols-4 flex-1 mt-1">
+            <HeritageListView region={'central'} />
+            <HeritageListView region={'east'} />
+            <HeritageListView region={'west'} />
+            <HeritageListView region={'north'} />
+          </div>
         </div>
       </div>
     </div>
