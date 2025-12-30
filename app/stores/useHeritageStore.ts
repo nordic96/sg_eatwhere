@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { EateryCategory, FoodHeritage, ThemeColor } from '../types';
 import { ClassValue } from 'clsx';
 import { ThemeRecord } from '../constants/theme';
+import { flatten } from '../utils';
+import { FoodMarqueeItem } from '../[locale]/mapview/FoodMarquee';
 
 type State = {
   heritageId: string | null;
@@ -19,6 +21,8 @@ type Actions = {
   setFoodData: (data: FoodHeritage[]) => void;
   getFoodData: () => FoodHeritage[];
   getSelectedFoodData: () => FoodHeritage | null;
+  getFoodImages: () => FoodMarqueeItem[];
+  getFoodDataById: (id: string) => FoodHeritage | null;
   reset: () => void;
 };
 
@@ -77,5 +81,20 @@ export const useHeritageStore = create<State & Actions>((set, get) => ({
     if (!id) return null;
 
     return data.find((i) => i.id === id) || null;
+  },
+  getFoodImages: () => {
+    const data = get().foodData;
+    const itemsArr: FoodMarqueeItem[][] = data.map((x) => {
+      return x.imgSource.map((v) => ({ src: v, id: x.id }));
+    });
+    const arr = flatten<FoodMarqueeItem>(itemsArr);
+    return arr;
+  },
+  getFoodDataById: (id: string) => {
+    const data = get().foodData.filter((x) => x.id === id);
+    if (data.length === 0) {
+      return null;
+    }
+    return data[0];
   },
 }));

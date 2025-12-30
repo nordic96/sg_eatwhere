@@ -28,6 +28,7 @@
   --color-monsoongrey: #7F8B9B;
   --animate-fill: fill 1s linear forwards;
   --animate-marquee: marquee 25s linear infinite;
+  --animate-food-marquee: marquee 60s linear infinite;
   @keyframes fill {
     0% {
       transform: scaleX(0);
