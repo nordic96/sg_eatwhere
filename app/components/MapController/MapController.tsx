@@ -1,11 +1,13 @@
 'use client';
 import { Expand, ThreeSixty, ZoomOutMap } from '@mui/icons-material';
-import { RefObject, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { MapControls as MapControlsImpl } from 'three-stdlib';
 import ControlButton, { buttonStyle } from './ControlButton';
 import { ControlMode } from './types';
-import { cn } from '@/app/utils';
+import { cn, geoConverter } from '@/app/utils';
+import useCameraControls from '@/app/hooks/useCameraControls';
+import { useHeritageStore } from '@/app/stores';
 
 export type MapControllerProps = {
   controls: RefObject<MapControlsImpl | null>;
@@ -14,6 +16,18 @@ export type MapControllerProps = {
 
 export default function MapController({ controls, camera }: MapControllerProps) {
   const [expanded, setExpanded] = useState(true);
+  const heritageId = useHeritageStore((state) => state.heritageId);
+  const getSelectedFoodData = useHeritageStore((state) => state.getSelectedFoodData);
+
+  const { focusOnLocation } = useCameraControls(controls.current, camera.current);
+
+  const selectedFoodData = getSelectedFoodData();
+  useEffect(() => {
+    if (selectedFoodData !== null && heritageId) {
+      const vector = geoConverter(selectedFoodData.location.geoLocation);
+      focusOnLocation(new THREE.Vector3(...vector));
+    }
+  }, [heritageId, focusOnLocation, selectedFoodData]);
 
   const toggleExpand = () => {
     setExpanded((t) => !t);

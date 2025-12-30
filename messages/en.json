@@ -11,7 +11,8 @@
         "nanhuachang_desc": "Are you a seafood lover? or perhaps a hotpot lover? This restaurant has been serving one of the best fishhead steamboat dishes since 1927 and the family is running business over 4 generations. Fishhead steamboat is a dish that serves soup with fish head meat, variety of vegetables, with a specially designed pot, where the centre has a charcoal placed inside the centre hole. This design keeps the dish hot after long hours, and turns the soup infused with charcoal flavour, giving you the irresistable taste.\n\nIt became a place where many Singaporeans bring families, close friends to visit, eat, and talk almost about everything. Will you be keen to experience steamboat culture in the most delicious way at this restaurant?",
         "yatkayan_desc": "Are you staying near Dhoby Ghaut Station? or planning to visit Chijmes? there is a hidden chinese dessert shop not far from Bencoolen station, favoured by young Singaporeans. This dessert shop is also known by nearby design school and university students for selling variety of delicious chinese desserts at a cheap price.\n\nMy personal favourite, Chendol, a popular singaporean ice dessert with generous amount of GulaMelaka (charamelised syrup) drizzled, or if you are not much into 'too sweet' desserts, you can also try out a purple rice dessert made of glutinous purple rice served with variety of toppings. There are hot desserts available too!",
         "jixiang_desc": "Do you know what Kueh is? This confectionery was founded in 1988, located near Outram Park and Tanjong Pagar MRT station, selling freshly handmade delicious Ang Ku Kueh. The word 'Ang Ku Kueh' literally means red tortoise cake, because the shape resembles a tortoise shell. It has a delicious rice cake texture, coated with sesame oil, and has variety of fillings.\n\n I personally recommend their sweet bean fillings and yam fillings",
-        "donamanis_desc": "Planning to visit Joo Chiat Road? not near from the centre of the popular joo chiat road, an old institution bakes delicious pies since 1990 at Katong Shopping Centre. Once you are near this shop, you cannot resist the smell of one of the best banana pies in Singapore."
+        "donamanis_desc": "Planning to visit Joo Chiat Road? not near from the centre of the popular joo chiat road, an old institution bakes delicious pies since 1990 at Katong Shopping Centre. Once you are near this shop, you cannot resist the smell of one of the best banana pies in Singapore.",
+        "ahtai_desc": "Chicken Rice is one of the most popular dish in Singapore. AhTai Chicken Rice, located at Maxwell Food Centre, which is only few minutes walk from the famous Buddha Tooth Relic Temple in ChinaTown. If you are travelling with more than 2 people, I recommend ordering half/whole chicken with separate rice bowls, or just individual chicken rice sets if you are not so hungry!"
     },
     "MRT": {
         "tanjong_pagar": "Tanjong Pagar",
@@ -21,7 +22,8 @@
         "lavender": "Lavender",
         "bugis": "Bugis",
         "nicoll_highway": "Nicoll Highway",
-        "marine_parade": "Marine Parade"
+        "marine_parade": "Marine Parade",
+        "maxwell": "Maxwell"
     },
     "Header": {
         "link_mapview": "MapView",
@@ -46,6 +48,12 @@
     },
     "HomePage": {
         "trail_mode": "Trail Mode",
+        "featured_food_spots": "Featured Food Spots",
+        "play_marquee": "Play Marquee",
+        "pause_marquee": "Pause Marquee",
+        "marquee_paused": "Marquee paused",
+        "marquee_playing": "Marquee playing",
+        "foodlist_by_region": "Food List By Region",
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
     },
@@ -71,6 +79,8 @@
         "north": "North Region"
     },
     "CardView": {
+        "must_try": "Must Try Dishes",
+        "directions": "Get Directions",
         "learnmore": "Learn More"
     },
     "Sidebar": {
