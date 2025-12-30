@@ -1,16 +1,19 @@
 [
   {
-    "id": "fh-001",
-    "name": "Maxwell Hainanese Chicken Rice",
-    "recommendations": ["Steamed chicken", "Roasted chicken"],
+    "id": "ahtai",
+    "name": "AhTai Hainanese Chicken Rice",
+    "recommendations": ["Chicken Rice Set"],
     "category": "hawker",
-    "imgSource": ["/maxwell-1.jpg"],
+    "imgSource": ["/ahtai/ahtai.jpeg"],
     "location": {
-      "address": "1 Kadayanallur St, Singapore",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Chinatown"],
+      "address": "1 Kadayanallur St, Maxwell Food Centre, Singapore 069184",
+      "gmapUrl": "https://maps.google.com/?q=Maxwell+Food+Centre",
+      "mrt": ["maxwell"],
       "region": "central",
-      "geoLocation": { "latitude": 1.2800, "longitude": 103.8443 }
+      "geoLocation": { 
+        "latitude": 1.2808, 
+        "longitude": 103.8440 
+      }
     }
   },
   {
