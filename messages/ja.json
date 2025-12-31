@@ -44,7 +44,17 @@
         "discover_why": "このガイドを作った理由",
         "landing2_desc": "これは単なる食事リストではありません",
         "landing2_desc_2": "「私は10年以上前にシンガポールに移住しました。これは何百もの地元の食事と共に、友人一人一人との個人的な思い出を描いています」",
-        "photo_disclaimer": "すべての写真は私が撮影しました！"
+        "photo_disclaimer": "すべての写真は私が撮影しました！",
+        "your_complete_singapore_food_guide": "シンガポール完全グルメガイド",
+        "access_full_curated_collection": "Googleマップで厳選されたコレクション全体にアクセスでき、リアルタイム情報とナビゲーションが利用できます。",
+        "feature_100_plus_locations": "100以上の本格的な飲食店",
+        "feature_turn_by_turn": "ターンバイターンのルート案内",
+        "feature_live_hours": "営業時間と連絡先のリアルタイム情報",
+        "feature_hidden_gems": "インタラクティブマップにない隠れた名店",
+        "google_maps_collection": "Googleマップコレクション",
+        "ten_years_discoveries": "10年以上の食の発見を一か所に",
+        "open_collection": "コレクションを開く",
+        "opens_in_google_maps": "Googleマップで開きます"
     },
     "HomePage": {
         "trail_mode": "トレイルモード",
@@ -56,6 +66,12 @@
         "foodlist_by_region": "地域別フードリスト",
         "map_by": "マップクレジット：",
         "map_disclaimer": "**マップの縮尺は正確ではなく、各レストランの場所の大まかな推定用です"
+    },
+    "GMapBanner": {
+        "explore_complete_collection": "完全なコレクションを探索",
+        "google_maps_banner_description": "Googleマップで100以上の厳選された飲食店を表示—このマップにまだない隠れた名店を含みます。ルート案内、写真、リアルタイム情報を取得できます。",
+        "view_full_list": "全リストを表示",
+        "google_maps_banner_sr_description": "Googleマップで100以上の厳選されたロケーション、ルート案内、リアルタイム情報を含む完全な飲食コレクションを開く"
     },
     "AboutPage": {
         "intro": "フロントエンドソフトウェアエンジニア | Webデベロッパー",

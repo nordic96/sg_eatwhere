@@ -44,7 +44,17 @@
         "discover_why": "Waarom ik deze gids maakte",
         "landing2_desc": "Dit is niet zomaar een voedsellijst",
         "landing2_desc_2": "\"Ik verhuisde meer dan 10 jaar geleden naar Singapore. Het schetst mijn persoonlijke herinneringen met meer dan honderd lokale maaltijden ... vriend voor vriend\"",
-        "photo_disclaimer": "Alle foto's zijn door mij genomen!"
+        "photo_disclaimer": "Alle foto's zijn door mij genomen!",
+        "your_complete_singapore_food_guide": "Uw Complete Singapore Voedseljids",
+        "access_full_curated_collection": "Bekijk mijn volledige verzameling op Google Maps met realtime informatie en navigatie.",
+        "feature_100_plus_locations": "100+ authentieke eetlocaties",
+        "feature_turn_by_turn": "Turn-by-turn routebeschrijving",
+        "feature_live_hours": "Live openingstijden & contactgegevens",
+        "feature_hidden_gems": "Verborgen juweeltjes niet op de interactieve kaart",
+        "google_maps_collection": "Google Maps Collectie",
+        "ten_years_discoveries": "10+ jaar van culinaire ontdekkingen op één plek",
+        "open_collection": "Open Collectie",
+        "opens_in_google_maps": "Opent in Google Maps"
     },
     "HomePage": {
         "trail_mode": "Trail Modus",
@@ -56,6 +66,12 @@
         "foodlist_by_region": "Voedsellijst per Regio",
         "map_by": "Kaart Credits: ",
         "map_disclaimer": "**De schaal van de kaart is niet precies, het is voor een ruwe schatting van de locaties voor elk restaurant"
+    },
+    "GMapBanner": {
+        "explore_complete_collection": "Ontdek de Volledige Collectie",
+        "google_maps_banner_description": "Bekijk alle 100+ geselecteerde eetgelegenheden op Google Maps—inclusief verborgen juweeltjes die nog niet op deze kaart staan. Krijg routebeschrijvingen, foto's en real-time updates.",
+        "view_full_list": "Bekijk Volledige Lijst",
+        "google_maps_banner_sr_description": "Open volledige voedselcollectie in Google Maps met meer dan 100 geselecteerde locaties, routebeschrijvingen en real-time informatie"
     },
     "AboutPage": {
         "intro": "Frontend Software Engineer | Web Developer",
