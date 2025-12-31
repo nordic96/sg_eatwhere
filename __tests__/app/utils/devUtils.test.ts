@@ -145,8 +145,8 @@ describe('devUtils', () => {
 
   describe('getGmapUrl', () => {
     test('returns URL when GMAP_URL is set', () => {
-      process.env.GMAP_URL = 'https://maps.google.com/test';
-      expect(getGmapUrl()).toBe('https://maps.google.com/test');
+      process.env.GMAP_URL = 'https://maps.app.goo.gl/test';
+      expect(getGmapUrl()).toBe('https://maps.app.goo.gl/test');
     });
 
     test('returns undefined and warns when GMAP_URL is not set in development', () => {

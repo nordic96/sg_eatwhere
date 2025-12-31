@@ -16,7 +16,7 @@ export function getAppVersion() {
 
 export function getGmapUrl() {
   const url = process.env.GMAP_URL;
-  if (url && !url.startsWith('https://maps.google.com') && !url.startsWith('https://goo.gl/maps')) {
+  if (url && !url.startsWith('https://maps.app.goo.gl') && !url.startsWith('https://goo.gl/maps')) {
     console.error('Must be a valid Google Map URL');
     return undefined;
   }
