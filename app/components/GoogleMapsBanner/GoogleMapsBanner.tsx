@@ -12,7 +12,7 @@ export default function GoogleMapsBanner({ url }: { url: string | undefined }) {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="block relative bg-linear-to-r from-primary to-outramorange rounded-xl p-3 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group"
+        className="block relative bg-gradient-to-r from-primary to-outramorange rounded-xl p-3 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group"
       >
         {/* Decorative Background Circle */}
         <div

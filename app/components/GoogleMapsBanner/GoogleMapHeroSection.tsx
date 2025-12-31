@@ -13,7 +13,7 @@ export default function GoogleMapsHeroSection() {
     <div className="w-full max-w-6xl mx-auto my-16 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl">
         {/* Left Side: Feature List */}
-        <div className="bg-linear-to-br from-primary to-outramorange p-8 md:p-12 text-white flex flex-col justify-center">
+        <div className="bg-gradient-to-br from-primary to-outramorange p-8 md:p-12 text-white flex flex-col justify-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {t('your_complete_singapore_food_guide')}
           </h2>
@@ -55,7 +55,7 @@ export default function GoogleMapsHeroSection() {
 
         {/* Right Side: CTA */}
         <div className="bg-white p-8 md:p-12 flex flex-col justify-center items-center text-center">
-          <div className="w-20 h-20 bg-linear-to-br from-primary to-outramorange rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+          <div className="w-20 h-20 bg-gradient-to-br from-primary to-outramorange rounded-2xl flex items-center justify-center mb-6 shadow-lg">
             <Map sx={{ fontSize: 40, color: 'white' }} />
           </div>
 
@@ -67,7 +67,7 @@ export default function GoogleMapsHeroSection() {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-linear-to-r from-primary to-outramorange text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-outramorange text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105"
             aria-label={'View Complete food collection on Google Maps'}
           >
             {t('open_collection')}
