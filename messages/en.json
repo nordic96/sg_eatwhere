@@ -44,7 +44,17 @@
         "discover_why": "Why I made this guide",
         "landing2_desc": "This is not just a Food List",
         "landing2_desc_2": "\"I moved to Singapore more than 10 years ago. It depicts my personal memories with over hundreds of local meals ... friend by friend\"",
-        "photo_disclaimer": "All photos were taken by me!"
+        "photo_disclaimer": "All photos were taken by me!",
+        "your_complete_singapore_food_guide": "Your Complete Singapore Food Guide",
+        "access_full_curated_collection": "Access my full curated collection on Google Maps with real-time information and navigation.",
+        "feature_100_plus_locations": "100+ authentic food locations",
+        "feature_turn_by_turn": "Turn-by-turn directions",
+        "feature_live_hours": "Live hours & contact info",
+        "feature_hidden_gems": "Hidden gems not on the interactive map",
+        "google_maps_collection": "Google Maps Collection",
+        "ten_years_discoveries": "10+ years of food discoveries in one place",
+        "open_collection": "Open Collection",
+        "opens_in_google_maps": "Opens in Google Maps"
     },
     "HomePage": {
         "trail_mode": "Trail Mode",
@@ -56,6 +66,12 @@
         "foodlist_by_region": "Food List By Region",
         "map_by": "Map Credit: ",
         "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
+    },
+    "GMapBanner": {
+        "explore_complete_collection": "Explore the Complete Collection",
+        "google_maps_banner_description": "View all 100+ curated food spots on Google Maps—including hidden gems not yet on this map. Get directions, photos, and real-time updates.",
+        "view_full_list": "View Full List",
+        "google_maps_banner_sr_description": "Open complete food collection in Google Maps with over 100 curated locations, directions, and real-time information"
     },
     "AboutPage": {
         "intro": "Frontend Software Engineer | Web Developer",

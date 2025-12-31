@@ -82,7 +82,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
       </div>
       {/** Marquee Container */}
       <div
-        className={'relative w-full flex h-48 overflow-x-hidden'}
+        className={'relative w-full flex h-40 overflow-x-hidden'}
         role="region"
         aria-label={t('featured_food_spots')}
       >
@@ -150,7 +150,7 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
         quality={90}
         draggable={false}
       />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/90 to-transparent"></div>
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent"></div>
       <div className={'absolute flex flex-col text-white bottom-2 w-full px-2 text-left'}>
         <CategoryIcon alt={'category'} cat={data.category} />
         <span className={'font-extrabold text-xs'}>{data.name}</span>

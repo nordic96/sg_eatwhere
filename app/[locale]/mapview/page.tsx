@@ -1,7 +1,7 @@
 import { geti18nConfig } from '@/i18n/request';
 import ClientHome from './ClientHome';
 import { AppResponse, FoodHeritage } from '../../types';
-import { fetchApi, isTrailMode, isUsingTestData } from '../../utils';
+import { fetchApi, getGmapUrl, isTrailMode, isUsingTestData } from '../../utils';
 import data from '@/resources/devData.json';
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
@@ -23,6 +23,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       locale={locale}
       trailMode={isTrailMode()}
       foods={response.error || response.data === null ? [] : response.data}
+      gmapUrl={getGmapUrl()}
     />
   );
 }

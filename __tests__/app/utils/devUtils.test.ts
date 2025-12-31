@@ -1,4 +1,4 @@
-import { isProductionMode, isTrailMode, isUsingTestData } from '@/app/utils/devUtils';
+import { getGmapUrl, isProductionMode, isTrailMode, isUsingTestData } from '@/app/utils/devUtils';
 
 describe('devUtils', () => {
   const originalEnv = process.env;
@@ -140,6 +140,24 @@ describe('devUtils', () => {
       expect(isProductionMode()).toBe(false);
       expect(isTrailMode()).toBe(false);
       expect(isUsingTestData()).toBe(false);
+    });
+  });
+
+  describe('getGmapUrl', () => {
+    test('returns URL when GMAP_URL is set', () => {
+      process.env.GMAP_URL = 'https://maps.app.goo.gl/test';
+      expect(getGmapUrl()).toBe('https://maps.app.goo.gl/test');
+    });
+
+    test('returns undefined and warns when GMAP_URL is not set in development', () => {
+      delete process.env.GMAP_URL;
+      process.env.NODE_ENV = 'development';
+      const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+      expect(getGmapUrl()).toBeUndefined();
+      expect(consoleWarnSpy).toHaveBeenCalledWith('GMAP_URL environment variable is not set');
+
+      consoleWarnSpy.mockRestore();
     });
   });
 });

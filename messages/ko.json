@@ -47,6 +47,12 @@
         "map_by": "지도 저작권: ",
         "map_disclaimer": "**지도의 척도와 음식점들의 위치는 다소 상이할수 있습니다, 참고용으로 보시기 바랍니다"
     },
+    "GMapBanner": {
+        "explore_complete_collection": "전체 컬렉션 탐색하기",
+        "google_maps_banner_description": "구글 지도에서 100개 이상의 엄선된 맛집을 확인하세요—이 지도에 아직 없는 숨겨진 맛집도 포함되어 있습니다. 길찾기, 사진, 실시간 업데이트를 받아보세요.",
+        "view_full_list": "전체 목록 보기",
+        "google_maps_banner_sr_description": "100개 이상의 엄선된 위치, 길찾기 및 실시간 정보가 포함된 구글 지도에서 전체 음식 컬렉션 열기"
+    },
     "AboutPage": {
         "intro": "프론트엔드 소프트웨어 엔지니어 | 웹 개발자",
         "food_code_desc": "2024–2025년, 저는 병역 의무를 수행하기 위해 고향인 한국으로 돌아갔습니다.\n입대 전까지 소프트웨어 엔지니어로 일해왔기에, 군 복무 중에는 자연스럽게 개발하던 시간이 그리워졌습니다.\n\n하지만 그만큼 그리웠던 것이 또 하나 있었는데, 바로 <b>싱가포르의 음식</b>이었습니다.\n\n싱가포르 친구들과 함께 먹었던 음식 사진들을 다시 보다가 문득 생각이 떠올랐습니다.\n지금 가진 기술로 단순한 음식 블로그가 아니라, 제가 싱가포르에서 보낸 시간과 이야기를 <b>더 재미있고 인터랙티브하게 담아낼 수 있는 프로젝트</b>를 만들면 어떨까?\n\n그렇게 해서 <b>3D 지도 위에서 추억과 음식들을 탐험할 수 있는 웹사이트(The Foodie's Trail)</b>가 탄생했습니다.\n\n제가 가장 좋아하는 두 가지 — 음식과 코드 — 를 한곳에 담아낸 셈이죠.",
@@ -61,7 +67,17 @@
         "discover_why": "이 웹사이트에 대하여",
         "landing2_desc": "단순한 맛집 북마크가 아닙니다",
         "landing2_desc_2": "\"싱가폴에서의 10년이 넘는 시간동안 저의 친구들,가족들이랑 같이 쌓아온 저의 추억들이 고스란히 묻힌 음식점들을 다른 분들도 좋은 추억을 쌓을 수 있길 바라며 공유합니다\"",
-        "photo_disclaimer": "모든 사진은 개발자 본인이 촬영했습니다"
+        "photo_disclaimer": "모든 사진은 개발자 본인이 촬영했습니다",
+        "your_complete_singapore_food_guide": "싱가포르 맛집 가이드",
+        "access_full_curated_collection": "구글 지도에서 실시간 정보와 내비게이션이 포함된 전체 큐레이션 컬렉션에 액세스하세요.",
+        "feature_100_plus_locations": "100개 이상의 정통 맛집",
+        "feature_turn_by_turn": "상세한 길찾기 안내",
+        "feature_live_hours": "실시간 영업시간 및 연락처 정보",
+        "feature_hidden_gems": "인터랙티브 지도에 없는 숨겨진 맛집",
+        "google_maps_collection": "구글 지도 컬렉션",
+        "ten_years_discoveries": "10년 이상의 맛집 발견을 한 곳에",
+        "open_collection": "컬렉션 열기",
+        "opens_in_google_maps": "구글 지도에서 열립니다"
     },
     "FilterBar": {
         "hawker": "호커 음식점",
