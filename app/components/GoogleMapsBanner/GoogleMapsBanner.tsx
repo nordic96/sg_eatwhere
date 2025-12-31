@@ -1,10 +1,9 @@
-import { getGmapUrl } from '@/app/utils';
 import { Map, ArrowForward } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 
-export default function GoogleMapsBanner() {
+export default function GoogleMapsBanner({ url }: { url: string | undefined }) {
   const t = useTranslations('GMapBanner');
-  const url = getGmapUrl() || '';
+  if (!url) return null;
 
   return (
     <div className="relative w-full">

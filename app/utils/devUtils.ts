@@ -15,5 +15,9 @@ export function getAppVersion() {
 }
 
 export function getGmapUrl() {
-  return process.env.GMAP_URL;
+  const url = process.env.GMAP_URL;
+  if (!url && !isProductionMode()) {
+    console.warn('GMAP_URL environment variable is not set');
+  }
+  return url;
 }

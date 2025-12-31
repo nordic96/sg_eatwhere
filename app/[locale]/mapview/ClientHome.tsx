@@ -20,11 +20,12 @@ type ClientHomeProps = {
   messages: Record<string, string>;
   foods: FoodHeritage[];
   trailMode?: boolean;
+  gmapUrl: string | undefined;
 };
 
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
-function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
+function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeProps) {
   const { setFoodData, reset } = useHeritageStore();
   const getFoodImages = useHeritageStore((state) => state.getFoodImages);
   const foodImages = getFoodImages();
@@ -73,7 +74,7 @@ function ClientHome({ trailMode, foods, locale, messages }: ClientHomeProps) {
           {/** Food Macquee Container */}
           <FoodMarquee items={foodImages} />
         </div>
-        <GoogleMapsBanner />
+        <GoogleMapsBanner url={gmapUrl} />
         {/** Food List Container */}
         <div className={'flex flex-col'}>
           <div className={'flex items-center'}>

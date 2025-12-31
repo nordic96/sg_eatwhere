@@ -4,6 +4,10 @@ import { useTranslations } from 'next-intl';
 
 export default function GoogleMapsHeroSection() {
   const t = useTranslations('LandingPage');
+  const url = getGmapUrl();
+  if (!url) {
+    return null;
+  }
 
   return (
     <div className="w-full max-w-6xl mx-auto my-16 px-4">
@@ -60,7 +64,7 @@ export default function GoogleMapsHeroSection() {
           <p className="text-sm text-gray-600 mb-8 max-w-xs">{t('ten_years_discoveries')}</p>
 
           <a
-            href={getGmapUrl() || ''}
+            href={url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-linear-to-r from-primary to-outramorange text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105"
