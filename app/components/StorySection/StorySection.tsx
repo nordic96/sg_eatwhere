@@ -6,6 +6,7 @@ import { PhotoCamera } from '@mui/icons-material';
 
 /* eslint-disable @next/next/no-img-element */
 export default function StorySection() {
+  const CDN_BASE = process.env.NEXT_PUBLIC_CDN_BASE || '';
   const t = useTranslations('LandingPage');
   return (
     <div>
@@ -27,7 +28,7 @@ export default function StorySection() {
             <p className={cn(microTextBaseStyle)}>{t('landing2_desc_2')}</p>
           </FadeIn>
           <img
-            src={'/images/film_canister.png'}
+            src={`${CDN_BASE}/resources/images/film_canister.png`}
             alt={'film_canister'}
             draggable={false}
             className={
@@ -38,13 +39,13 @@ export default function StorySection() {
             <div className="flex animate-marquee">
               <img
                 className={'lg:w-[1100px] max-sm:w-[200vw]'}
-                src={'/images/landing_film.png'}
+                src={`${CDN_BASE}/resources//images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
               />
               <img
                 className={'lg:w-[1100px] max-sm:w-[200vw]'}
-                src={'/images/landing_film.png'}
+                src={`${CDN_BASE}/resources//images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
               />
