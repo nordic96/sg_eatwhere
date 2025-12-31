@@ -39,13 +39,13 @@ export default function StorySection() {
             <div className="flex animate-marquee">
               <img
                 className={'lg:w-[1100px] max-sm:w-[200vw]'}
-                src={`${CDN_BASE}/resources//images/landing_film.png`}
+                src={`${CDN_BASE}/resources/images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
               />
               <img
                 className={'lg:w-[1100px] max-sm:w-[200vw]'}
-                src={`${CDN_BASE}/resources//images/landing_film.png`}
+                src={`${CDN_BASE}/resources/images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
               />
