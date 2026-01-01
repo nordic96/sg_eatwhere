@@ -4,9 +4,9 @@ import { useTranslations } from 'next-intl';
 import { h1BaseStyle, microTextBaseStyle } from '@/app/constants';
 import { PhotoCamera } from '@mui/icons-material';
 import Image from 'next/image';
+import { CDN_BASE } from '@/app/config/cdn';
 
 export default function StorySection() {
-  const CDN_BASE = process.env.NEXT_PUBLIC_CDN_BASE || '';
   const t = useTranslations('LandingPage');
   return (
     <div>

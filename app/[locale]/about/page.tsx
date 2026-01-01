@@ -3,9 +3,9 @@ import FadeIn from '../../components/FadeIn/FadeIn';
 import NameCard from '../../components/NameCard/NameCard';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { CDN_BASE } from '@/app/config/cdn';
 
 export default function Page() {
-  const CDN_BASE = process.env.NEXT_PUBLIC_CDN_BASE || '';
   const t = useTranslations('AboutPage');
   return (
     <div className={'py-16'}>

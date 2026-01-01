@@ -5,7 +5,11 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
-      new URL(`${process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jsdelivr.net'}/**`),
+      {
+        protocol: 'https',
+        hostname: new URL(process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jsdelivr.net').hostname,
+        pathname: '/**',
+      },
     ],
   },
   logging: {

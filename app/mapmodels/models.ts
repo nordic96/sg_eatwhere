@@ -2,8 +2,8 @@
 
 import { useGLTF } from '@react-three/drei';
 import { isProductionMode } from '../utils';
+import { CDN_BASE } from '../config/cdn';
 
-const CDN_BASE = process.env.NEXT_PUBLIC_CDN_BASE || '';
 export const MODELS = {
   riceBowl: `${CDN_BASE}/resources/models/rice_bowl.glb`,
   hawkerStall: `${CDN_BASE}/resources/models/hawker_stall_opt.glb`,
