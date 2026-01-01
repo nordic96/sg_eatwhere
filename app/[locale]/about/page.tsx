@@ -21,7 +21,7 @@ export default function Page() {
               className={'w-full max-w-[500px]'}
               draggable={false}
               width={'500'}
-              height={'0'}
+              height={'500'}
               quality={'95'}
               src={`${CDN_BASE}/resources/images/about_me.png`}
             />
