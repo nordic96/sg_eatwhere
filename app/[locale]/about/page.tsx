@@ -20,9 +20,9 @@ export default function Page() {
               alt={'me'}
               className={'w-full max-w-[500px]'}
               draggable={false}
-              width={'500'}
-              height={'500'}
-              quality={'95'}
+              width={500}
+              height={500}
+              quality={95}
               src={`${CDN_BASE}/resources/images/about_me.png`}
             />
             <span className={'flex justify-center'}>{'-Illustration designed by Gihun Ko'}</span>

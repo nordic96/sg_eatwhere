@@ -34,8 +34,9 @@ export default function StorySection() {
             className={
               'h-[275px] w-auto absolute right-10 max-sm:-right-[20vw] top-[105px] max-sm:top-[110px] z-999'
             }
-            width={'275'}
-            height={'275'}
+            width={275}
+            height={275}
+            priority
           />
           <div className="absolute overflow-x-hidden top-[125px] max-sm:top-[130px] w-[1100px] max-sm:w-[200vw] right-[198px] max-sm:right-12 block">
             <div className="flex animate-marquee">
@@ -44,16 +45,16 @@ export default function StorySection() {
                 src={`${CDN_BASE}/resources/images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
-                width={'1100'}
-                height={'1100'}
+                width={1100}
+                height={1100}
               />
               <Image
                 className={'lg:w-[1100px] max-sm:w-[200vw]'}
                 src={`${CDN_BASE}/resources/images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
-                width={'1100'}
-                height={'1100'}
+                width={1100}
+                height={1100}
               />
             </div>
             <div className="flex items-center gap-2 justify-end">
