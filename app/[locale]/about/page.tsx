@@ -1,8 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import { h1BaseStyle, microTextBaseStyle } from '../../constants';
 import FadeIn from '../../components/FadeIn/FadeIn';
 import NameCard from '../../components/NameCard/NameCard';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { CDN_BASE } from '@/app/config/cdn';
 
 export default function Page() {
   const t = useTranslations('AboutPage');
@@ -15,11 +16,14 @@ export default function Page() {
       >
         <div className={'min-w-[40vw]'}>
           <FadeIn>
-            <img
+            <Image
               alt={'me'}
               className={'w-full max-w-[500px]'}
               draggable={false}
-              src={'/images/about_me_2.png'}
+              width={500}
+              height={500}
+              quality={95}
+              src={`${CDN_BASE}/resources/images/about_me.png`}
             />
             <span className={'flex justify-center'}>{'-Illustration designed by Gihun Ko'}</span>
           </FadeIn>

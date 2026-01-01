@@ -2,12 +2,13 @@
 
 import { useGLTF } from '@react-three/drei';
 import { isProductionMode } from '../utils';
+import { CDN_BASE } from '../config/cdn';
 
 export const MODELS = {
-  riceBowl: '/models/rice_bowl.glb',
-  hawkerStall: '/models/hawker_stall_opt.glb',
-  shophouse: '/models/shophouse_A_opt.glb',
-  locationpin: '/models/location_pin.glb',
+  riceBowl: `${CDN_BASE}/resources/models/rice_bowl.glb`,
+  hawkerStall: `${CDN_BASE}/resources/models/hawker_stall_opt.glb`,
+  shophouse: `${CDN_BASE}/resources/models/shophouse_A_opt.glb`,
+  locationpin: `${CDN_BASE}/resources/models/location_pin.glb`,
 };
 
 export function useModel(name: keyof typeof MODELS) {

@@ -4,7 +4,13 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [new URL('https://cdn.jsdelivr.net/**')],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: new URL(process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jsdelivr.net').hostname,
+        pathname: '/**',
+      },
+    ],
   },
   logging: {
     fetches: {
