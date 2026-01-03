@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Activity } from 'react';
 import Image from 'next/image';
 import horizontalImage from '@/public/images/header_icon.svg';
 import LocaleSwitcher from './LocaleSwitcher/LocaleSwitcher';
@@ -8,8 +8,13 @@ import { cn } from '../utils';
 import { baseLayoutStyle } from '../constants/theme';
 import AppLink from './AppLink';
 import { useTranslations } from 'next-intl';
+import { usePathname } from '@/i18n/navigation';
+import SearchBar from './SearchBar/SearchBar';
+import { useBreakpoints } from '../hooks';
 
 const Header = () => {
+  const pathname = usePathname();
+  const breakpoint = useBreakpoints();
   const t = useTranslations('Header');
   return (
     <div>
@@ -22,6 +27,14 @@ const Header = () => {
             <AppLink route={'/mapview'}>{t(`link_mapview`)}</AppLink>
             <AppLink route={'/about'}>{t(`link_about`)}</AppLink>
           </nav>
+          <Activity
+            mode={pathname.includes('mapview') && breakpoint === 'desktop' ? 'visible' : 'hidden'}
+          >
+            {/** Search Bar */}
+            <div className={'h-10 py-0.5 flex items-center'}>
+              <SearchBar />
+            </div>
+          </Activity>
           <LocaleSwitcher />
         </div>
       </header>
