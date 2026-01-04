@@ -2,7 +2,7 @@
 
 import { cn } from '@/app/utils';
 import { ClassValue } from 'clsx';
-import React, { Activity, useId } from 'react';
+import React, { useId } from 'react';
 
 type ToggleButtonProps = {
   label?: string | React.JSX.Element;
@@ -36,9 +36,7 @@ export default function ToggleButton({ label, className, onToggle, on }: ToggleB
           )}
         ></div>
       </div>
-      <Activity mode={label !== undefined ? 'visible' : 'hidden'}>
-        <label aria-labelledby={toggleId}>{label}</label>
-      </Activity>
+      {label !== undefined && <label aria-labelledby={toggleId}>{label}</label>}
     </div>
   );
 }

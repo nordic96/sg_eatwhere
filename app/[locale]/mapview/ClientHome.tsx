@@ -8,7 +8,7 @@ import HeritageListView from '../../components/HeritageListView/HeritageListView
 import { useTranslations } from 'next-intl';
 import { FoodHeritage } from '../../types';
 import { useHeritageStore } from '../../stores';
-import { Activity, useEffect } from 'react';
+import { useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
 import FoodMarquee from '../../components/FoodMarquee/FoodMarquee';
@@ -48,9 +48,7 @@ function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeP
       </div>
       {/** Map Filters */}
       <div className={'absolute flex w-full justify-between items-center top-10 z-100'}>
-        <Activity mode={trailMode ? 'visible' : 'hidden'}>
-          <TrailMode />
-        </Activity>
+        {trailMode && <TrailMode />}
         <FilterBar />
       </div>
       {/** Map Content */}

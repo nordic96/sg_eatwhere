@@ -1,7 +1,6 @@
 'use client';
 import { useHeritageStore, useTrailStore } from '@/app/stores';
 import { Redo, Undo } from '@mui/icons-material';
-import { Activity } from 'react';
 import CloseButton from '../CloseButton/CloseButton';
 import { cn } from '@/app/utils';
 
@@ -18,22 +17,24 @@ export default function ButtonContainer() {
       aria-label="Action buttons"
     >
       <div className={'flex gap-2'} role="group" aria-label="Trail navigation">
-        <Activity mode={trailMode ? 'visible' : 'hidden'}>
-          <button
-            className={cn(trailButtonStyle)}
-            onClick={() => moveToNextTrail(true)}
-            aria-label="Previous location in trail"
-          >
-            <Undo fontSize={'inherit'} />
-          </button>
-          <button
-            className={cn(trailButtonStyle)}
-            onClick={() => moveToNextTrail()}
-            aria-label="Next location in trail"
-          >
-            <Redo fontSize={'inherit'} />
-          </button>
-        </Activity>
+        {trailMode && (
+          <>
+            <button
+              className={cn(trailButtonStyle)}
+              onClick={() => moveToNextTrail(true)}
+              aria-label="Previous location in trail"
+            >
+              <Undo fontSize={'inherit'} />
+            </button>
+            <button
+              className={cn(trailButtonStyle)}
+              onClick={() => moveToNextTrail()}
+              aria-label="Next location in trail"
+            >
+              <Redo fontSize={'inherit'} />
+            </button>
+          </>
+        )}
       </div>
       <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
     </div>

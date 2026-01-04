@@ -3,8 +3,9 @@
 
 import { cn } from '@/app/utils';
 import { East, West } from '@mui/icons-material';
+import { CircularProgress } from '@mui/material';
 import { ClassValue } from 'clsx';
-import { useCallback, useState, useEffect, memo, useRef, useMemo } from 'react';
+import { useCallback, useState, useEffect, memo, useRef, useMemo, useTransition } from 'react';
 
 interface ImageCarouselProps {
   img: string[];
@@ -15,11 +16,36 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [currImg, setCurrImg] = useState<number>(0);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  const [isPending, startTransition] = useTransition();
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [displayImages, setDisplayImages] = useState<string[]>(img);
+
+  const isLoading = useMemo(
+    () => isPending || loadedImages.size < displayImages.length,
+    [isPending, loadedImages.size, displayImages.length],
+  );
+
   useEffect(() => {
-    return () => setCurrImg(0);
+    // Reset index immediately when images change (outside transition)
+    setCurrImg(0);
+
+    startTransition(() => {
+      setLoadedImages(new Set());
+      setDisplayImages(img);
+    });
   }, [img]);
 
-  const offset = useMemo(() => 100 / img.length, [img.length]);
+  const handleImageLoad = useCallback((src: string) => {
+    setLoadedImages((prev) => {
+      if (prev.has(src)) return prev;
+      const next = new Set(prev);
+      next.add(src);
+      return next;
+    });
+  }, []);
+
+  // Use displayImages.length for consistency between indicator and carousel
+  const offset = useMemo(() => 100 / displayImages.length, [displayImages.length]);
 
   useEffect(() => {
     if (wrapperRef.current) {
@@ -28,14 +54,14 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   }, [currImg, offset]);
 
   const onClickLeft = useCallback(() => {
-    setCurrImg((index) => (index - 1 + img.length) % img.length);
-  }, [img.length]);
+    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
+  }, [displayImages.length]);
 
   const onClickRight = useCallback(() => {
-    setCurrImg((index) => (index + 1) % img.length);
-  }, [img.length]);
+    setCurrImg((index) => (index + 1) % displayImages.length);
+  }, [displayImages.length]);
 
-  const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-monsoongrey';
+  const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-white';
   const navBtnBaseStyle =
     'absolute top-[50%] opacity-80 text-white rounded-full cursor-pointer text-3xl max-sm:text-4xl flex';
   const currImgIndicatorBaseStyle =
@@ -45,23 +71,28 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     <div className={cn(containerBaseStyle)} role="region" aria-label="Image carousel">
       <div
         ref={wrapperRef}
-        style={{ width: `${img.length * 100}%` }}
-        className="flex h-full transition-transform ease-in-out"
+        style={{
+          width: `${displayImages.length * 100}%`,
+          display: isLoading ? 'none' : 'flex',
+        }}
+        className="h-full transition-transform ease-in-out"
         aria-live="polite"
       >
-        {img.map((src, i) => {
+        {displayImages.map((src, i) => {
           return (
             <img
-              key={i}
-              style={{ width: `${100 / img.length}%` }}
+              key={`${src}-${i}`}
+              style={{ width: `${100 / displayImages.length}%` }}
               className={'h-full object-cover'}
               src={src}
-              alt={`Image ${i + 1} of ${img.length}`}
+              alt={`Image ${i + 1} of ${displayImages.length}`}
+              onLoad={() => handleImageLoad(src)}
               draggable="false"
             />
           );
         })}
       </div>
+      {isLoading && <LoadingIndicator />}
       <button
         className={cn(navBtnBaseStyle, { 'left-4': true }, customClass)}
         onClick={onClickLeft}
@@ -80,7 +111,15 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         className={cn(currImgIndicatorBaseStyle, customClass)}
         aria-live="polite"
         aria-atomic="true"
-      >{`${currImg + 1} / ${img.length}`}</div>
+      >{`${currImg + 1} / ${displayImages.length}`}</div>
+    </div>
+  );
+}
+
+function LoadingIndicator() {
+  return (
+    <div className={'w-full h-full flex justify-center items-center text-primary'}>
+      <CircularProgress color={'inherit'} />
     </div>
   );
 }
