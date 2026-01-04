@@ -32,7 +32,7 @@ export default function Page() {
           <div>
             <h1 className={h1BaseStyle}>Gihun Ko Stephen</h1>
             <p className={microTextBaseStyle}>{t('intro')}</p>
-            <NameCard />
+            <NameCard variant="expanded" />
           </div>
           <div className={'flex flex-col gap-8 w-[80%]'}>
             <div>
