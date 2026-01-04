@@ -17,28 +17,28 @@ const Header = () => {
   const breakpoint = useBreakpoints();
   const t = useTranslations('Header');
   return (
-    <div>
-      <header className="bg-primary text-white flex justify-center" role="banner">
-        <div className={cn('flex items-center justify-between grow py-1', baseLayoutStyle)}>
-          <nav className="flex gap-8 items-center" aria-label="Main navigation">
-            <AppLink route={'/'}>
-              <Image src={horizontalImage} alt="logo" height={50} draggable={false} />
-            </AppLink>
-            <AppLink route={'/mapview'}>{t(`link_mapview`)}</AppLink>
-            <AppLink route={'/about'}>{t(`link_about`)}</AppLink>
-          </nav>
-          <Activity
-            mode={pathname.includes('mapview') && breakpoint === 'desktop' ? 'visible' : 'hidden'}
-          >
-            {/** Search Bar */}
-            <div className={'h-10 py-0.5 flex items-center'}>
-              <SearchBar />
-            </div>
-          </Activity>
-          <LocaleSwitcher />
+    <header className="relative bg-primary text-white flex justify-center" role="banner">
+      <div className={cn('flex items-center justify-between grow py-1', baseLayoutStyle)}>
+        <nav className="flex gap-8 items-center" aria-label="Main navigation">
+          <AppLink route={'/'}>
+            <Image src={horizontalImage} alt="logo" height={50} draggable={false} />
+          </AppLink>
+          <AppLink route={'/mapview'}>{t(`link_mapview`)}</AppLink>
+          <AppLink route={'/about'}>{t(`link_about`)}</AppLink>
+        </nav>
+        <LocaleSwitcher />
+      </div>
+      <Activity mode={pathname === '/mapview' && breakpoint === 'desktop' ? 'visible' : 'hidden'}>
+        {/** Search Bar */}
+        <div
+          className={
+            'absolute top-[50%] -translate-x-[50%] left-[50%] -translate-y-[50%] h-10 py-0.5 flex items-center z-999'
+          }
+        >
+          <SearchBar />
         </div>
-      </header>
-    </div>
+      </Activity>
+    </header>
   );
 };
 
