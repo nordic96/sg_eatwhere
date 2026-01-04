@@ -20,21 +20,29 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [displayImages, setDisplayImages] = useState<string[]>(img);
 
-  const isLoading = isPending || loadedImages.size < displayImages.length;
+  const isLoading = useMemo(
+    () => isPending || loadedImages.size < displayImages.length,
+    [isPending, loadedImages.size, displayImages.length],
+  );
 
   useEffect(() => {
     // Reset index immediately when images change (outside transition)
     setCurrImg(0);
-    setLoadedImages(new Set());
 
     startTransition(() => {
+      setLoadedImages(new Set());
       setDisplayImages(img);
     });
   }, [img]);
 
-  const handleImageLoad = (src: string) => {
-    setLoadedImages((prev) => new Set(prev).add(src));
-  };
+  const handleImageLoad = useCallback((src: string) => {
+    setLoadedImages((prev) => {
+      if (prev.has(src)) return prev;
+      const next = new Set(prev);
+      next.add(src);
+      return next;
+    });
+  }, []);
 
   // Use displayImages.length for consistency between indicator and carousel
   const offset = useMemo(() => 100 / displayImages.length, [displayImages.length]);
