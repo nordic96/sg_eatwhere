@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { Activity, Suspense, useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
@@ -84,9 +84,7 @@ export default function MapScene({ messages, locale = 'en' }: Props) {
           />
         </Suspense>
       </Canvas>
-      <Activity mode={!ready ? 'visible' : 'hidden'}>
-        <DynamicPortalLoader onReady={() => setReady(true)} />
-      </Activity>
+      {!ready && <DynamicPortalLoader onReady={() => setReady(true)} />}
       <div className="absolute bottom-0 right-0 z-90">
         {/** Map Controller UI, not wired with control logic */}
         <MapController controls={controllerRef} camera={cameraRef} />
