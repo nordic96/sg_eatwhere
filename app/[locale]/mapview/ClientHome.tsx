@@ -4,11 +4,14 @@ import FilterBar from '../../components/FilterBar/FilterBar';
 import MapScene from '../../components/MapScene/MapScene';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import withSuspense from '../../functions/withSuspense';
-import HeritageListView from '../../components/HeritageListView/HeritageListView';
+
 import { useTranslations } from 'next-intl';
 import { FoodHeritage } from '../../types';
+import { useBreakpoints } from '@/app/hooks';
 import { useHeritageStore } from '../../stores';
-import { useEffect } from 'react';
+
+import HeritageListView from '../../components/HeritageListView/HeritageListView';
+import { Activity, useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
 import FoodMarquee from '../../components/FoodMarquee/FoodMarquee';
@@ -26,6 +29,7 @@ type ClientHomeProps = {
 const MAP_COPYRIGHT_URL =
   'Seloloving, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons';
 function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeProps) {
+  const breakpoint = useBreakpoints();
   const { setFoodData, reset } = useHeritageStore();
   const getFoodImages = useHeritageStore((state) => state.getFoodImages);
   const foodImages = getFoodImages();
@@ -42,17 +46,19 @@ function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeP
 
   return (
     <div className={'relative flex flex-col grow pb-8'}>
-      {/** Search Bar */}
-      <div className={'h-10 py-0.5 flex items-center'}>
-        <SearchBar />
-      </div>
+      <Activity mode={breakpoint === 'mobile' ? 'visible' : 'hidden'}>
+        {/** Search Bar */}
+        <div className={'h-10 py-0.5 flex items-center'}>
+          <SearchBar />
+        </div>
+      </Activity>
       {/** Map Filters */}
-      <div className={'absolute flex w-full justify-between items-center top-10 z-100'}>
+      <div className={'absolute flex w-full justify-between items-center max-sm:top-10 z-50'}>
         {trailMode && <TrailMode />}
         <FilterBar />
       </div>
       {/** Map Content */}
-      <div className="relative h-[75vh] max-h-[800px] overflow-y-hidden select-none">
+      <div className="relative h-[75vh] max-h-[800px] z-49 overflow-y-hidden select-none">
         <MapScene locale={locale} messages={messages} />
       </div>
       <Sidebar />

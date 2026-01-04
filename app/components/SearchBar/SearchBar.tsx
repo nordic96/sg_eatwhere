@@ -151,7 +151,7 @@ export default function SearchBar() {
           id={inputId}
           className={cn(
             containerBaseWidthStyle,
-            'rounded-2xl h-6 max-sm:h-8 border border-[#333] focus:border-primary focus:outline-none px-2',
+            'rounded-2xl h-6 max-sm:h-8 border border-[#333] focus:border-primary focus:outline-none px-2 bg-white text-black',
           )}
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -198,12 +198,12 @@ export default function SearchBar() {
           id={listboxId}
           className={cn(
             containerBaseWidthStyle,
-            'absolute z-999 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
+            'absolute z-50 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
           )}
           role={'listbox'}
         >
           {results.length === 0 ? (
-            <li role={'option'} className={cn(defaultLiStyle)} aria-selected={false}>
+            <li role={'option'} className={cn(defaultLiStyle, 'text-black')} aria-selected={false}>
               {t('no_results')}
             </li>
           ) : (
