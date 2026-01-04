@@ -53,12 +53,12 @@ function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeP
         </div>
       </Activity>
       {/** Map Filters */}
-      <div className={'absolute flex w-full justify-between items-center max-sm:top-10 z-100'}>
+      <div className={'absolute flex w-full justify-between items-center max-sm:top-10 z-50'}>
         {trailMode && <TrailMode />}
         <FilterBar />
       </div>
       {/** Map Content */}
-      <div className="relative h-[75vh] max-h-[800px] z-99 overflow-y-hidden select-none">
+      <div className="relative h-[75vh] max-h-[800px] z-49 overflow-y-hidden select-none">
         <MapScene locale={locale} messages={messages} />
       </div>
       <Sidebar />

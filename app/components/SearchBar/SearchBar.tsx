@@ -198,7 +198,7 @@ export default function SearchBar() {
           id={listboxId}
           className={cn(
             containerBaseWidthStyle,
-            'absolute z-999 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
+            'absolute z-50 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
           )}
           role={'listbox'}
         >

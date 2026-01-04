@@ -32,7 +32,7 @@ const Header = () => {
         {/** Search Bar */}
         <div
           className={
-            'absolute top-[50%] -translate-x-[50%] left-[50%] -translate-y-[50%] h-10 py-0.5 flex items-center z-999'
+            'absolute top-[50%] -translate-x-[50%] left-[50%] -translate-y-[50%] h-10 py-0.5 flex items-center z-50'
           }
         >
           <SearchBar />

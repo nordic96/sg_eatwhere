@@ -35,7 +35,7 @@ export default function FullScreenLoader(props: ScreenLoaderProps) {
     return null;
   }
   return createPortal(
-    <div className="fixed bg-white inset-0 flex flex-col grow align-center justify-center z-999">
+    <div className="fixed bg-white inset-0 flex flex-col grow align-center justify-center z-50">
       <div className={'absolute left-[50%] translate-x-[-50%] top-[40%] translate-y-[-40%]'}>
         <div className="flex flex-col gap-8 justify-center items-center">
           <Image

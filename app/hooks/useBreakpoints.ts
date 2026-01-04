@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useDebounce } from './useDebounce';
 
 type Breakpoint = Record<string, number>;
@@ -17,10 +17,14 @@ export function createBreakpoints<T extends Breakpoint>(breakpoints: T): () => k
   }
 
   return function () {
-    const [breakpoint, setBreakpoint] = useState<keyof T>('desktop');
+    const [breakpoint, setBreakpoint] = useState<keyof T>(() => {
+      if (typeof window === 'undefined') return 'desktop';
+      const width = window.innerWidth;
+      return getBreakpointFromWidth(width);
+    });
     const debouncedBreakpoint = useDebounce(breakpoint, DEBOUNCE_DELAY);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const updateBreakpoints = () => {
         const width = window.innerWidth;
         setBreakpoint(getBreakpointFromWidth(width));

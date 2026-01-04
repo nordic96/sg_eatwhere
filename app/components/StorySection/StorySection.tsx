@@ -32,7 +32,7 @@ export default function StorySection() {
             alt={'film_canister'}
             draggable={false}
             className={
-              'h-[275px] w-auto absolute right-10 max-sm:-right-[20vw] top-[105px] max-sm:top-[110px] z-999'
+              'h-[275px] w-auto absolute right-10 max-sm:-right-[20vw] top-[105px] max-sm:top-[110px] z-50'
             }
             width={275}
             height={275}

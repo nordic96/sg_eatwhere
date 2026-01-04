@@ -39,7 +39,7 @@ export default function LocaleSwitcher() {
           id="locale-swticher"
           role="menu"
           aria-label="Language options"
-          className="absolute shadow-xl border-[#333] border top-[38px] right-0 z-999 bg-[#f3f3f3] text-black rounded-b-lg w-[146px] max-sm:w-[100px] lg:w-[100px] flex flex-col p-2 gap-1"
+          className="absolute shadow-xl border-[#333] border top-[38px] right-0 z-50 bg-[#f3f3f3] text-black rounded-b-lg w-[146px] max-sm:w-[100px] lg:w-[100px] flex flex-col p-2 gap-1"
         >
           {AvailableLocales.map((locale, id) => (
             <LocaleSwitch key={id} locale={locale} />
