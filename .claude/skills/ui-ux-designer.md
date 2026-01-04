@@ -112,18 +112,51 @@ When analyzing UI/UX:
    - Error states
    - Transitions/animations
 
-## Tools Available
+## Tools Available (MCP Servers)
 
-Use **Playwright MCP** to:
-- Capture screenshots at different viewports
-- Navigate through user flows
-- Verify visual states
-- Test interactions
+**IMPORTANT:** Use MCP tools provided by Claude Code. **DO NOT install packages like Playwright directly via npm.**
 
-Use **Sequential Thinking MCP** to:
-- Analyze complex UX problems
-- Plan design improvements
-- Evaluate trade-offs
+### Playwright MCP Server
+
+Use these MCP-provided tools for browser automation:
+
+| Tool | Purpose |
+|------|---------|
+| `mcp__playwright__browser_navigate` | Navigate to a URL |
+| `mcp__playwright__browser_screenshot` | Capture screenshot |
+| `mcp__playwright__browser_click` | Click on elements |
+| `mcp__playwright__browser_snapshot` | Get accessibility tree |
+| `mcp__playwright__browser_resize` | Resize viewport |
+
+**Screenshot Workflow:**
+```
+1. Ensure dev server is running (npm run dev)
+2. Use mcp__playwright__browser_navigate to open the page
+3. Use mcp__playwright__browser_resize for different viewports
+4. Use mcp__playwright__browser_screenshot to capture
+```
+
+**Viewport sizes:**
+- Mobile: 375 x 812
+- Tablet: 768 x 1024
+- Desktop: 1440 x 900
+
+### Sequential Thinking MCP Server
+
+Use for complex analysis:
+- Analyze complex UX problems step by step
+- Plan design improvements systematically
+- Evaluate trade-offs with structured reasoning
+
+### DO NOT
+
+```bash
+# NEVER do this - it pollutes the project's package.json
+npm install playwright
+npm install --save-dev playwright
+```
+
+MCP servers are pre-configured in `.claude/mcp.json` and managed by Claude Code.
 
 ## Deliverables
 
