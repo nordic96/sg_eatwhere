@@ -109,5 +109,15 @@
         "changelanguage": "言語を変更",
         "column_website": "ウェブサイト",
         "app_version": "アプリのバージョン"
+    },
+    "StatsBar": {
+        "years_value": "10+",
+        "years_label": "年",
+        "spots_value": "100+",
+        "spots_label": "スポット",
+        "languages_value": "4",
+        "languages_label": "言語",
+        "project_value": "1",
+        "project_label": "夢のプロジェクト"
     }
 }

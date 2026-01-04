@@ -1,12 +1,22 @@
 import { h1BaseStyle, microTextBaseStyle } from '../../constants';
 import FadeIn from '../../components/FadeIn/FadeIn';
 import NameCard from '../../components/NameCard/NameCard';
+import StatsBar from '../../components/StatsBar';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { CDN_BASE } from '@/app/config/cdn';
 
 export default function Page() {
   const t = useTranslations('AboutPage');
+  const tStats = useTranslations('StatsBar');
+
+  const stats = [
+    { value: tStats('years_value'), label: tStats('years_label') },
+    { value: tStats('spots_value'), label: tStats('spots_label') },
+    { value: tStats('languages_value'), label: tStats('languages_label') },
+    { value: tStats('project_value'), label: tStats('project_label') },
+  ];
+
   return (
     <div className={'py-16'}>
       <div
@@ -33,6 +43,7 @@ export default function Page() {
             <h1 className={h1BaseStyle}>Gihun Ko Stephen</h1>
             <p className={microTextBaseStyle}>{t('intro')}</p>
             <NameCard variant="expanded" />
+            <StatsBar stats={stats} className="mt-8" />
           </div>
           <div className={'flex flex-col gap-8 w-[80%]'}>
             <div>

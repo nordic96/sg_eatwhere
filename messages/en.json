@@ -109,5 +109,15 @@
         "changelanguage": "Change Language",
         "column_website": "Website",
         "app_version": "App Version"
+    },
+    "StatsBar": {
+        "years_value": "10+",
+        "years_label": "Years",
+        "spots_value": "100+",
+        "spots_label": "Spots",
+        "languages_value": "4",
+        "languages_label": "Languages",
+        "project_value": "1",
+        "project_label": "Dream Project"
     }
 }

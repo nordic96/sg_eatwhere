@@ -109,5 +109,15 @@
         "changelanguage": "Taal Wijzigen",
         "column_website": "Website",
         "app_version": "App-Versie"
+    },
+    "StatsBar": {
+        "years_value": "10+",
+        "years_label": "Jaar",
+        "spots_value": "100+",
+        "spots_label": "Locaties",
+        "languages_value": "4",
+        "languages_label": "Talen",
+        "project_value": "1",
+        "project_label": "Droomproject"
     }
 }
