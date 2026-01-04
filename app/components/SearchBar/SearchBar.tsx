@@ -9,7 +9,7 @@ import { AvailableLocales } from '@/i18n/locales';
 import { geti18nConfig } from '@/i18n/request';
 import { Close, Search } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
-import { Activity, useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import RichItem from './RichItem';
 
 const DEBOUNCE_DELAY_MS = 200;
@@ -180,7 +180,7 @@ export default function SearchBar() {
         >
           <Search fontSize={'inherit'} />
         </div>
-        <Activity mode={debouncedKeyword.length > 0 ? 'visible' : 'hidden'}>
+        {debouncedKeyword.length > 0 && (
           <button
             onClick={() => setKeyword('')}
             className={
@@ -189,8 +189,8 @@ export default function SearchBar() {
           >
             <Close fontSize={'inherit'} />
           </button>
-        </Activity>
-        <Activity mode={loading ? 'visible' : 'hidden'}>Loading...</Activity>
+        )}
+        {loading && <span>Loading...</span>}
       </div>
       {/** Search Result Container */}
       {showResults && (

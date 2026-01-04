@@ -1,6 +1,14 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import ImageCarousel from '@/app/components/ImageCarousel/ImageCarousel';
+
+// Helper to simulate image loading
+function simulateImageLoads(container: HTMLElement) {
+  const images = container.querySelectorAll('img');
+  images.forEach((img) => {
+    fireEvent.load(img);
+  });
+}
 
 describe('ImageCarousel', () => {
   const mockImages = [
@@ -9,15 +17,20 @@ describe('ImageCarousel', () => {
     'https://example.com/image3.jpg',
   ];
 
-  test('renders carousel with all images', () => {
-    render(<ImageCarousel img={mockImages} />);
+  test('renders carousel with all images', async () => {
+    const { container } = render(<ImageCarousel img={mockImages} />);
 
-    const images = screen.getAllByRole('img');
-    expect(images).toHaveLength(3);
+    // Simulate images loading
+    simulateImageLoads(container);
 
-    images.forEach((img, index) => {
-      expect(img).toHaveAttribute('src', mockImages[index]);
-      expect(img).toHaveAttribute('alt', `Image ${index + 1} of ${mockImages.length}`);
+    await waitFor(() => {
+      const images = screen.getAllByRole('img');
+      expect(images).toHaveLength(3);
+
+      images.forEach((img, index) => {
+        expect(img).toHaveAttribute('src', mockImages[index]);
+        expect(img).toHaveAttribute('alt', `Image ${index + 1} of ${mockImages.length}`);
+      });
     });
   });
 
@@ -129,12 +142,17 @@ describe('ImageCarousel', () => {
     expect(screen.getByText('1 / 1')).toBeInTheDocument();
   });
 
-  test('images have draggable attribute set to false', () => {
-    render(<ImageCarousel img={mockImages} />);
+  test('images have draggable attribute set to false', async () => {
+    const { container } = render(<ImageCarousel img={mockImages} />);
 
-    const images = screen.getAllByRole('img');
-    images.forEach((img) => {
-      expect(img).toHaveAttribute('draggable', 'false');
+    // Simulate images loading
+    simulateImageLoads(container);
+
+    await waitFor(() => {
+      const images = screen.getAllByRole('img');
+      images.forEach((img) => {
+        expect(img).toHaveAttribute('draggable', 'false');
+      });
     });
   });
 
