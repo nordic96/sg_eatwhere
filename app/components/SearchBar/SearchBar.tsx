@@ -4,56 +4,31 @@ import { useDebounce } from '@/app/hooks';
 import useClickOutside from '@/app/hooks/useClickOutside';
 import { useHeritageStore } from '@/app/stores';
 import { FoodHeritage } from '@/app/types';
+
 import { cn } from '@/app/utils';
-import { AvailableLocales } from '@/i18n/locales';
-import { geti18nConfig } from '@/i18n/request';
-import { Close, Search } from '@mui/icons-material';
+
+import { Close } from '@mui/icons-material';
+
 import { useTranslations } from 'next-intl';
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useSemanticSearch } from '@/app/hooks/useSemanticSearch';
+
 import RichItem from './RichItem';
+import SearchSkeleton from './SearchSkeleton';
+import LoadingProgress from './LoadingProgress';
+import AISparkle from './AISparkle';
+import SearchProgress from './SearchProgress';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
 const DEFAULT_MIN_NO_RESULTS = 5;
-
-function searchForKeyword<T extends object>(keyword: string, items: T[]): T[] {
-  const lowerKeyword = keyword.toLowerCase();
-  return items.filter((item) => {
-    return Object.values(item).some((val) => {
-      if (Array.isArray(val)) {
-        return val.some((el) => String(el).toLowerCase().includes(lowerKeyword));
-      }
-      return String(val).toLowerCase().includes(lowerKeyword);
-    });
-  });
-}
-
-type SearchableData = FoodHeritage & { desc?: string };
-async function prepareSearchData(items: FoodHeritage[]): Promise<SearchableData[]> {
-  const localeDataPromises = AvailableLocales.map((locale) => geti18nConfig(locale));
-  const localeConfigs = await Promise.all(localeDataPromises);
-  const localeData = localeConfigs.map((config) => config.messages);
-
-  const preparedData = items.map((x) => {
-    const newData: SearchableData = Object.assign({}, x);
-    let descStr = '';
-    for (const messages of localeData) {
-      descStr = descStr.concat(' ', messages['Heritage'][`${x.id}_desc`]);
-    }
-    newData.desc = descStr;
-    return newData;
-  });
-
-  return preparedData;
-}
 
 export default function SearchBar() {
   const t = useTranslations('SearchBar');
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { foodData, setHeritageId } = useHeritageStore();
-  const [loading, setLoading] = useState(false);
-  const [searchableData, setSearchableData] = useState<SearchableData[]>([]);
+
   const [keyword, setKeyword] = useState<string>('');
   const [results, setResults] = useState<FoodHeritage[]>([]);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -64,40 +39,71 @@ export default function SearchBar() {
   const listboxId = useId();
   const inputId = useId();
 
+  /** Search Related */
+  const { search, isReady, isSearching } = useSemanticSearch(foodData);
+
+  // Track active search to prevent stale results
+  const searchAbortRef = useRef<AbortController | null>(null);
+
+  // Memoize the search handler to avoid recreating on every render
+  const performSearch = useCallback(
+    async (query: string) => {
+      // Cancel any pending search
+      if (searchAbortRef.current) {
+        searchAbortRef.current.abort();
+      }
+
+      // Create new abort controller for this search
+      const abortController = new AbortController();
+      searchAbortRef.current = abortController;
+
+      try {
+        const res = await search(query);
+
+        // Check if this search was aborted
+        if (abortController.signal.aborted) {
+          return;
+        }
+
+        const resultsData = res
+          .map((id) => foodData.find((f) => f.id === id))
+          .filter((item): item is FoodHeritage => item !== undefined);
+
+        setResults(resultsData);
+        setSelectedIndex(-1);
+      } catch (error) {
+        // Only log if not aborted
+        if (!abortController.signal.aborted) {
+          console.error('Search error:', error);
+        }
+      }
+    },
+    [search, foodData],
+  );
+
   useClickOutside(containerRef, () => {
     setIsActive(false);
   });
 
+  // Effect to trigger search when debounced keyword changes
   useEffect(() => {
-    async function loadSearchData() {
-      setLoading(true);
-      await prepareSearchData(foodData)
-        .then((data) => {
-          setSearchableData(data);
-        })
-        .catch((error) => {
-          console.error('Failed to prepare search data:', error);
-          setSearchableData(foodData);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-    if (foodData.length > 0) {
-      loadSearchData();
-    }
-  }, [foodData]);
-
-  useEffect(() => {
-    if (!debouncedKeyword || loading) {
+    // Clear results if no keyword or not ready
+    if (!debouncedKeyword || !isReady) {
       setResults([]);
       setSelectedIndex(-1);
       return;
     }
-    const res = searchForKeyword<SearchableData>(debouncedKeyword, searchableData);
-    setResults(res);
-    setSelectedIndex(-1);
-  }, [debouncedKeyword, searchableData, loading]);
+
+    // Perform the search (do NOT include isSearching in dependencies)
+    performSearch(debouncedKeyword);
+
+    // Cleanup: abort search on unmount or when dependencies change
+    return () => {
+      if (searchAbortRef.current) {
+        searchAbortRef.current.abort();
+      }
+    };
+  }, [debouncedKeyword, isReady, performSearch]);
 
   function resetResults() {
     setKeyword('');
@@ -114,7 +120,7 @@ export default function SearchBar() {
 
   function onFocus() {
     if (debouncedKeyword === '') {
-      setResults(searchableData.slice(0, DEFAULT_MIN_NO_RESULTS));
+      setResults(foodData.slice(0, DEFAULT_MIN_NO_RESULTS));
     }
     setIsActive(true);
   }
@@ -140,25 +146,32 @@ export default function SearchBar() {
     }
   }
 
-  const showResults = !loading && isActive;
+  const showResults = isReady && isActive;
   const defaultLiStyle = 'px-2 py-1 rounded-lg cursor-pointer';
   const containerBaseWidthStyle = 'w-[500px] max-sm:w-full';
 
   return (
     <div ref={containerRef} className={'relative max-sm:w-full'}>
-      <div className={'relative h-full flex items-center gap-1'}>
+      <div
+        className={cn(
+          'relative h-full flex items-center gap-1 overflow-hidden',
+          'border border-[#333] focus:border-primary rounded-2xl bg-white text-black px-5',
+          'transition-opacity ease-in-out',
+          { 'opacity-60': !isReady },
+        )}
+      >
+        <LoadingProgress isReady={isReady} />
+        <AISparkle isActive={isActive} isReady={isReady} />
+        <SearchProgress isSearching={isSearching} />
         <input
           id={inputId}
-          className={cn(
-            containerBaseWidthStyle,
-            'rounded-2xl h-6 max-sm:h-8 border border-[#333] focus:border-primary focus:outline-none px-2 bg-white text-black',
-          )}
+          className={cn(containerBaseWidthStyle, 'h-7 max-sm:h-8 focus:outline-none px-2 ')}
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
           value={keyword}
           maxLength={MAX_INPUT_LEN}
           type={'text'}
-          disabled={loading}
+          disabled={!isReady}
           onFocus={onFocus}
           onBlur={() => {
             setTimeout(() => setIsActive(false), 150);
@@ -170,16 +183,11 @@ export default function SearchBar() {
             selectedIndex >= 0 ? `${listboxId}-option-${selectedIndex}` : undefined
           }
           aria-autocomplete={'list'}
+          aria-busy={isSearching}
           aria-label={'Search Food Locations'}
-          placeholder={t('placeholder')}
+          placeholder={!isReady ? t('placeholder_loading') : t('placeholder')}
         />
-        <div
-          className={
-            'absolute right-0 top-[50%] translate-y-[-60%] w-6 h-6 rounded-full text-primary text-xl items-center justify-center'
-          }
-        >
-          <Search fontSize={'inherit'} />
-        </div>
+        {/** Close Text Icon */}
         {debouncedKeyword.length > 0 && (
           <button
             onClick={() => setKeyword('')}
@@ -190,7 +198,6 @@ export default function SearchBar() {
             <Close fontSize={'inherit'} />
           </button>
         )}
-        {loading && <span>Loading...</span>}
       </div>
       {/** Search Result Container */}
       {showResults && (
@@ -198,11 +205,15 @@ export default function SearchBar() {
           id={listboxId}
           className={cn(
             containerBaseWidthStyle,
-            'absolute z-50 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
+            'absolute left-[50%] -translate-x-[50%] z-50 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
           )}
           role={'listbox'}
         >
-          {results.length === 0 ? (
+          {isSearching ? (
+            <li role={'option'} className={cn(defaultLiStyle, 'text-black')} aria-selected={false}>
+              <SearchSkeleton />
+            </li>
+          ) : results.length === 0 ? (
             <li role={'option'} className={cn(defaultLiStyle, 'text-black')} aria-selected={false}>
               {t('no_results')}
             </li>

@@ -17,6 +17,14 @@ const nextConfig: NextConfig = {
       fullUrl: true,
     },
   },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      sharp$: false,
+      'onnxruntime-node$': false,
+    };
+    return config;
+  },
 };
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');

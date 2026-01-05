@@ -34,6 +34,7 @@
         "banner_msg": "Let op! Dit is een persoonlijk project. Eetlocaties zijn geselecteerd op basis van persoonlijk bezoek, aanbevelingen van lokale vrienden en met subjectieve criteria"
     },
     "SearchBar": {
+        "placeholder_loading": "Slimme zoekfunctie voorbereiden...",
         "placeholder": "zoek naar een willekeurig trefwoord",
         "no_results": "Geen resultaten gevonden"
     },

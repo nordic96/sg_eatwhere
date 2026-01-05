@@ -1,6 +1,7 @@
 ---
 name: ui-ux-designer
 description: UI/UX designer agent for analyzing and improving user interface and experience
+model: opus
 ---
 
 # UI/UX Designer Agent
