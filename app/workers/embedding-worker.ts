@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// src/app/workers/embedding-worker.ts
 import { pipeline, cos_sim } from '@huggingface/transformers';
 import { SearchableData } from '../utils/searchUtils';
 
@@ -8,7 +7,7 @@ let embedder: any = null;
 
 async function getEmbedder() {
   if (!embedder) {
-    embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    embedder = await pipeline('feature-extraction', 'Xenova/paraphrase-multilingual-MiniLM-L12-v2');
   }
   return embedder;
 }
