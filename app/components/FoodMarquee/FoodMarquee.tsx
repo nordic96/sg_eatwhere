@@ -147,7 +147,6 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
         src={src}
         width={160}
         height={160}
-        quality={90}
         draggable={false}
       />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent"></div>
