@@ -5,11 +5,12 @@ import useClickOutside from '@/app/hooks/useClickOutside';
 import { useHeritageStore } from '@/app/stores';
 import { FoodHeritage } from '@/app/types';
 import { cn } from '@/app/utils';
-import { Close, Search } from '@mui/icons-material';
+import { AutoAwesome, Close, Search } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import RichItem from './RichItem';
 import { useSemanticSearch } from '@/app/hooks/useSemanticSearch';
+import { CircularProgress } from '@mui/material';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
@@ -144,13 +145,19 @@ export default function SearchBar() {
 
   return (
     <div ref={containerRef} className={'relative max-sm:w-full'}>
-      <div className={'relative h-full flex items-center gap-1'}>
+      <div
+        className={cn(
+          'relative h-full flex items-center gap-1 overflow-hidden',
+          'border border-[#333] focus:border-primary rounded-2xl bg-white text-black px-5',
+          'transition-opacity ease-in-out',
+          { 'opacity-60': !isReady },
+        )}
+      >
+        <LoadingProgress isReady={isReady} />
+        <AISparkle isReady={isReady} />
         <input
           id={inputId}
-          className={cn(
-            containerBaseWidthStyle,
-            'rounded-2xl h-6 max-sm:h-8 border border-[#333] focus:border-primary focus:outline-none px-2 bg-white text-black',
-          )}
+          className={cn(containerBaseWidthStyle, 'h-7 max-sm:h-8 focus:outline-none px-2 ')}
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
           value={keyword}
@@ -169,8 +176,9 @@ export default function SearchBar() {
           }
           aria-autocomplete={'list'}
           aria-label={'Search Food Locations'}
-          placeholder={t('placeholder')}
+          placeholder={!isReady ? t('placeholder_loading') : t('placeholder')}
         />
+        {/** Search Icon */}
         <div
           className={
             'absolute right-0 top-[50%] translate-y-[-60%] w-6 h-6 rounded-full text-primary text-xl items-center justify-center'
@@ -178,6 +186,7 @@ export default function SearchBar() {
         >
           <Search fontSize={'inherit'} />
         </div>
+        {/** Close Text Icon */}
         {debouncedKeyword.length > 0 && (
           <button
             onClick={() => setKeyword('')}
@@ -195,7 +204,7 @@ export default function SearchBar() {
           id={listboxId}
           className={cn(
             containerBaseWidthStyle,
-            'absolute z-50 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
+            'absolute left-[50%] -translate-x-[50%] z-50 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
           )}
           role={'listbox'}
         >
@@ -230,6 +239,40 @@ export default function SearchBar() {
           )}
         </ul>
       )}
+    </div>
+  );
+}
+
+function LoadingProgress({ isReady }: { isReady: boolean }) {
+  return (
+    <div
+      className={cn(
+        'text-primary absolute left-2 top-[50%] -translate-y-[40%] text-sm z-51',
+        'transition-transform ease-in-out',
+        {
+          'translate-x-0': !isReady,
+          '-translate-x-100': isReady,
+        },
+      )}
+    >
+      <CircularProgress color={'inherit'} size={'16px'} thickness={8} />
+    </div>
+  );
+}
+
+function AISparkle({ isReady }: { isReady: boolean }) {
+  return (
+    <div
+      className={cn(
+        'text-monsoongrey absolute left-2 top-[50%] -translate-y-[50%] text-sm z-51',
+        'transition-transform ease-in-out',
+        {
+          'translate-x-0': isReady,
+          '-translate-x-100': !isReady,
+        },
+      )}
+    >
+      <AutoAwesome fontSize={'inherit'} />
     </div>
   );
 }
