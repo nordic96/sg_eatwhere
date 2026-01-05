@@ -7,10 +7,15 @@ This directory contains the Claude Code configuration for **The Foodie's Trail -
 ```
 .claude/
 ├── README.md           # This file
-├── settings.json       # MCP server configuration
-└── skills/
-    ├── frontend-dev.md    # @frontend-dev subagent
-    └── ui-ux-designer.md  # @ui-ux-designer subagent
+├── CLAUDE.md           # Shared agent context
+├── SKILLS.md           # Lessons learned & best practices
+├── UI_UX_CONTEXT.md    # Visual design system documentation
+├── mcp.json            # MCP server configuration
+├── agents/             # Subagent definitions
+│   ├── frontend-dev.md    # @frontend-dev subagent
+│   └── ui-ux-designer.md  # @ui-ux-designer subagent
+├── context/            # Additional context documents
+└── screenshots/        # UI screenshots for review
 ```
 
 ## Subagents
