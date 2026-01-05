@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { renderHook, act } from '@testing-library/react';
 import { useHeritageStore } from '@/app/stores/useHeritageStore';
 import { useAppStore } from '@/app/stores/useAppStore';
@@ -74,8 +75,8 @@ describe('Store Integration Tests', () => {
       });
 
       // Trail IDs should be from food data
-      const allIds = mockFoodData.map(f => f.id);
-      trailResult.current.trailIds.forEach(id => {
+      const allIds = mockFoodData.map((f) => f.id);
+      trailResult.current.trailIds.forEach((id) => {
         expect(allIds).toContain(id);
       });
     });
@@ -96,10 +97,10 @@ describe('Store Integration Tests', () => {
       });
 
       const filteredTrails = trailResult.current.getFilteredTrails();
-      const trailData = mockFoodData.filter(f => filteredTrails.includes(f.id));
+      const trailData = mockFoodData.filter((f) => filteredTrails.includes(f.id));
 
       // Should only have hawker trails
-      trailData.forEach(food => {
+      trailData.forEach((food) => {
         expect(food.category).not.toBe('restaurant');
         expect(food.category).not.toBe('dessert');
       });
@@ -247,7 +248,7 @@ describe('Store Integration Tests', () => {
       });
 
       const filtered = heritageResult.current.getFilteredFood();
-      expect(filtered.every(f => f.category !== 'restaurant')).toBe(true);
+      expect(filtered.every((f) => f.category !== 'restaurant')).toBe(true);
 
       // 5. Enable trail mode
       act(() => {
