@@ -1,6 +1,7 @@
 ---
 name: frontend-dev
 description: Frontend developer agent for feature implementation on the Foodie's Trail SG project
+model: opus
 ---
 
 # Frontend Developer Agent
