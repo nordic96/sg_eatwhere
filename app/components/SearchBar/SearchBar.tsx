@@ -5,47 +5,15 @@ import useClickOutside from '@/app/hooks/useClickOutside';
 import { useHeritageStore } from '@/app/stores';
 import { FoodHeritage } from '@/app/types';
 import { cn } from '@/app/utils';
-import { AvailableLocales } from '@/i18n/locales';
-import { geti18nConfig } from '@/i18n/request';
 import { Close, Search } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import { useEffect, useId, useRef, useState } from 'react';
 import RichItem from './RichItem';
+import { prepareSearchData, SearchableData, searchForKeyword } from '@/app/utils/searchUtils';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
 const DEFAULT_MIN_NO_RESULTS = 5;
-
-function searchForKeyword<T extends object>(keyword: string, items: T[]): T[] {
-  const lowerKeyword = keyword.toLowerCase();
-  return items.filter((item) => {
-    return Object.values(item).some((val) => {
-      if (Array.isArray(val)) {
-        return val.some((el) => String(el).toLowerCase().includes(lowerKeyword));
-      }
-      return String(val).toLowerCase().includes(lowerKeyword);
-    });
-  });
-}
-
-type SearchableData = FoodHeritage & { desc?: string };
-async function prepareSearchData(items: FoodHeritage[]): Promise<SearchableData[]> {
-  const localeDataPromises = AvailableLocales.map((locale) => geti18nConfig(locale));
-  const localeConfigs = await Promise.all(localeDataPromises);
-  const localeData = localeConfigs.map((config) => config.messages);
-
-  const preparedData = items.map((x) => {
-    const newData: SearchableData = Object.assign({}, x);
-    let descStr = '';
-    for (const messages of localeData) {
-      descStr = descStr.concat(' ', messages['Heritage'][`${x.id}_desc`]);
-    }
-    newData.desc = descStr;
-    return newData;
-  });
-
-  return preparedData;
-}
 
 export default function SearchBar() {
   const t = useTranslations('SearchBar');
