@@ -7,9 +7,9 @@ import { FoodHeritage } from '@/app/types';
 import { cn } from '@/app/utils';
 import { Close, Search } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import RichItem from './RichItem';
-import { prepareSearchData, SearchableData, searchForKeyword } from '@/app/utils/searchUtils';
+import { useSemanticSearch } from '@/app/hooks/useSemanticSearch';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
@@ -20,8 +20,7 @@ export default function SearchBar() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { foodData, setHeritageId } = useHeritageStore();
-  const [loading, setLoading] = useState(false);
-  const [searchableData, setSearchableData] = useState<SearchableData[]>([]);
+
   const [keyword, setKeyword] = useState<string>('');
   const [results, setResults] = useState<FoodHeritage[]>([]);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -32,40 +31,71 @@ export default function SearchBar() {
   const listboxId = useId();
   const inputId = useId();
 
+  /** Search Related */
+  const { search, isReady } = useSemanticSearch(foodData);
+
+  // Track active search to prevent stale results
+  const searchAbortRef = useRef<AbortController | null>(null);
+
+  // Memoize the search handler to avoid recreating on every render
+  const performSearch = useCallback(
+    async (query: string) => {
+      // Cancel any pending search
+      if (searchAbortRef.current) {
+        searchAbortRef.current.abort();
+      }
+
+      // Create new abort controller for this search
+      const abortController = new AbortController();
+      searchAbortRef.current = abortController;
+
+      try {
+        const res = await search(query);
+
+        // Check if this search was aborted
+        if (abortController.signal.aborted) {
+          return;
+        }
+
+        const resultsData = res
+          .map((id) => foodData.find((f) => f.id === id))
+          .filter((item): item is FoodHeritage => item !== undefined);
+
+        setResults(resultsData);
+        setSelectedIndex(-1);
+      } catch (error) {
+        // Only log if not aborted
+        if (!abortController.signal.aborted) {
+          console.error('Search error:', error);
+        }
+      }
+    },
+    [search, foodData],
+  );
+
   useClickOutside(containerRef, () => {
     setIsActive(false);
   });
 
+  // Effect to trigger search when debounced keyword changes
   useEffect(() => {
-    async function loadSearchData() {
-      setLoading(true);
-      await prepareSearchData(foodData)
-        .then((data) => {
-          setSearchableData(data);
-        })
-        .catch((error) => {
-          console.error('Failed to prepare search data:', error);
-          setSearchableData(foodData);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-    if (foodData.length > 0) {
-      loadSearchData();
-    }
-  }, [foodData]);
-
-  useEffect(() => {
-    if (!debouncedKeyword || loading) {
+    // Clear results if no keyword or not ready
+    if (!debouncedKeyword || !isReady) {
       setResults([]);
       setSelectedIndex(-1);
       return;
     }
-    const res = searchForKeyword<SearchableData>(debouncedKeyword, searchableData);
-    setResults(res);
-    setSelectedIndex(-1);
-  }, [debouncedKeyword, searchableData, loading]);
+
+    // Perform the search (do NOT include isSearching in dependencies)
+    performSearch(debouncedKeyword);
+
+    // Cleanup: abort search on unmount or when dependencies change
+    return () => {
+      if (searchAbortRef.current) {
+        searchAbortRef.current.abort();
+      }
+    };
+  }, [debouncedKeyword, isReady, performSearch]);
 
   function resetResults() {
     setKeyword('');
@@ -82,7 +112,7 @@ export default function SearchBar() {
 
   function onFocus() {
     if (debouncedKeyword === '') {
-      setResults(searchableData.slice(0, DEFAULT_MIN_NO_RESULTS));
+      setResults(foodData.slice(0, DEFAULT_MIN_NO_RESULTS));
     }
     setIsActive(true);
   }
@@ -108,7 +138,7 @@ export default function SearchBar() {
     }
   }
 
-  const showResults = !loading && isActive;
+  const showResults = isReady && isActive;
   const defaultLiStyle = 'px-2 py-1 rounded-lg cursor-pointer';
   const containerBaseWidthStyle = 'w-[500px] max-sm:w-full';
 
@@ -126,7 +156,7 @@ export default function SearchBar() {
           value={keyword}
           maxLength={MAX_INPUT_LEN}
           type={'text'}
-          disabled={loading}
+          disabled={!isReady}
           onFocus={onFocus}
           onBlur={() => {
             setTimeout(() => setIsActive(false), 150);
@@ -158,7 +188,6 @@ export default function SearchBar() {
             <Close fontSize={'inherit'} />
           </button>
         )}
-        {loading && <span>Loading...</span>}
       </div>
       {/** Search Result Container */}
       {showResults && (
