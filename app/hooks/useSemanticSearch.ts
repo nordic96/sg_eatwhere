@@ -21,7 +21,8 @@ export function useSemanticSearch(foodData: FoodHeritage[]) {
     aborted: false,
   });
 
-  // Get or create the search client
+  // Get or create the search client - call singleton factory directly
+  // This simplifies the dependency chain and fixes the missing dependency warning
   const getClient = useCallback(() => {
     if (!initializationRef.current.client) {
       initializationRef.current.client = getSemanticSearchClient();
@@ -48,7 +49,10 @@ export function useSemanticSearch(foodData: FoodHeritage[]) {
     }
 
     async function init() {
-      const client = getClient();
+      // Get client directly from singleton factory to avoid dependency issues
+      // The getSemanticSearchClient() function is stable and returns the same instance
+      const client = getSemanticSearchClient();
+      initState.client = client;
 
       // Check if client is already ready (e.g., from previous mount)
       if (client.getReadyState()) {
@@ -107,7 +111,9 @@ export function useSemanticSearch(foodData: FoodHeritage[]) {
     return () => {
       initState.aborted = true;
     };
-  }, [foodData, getClient]);
+    // Only depend on foodData - getSemanticSearchClient is a stable singleton factory
+    // This fixes the missing dependency warning by simplifying the dependency chain
+  }, [foodData]);
 
   const search = useCallback(
     async (query: string, topK: number = 10): Promise<string[]> => {

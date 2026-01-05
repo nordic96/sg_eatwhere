@@ -1,18 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isDebugMode } from '@/app/config/envMode';
 import { SearchableData } from '@/app/utils/searchUtils';
 
+// Type for pending message handlers with request ID correlation
+type MessageHandler = {
+  resolve: (value: string[]) => void;
+  reject: (error: Error) => void;
+};
+
 export class SemanticSearchClient {
   private worker: Worker | null = null;
-  private embeddings: Array<{ id: string; embedding: number[] }> = [];
   private isReady = false;
   private isDestroyed = false;
   private initPromise: Promise<void> | null = null;
   private embeddingsReadyResolve: (() => void) | null = null;
-  private messageQueue: Array<{
-    resolve: (value: any) => void;
-    reject: (error: any) => void;
-  }> = [];
+  // Use Map with request IDs to fix race condition - responses are matched to requests by ID
+  private messageQueue: Map<string, MessageHandler> = new Map();
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -40,9 +42,8 @@ export class SemanticSearchClient {
 
           switch (type) {
             case 'EMBEDDINGS_READY':
-              this.embeddings = data.embeddings;
               this.isReady = true;
-              if (isDebugMode()) console.log('Embeddings ready:', this.embeddings.length, 'items');
+              if (isDebugMode()) console.log('Embeddings ready:', data.embeddings.length, 'items');
               // Resolve the embeddings generation promise
               if (this.embeddingsReadyResolve) {
                 this.embeddingsReadyResolve();
@@ -50,21 +51,31 @@ export class SemanticSearchClient {
               }
               break;
 
-            case 'SEARCH_RESULTS':
-              // Resolve the pending search promise
-              if (this.messageQueue.length > 0) {
-                const { resolve } = this.messageQueue.shift()!;
-                resolve(data.results);
+            case 'SEARCH_RESULTS': {
+              // Resolve the pending search promise using requestId to match the correct handler
+              // This fixes the race condition where responses could resolve wrong promises
+              const requestId = data.requestId;
+              const handler = this.messageQueue.get(requestId);
+              if (handler) {
+                handler.resolve(data.results);
+                this.messageQueue.delete(requestId);
               }
               break;
+            }
 
-            case 'ERROR':
+            case 'ERROR': {
               if (isDebugMode()) console.error('Worker error:', data.error);
-              if (this.messageQueue.length > 0) {
-                const { reject } = this.messageQueue.shift()!;
-                reject(new Error(data.error));
+              // Use requestId to reject the correct promise
+              const errorRequestId = data.requestId;
+              if (errorRequestId) {
+                const errorHandler = this.messageQueue.get(errorRequestId);
+                if (errorHandler) {
+                  errorHandler.reject(new Error(data.error));
+                  this.messageQueue.delete(errorRequestId);
+                }
               }
               break;
+            }
           }
         };
 
@@ -145,36 +156,41 @@ export class SemanticSearchClient {
     }
 
     return new Promise((resolve, reject) => {
+      // Generate unique request ID to correlate request/response and fix race condition
+      const requestId = crypto.randomUUID();
+
       // Set a timeout to prevent hanging promises
       const timeout = setTimeout(() => {
-        // Find and remove this promise from the queue
-        const index = this.messageQueue.findIndex((item) => item.resolve === resolve);
-        if (index !== -1) {
-          this.messageQueue.splice(index, 1);
+        // Remove this request from the queue by ID
+        if (this.messageQueue.has(requestId)) {
+          this.messageQueue.delete(requestId);
         }
         reject(new Error('Search query timed out'));
       }, 10000); // 10 second timeout for individual searches
 
       // Wrap resolve to clear timeout
-      const wrappedResolve = (value: any) => {
+      const wrappedResolve = (value: string[]) => {
         clearTimeout(timeout);
         resolve(value);
       };
 
       // Wrap reject to clear timeout
-      const wrappedReject = (error: any) => {
+      const wrappedReject = (error: Error) => {
         clearTimeout(timeout);
         reject(error);
       };
 
-      this.messageQueue.push({ resolve: wrappedResolve, reject: wrappedReject });
+      // Store handler with request ID for correlation
+      this.messageQueue.set(requestId, { resolve: wrappedResolve, reject: wrappedReject });
 
+      // Send search query - embeddings are now cached in worker, no need to send them
+      // This fixes the memory performance issue
       this.worker!.postMessage({
         type: 'SEARCH_QUERY',
         data: {
           query,
-          embeddings: this.embeddings,
           topK,
+          requestId,
         },
       });
     });

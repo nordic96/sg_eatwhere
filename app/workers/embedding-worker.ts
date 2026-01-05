@@ -5,6 +5,10 @@ import { SearchableData } from '../utils/searchUtils';
 // Singleton pattern for model
 let embedder: any = null;
 
+// Cache embeddings in worker to avoid repeated postMessage transfers
+// This fixes the memory performance issue where embeddings were sent on every search
+let cachedEmbeddings: Array<{ id: string; embedding: number[] }> = [];
+
 async function getEmbedder() {
   if (!embedder) {
     embedder = await pipeline('feature-extraction', 'Xenova/paraphrase-multilingual-MiniLM-L12-v2');
@@ -49,6 +53,9 @@ self.onmessage = async (event) => {
           }),
         );
 
+        // Cache embeddings in worker for subsequent searches
+        cachedEmbeddings = embeddings;
+
         self.postMessage({
           type: 'EMBEDDINGS_READY',
           data: { embeddings },
@@ -57,16 +64,25 @@ self.onmessage = async (event) => {
       }
 
       case 'SEARCH_QUERY': {
-        // Encode user query
-        const { query, embeddings, topK } = data;
+        // Encode user query - use cached embeddings instead of receiving them each time
+        const { query, topK, requestId } = data;
+
+        // Use cached embeddings from GENERATE_EMBEDDINGS
+        if (cachedEmbeddings.length === 0) {
+          self.postMessage({
+            type: 'ERROR',
+            data: { error: 'Embeddings not generated yet', requestId },
+          });
+          break;
+        }
 
         const queryOutput = await model(query, {
           pooling: 'mean',
           normalize: true,
         });
 
-        // Calculate similarities
-        const scores = embeddings.map((item: any) => ({
+        // Calculate similarities using cached embeddings
+        const scores = cachedEmbeddings.map((item: any) => ({
           id: item.id,
           similarity: cos_sim(queryOutput.data, item.embedding),
         }));
@@ -79,7 +95,7 @@ self.onmessage = async (event) => {
 
         self.postMessage({
           type: 'SEARCH_RESULTS',
-          data: { results },
+          data: { results, requestId },
         });
         break;
       }
@@ -96,7 +112,7 @@ self.onmessage = async (event) => {
   } catch (error: any) {
     self.postMessage({
       type: 'ERROR',
-      data: { error: error.message },
+      data: { error: error.message, requestId: data?.requestId },
     });
   }
 };
