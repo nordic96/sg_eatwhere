@@ -167,6 +167,18 @@ describe('Section Component', () => {
       const section = container.querySelector('section');
       expect(section).not.toHaveAttribute('aria-labelledby');
     });
+
+    test('does not set aria-labelledby when title exists but no id', () => {
+      const { container } = render(
+        <Section title="Test Title">
+          <p>Content</p>
+        </Section>,
+      );
+
+      const section = container.querySelector('section');
+      expect(section).not.toHaveAttribute('aria-labelledby');
+      expect(container.querySelector('h3')).not.toHaveAttribute('id');
+    });
   });
 
   describe('Custom className', () => {
@@ -240,7 +252,7 @@ describe('Section Component', () => {
 
       const section = container.querySelector('section');
       expect(section).toHaveClass('md:py-12');
-      expect(section).toHaveClass('md:px-0');
+      expect(section).toHaveClass('px-4');
     });
 
     test('title has margin-bottom for spacing', () => {

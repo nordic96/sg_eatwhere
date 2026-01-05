@@ -47,12 +47,7 @@ export default function Page() {
             <StatsBar stats={stats} className="mt-8" />
           </div>
           <div className={'flex flex-col w-full'}>
-            <Section
-              title={t('food_code')}
-              id="food-code"
-              background="white"
-              className="px-0"
-            >
+            <Section title={t('food_code')} id="food-code" background="white" className="px-0">
               <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
                 {t.rich('food_code_desc', {
                   b: (chunks) => <span className={'font-bold'}>{chunks}</span>,

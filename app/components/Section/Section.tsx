@@ -32,11 +32,7 @@ export default function Section({
   className,
   titleClassName,
 }: SectionProps) {
-  const containerStyles = cn(
-    'py-8 md:py-12 px-4 md:px-0',
-    backgroundStyles[background],
-    className,
-  );
+  const containerStyles = cn('py-8 md:py-12 px-4', backgroundStyles[background], className);
 
   const titleStyles = cn(
     'text-xl md:text-2xl font-bold text-gray-800',
@@ -45,10 +41,11 @@ export default function Section({
     titleClassName,
   );
 
+  const titleId = id && title ? `${id}-title` : undefined;
   return (
-    <section id={id} className={containerStyles} aria-labelledby={title ? `${id}-title` : undefined}>
+    <section id={id} className={containerStyles} aria-labelledby={titleId}>
       {title && (
-        <h3 id={id ? `${id}-title` : undefined} className={titleStyles}>
+        <h3 id={titleId} className={titleStyles}>
           {title}
         </h3>
       )}
