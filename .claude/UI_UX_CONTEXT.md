@@ -155,19 +155,35 @@
 #### Profile Section
 - **Name:** "Gihun Ko Stephen"
 - **Title:** "Frontend Software Engineer | Web Developer"
-- **Social Links:** GitHub, LinkedIn, Home icons
+- **Social Links:** GitHub, LinkedIn, Home icons (NameCard component with labels)
 - **Layout:** Centered on mobile/tablet, right-aligned on desktop
 
-#### Content Sections
+#### StatsBar Component
+- **Stats:** 10+ Years, 100+ Spots, 4 Languages, 1 Dream Project
+- **Desktop:** Horizontal row layout
+- **Mobile:** 2x2 grid layout
+- **Styling:** Gradient text values, subtle hover effects, rounded cards
 
-**Food & Code**
+#### Content Sections (Section Component)
+
+**Section Component Features:**
+- Wrapper with background variants: `white`, `gray` (bg-gray-50), `accent` (bg-red-50)
+- Title styling: Bold text with 3px primary (red) underline
+- Responsive padding: py-8 mobile, py-12 desktop
+- Accessible: aria-labelledby support
+
+**Food & Code Section**
+- **Background:** White
+- **Title:** Red underlined h3
 - Personal narrative about returning to Korea for national service
 - Discovery of passion for food documentation
 - Connection between coding and food exploration
 - Key phrase highlighted: "food in Singapore"
 - Origin story of "Foodie's Trail" concept
 
-**About this Project**
+**About this Project Section**
+- **Background:** Gray (bg-gray-50) with rounded corners
+- **Title:** Red underlined h3
 - Project description as personal passion
 - 10 years of food discoveries
 - Archive of meals, memories, moments
@@ -240,6 +256,13 @@
 | Food Spot Card | Thumbnail + name overlay |
 | Region Tab Panel | Categorized food lists |
 | CTA Banner | Full-width promotional sections |
+
+### About Page Components
+| Component | Usage |
+|-----------|-------|
+| NameCard | Social links with labels (LinkedIn, GitHub, Portfolio) |
+| StatsBar | Statistics display (Years, Spots, Languages, Project) |
+| Section | Content wrapper with title styling & background variants |
 
 ### 3D Components
 | Component | Purpose |
