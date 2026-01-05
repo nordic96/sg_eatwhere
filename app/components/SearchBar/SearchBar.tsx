@@ -33,7 +33,7 @@ export default function SearchBar() {
   const inputId = useId();
 
   /** Search Related */
-  const { search, isReady } = useSemanticSearch(foodData);
+  const { search, isReady, isSearching } = useSemanticSearch(foodData);
 
   // Track active search to prevent stale results
   const searchAbortRef = useRef<AbortController | null>(null);
@@ -154,7 +154,8 @@ export default function SearchBar() {
         )}
       >
         <LoadingProgress isReady={isReady} />
-        <AISparkle isReady={isReady} />
+        <AISparkle isActive={isActive} isReady={isReady} />
+        <SearchProgress isSearching={isSearching} />
         <input
           id={inputId}
           className={cn(containerBaseWidthStyle, 'h-7 max-sm:h-8 focus:outline-none px-2 ')}
@@ -178,14 +179,6 @@ export default function SearchBar() {
           aria-label={'Search Food Locations'}
           placeholder={!isReady ? t('placeholder_loading') : t('placeholder')}
         />
-        {/** Search Icon */}
-        <div
-          className={
-            'absolute right-0 top-[50%] translate-y-[-60%] w-6 h-6 rounded-full text-primary text-xl items-center justify-center'
-          }
-        >
-          <Search fontSize={'inherit'} />
-        </div>
         {/** Close Text Icon */}
         {debouncedKeyword.length > 0 && (
           <button
@@ -243,6 +236,20 @@ export default function SearchBar() {
   );
 }
 
+function SearchProgress({ isSearching }: { isSearching: boolean }) {
+  return (
+    <div
+      className={cn('text-primary absolute right-2 top-[50%] text-xl', {
+        '-translate-y-[40%]': isSearching,
+        '-translate-y-[50%]': !isSearching,
+      })}
+    >
+      {isSearching && <CircularProgress color={'inherit'} size={'16px'} thickness={8} />}
+      {!isSearching && <Search fontSize={'inherit'} />}
+    </div>
+  );
+}
+
 function LoadingProgress({ isReady }: { isReady: boolean }) {
   return (
     <div
@@ -260,13 +267,15 @@ function LoadingProgress({ isReady }: { isReady: boolean }) {
   );
 }
 
-function AISparkle({ isReady }: { isReady: boolean }) {
+function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean }) {
   return (
     <div
       className={cn(
         'text-monsoongrey absolute left-2 top-[50%] -translate-y-[50%] text-sm z-51',
         'transition-transform ease-in-out',
         {
+          'text-monsoongrey': !isActive,
+          'text-primary': isActive,
           'translate-x-0': isReady,
           '-translate-x-100': !isReady,
         },
