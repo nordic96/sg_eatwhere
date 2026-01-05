@@ -239,5 +239,55 @@ npm run lint:fix   # ESLint auto-fix
 Both agents should:
 1. Read existing code before making changes
 2. Follow established patterns
-3. Use MCP tools (Playwright, Sequential Thinking) when beneficial
+3. Use MCP servers for browser automation (see below)
 4. Update tests for new functionality
+
+---
+
+## MCP Server Usage
+
+**IMPORTANT:** This project has MCP (Model Context Protocol) servers configured in `.claude/mcp.json`.
+
+### Available MCP Servers
+
+| Server | Purpose |
+|--------|---------|
+| `playwright` | Browser automation for screenshots & visual testing |
+| `sequential-thinking` | Enhanced reasoning for complex problems |
+
+### How to Use MCP Servers
+
+MCP servers are accessed through Claude's built-in MCP tool interface. **DO NOT install packages directly.**
+
+```
+WRONG: npm install playwright          # DO NOT DO THIS
+WRONG: npm install --save-dev playwright   # DO NOT DO THIS
+
+RIGHT: Use the MCP tools provided by Claude Code
+```
+
+### Using Playwright MCP for Screenshots
+
+The Playwright MCP server provides tools for browser automation. Use these MCP-provided tools:
+
+1. **`mcp__playwright__browser_navigate`** - Navigate to a URL
+2. **`mcp__playwright__browser_screenshot`** - Capture screenshot
+3. **`mcp__playwright__browser_click`** - Click elements
+4. **`mcp__playwright__browser_snapshot`** - Get accessibility snapshot
+
+Example workflow for capturing screenshots:
+```
+1. Use mcp__playwright__browser_navigate to go to http://localhost:3000/en/about
+2. Use mcp__playwright__browser_screenshot to capture the page
+```
+
+### Using Sequential Thinking MCP
+
+For complex problem-solving, use the sequential thinking MCP tools to break down problems step by step.
+
+### Why Not Install Playwright Directly?
+
+- MCP servers run in isolated environments
+- No need to modify `package.json`
+- Consistent tooling across all agents
+- Automatically managed by Claude Code

@@ -85,3 +85,20 @@ npm run test      # Run tests
 npm run lint:fix  # Fix linting issues
 npm run build     # Verify production build
 ```
+
+## MCP Server Usage
+
+**IMPORTANT:** For browser automation (screenshots, visual testing), use MCP tools provided by Claude Code.
+
+```bash
+# NEVER do this - it pollutes package.json
+npm install playwright
+npm install --save-dev playwright
+```
+
+Instead, use MCP-provided tools:
+- `mcp__playwright__browser_navigate` - Navigate to URL
+- `mcp__playwright__browser_screenshot` - Capture screenshot
+- `mcp__playwright__browser_resize` - Change viewport
+
+MCP servers are configured in `.claude/mcp.json` and managed by Claude Code.

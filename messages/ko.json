@@ -108,5 +108,15 @@
         "changelanguage": "언어 변경",
         "column_website": "웹사이트",
         "app_version": "앱 버젼"
+    },
+    "StatsBar": {
+        "years_value": "10+",
+        "years_label": "년",
+        "spots_value": "100+",
+        "spots_label": "맛집",
+        "languages_value": "4",
+        "languages_label": "언어 지원",
+        "project_value": "1",
+        "project_label": "꿈의 프로젝트"
     }
 }
