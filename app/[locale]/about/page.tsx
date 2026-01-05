@@ -2,6 +2,7 @@ import { h1BaseStyle, microTextBaseStyle } from '../../constants';
 import FadeIn from '../../components/FadeIn/FadeIn';
 import NameCard from '../../components/NameCard/NameCard';
 import StatsBar from '../../components/StatsBar';
+import Section from '../../components/Section';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { CDN_BASE } from '@/app/config/cdn';
@@ -45,22 +46,25 @@ export default function Page() {
             <NameCard variant="expanded" />
             <StatsBar stats={stats} className="mt-8" />
           </div>
-          <div className={'flex flex-col gap-8 w-[80%]'}>
-            <div>
-              <h3>{t('food_code')}</h3>
-              <p className={'whitespace-pre-line font-light text-base'}>
+          <div className={'flex flex-col w-full'}>
+            <Section title={t('food_code')} id="food-code" background="white" className="px-0">
+              <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
                 {t.rich('food_code_desc', {
                   b: (chunks) => <span className={'font-bold'}>{chunks}</span>,
                   i: (chunks) => <span className={'italic'}>{chunks}</span>,
                 })}
               </p>
-            </div>
-            <div>
-              <h3>{t('about_project')}</h3>
-              <p className={'whitespace-pre-line font-light text-base'}>
+            </Section>
+            <Section
+              title={t('about_project')}
+              id="about-project"
+              background="gray"
+              className="rounded-lg"
+            >
+              <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
                 {t('about_project_desc')}
               </p>
-            </div>
+            </Section>
           </div>
         </div>
       </div>
