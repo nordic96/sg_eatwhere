@@ -19,7 +19,7 @@ import LoadingProgress from './LoadingProgress';
 import AISparkle from './AISparkle';
 import SearchProgress from './SearchProgress';
 
-const DEBOUNCE_DELAY_MS = 500;
+const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
 const DEFAULT_MIN_NO_RESULTS = 5;
 

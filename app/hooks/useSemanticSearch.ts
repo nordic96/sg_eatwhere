@@ -1,8 +1,8 @@
-// src/hooks/useSemanticSearch.ts
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { getSemanticSearchClient, SemanticSearchClient } from '@/lib/semanticSearch';
 import { FoodHeritage } from '@/app/types';
 import { prepareSearchData, SearchableData } from '../utils/searchUtils';
+import { isDebugMode } from '../config/envMode';
 
 export function useSemanticSearch(foodData: FoodHeritage[]) {
   const [isInitializing, setIsInitializing] = useState(true);
@@ -52,7 +52,7 @@ export function useSemanticSearch(foodData: FoodHeritage[]) {
 
       // Check if client is already ready (e.g., from previous mount)
       if (client.getReadyState()) {
-        console.log('Semantic search already initialized');
+        if (isDebugMode()) console.log('Semantic search already initialized');
         initState.initialized = true;
         setIsInitializing(false);
         return;
@@ -61,21 +61,24 @@ export function useSemanticSearch(foodData: FoodHeritage[]) {
       initState.initializing = true;
 
       try {
-        console.log('Preparing Searchable data...');
+        if (isDebugMode()) console.log('Preparing Searchable data...');
         let searchableData: SearchableData[] = foodData;
 
         try {
           searchableData = await prepareSearchData(foodData);
         } catch (e) {
-          console.error('Error while fetching descriptions for searchable data:', e);
+          if (isDebugMode())
+            console.error('Error while fetching descriptions for searchable data:', e);
         }
-        console.log(initState);
+
         // Check if unmounted during async operation
         if (initState.aborted) {
           return;
         }
 
-        console.log('Generating embeddings for', foodData.length, 'items...');
+        if (isDebugMode()) {
+          console.log('Generating embeddings for', foodData.length, 'items...');
+        }
         await client.generateEmbeddings(searchableData);
 
         // Check if unmounted during async operation
@@ -83,7 +86,7 @@ export function useSemanticSearch(foodData: FoodHeritage[]) {
           return;
         }
 
-        console.log('Semantic search ready!');
+        if (isDebugMode()) console.log('Semantic search ready!');
         initState.initialized = true;
       } catch (error) {
         console.error('Failed to initialize semantic search:', error);

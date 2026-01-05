@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// src/lib/semanticSearch.ts
+import { isDebugMode } from '@/app/config/envMode';
 import { SearchableData } from '@/app/utils/searchUtils';
 
 export class SemanticSearchClient {
@@ -42,7 +42,7 @@ export class SemanticSearchClient {
             case 'EMBEDDINGS_READY':
               this.embeddings = data.embeddings;
               this.isReady = true;
-              console.log('Embeddings ready:', this.embeddings.length, 'items');
+              if (isDebugMode()) console.log('Embeddings ready:', this.embeddings.length, 'items');
               // Resolve the embeddings generation promise
               if (this.embeddingsReadyResolve) {
                 this.embeddingsReadyResolve();
@@ -59,7 +59,7 @@ export class SemanticSearchClient {
               break;
 
             case 'ERROR':
-              console.error('Worker error:', data.error);
+              if (isDebugMode()) console.error('Worker error:', data.error);
               if (this.messageQueue.length > 0) {
                 const { reject } = this.messageQueue.shift()!;
                 reject(new Error(data.error));
