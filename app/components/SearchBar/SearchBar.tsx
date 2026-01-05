@@ -4,13 +4,20 @@ import { useDebounce } from '@/app/hooks';
 import useClickOutside from '@/app/hooks/useClickOutside';
 import { useHeritageStore } from '@/app/stores';
 import { FoodHeritage } from '@/app/types';
+
 import { cn } from '@/app/utils';
-import { AutoAwesome, Close, Search } from '@mui/icons-material';
+
+import { Close } from '@mui/icons-material';
+
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import RichItem from './RichItem';
 import { useSemanticSearch } from '@/app/hooks/useSemanticSearch';
-import { CircularProgress, Skeleton } from '@mui/material';
+
+import RichItem from './RichItem';
+import SearchSkeleton from './SearchSkeleton';
+import LoadingProgress from './LoadingProgress';
+import AISparkle from './AISparkle';
+import SearchProgress from './SearchProgress';
 
 const DEBOUNCE_DELAY_MS = 500;
 const MAX_INPUT_LEN = 100;
@@ -176,6 +183,7 @@ export default function SearchBar() {
             selectedIndex >= 0 ? `${listboxId}-option-${selectedIndex}` : undefined
           }
           aria-autocomplete={'list'}
+          aria-busy={isSearching}
           aria-label={'Search Food Locations'}
           placeholder={!isReady ? t('placeholder_loading') : t('placeholder')}
         />
@@ -236,77 +244,6 @@ export default function SearchBar() {
           )}
         </ul>
       )}
-    </div>
-  );
-}
-
-function SearchSkeleton({ rows = 5 }: { rows?: number }) {
-  return (
-    <div className={'flex flex-col gap-2'}>
-      {Array.from({ length: rows }).map((_, i) => {
-        return (
-          <div key={`search-skeleton-${i}`} className={'flex items-center justify-start gap-4'}>
-            <Skeleton variant="circular" width={24} height={24} />
-            <div className={'flex grow flex-col'}>
-              <Skeleton width={'100%'} height={32} />
-              <div className={'flex gap-2 w-[50%]'}>
-                <Skeleton width={'100%'} />
-                <Skeleton width={'100%'} />
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function SearchProgress({ isSearching }: { isSearching: boolean }) {
-  return (
-    <div
-      className={cn('text-primary absolute right-2 top-[50%] text-xl', {
-        '-translate-y-[40%]': isSearching,
-        '-translate-y-[50%]': !isSearching,
-      })}
-    >
-      {isSearching && <CircularProgress color={'inherit'} size={'16px'} thickness={8} />}
-      {!isSearching && <Search fontSize={'inherit'} />}
-    </div>
-  );
-}
-
-function LoadingProgress({ isReady }: { isReady: boolean }) {
-  return (
-    <div
-      className={cn(
-        'text-primary absolute left-2 top-[50%] -translate-y-[40%] text-sm z-51',
-        'transition-transform ease-in-out',
-        {
-          'translate-x-0': !isReady,
-          '-translate-x-100': isReady,
-        },
-      )}
-    >
-      <CircularProgress color={'inherit'} size={'16px'} thickness={8} />
-    </div>
-  );
-}
-
-function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean }) {
-  return (
-    <div
-      className={cn(
-        'text-monsoongrey absolute left-2 top-[50%] -translate-y-[50%] text-sm z-51',
-        'transition-transform ease-in-out',
-        {
-          'text-monsoongrey': !isActive,
-          'text-primary': isActive,
-          'translate-x-0': isReady,
-          '-translate-x-100': !isReady,
-        },
-      )}
-    >
-      <AutoAwesome fontSize={'inherit'} />
     </div>
   );
 }

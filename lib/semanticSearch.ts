@@ -145,7 +145,29 @@ export class SemanticSearchClient {
     }
 
     return new Promise((resolve, reject) => {
-      this.messageQueue.push({ resolve, reject });
+      // Set a timeout to prevent hanging promises
+      const timeout = setTimeout(() => {
+        // Find and remove this promise from the queue
+        const index = this.messageQueue.findIndex((item) => item.resolve === resolve);
+        if (index !== -1) {
+          this.messageQueue.splice(index, 1);
+        }
+        reject(new Error('Search query timed out'));
+      }, 10000); // 10 second timeout for individual searches
+
+      // Wrap resolve to clear timeout
+      const wrappedResolve = (value: any) => {
+        clearTimeout(timeout);
+        resolve(value);
+      };
+
+      // Wrap reject to clear timeout
+      const wrappedReject = (error: any) => {
+        clearTimeout(timeout);
+        reject(error);
+      };
+
+      this.messageQueue.push({ resolve: wrappedResolve, reject: wrappedReject });
 
       this.worker!.postMessage({
         type: 'SEARCH_QUERY',
