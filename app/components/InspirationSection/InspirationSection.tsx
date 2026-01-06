@@ -15,7 +15,7 @@ export interface InspirationSectionProps {
 /** Colour swatch data representing the inspired palette */
 interface ColourSwatch {
   hex: string;
-  labelKey: 'colour_hawker' | 'colour_dessert' | 'colour_restaurant';
+  labelKey: 'colour_hawker' | 'colour_dessert' | 'colour_restaurant' | 'colour_yellow';
 }
 
 const STRAITS_TIMES_ARTICLE_URL =
@@ -25,14 +25,15 @@ const STRAITS_TIMES_ARTICLE_URL =
 const THUMBNAIL_IMAGE_URL = 'https://www.storybench.org/wp-content/uploads/2023/09/PNG-image.jpeg';
 
 const COLOUR_SWATCHES: ColourSwatch[] = [
-  { hex: '#FF6B6B', labelKey: 'colour_hawker' },
-  { hex: '#4CAF50', labelKey: 'colour_dessert' },
-  { hex: '#FF9800', labelKey: 'colour_restaurant' },
+  { hex: '#A7292C', labelKey: 'colour_hawker' },
+  { hex: '#E15F2B', labelKey: 'colour_restaurant' },
+  { hex: '#F8D64F', labelKey: 'colour_yellow' },
+  { hex: '#406E3B', labelKey: 'colour_dessert' },
 ];
 
 const ctaButtonStyles = cn(
   'inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-200',
-  'bg-gray-900 text-white hover:bg-gray-800 active:bg-gray-700',
+  'bg-primary text-white hover:bg-red-700 active:bg-gray-700',
   'max-sm:px-4 max-sm:py-2 max-sm:text-xs',
 );
 
@@ -57,6 +58,7 @@ export default function InspirationSection({ className }: InspirationSectionProp
               height={489}
               className="w-full h-auto object-cover"
               priority={false}
+              draggable={false}
             />
           </div>
 
@@ -74,7 +76,7 @@ export default function InspirationSection({ className }: InspirationSectionProp
           </p>
 
           {/* Colour Palette */}
-          <div className="flex flex-col gap-3">
+          <div className="flex justify-center items-center flex-col gap-3">
             <p className="text-sm font-medium text-gray-700">{t('inspiration_palette_label')}</p>
             <div className="flex gap-4 max-sm:gap-3">
               {COLOUR_SWATCHES.map((swatch) => (
@@ -94,7 +96,7 @@ export default function InspirationSection({ className }: InspirationSectionProp
           </div>
 
           {/* CTA Button */}
-          <div className="mt-2">
+          <div className="mt-2 flex justify-center">
             <a
               href={STRAITS_TIMES_ARTICLE_URL}
               target="_blank"
