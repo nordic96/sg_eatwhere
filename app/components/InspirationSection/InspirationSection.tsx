@@ -80,9 +80,12 @@ export default function InspirationSection({ className }: InspirationSectionProp
             <p className="text-sm font-medium text-gray-700">{t('inspiration_palette_label')}</p>
             <div className="flex gap-4 max-sm:gap-3">
               {COLOUR_SWATCHES.map((swatch) => (
-                <div key={swatch.hex} className="flex flex-col items-center gap-2">
+                <div
+                  key={swatch.hex}
+                  className="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform ease-in-out"
+                >
                   <div
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-lg shadow-md"
+                    className="w-16 h-16 md:w-20 md:h-20 max-sm:w-14 max-sm:h-14 rounded-lg shadow-md"
                     style={{ backgroundColor: swatch.hex }}
                     role="img"
                     aria-label={`${t(swatch.labelKey)} colour swatch: ${swatch.hex}`}
