@@ -12,12 +12,7 @@ import { Close } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useSemanticSearch } from '@/app/hooks/useSemanticSearch';
-
-import RichItem from './RichItem';
-import SearchSkeleton from './SearchSkeleton';
-import LoadingProgress from './LoadingProgress';
-import AISparkle from './AISparkle';
-import SearchProgress from './SearchProgress';
+import { AISparkle, LoadingProgress, RichItem, SearchProgress, SearchSkeleton } from '.';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
@@ -191,6 +186,7 @@ export default function SearchBar() {
         {debouncedKeyword.length > 0 && (
           <button
             onClick={() => setKeyword('')}
+            aria-label={'Clear Search'}
             className={
               'absolute right-6 top-[50%] translate-y-[-60%] w-6 h-6 cursor-pointer rounded-full text-gray-400 text-xl items-center justify-center'
             }
@@ -208,6 +204,7 @@ export default function SearchBar() {
             'absolute left-[50%] -translate-x-[50%] z-50 bg-white rounded-lg flex flex-col gap-2 shadow-xl py-1',
           )}
           role={'listbox'}
+          aria-live={'polite'}
         >
           {isSearching ? (
             <li role={'option'} className={cn(defaultLiStyle, 'text-black')} aria-selected={false}>
