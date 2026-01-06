@@ -22,7 +22,7 @@ export default function StatsBar({ stats, variant = 'default', className }: Stat
   const containerStyles = cn(
     'w-full',
     variant === 'default'
-      ? 'grid grid-cols-2 gap-4 md:flex md:flex-row md:justify-center md:gap-8 lg:gap-12'
+      ? 'grid grid-cols-2 gap-4 md:flex md:flex-row md:justify-start md:gap-4 lg:gap-8'
       : 'grid grid-cols-2 gap-4',
     className,
   );
@@ -34,7 +34,7 @@ export default function StatsBar({ stats, variant = 'default', className }: Stat
   );
 
   const valueStyles = cn(
-    'text-2xl md:text-3xl lg:text-4xl font-bold',
+    'text-3xl md:text-3xl lg:text-3xl font-bold',
     'text-primary bg-gradient-to-r from-primary to-red-600 bg-clip-text text-transparent',
   );
 

@@ -84,7 +84,7 @@ describe('NameCard Component', () => {
 
       expect(wrapper).toHaveClass('gap-4');
       expect(wrapper).toHaveClass('flex-wrap');
-      expect(wrapper).toHaveClass('justify-center');
+      expect(wrapper).toHaveClass('justify-start');
     });
 
     test('links have flex-col layout in expanded mode', () => {
@@ -257,10 +257,7 @@ describe('NameCard Component', () => {
       const { container } = render(<NameCard />);
       const firstLink = container.querySelector('a');
 
-      expect(firstLink).toHaveAttribute(
-        'href',
-        'https://www.linkedin.com/in/gi-hun-ko-863619184/',
-      );
+      expect(firstLink).toHaveAttribute('href', 'https://www.linkedin.com/in/gi-hun-ko-863619184/');
     });
 
     test('renders GitHub icon second', () => {

@@ -251,7 +251,7 @@ describe('Section Component', () => {
       );
 
       const section = container.querySelector('section');
-      expect(section).toHaveClass('md:py-12');
+      expect(section).toHaveClass('md:py-8');
       expect(section).toHaveClass('px-4');
     });
 

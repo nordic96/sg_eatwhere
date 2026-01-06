@@ -32,7 +32,7 @@ export default function Section({
   className,
   titleClassName,
 }: SectionProps) {
-  const containerStyles = cn('py-8 md:py-12 px-4', backgroundStyles[background], className);
+  const containerStyles = cn('py-8 md:py-8 px-4', backgroundStyles[background], className);
 
   const titleStyles = cn(
     'text-xl md:text-2xl font-bold text-gray-800',

@@ -135,7 +135,7 @@ describe('StatsBar Component', () => {
 
       expect(wrapper).toHaveClass('md:flex');
       expect(wrapper).toHaveClass('md:flex-row');
-      expect(wrapper).toHaveClass('md:justify-center');
+      expect(wrapper).toHaveClass('md:justify-start');
     });
 
     test('compact variant always uses grid layout', () => {

@@ -39,7 +39,7 @@ export default function Page() {
             <span className={'flex justify-center'}>{'-Illustration designed by Gihun Ko'}</span>
           </FadeIn>
         </div>
-        <div className={'flex flex-col gap-16'}>
+        <div className={'flex flex-col gap-8'}>
           <div>
             <h1 className={h1BaseStyle}>Gihun Ko Stephen</h1>
             <p className={microTextBaseStyle}>{t('intro')}</p>

@@ -65,17 +65,18 @@ export default function NameCard({
     'flex items-center gap-2 text-gray-700 transition-all duration-200 ease-in-out',
     'hover:text-primary hover:scale-110',
     'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md',
-    isExpanded ? 'flex-col p-3' : 'p-2',
+    isExpanded && 'flex-col',
   );
 
   const iconStyles = 'text-2xl';
-  const labelStyles = 'text-xs font-medium text-gray-500 group-hover:text-primary transition-colors';
+  const labelStyles =
+    'text-xs font-medium text-gray-500 group-hover:text-primary transition-colors';
 
   return (
     <div
       className={cn(
         'flex items-center',
-        isExpanded ? 'gap-4 flex-wrap justify-center' : 'gap-1',
+        isExpanded ? 'mt-4 gap-4 flex-wrap justify-start' : 'gap-1',
         className,
       )}
       role="navigation"
