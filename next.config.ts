@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: new URL(process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jsdelivr.net').hostname,
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.storybench.org',
+        pathname: '/wp-content/uploads/**',
+      },
     ],
   },
   logging: {

@@ -3,6 +3,7 @@ import FadeIn from '../../components/FadeIn/FadeIn';
 import NameCard from '../../components/NameCard/NameCard';
 import StatsBar from '../../components/StatsBar';
 import Section from '../../components/Section';
+import { InspirationSection } from '../../components/InspirationSection';
 import { TechStackSection } from '../../components/TechStack';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -23,10 +24,10 @@ export default function Page() {
     <div className={'py-16'}>
       <div
         className={
-          'lg:grid-cols-2 lg:grid-rows-1 lg:grid max-sm:flex max-sm:flex-col max-sm:gap-16 items-start max-sm:items-center'
+          'lg:grid-cols-2 lg:grid-rows-1 lg:grid gap-12 max-sm:flex max-sm:flex-col items-start max-sm:items-center'
         }
       >
-        <div className={'lg:min-w-[40vw] max-sm:w-full flex flex-col max-sm:items-center'}>
+        <div className={'max-sm:w-full flex flex-col max-sm:items-center gap-12'}>
           <FadeIn>
             <Image
               alt={'me'}
@@ -44,7 +45,17 @@ export default function Page() {
             <p className={microTextBaseStyle}>{t('intro')}</p>
             <NameCard variant="expanded" />
           </div>
-          <StatsBar stats={stats} className="mt-12" />
+          <StatsBar stats={stats} />
+          <Section
+            title={t('about_project')}
+            id="about-project"
+            background="gray"
+            className="rounded-lg"
+          >
+            <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
+              {t('about_project_desc')}
+            </p>
+          </Section>
         </div>
         <div className={'flex flex-col w-full'}>
           <div className={'flex flex-col w-full'}>
@@ -56,16 +67,7 @@ export default function Page() {
                 })}
               </p>
             </Section>
-            <Section
-              title={t('about_project')}
-              id="about-project"
-              background="gray"
-              className="rounded-lg"
-            >
-              <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
-                {t('about_project_desc')}
-              </p>
-            </Section>
+            <InspirationSection />
             <TechStackSection />
           </div>
         </div>

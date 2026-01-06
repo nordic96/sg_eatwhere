@@ -22,12 +22,20 @@ This is an interactive web application showcasing Singapore's hidden food gems t
 
 ## Design System
 
-### Theme Colors
+### Category Theme Colors
 | Category | Color | Hex |
 |----------|-------|-----|
 | Hawker | Red | #FF6B6B |
 | Dessert | Green | #4CAF50 |
 | Restaurant | Orange | #FF9800 |
+
+### Brand Colour Palette (Singapore-Inspired)
+| Name | Hex | Usage |
+|------|-----|-------|
+| Primary Red | #A7292C | CTA buttons, primary actions |
+| Outram Orange | #E15F2B | Restaurant accents |
+| Golden Mile Yellow | #F8D64F | Highlights, attention |
+| Garden Green | #406E3B | Dessert accents |
 
 ### Typography & Styling
 - **Framework**: Tailwind CSS 4
@@ -64,6 +72,17 @@ This is an interactive web application showcasing Singapore's hidden food gems t
 - `HeroSection/` - Landing page hero
 - `StorySection/` - Story content
 - `TrailMode/` - Trail navigation UI
+
+### About Page
+- `InspirationSection/` - Attribution with colour palette & CTA
+- `TechStack/TechStackSection` - Tech badges grid with GitHub CTAs
+- `TechStack/TechBadge` - Individual badge with tooltip
+
+### SearchBar Sub-Components
+- `AISparkle` - AI semantic search indicator
+- `LoadingProgress` - Initialization loading
+- `SearchProgress` - Search loading indicator
+- `SearchSkeleton` - Skeleton loading for results
 
 ## UX Considerations
 
@@ -112,6 +131,34 @@ When analyzing UI/UX:
    - Loading indicators
    - Error states
    - Transitions/animations
+
+## Established Design Patterns
+
+### CTA Buttons
+- **Primary**: `bg-primary text-white` (Primary Red #A7292C)
+- **Secondary**: `bg-gray-900 text-white` for GitHub CTAs
+- **Outlined**: `bg-white text-gray-700 border border-gray-300`
+- **Layout**: Centered with `flex justify-center gap-4`
+- **Styling**: `rounded-full px-6 py-3`, responsive: `max-sm:px-4 max-sm:py-2`
+
+### Attribution Sections
+Pattern for crediting external inspiration:
+1. Thumbnail image
+2. Title + author
+3. Description text
+4. Visual element (e.g., colour palette)
+5. CTA button to source
+
+### Tech Badges
+- Grid layout with `flex flex-wrap justify-center gap-4`
+- Icon + label with MUI Tooltip
+- Hover lift: `hover:-translate-y-1 hover:shadow-md`
+- Links to official docs via `source` URL
+
+### Loading States
+- **Skeleton**: Use `SearchSkeleton` pattern for content loading
+- **Progress**: `CircularProgress` for actions (size 16px, thickness 8)
+- **AI Indicator**: Sparkle icon (AutoAwesome) for AI features
 
 ## Tools Available (MCP Servers)
 
@@ -175,11 +222,21 @@ app/components/
 ├── Header.tsx
 ├── Footer.tsx
 ├── SearchBar/
+│   ├── SearchBar.tsx
+│   ├── AISparkle.tsx
+│   ├── LoadingProgress.tsx
+│   ├── SearchProgress.tsx
+│   ├── SearchSkeleton.tsx
+│   └── RichItem.tsx
 ├── Sidebar/
 ├── FilterBar/
 ├── MapController/
 ├── TrailMode/
 ├── HeroSection/
 ├── StorySection/
+├── InspirationSection/
+├── TechStack/
+│   ├── TechStackSection.tsx
+│   └── TechBadge.tsx
 └── LocaleSwitcher/
 ```

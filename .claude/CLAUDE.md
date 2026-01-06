@@ -79,6 +79,14 @@ interface FoodHeritage {
 | Dessert | `#4CAF50` | Green for dessert shops |
 | Restaurant | `#FF9800` | Orange for restaurants |
 
+### Brand Colour Palette (Singapore-Inspired)
+| Name | Hex | Usage |
+|------|-----|-------|
+| Primary Red | `#A7292C` | CTA buttons, primary actions |
+| Outram Orange | `#E15F2B` | Restaurant accents |
+| Golden Mile Yellow | `#F8D64F` | Highlights, attention |
+| Garden Green | `#406E3B` | Dessert accents |
+
 ---
 
 ## State Management (Zustand)
@@ -106,13 +114,44 @@ interface FoodHeritage {
 ### UI Components (`app/components/`)
 | Component | Purpose |
 |-----------|---------|
-| `SearchBar/` | Autocomplete search |
+| `SearchBar/` | Autocomplete search with AI semantic search |
 | `Sidebar/` | Location details panel |
 | `FilterBar/` | Category filters |
 | `MapController/` | Camera controls |
 | `TrailMode/` | Trail navigation |
 | `Header.tsx` | Navigation header |
 | `LocaleSwitcher/` | Language switcher |
+
+### About Page Components (`app/components/`)
+| Component | Purpose |
+|-----------|---------|
+| `InspirationSection/` | Attribution section with colour palette & CTA |
+| `TechStack/TechStackSection` | Tech badges grid with GitHub CTAs |
+| `TechStack/TechBadge` | Individual tech badge with tooltip |
+
+### SearchBar Sub-Components (`app/components/SearchBar/`)
+| Component | Purpose |
+|-----------|---------|
+| `AISparkle` | Sparkle icon indicating AI semantic search |
+| `LoadingProgress` | Initialization loading indicator |
+| `SearchProgress` | Active search loading indicator |
+| `SearchSkeleton` | Skeleton loading for search results |
+| `RichItem` | Rich search result item display |
+
+### About Page Layout (`app/[locale]/about/page.tsx`)
+Two-column responsive grid (single column on mobile):
+
+**Left Column:**
+- Hero image with attribution
+- Name + intro text
+- NameCard (contact links)
+- StatsBar (key metrics)
+- "About this Project" section
+
+**Right Column:**
+- "Food & Code" section
+- InspirationSection (attribution + colour palette)
+- TechStackSection (tech badges + GitHub CTAs)
 
 ---
 
@@ -146,6 +185,13 @@ interface FoodHeritage {
 - `clsx` + `tailwind-merge` via `cn()` utility
 - Material-UI for complex components
 - Theme colors from `constants/theme.ts`
+
+### Design Patterns
+- **Centered CTAs**: Use `flex justify-center` for CTA button groups
+- **Attribution Sections**: Image, title, author, description, colour palette, CTA
+- **Tech Badges**: Icon + label with tooltip, hover lift effect (`hover:-translate-y-1`)
+- **Loading States**: Skeleton components for content, CircularProgress for actions
+- **AI Indicators**: Sparkle icon (AutoAwesome) for AI-powered features
 
 ### State
 - Zustand stores with typed selectors

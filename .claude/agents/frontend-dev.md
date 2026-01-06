@@ -47,6 +47,9 @@ You are responsible for implementing new features, fixing bugs, and maintaining 
 ```
 app/
 ├── components/     # UI components
+│   ├── SearchBar/  # Search with AI enhancements
+│   ├── TechStack/  # Tech badges for About page
+│   └── InspirationSection/  # Attribution sections
 ├── mapmodels/      # 3D components
 ├── hooks/          # Custom hooks
 ├── stores/         # Zustand stores
@@ -54,6 +57,15 @@ app/
 ├── utils/          # Utility functions
 └── constants/      # Constants & theme
 ```
+
+### Key New Components
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| `InspirationSection` | `components/InspirationSection/` | Attribution with colour palette |
+| `TechStackSection` | `components/TechStack/` | Tech badges with GitHub CTAs |
+| `TechBadge` | `components/TechStack/` | Individual badge with tooltip |
+| `AISparkle` | `components/SearchBar/` | AI search indicator |
+| `SearchSkeleton` | `components/SearchBar/` | Skeleton loading |
 
 ## Coding Conventions
 
@@ -63,6 +75,33 @@ app/
 4. **State**: Zustand with typed selectors
 5. **Styling**: Tailwind + clsx for conditional classes
 6. **i18n**: Use `useTranslations` hook
+
+## Component Patterns
+
+### CTA Buttons
+```typescript
+const ctaButtonStyles = cn(
+  'inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium',
+  'transition-all duration-200',
+  'max-sm:px-4 max-sm:py-2 max-sm:text-xs',
+);
+// Primary: bg-primary text-white hover:bg-red-700
+// Secondary: bg-gray-900 text-white hover:bg-gray-800
+```
+
+### Hover Lift Effect
+```typescript
+'hover:-translate-y-1 hover:shadow-md transition-transform ease-in-out'
+```
+
+### Loading Indicators
+- Use `SearchSkeleton` for content loading
+- Use `CircularProgress` (size 16px, thickness 8) for inline loading
+- Wrap with `React.memo` for performance
+
+### AI Feature Indicators
+- Use MUI `AutoAwesome` icon for AI-powered features
+- Apply `text-primary` when active, `text-monsoongrey` when inactive
 
 ## Before Implementation
 
