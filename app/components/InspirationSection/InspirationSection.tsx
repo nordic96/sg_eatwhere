@@ -5,6 +5,7 @@ import Section from '@/app/components/Section';
 import FadeIn from '@/app/components/FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
 import { OpenInNew } from '@mui/icons-material';
+import Image from 'next/image';
 
 export interface InspirationSectionProps {
   /** Custom class name for the container */
@@ -19,6 +20,9 @@ interface ColourSwatch {
 
 const STRAITS_TIMES_ARTICLE_URL =
   'https://www.straitstimes.com/multimedia/graphics/2023/08/singapore-in-colour/index.html';
+
+/** Thumbnail image from Storybench article documenting the Singapore in Colour project */
+const THUMBNAIL_IMAGE_URL = 'https://www.storybench.org/wp-content/uploads/2023/09/PNG-image.jpeg';
 
 const COLOUR_SWATCHES: ColourSwatch[] = [
   { hex: '#FF6B6B', labelKey: 'colour_hawker' },
@@ -44,6 +48,18 @@ export default function InspirationSection({ className }: InspirationSectionProp
     >
       <FadeIn>
         <div className="flex flex-col gap-6">
+          {/* Thumbnail Image */}
+          <div className="relative w-full max-w-xl overflow-hidden rounded-lg shadow-md">
+            <Image
+              src={THUMBNAIL_IMAGE_URL}
+              alt="Singapore in Colour - A visual exploration of Singapore's vibrant colors by The Straits Times"
+              width={765}
+              height={489}
+              className="w-full h-auto object-cover"
+              priority={false}
+            />
+          </div>
+
           {/* Attribution Title */}
           <div className="flex flex-col gap-1">
             <h4 className="text-xl md:text-2xl font-semibold text-gray-800">
