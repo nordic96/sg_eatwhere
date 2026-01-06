@@ -3,6 +3,7 @@ import FadeIn from '../../components/FadeIn/FadeIn';
 import NameCard from '../../components/NameCard/NameCard';
 import StatsBar from '../../components/StatsBar';
 import Section from '../../components/Section';
+import { InspirationSection } from '../../components/InspirationSection';
 import { TechStackSection } from '../../components/TechStack';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -56,6 +57,7 @@ export default function Page() {
                 })}
               </p>
             </Section>
+            <InspirationSection />
             <Section
               title={t('about_project')}
               id="about-project"
