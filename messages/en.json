@@ -80,7 +80,7 @@
         "food_code": "Food & Code",
         "about_project": "About this Project",
         "about_project_desc": "This website is a personal passion project. It's a collection of food places I've discovered and loved over the past 10 years living in Singapore - a small archive of the meals, memories, and moments shared with friends and family.\n\nMy hope is that this map becomes useful not only to future visitors, but to anyone curious about Singapore's food culture.\nIf these recommendations help even one person find a memorable meal, or let someone feel the warmth I experienced eating here, then I'll be more than happy.",
-        "tech_title": "Built With Love & Code",
+        "tech_title": "Built With Passion & Code",
         "tech_desc": "This project combines my passion for web development with my love for Singapore's food scene. The 3D map uses Three.js to bring the MRT-style visualization to life, making food discovery interactive and fun.",
         "tech_star_github": "Star on GitHub",
         "tech_report_issue": "Report an Issue"

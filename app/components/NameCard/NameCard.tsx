@@ -23,19 +23,19 @@ export interface NameCardProps {
 const defaultSocialLinks: SocialLink[] = [
   {
     href: 'https://www.linkedin.com/in/gi-hun-ko-863619184/',
-    icon: <LinkedIn />,
+    icon: <LinkedIn fontSize={'inherit'} />,
     label: 'LinkedIn',
     ariaLabel: 'Visit LinkedIn profile',
   },
   {
     href: 'https://github.com/nordic96',
-    icon: <GitHub />,
+    icon: <GitHub fontSize={'inherit'} />,
     label: 'GitHub',
     ariaLabel: 'Visit GitHub profile',
   },
   {
     href: 'https://stephenghk.com',
-    icon: <Home />,
+    icon: <Home fontSize={'inherit'} />,
     label: 'Portfolio',
     ariaLabel: 'Visit portfolio website',
   },
@@ -68,7 +68,6 @@ export default function NameCard({
     isExpanded && 'flex-col',
   );
 
-  const iconStyles = 'text-2xl';
   const labelStyles =
     'text-xs font-medium text-gray-500 group-hover:text-primary transition-colors';
 
@@ -76,7 +75,7 @@ export default function NameCard({
     <div
       className={cn(
         'flex items-center',
-        isExpanded ? 'mt-4 gap-4 flex-wrap justify-start' : 'gap-1',
+        isExpanded ? 'mt-4 gap-4 flex-wrap justify-start text-4xl' : 'text-2xl gap-1',
         className,
       )}
       role="navigation"
@@ -91,7 +90,7 @@ export default function NameCard({
           className={cn(linkBaseStyles, 'group')}
           aria-label={link.ariaLabel}
         >
-          <span className={iconStyles}>{link.icon}</span>
+          <span>{link.icon}</span>
           {isExpanded && <span className={labelStyles}>{link.label}</span>}
         </a>
       ))}

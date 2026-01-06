@@ -23,10 +23,10 @@ export default function Page() {
     <div className={'py-16'}>
       <div
         className={
-          'lg:grid-cols-2 lg:grid-rows-1 lg:grid max-sm:flex max-sm:flex-col max-sm:gap-16 items-center'
+          'lg:grid-cols-2 lg:grid-rows-1 lg:grid max-sm:flex max-sm:flex-col max-sm:gap-16 items-start max-sm:items-center'
         }
       >
-        <div className={'min-w-[40vw]'}>
+        <div className={'lg:min-w-[40vw] max-sm:w-full flex flex-col max-sm:items-center'}>
           <FadeIn>
             <Image
               alt={'me'}
@@ -39,14 +39,14 @@ export default function Page() {
             />
             <span className={'flex justify-center'}>{'-Illustration designed by Gihun Ko'}</span>
           </FadeIn>
-        </div>
-        <div className={'flex flex-col gap-8'}>
-          <div>
+          <div className={'max-sm:w-full max-sm:mt-8'}>
             <h1 className={h1BaseStyle}>Gihun Ko Stephen</h1>
             <p className={microTextBaseStyle}>{t('intro')}</p>
             <NameCard variant="expanded" />
-            <StatsBar stats={stats} className="mt-8" />
           </div>
+          <StatsBar stats={stats} className="mt-12" />
+        </div>
+        <div className={'flex flex-col w-full'}>
           <div className={'flex flex-col w-full'}>
             <Section title={t('food_code')} id="food-code" background="white" className="px-0">
               <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
