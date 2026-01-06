@@ -3,6 +3,7 @@ import FadeIn from '../../components/FadeIn/FadeIn';
 import NameCard from '../../components/NameCard/NameCard';
 import StatsBar from '../../components/StatsBar';
 import Section from '../../components/Section';
+import { TechStackSection } from '../../components/TechStack';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { CDN_BASE } from '@/app/config/cdn';
@@ -65,6 +66,7 @@ export default function Page() {
                 {t('about_project_desc')}
               </p>
             </Section>
+            <TechStackSection />
           </div>
         </div>
       </div>
