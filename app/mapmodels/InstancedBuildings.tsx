@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import { InstancedMesh } from 'three';
-import { useRef, useLayoutEffect, useMemo, useState } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { useInstancingModel } from '@/app/hooks/useInstancingModel';
 
 import { EateryCategory, FoodHeritage } from '../types';

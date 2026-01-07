@@ -182,7 +182,7 @@ describe('useTrailStore', () => {
       const filtered = trailResult.current.getFilteredTrails();
 
       expect(Array.isArray(filtered)).toBe(true);
-      filtered.forEach(id => {
+      filtered.forEach((id) => {
         expect(typeof id).toBe('string');
       });
     });
@@ -242,8 +242,8 @@ describe('useTrailStore', () => {
         trailResult.current.toggleTrailMode();
       });
 
-      const allFoodIds = mockFoodData.map(f => f.id);
-      trailResult.current.trailIds.forEach(id => {
+      const allFoodIds = mockFoodData.map((f) => f.id);
+      trailResult.current.trailIds.forEach((id) => {
         expect(allFoodIds).toContain(id);
       });
     });

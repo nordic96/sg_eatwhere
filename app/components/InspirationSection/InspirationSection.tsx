@@ -1,0 +1,118 @@
+'use client';
+
+import { cn } from '@/app/utils';
+import Section from '@/app/components/Section';
+import FadeIn from '@/app/components/FadeIn/FadeIn';
+import { useTranslations } from 'next-intl';
+import { OpenInNew } from '@mui/icons-material';
+import Image from 'next/image';
+
+export interface InspirationSectionProps {
+  /** Custom class name for the container */
+  className?: string;
+}
+
+/** Colour swatch data representing the inspired palette */
+interface ColourSwatch {
+  hex: string;
+  labelKey: 'colour_hawker' | 'colour_dessert' | 'colour_restaurant' | 'colour_yellow';
+}
+
+const STRAITS_TIMES_ARTICLE_URL =
+  'https://www.straitstimes.com/multimedia/graphics/2023/08/singapore-in-colour/index.html';
+
+/** Thumbnail image from Storybench article documenting the Singapore in Colour project */
+const THUMBNAIL_IMAGE_URL = 'https://www.storybench.org/wp-content/uploads/2023/09/PNG-image.jpeg';
+
+const COLOUR_SWATCHES: ColourSwatch[] = [
+  { hex: '#A7292C', labelKey: 'colour_hawker' },
+  { hex: '#E15F2B', labelKey: 'colour_restaurant' },
+  { hex: '#F8D64F', labelKey: 'colour_yellow' },
+  { hex: '#406E3B', labelKey: 'colour_dessert' },
+];
+
+const ctaButtonStyles = cn(
+  'inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-200',
+  'bg-primary text-white hover:bg-red-700 active:bg-gray-700',
+  'max-sm:px-4 max-sm:py-2 max-sm:text-xs',
+);
+
+export default function InspirationSection({ className }: InspirationSectionProps) {
+  const t = useTranslations('AboutPage');
+
+  return (
+    <Section
+      title={t('inspiration_label')}
+      id="inspiration"
+      background="white"
+      className={cn('px-0', className)}
+    >
+      <FadeIn>
+        <div className="flex flex-col gap-6">
+          {/* Thumbnail Image */}
+          <div className="relative w-full max-w-xl overflow-hidden rounded-lg shadow-md">
+            <Image
+              src={THUMBNAIL_IMAGE_URL}
+              alt="Singapore in Colour - A visual exploration of Singapore's vibrant colors by The Straits Times"
+              width={765}
+              height={489}
+              className="w-full h-auto object-cover"
+              priority={false}
+              draggable={false}
+            />
+          </div>
+
+          {/* Attribution Title */}
+          <div className="flex flex-col gap-1">
+            <h4 className="text-xl md:text-2xl font-semibold text-gray-800">
+              {t('inspiration_title')}
+            </h4>
+            <p className="text-sm md:text-base text-gray-600">{t('inspiration_author')}</p>
+          </div>
+
+          {/* Description */}
+          <p className="text-base text-gray-600 leading-relaxed max-w-2xl">
+            {t('inspiration_description')}
+          </p>
+
+          {/* Colour Palette */}
+          <div className="flex justify-center items-center flex-col gap-3">
+            <p className="text-sm font-medium text-gray-700">{t('inspiration_palette_label')}</p>
+            <div className="flex gap-4 max-sm:gap-3">
+              {COLOUR_SWATCHES.map((swatch) => (
+                <div
+                  key={swatch.hex}
+                  className="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform ease-in-out"
+                >
+                  <div
+                    className="w-16 h-16 md:w-20 md:h-20 max-sm:w-14 max-sm:h-14 rounded-lg shadow-md"
+                    style={{ backgroundColor: swatch.hex }}
+                    role="img"
+                    aria-label={`${t(swatch.labelKey)} colour swatch: ${swatch.hex}`}
+                  />
+                  <span className="text-xs md:text-sm text-gray-600 font-medium">
+                    {t(swatch.labelKey)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="mt-2 flex justify-center">
+            <a
+              href={STRAITS_TIMES_ARTICLE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={ctaButtonStyles}
+              aria-label={`${t('inspiration_cta')} (opens in new tab)`}
+            >
+              <span>{t('inspiration_cta')}</span>
+              <OpenInNew fontSize="small" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </FadeIn>
+    </Section>
+  );
+}

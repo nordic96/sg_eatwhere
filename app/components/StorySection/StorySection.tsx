@@ -3,8 +3,9 @@ import FadeIn from '../FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
 import { h1BaseStyle, microTextBaseStyle } from '@/app/constants';
 import { PhotoCamera } from '@mui/icons-material';
+import Image from 'next/image';
+import { CDN_BASE } from '@/app/config/cdn';
 
-/* eslint-disable @next/next/no-img-element */
 export default function StorySection() {
   const t = useTranslations('LandingPage');
   return (
@@ -26,27 +27,34 @@ export default function StorySection() {
             </h1>
             <p className={cn(microTextBaseStyle)}>{t('landing2_desc_2')}</p>
           </FadeIn>
-          <img
-            src={'/images/film_canister.png'}
+          <Image
+            src={`${CDN_BASE}/resources/images/film_canister.png`}
             alt={'film_canister'}
             draggable={false}
             className={
-              'h-[275px] w-auto absolute right-10 max-sm:-right-[20vw] top-[105px] max-sm:top-[110px] z-999'
+              'h-[275px] w-auto absolute right-10 max-sm:-right-[20vw] top-[105px] max-sm:top-[110px] z-50'
             }
+            width={275}
+            height={275}
+            priority
           />
           <div className="absolute overflow-x-hidden top-[125px] max-sm:top-[130px] w-[1100px] max-sm:w-[200vw] right-[198px] max-sm:right-12 block">
             <div className="flex animate-marquee">
-              <img
+              <Image
                 className={'lg:w-[1100px] max-sm:w-[200vw]'}
-                src={'/images/landing_film.png'}
+                src={`${CDN_BASE}/resources/images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
+                width={1100}
+                height={1100}
               />
-              <img
+              <Image
                 className={'lg:w-[1100px] max-sm:w-[200vw]'}
-                src={'/images/landing_film.png'}
+                src={`${CDN_BASE}/resources/images/landing_film.png`}
                 alt={'landing_logo'}
                 draggable={false}
+                width={1100}
+                height={1100}
               />
             </div>
             <div className="flex items-center gap-2 justify-end">

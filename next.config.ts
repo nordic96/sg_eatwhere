@@ -4,12 +4,31 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [new URL('https://cdn.jsdelivr.net/**')],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: new URL(process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jsdelivr.net').hostname,
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.storybench.org',
+        pathname: '/wp-content/uploads/**',
+      },
+    ],
   },
   logging: {
     fetches: {
       fullUrl: true,
     },
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      sharp$: false,
+      'onnxruntime-node$': false,
+    };
+    return config;
   },
 };
 

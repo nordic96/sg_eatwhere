@@ -20,8 +20,8 @@ describe('ToggleButton Component', () => {
     const { container } = render(<ToggleButton on={false} />);
     const label = container.querySelector('label');
 
-    // Label element exists but is hidden
-    expect(label).toBeInTheDocument();
+    // Label element should not be rendered when label prop is not provided
+    expect(label).not.toBeInTheDocument();
   });
 
   test('calls onToggle when clicked', () => {
