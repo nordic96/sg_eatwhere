@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { useHeritageStore } from '@/app/stores/useHeritageStore';
-import { FoodHeritage, EateryCategory } from '@/app/types';
+import { FoodHeritage } from '@/app/types';
 
 describe('useHeritageStore', () => {
   // Mock food data
@@ -224,8 +224,8 @@ describe('useHeritageStore', () => {
       const filtered = result.current.getFilteredFood();
 
       expect(filtered).toHaveLength(2);
-      expect(filtered.map(f => f.category)).toContain('hawker');
-      expect(filtered.map(f => f.category)).toContain('restaurant');
+      expect(filtered.map((f) => f.category)).toContain('hawker');
+      expect(filtered.map((f) => f.category)).toContain('restaurant');
     });
   });
 

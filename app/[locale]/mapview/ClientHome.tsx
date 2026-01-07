@@ -13,7 +13,7 @@ import { useHeritageStore } from '../../stores';
 import HeritageListView from '../../components/HeritageListView/HeritageListView';
 import { Activity, useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
-import SearchBar from '@/app/components/SearchBar/SearchBar';
+import { SearchBar } from '@/app/components/SearchBar';
 import FoodMarquee from '../../components/FoodMarquee/FoodMarquee';
 import { LocationPin } from '@mui/icons-material';
 import GoogleMapsBanner from '@/app/components/GoogleMapsBanner/GoogleMapsBanner';
