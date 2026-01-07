@@ -1,4 +1,5 @@
-import { getGmapUrl } from '@/app/utils';
+import { CDN_BASE } from '@/app/config/cdn';
+import { cn, getGmapUrl } from '@/app/utils';
 import { Map, Check, ArrowForward } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 
@@ -8,10 +9,18 @@ export default function GoogleMapsHeroSection() {
   if (!url) {
     return null;
   }
-
+  const imageUrl = `${CDN_BASE}/resources/images/map_gemini.png`;
   return (
-    <div className="w-full max-w-6xl mx-auto my-16 px-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl">
+    <div
+      style={{
+        backgroundImage: `url('${imageUrl}')`,
+      }}
+      className={cn(
+        'bg-no-repeat bg-contain bg-center',
+        'w-full flex justify-center items-center relative mx-auto lg:py-32 md:py-20 max-sm:py-16 md:px-16',
+      )}
+    >
+      <div className="grid grid-cols-1 max-w-6xl md:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl z-50">
         {/* Left Side: Feature List */}
         <div className="bg-gradient-to-br from-primary to-outramorange p-8 md:p-12 text-white flex flex-col justify-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
