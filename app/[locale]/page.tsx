@@ -4,7 +4,7 @@ import StorySection from '../components/StorySection/StorySection';
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-30 max-sm:gap-20 mb-40">
+    <div className="flex flex-col gap-32 max-sm:gap-20 mb-40">
       {/** Hero Section */}
       <HeroSection />
       <GoogleMapsHeroSection />
