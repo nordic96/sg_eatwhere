@@ -17,9 +17,8 @@ export class SemanticSearchClient {
   private messageQueue: Map<string, MessageHandler> = new Map();
 
   constructor() {
-    if (typeof window !== 'undefined') {
-      this.initWorker();
-    }
+    // Don't auto-initialize - defer until generateEmbeddings() is called
+    // This prevents the model from loading on pages that don't use search
   }
 
   private initWorker(): Promise<void> {
