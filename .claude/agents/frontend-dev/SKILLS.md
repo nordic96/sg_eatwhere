@@ -1,124 +1,6 @@
----
-name: frontend-dev
-description: Frontend developer agent for feature implementation on the Foodie's Trail SG project
-model: opus
----
+# Frontend Developer - Skills & Learnings
 
-# Frontend Developer Agent
-
-You are a specialized frontend developer agent for **The Foodie's Trail - SG** project.
-
-## Your Role
-
-You are responsible for implementing new features, fixing bugs, and maintaining code quality across the Next.js application.
-
-## Tech Stack Expertise
-
-- **Next.js 16** with App Router architecture
-- **React 19** with hooks and modern patterns
-- **TypeScript** with strict type safety
-- **Three.js / React Three Fiber** for 3D visualization
-- **Zustand** for state management
-- **Tailwind CSS 4** and Material-UI for styling
-- **next-intl** for internationalization
-
-## Key Responsibilities
-
-1. **Feature Implementation**
-   - Implement new UI components in `app/components/`
-   - Add 3D features in `app/mapmodels/`
-   - Create custom hooks in `app/hooks/`
-   - Extend Zustand stores in `app/stores/`
-
-2. **Code Quality**
-   - Follow TypeScript strict mode
-   - Use existing patterns and conventions
-   - Write tests in `__tests__/` directory
-   - Maintain ESLint/Prettier compliance
-
-3. **Performance**
-   - Use Server Components for data fetching
-   - Apply Suspense boundaries with `withSuspense`
-   - Optimize 3D rendering (instancing, LOD)
-   - Use responsive breakpoints via `useBreakpoints`
-
-## File Organization
-
-```
-app/
-├── components/     # UI components
-│   ├── SearchBar/  # Search with AI enhancements
-│   ├── TechStack/  # Tech badges for About page
-│   └── InspirationSection/  # Attribution sections
-├── mapmodels/      # 3D components
-├── hooks/          # Custom hooks
-├── stores/         # Zustand stores
-├── types/          # TypeScript types
-├── utils/          # Utility functions
-└── constants/      # Constants & theme
-```
-
-> **See [CLAUDE.md](../CLAUDE.md#key-components-reference)** for complete component reference including About Page, SearchBar, and UI components.
-
-## Coding Conventions
-
-> **See [CLAUDE.md](../CLAUDE.md#coding-standards)** for complete coding standards including imports, components, styling, state management, and testing conventions.
-
-## Component Patterns
-
-### CTA Buttons
-```typescript
-const ctaButtonStyles = cn(
-  'inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium',
-  'transition-all duration-200',
-  'max-sm:px-4 max-sm:py-2 max-sm:text-xs',
-);
-// Primary: bg-primary text-white hover:bg-red-700
-// Secondary: bg-gray-900 text-white hover:bg-gray-800
-```
-
-### Hover Lift Effect
-```typescript
-'hover:-translate-y-1 hover:shadow-md transition-transform ease-in-out'
-```
-
-### Loading Indicators
-- Use `SearchSkeleton` for content loading
-- Use `CircularProgress` (size 16px, thickness 8) for inline loading
-- Wrap with `React.memo` for performance
-
-### AI Feature Indicators
-- Use MUI `AutoAwesome` icon for AI-powered features
-- Apply `text-primary` when active, `text-monsoongrey` when inactive
-
-## Before Implementation
-
-1. Read relevant existing code to understand patterns
-2. Check the Zustand stores for state requirements
-3. Review component conventions in similar files
-4. Consider responsive design via `useBreakpoints`
-5. Plan for internationalization if UI text is involved
-
-## Testing
-
-- Write unit tests for utilities and hooks
-- Test component behavior with Jest
-- Mock MUI components using `__mocks__/`
-
-## Development Workflow
-
-```bash
-npm run dev       # Start dev server
-npm run test      # Run tests
-npm run lint:fix  # Fix linting issues
-npm run build     # Verify production build
-```
-
-## MCP Server Usage
-
-> **See [CLAUDE.md](../CLAUDE.md#mcp-server-usage)** for complete MCP server documentation.
->
-> Key points: Use MCP tools provided by Claude Code for browser automation. **DO NOT install packages like Playwright directly via npm.**
+> **Purpose:** Document key lessons, mistakes, debugging patterns, and automation opportunities learned while working on this codebase.
 
 ---
 
@@ -128,7 +10,7 @@ npm run build     # Verify production build
 
 - **Issue:** Landing page loading extremely slow (~50MB HuggingFace semantic model loading on all pages)
   - **Root Cause:** Two compounding issues:
-    1. React 19's `<Activity mode={condition}>` component wraps children but **still mounts them** - visibility hiding ≠ conditional rendering
+    1. React 19's `<Activity mode={condition}>` component wraps children but **still mounts them** - visibility hiding does not equal conditional rendering
     2. `SemanticSearchClient` constructor called `initWorker()` automatically on instantiation, triggering model download on any page where SearchBar component existed
     3. SearchBar was used in Header.tsx which appears on every page, so model loaded everywhere even when not needed
   - **Fix:**
@@ -147,7 +29,7 @@ npm run build     # Verify production build
 
 ### Patterns Discovered
 
-> **See [CLAUDE.md](../CLAUDE.md#performance-patterns)** for documented performance patterns including:
+> **See [CLAUDE.md](../../CLAUDE.md#performance-patterns)** for documented performance patterns including:
 > - Lazy WebWorker Initialization
 > - React 19 Activity vs Conditional Rendering
 > - Singleton Factory with Lazy Initialization
@@ -160,7 +42,7 @@ npm run build     # Verify production build
     2. Traced asset URL back to HuggingFace embedding model
     3. Added console logs at component mount to see when SearchBar loads
     4. Found SearchBar mounted on all pages (via Header.tsx)
-    5. Traced execution backwards from SearchBar → useSemanticSearch hook → getSemanticSearchClient singleton → constructor auto-init
+    5. Traced execution backwards from SearchBar -> useSemanticSearch hook -> getSemanticSearchClient singleton -> constructor auto-init
   - **Tools/Techniques:**
     - Network tab with asset download tracing (crucial for finding unexpected resource loads)
     - Strategic console.log() at component mounts and constructor calls
@@ -177,7 +59,7 @@ npm run build     # Verify production build
 
 ---
 
-## Automation Opportunities - 2026-01-18
+## Automation Opportunities
 
 ### Identified Workflows & Patterns
 
@@ -224,7 +106,7 @@ Based on the performance investigation session, several automation opportunities
 ### Workflow Improvements
 
 #### Performance Investigation Workflow
-- **Current:** Manual process of Network tab inspection → code tracing → creating debug logs → testing fixes
+- **Current:** Manual process of Network tab inspection -> code tracing -> creating debug logs -> testing fixes
   - User reports slow landing page
   - Developer opens Network tab, finds 50MB download
   - Traces URL back to code
@@ -343,7 +225,9 @@ class HeavyService {
 - **Threshold:** Alert if bundle grows >5% from baseline
 - **Implementation:** Part of CI/CD pre-commit checks
 
-### Documentation Improvements Needed
+---
+
+## Documentation Improvements Needed
 
 1. **Performance Guidelines Document**
    - When to use conditional rendering vs Activity components
@@ -363,34 +247,37 @@ class HeavyService {
    - Look for module-level resource loads
    - Monitor bundle size changes
 
-### Quick Wins (Low Effort, High Value)
+---
+
+## Quick Wins (Low Effort, High Value)
 
 1. **Add Network Throttling Test**
    - Verify landing page loads <5 seconds on 4G
    - Would catch the 50MB model issue immediately
-   - ~30 minutes to implement
    - Prevents future regressions
 
 2. **Create Performance Regression Alert**
    - Flag bundle size increases >5% in CI
    - Alert when unexpected resources load on wrong pages
-   - ~1 hour to set up in GitHub Actions
    - Catches issues before code review
 
 3. **Document React 19 Activity Component Gotcha**
    - Add explicit note to Component patterns section
    - Show correct vs incorrect usage examples
-   - ~15 minutes
    - Prevents team members from making same mistake
 
-### Related Issues to Investigate
+---
+
+## Related Issues to Investigate
 
 - Check if other heavy resources (3D models, large images) initialize eagerly
 - Audit all constructor methods for blocking operations
 - Review all singleton factories for lazy init patterns
 - Verify all conditional UI uses true conditional rendering, not visibility wrappers
 
-### Performance Notes
+---
+
+## Performance Notes
 
 - **Heavy Model Loading:** ~50MB HuggingFace model download should never block initial page load
   - Use dynamic imports or lazy initialization for AI/ML features
@@ -405,3 +292,7 @@ class HeavyService {
   - Component still mounts and consumes resources
   - Only appropriate for UX state (hiding/showing without unmounting)
   - For code-splitting and resource control, use true conditionals or dynamic imports
+
+---
+
+*Last updated: 2026-01-18*

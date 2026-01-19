@@ -4,6 +4,35 @@
 
 ---
 
+## Agent-Specific Skills
+
+Each agent maintains its own SKILLS.md file for specialized learnings:
+
+| Agent | Skills Location | Focus Area |
+|-------|-----------------|------------|
+| frontend-dev | `.claude/agents/frontend-dev/SKILLS.md` | Performance, debugging, React patterns |
+| ui-ux-designer | `.claude/agents/ui-ux-designer/SKILLS.md` | Design patterns, accessibility, UX insights |
+
+### wrap-session Skill Integration
+
+When running `/wrap-session`, the skill should update the appropriate files based on the session context:
+
+1. **General learnings** (shared across agents) -> Update this file (`.claude/SKILLS.md`)
+2. **Frontend-specific learnings** (React, TypeScript, performance) -> Update `.claude/agents/frontend-dev/SKILLS.md`
+3. **UI/UX-specific learnings** (design, accessibility, visual patterns) -> Update `.claude/agents/ui-ux-designer/SKILLS.md`
+4. **Project-wide context changes** -> Update `.claude/CLAUDE.md`
+
+### Session Wrap-Up Checklist
+
+When wrapping a session, consider:
+- [ ] Extract new learnings and patterns discovered
+- [ ] Document any mistakes made and their fixes
+- [ ] Identify automation opportunities
+- [ ] Update relevant agent SKILLS.md if specialized knowledge
+- [ ] Add to CLAUDE.md if affects entire project
+
+---
+
 ## Critical Lessons
 
 ### 1. MCP Servers vs Direct Package Installation

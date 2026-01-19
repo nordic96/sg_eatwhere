@@ -361,21 +361,40 @@ npm run lint:fix   # ESLint auto-fix
 
 ## Agent Collaboration
 
+### Agent Directory Structure
+
+```
+.claude/agents/
+├── frontend-dev/
+│   ├── frontend-dev.md     # Agent definition & capabilities
+│   └── SKILLS.md           # Session learnings & patterns
+└── ui-ux-designer/
+    ├── ui-ux-designer.md   # Agent definition & capabilities
+    └── SKILLS.md           # Design insights & UX patterns
+```
+
 ### @frontend-dev
+- **Definition:** `.claude/agents/frontend-dev/frontend-dev.md`
+- **Skills:** `.claude/agents/frontend-dev/SKILLS.md`
 - Implements features and fixes bugs
 - Maintains code quality and tests
 - Focus: TypeScript, React, Three.js, Zustand
 
 ### @ui-ux-designer
+- **Definition:** `.claude/agents/ui-ux-designer/ui-ux-designer.md`
+- **Skills:** `.claude/agents/ui-ux-designer/SKILLS.md`
 - Analyzes UI/UX issues
 - Provides design recommendations
 - Focus: Visual consistency, user flows, accessibility
 
-Both agents should:
+### Agent Guidelines
+
+All agents should:
 1. Read existing code before making changes
 2. Follow established patterns
 3. Use MCP servers for browser automation (see below)
 4. Update tests for new functionality
+5. Update their SKILLS.md with session learnings via `/wrap-session`
 
 ---
 

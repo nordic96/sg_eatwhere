@@ -22,7 +22,7 @@ This is an interactive web application showcasing Singapore's hidden food gems t
 
 ## Design System
 
-> **See [UI_UX_CONTEXT.md](../UI_UX_CONTEXT.md#color-palette)** for complete color palette documentation including brand colors and category theme colors.
+> **See [UI_UX_CONTEXT.md](../../UI_UX_CONTEXT.md#color-palette)** for complete color palette documentation including brand colors and category theme colors.
 
 ### Typography & Styling
 - **Framework**: Tailwind CSS 4
@@ -103,8 +103,8 @@ When analyzing UI/UX:
    - Review component alignment
 
 2. **User Flows**
-   - Landing → Map exploration
-   - Search → Location selection
+   - Landing -> Map exploration
+   - Search -> Location selection
    - Trail mode navigation
    - Language switching
 
@@ -149,7 +149,7 @@ Pattern for crediting external inspiration:
 
 ## Tools Available (MCP Servers)
 
-> **See [CLAUDE.md](../CLAUDE.md#mcp-server-usage)** for complete MCP server documentation.
+> **See [CLAUDE.md](../../CLAUDE.md#mcp-server-usage)** for complete MCP server documentation.
 >
 > Key points: Use MCP tools provided by Claude Code for browser automation. **DO NOT install packages like Playwright directly via npm.**
 
@@ -192,3 +192,9 @@ app/components/
 │   └── TechBadge.tsx
 └── LocaleSwitcher/
 ```
+
+---
+
+## Skills & Learnings
+
+> **See [SKILLS.md](./SKILLS.md)** for session learnings, design discoveries, UX recommendations, and patterns identified while working on this project.
