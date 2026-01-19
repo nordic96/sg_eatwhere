@@ -8,12 +8,12 @@ import Image from 'next/image';
 
 import { useAppStore, useHeritageStore } from '@/app/stores';
 import Divider from '../Divider';
-import { Map, Globe, TrainFront, ThumbsUp } from 'lucide-react';
 import HighlightedText from '../HighlightText/HighlightText';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
 import HelpTooltip from '../Tooltip/HelpTooltip';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
+import { FaGlobe, FaMap, FaSubway, FaThumbsUp } from 'react-icons/fa';
 
 function Sidebar() {
   const target = useRef(null);
@@ -78,11 +78,7 @@ function Sidebar() {
               <span className={'flex items-center gap-1'}>
                 {catT(data.category)}
                 {data.category === 'hawker' && (
-                  <HelpTooltip
-                    direction={'right'}
-                    msgKey={'what_is_hawker'}
-                    iconProps={{ fontSize: 'small' }}
-                  />
+                  <HelpTooltip direction={'right'} msgKey={'what_is_hawker'} />
                 )}
               </span>
             </span>
@@ -92,12 +88,12 @@ function Sidebar() {
             {/** Secondary Info Container */}
             <div className="flex items-center gap-1">
               <a href={data.location.gmapUrl} target="_blank">
-                <Map size={18} />
+                <FaMap size={18} />
                 <label>{t('map')}</label>
               </a>
               {data.website && (
                 <a href={data.website} target={'_blank'}>
-                  <Globe size={18} />
+                  <FaGlobe size={18} />
                   <label>{t('website')}</label>
                 </a>
               )}
@@ -107,7 +103,7 @@ function Sidebar() {
           <div className="flex flex-col items-center gap-1">
             <label>{t('must-try')}</label>
             <span className="flex justify-center items-center gap-1">
-              <ThumbsUp size={20} />
+              <FaThumbsUp size={20} />
               <div>
                 {data.recommendations.map((dish, i) => (
                   <HighlightedText key={i}>{dish}</HighlightedText>
@@ -119,7 +115,7 @@ function Sidebar() {
           <div className="flex flex-col items-center gap-1">
             <label>{t('nearest-mrt')}</label>
             <span className="flex justify-center items-center gap-1">
-              <TrainFront size={20} />
+              <FaSubway size={20} />
               <div className="flex gap-1">
                 {data.location.mrt.map((station, i) => (
                   <div

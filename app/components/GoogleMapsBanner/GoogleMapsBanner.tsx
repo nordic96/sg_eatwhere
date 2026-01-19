@@ -1,5 +1,5 @@
-import { Map, ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { FaArrowRight, FaMap } from 'react-icons/fa';
 
 export default function GoogleMapsBanner({ url }: { url: string | undefined }) {
   const t = useTranslations('GMapBanner');
@@ -24,7 +24,7 @@ export default function GoogleMapsBanner({ url }: { url: string | undefined }) {
         <div className="relative z-10 flex flex-col sm:flex-row items-center gap-5 sm:gap-6">
           {/* Icon */}
           <div className="shrink-0 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-md">
-            <Map className="text-primary" size={32} aria-hidden="true" />
+            <FaMap className="text-primary" size={32} aria-hidden="true" />
           </div>
 
           {/* Text Content */}
@@ -39,7 +39,7 @@ export default function GoogleMapsBanner({ url }: { url: string | undefined }) {
           <div className="shrink-0">
             <div className="bg-white text-primary px-6 py-3 rounded-lg font-bold text-sm flex items-center gap-2 shadow-md transition-all duration-300 group-hover:bg-goldenmile group-hover:scale-105">
               <span>{t('view_full_list')}</span>
-              <ArrowRight
+              <FaArrowRight
                 className="transition-transform group-hover:translate-x-1"
                 size={18}
                 aria-hidden="true"

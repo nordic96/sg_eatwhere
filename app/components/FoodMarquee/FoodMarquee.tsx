@@ -5,10 +5,10 @@ import Tooltip from '@/app/components/Tooltip/Tooltip';
 import { useHeritageStore } from '@/app/stores';
 import { FoodMarqueeItem } from '@/app/types';
 import { cn, shuffle } from '@/app/utils';
-import { Camera, PauseCircle, PlayCircle, TrainFront } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useMemo, useRef, useState } from 'react';
+import { FaCamera, FaPauseCircle, FaPlayCircle, FaSubway } from 'react-icons/fa';
 import { useSwipeable } from 'react-swipeable';
 
 interface FoodMarqueeProps {
@@ -56,7 +56,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
       {/** Title Container */}
       <div className={'flex justify-between items-center'}>
         <div className={'flex items-center gap-1'}>
-          <Camera size={20} aria-hidden="true" />
+          <FaCamera size={20} aria-hidden="true" />
           <h2 id="featured-food-heading" className={'font-bold text-lg'}>
             {t('featured_food_spots')}
           </h2>
@@ -72,7 +72,11 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
             onClick={togglePause}
             aria-label={t(isPaused ? 'play_marquee' : 'pause_marquee')}
           >
-            {isPaused ? <PlayCircle size={24} aria-hidden="true" /> : <PauseCircle size={24} aria-hidden="true" />}
+            {isPaused ? (
+              <FaPlayCircle size={24} aria-hidden="true" />
+            ) : (
+              <FaPauseCircle size={24} aria-hidden="true" />
+            )}
           </button>
         </Tooltip>
       </div>
@@ -154,7 +158,7 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
         <CategoryIcon alt={'category'} cat={data.category} />
         <span className={'font-extrabold text-xs'}>{data.name}</span>
         <div className={'flex text-xs items-center gap-0.5'}>
-          <TrainFront className="w-[1em] h-[1em]" />
+          <FaSubway className="w-[1em] h-[1em]" />
           <span>{mrtT(data.location.mrt[0])}</span>
         </div>
       </div>

@@ -192,14 +192,6 @@ describe('ImageCarousel', () => {
     expect(wrapper).toHaveStyle({ width: '300%' }); // 3 images * 100%
   });
 
-  test('navigation buttons contain icon components', () => {
-    const { container } = render(<ImageCarousel img={mockImages} />);
-
-    // Lucide icons have class names like "lucide-chevron-left" and "lucide-chevron-right"
-    expect(container.querySelector('.lucide-chevron-left')).toBeInTheDocument();
-    expect(container.querySelector('.lucide-chevron-right')).toBeInTheDocument();
-  });
-
   test('navigates to next image on ArrowRight key press', () => {
     render(<ImageCarousel img={mockImages} />);
 

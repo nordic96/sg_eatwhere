@@ -1,8 +1,8 @@
 import { useTrailStore } from '@/app/stores';
 import ToggleButton from '../ToggleButton/ToggleButton';
-import { Compass } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/app/utils/cn';
+import { FaCompass } from 'react-icons/fa';
 
 export default function TrailMode() {
   const t = useTranslations('HomePage');
@@ -20,7 +20,7 @@ export default function TrailMode() {
             }
           >
             <span className="flex items-center gap-1">
-              <Compass size={14} />
+              <FaCompass size={14} />
               <span>{t('trail_mode')}</span>
             </span>
             <div

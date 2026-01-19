@@ -1,6 +1,7 @@
 import { cn } from '@/app/utils';
-import { Search, Loader2 } from 'lucide-react';
 import React from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { TbLoader2 } from 'react-icons/tb';
 
 function SearchProgress({ isSearching }: { isSearching: boolean }) {
   return (
@@ -11,14 +12,14 @@ function SearchProgress({ isSearching }: { isSearching: boolean }) {
       })}
     >
       {isSearching && (
-        <Loader2
+        <TbLoader2
           size={16}
           className="animate-spin"
           strokeWidth={3}
           aria-label={'Searching for results'}
         />
       )}
-      {!isSearching && <Search className="w-[1em] h-[1em]" />}
+      {!isSearching && <FaSearch className="w-[1em] h-[1em]" />}
     </div>
   );
 }

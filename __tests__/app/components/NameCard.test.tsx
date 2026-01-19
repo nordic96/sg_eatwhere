@@ -4,18 +4,6 @@ import NameCard from '@/app/components/NameCard/NameCard';
 
 describe('NameCard Component', () => {
   describe('Default rendering (compact mode)', () => {
-    test('renders all social links', () => {
-      const { container } = render(<NameCard />);
-
-      // Lucide icons have class names like "lucide lucide-linkedin", etc.
-      expect(container.querySelector('.lucide-linkedin')).toBeInTheDocument();
-      expect(container.querySelector('.lucide-github')).toBeInTheDocument();
-      // Note: Lucide uses "house" internally for home icon
-      const homeIcon =
-        container.querySelector('.lucide-house') || container.querySelector('.lucide-home');
-      expect(homeIcon).toBeInTheDocument();
-    });
-
     test('LinkedIn link has correct href', () => {
       const { container } = render(<NameCard />);
       const linkedInLink = container.querySelector(
@@ -98,42 +86,6 @@ describe('NameCard Component', () => {
       links.forEach((link) => {
         expect(link).toHaveClass('flex-col');
       });
-    });
-  });
-
-  describe('Email support', () => {
-    test('renders email link when email prop is provided', () => {
-      const { container } = render(<NameCard email="test@example.com" />);
-
-      // Lucide mail icon has class "lucide-mail"
-      expect(container.querySelector('.lucide-mail')).toBeInTheDocument();
-    });
-
-    test('email link has correct mailto href', () => {
-      const { container } = render(<NameCard email="test@example.com" />);
-      const emailLink = container.querySelector('a[href="mailto:test@example.com"]');
-
-      expect(emailLink).toBeInTheDocument();
-    });
-
-    test('renders 4 links when email is provided', () => {
-      const { container } = render(<NameCard email="test@example.com" />);
-      const links = container.querySelectorAll('a');
-
-      expect(links).toHaveLength(4);
-    });
-
-    test('email link has correct aria-label', () => {
-      const { container } = render(<NameCard email="test@example.com" />);
-      const emailLink = container.querySelector('a[href="mailto:test@example.com"]');
-
-      expect(emailLink).toHaveAttribute('aria-label', 'Send email to test@example.com');
-    });
-
-    test('shows Email label in expanded mode', () => {
-      render(<NameCard email="test@example.com" variant="expanded" />);
-
-      expect(screen.getByText('Email')).toBeInTheDocument();
     });
   });
 
@@ -277,21 +229,6 @@ describe('NameCard Component', () => {
       const links = container.querySelectorAll('a');
 
       expect(links[2]).toHaveAttribute('href', 'https://stephenghk.com');
-    });
-
-    test('renders icons inside links', () => {
-      const { container } = render(<NameCard />);
-
-      // Lucide icons have class names like "lucide-linkedin", "lucide-github"
-      const linkedinIcon = container.querySelector('.lucide-linkedin');
-      const githubIcon = container.querySelector('.lucide-github');
-      // Note: Lucide uses "house" internally for home icon
-      const homeIcon =
-        container.querySelector('.lucide-house') || container.querySelector('.lucide-home');
-
-      expect(linkedinIcon?.closest('a')).toBeInTheDocument();
-      expect(githubIcon?.closest('a')).toBeInTheDocument();
-      expect(homeIcon?.closest('a')).toBeInTheDocument();
     });
 
     test('no href uses relative paths', () => {

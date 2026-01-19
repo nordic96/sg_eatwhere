@@ -4,8 +4,8 @@ import { cn } from '@/app/utils';
 import Section from '@/app/components/Section';
 import FadeIn from '@/app/components/FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
-import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 export interface InspirationSectionProps {
   /** Custom class name for the container */
@@ -108,7 +108,7 @@ export default function InspirationSection({ className }: InspirationSectionProp
               aria-label={`${t('inspiration_cta')} (opens in new tab)`}
             >
               <span>{t('inspiration_cta')}</span>
-              <ExternalLink size={18} aria-hidden="true" />
+              <FaExternalLinkAlt size={18} aria-hidden="true" />
             </a>
           </div>
         </div>

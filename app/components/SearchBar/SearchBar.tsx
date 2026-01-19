@@ -7,12 +7,11 @@ import { FoodHeritage } from '@/app/types';
 
 import { cn } from '@/app/utils';
 
-import { X } from 'lucide-react';
-
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useSemanticSearch } from '@/app/hooks/useSemanticSearch';
 import { AISparkle, LoadingProgress, RichItem, SearchProgress, SearchSkeleton } from '.';
+import { FaX } from 'react-icons/fa6';
 
 const DEBOUNCE_DELAY_MS = 200;
 const MAX_INPUT_LEN = 100;
@@ -191,7 +190,7 @@ export default function SearchBar() {
               'absolute right-6 top-[50%] translate-y-[-60%] w-6 h-6 cursor-pointer rounded-full text-gray-400 text-xl items-center justify-center'
             }
           >
-            <X size={18} />
+            <FaX size={18} />
           </button>
         )}
       </div>

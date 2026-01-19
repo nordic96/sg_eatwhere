@@ -1,36 +1,28 @@
-import {
-  ChevronDown,
-  ChevronUp,
-  ArrowLeft,
-  ArrowRight,
-  RotateCcw,
-  RotateCw,
-  ZoomIn,
-  ZoomOut,
-} from 'lucide-react';
+import { FaArrowLeft, FaArrowRight, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { ControlType } from './types';
+import { FiRotateCcw, FiRotateCw, FiZoomIn, FiZoomOut } from 'react-icons/fi';
 
 export default function generateIcon(control: ControlType) {
   switch (control) {
     case 'left':
-      return <ArrowLeft size={24} />;
+      return <FaArrowLeft size={24} />;
     case 'right':
-      return <ArrowRight size={24} />;
+      return <FaArrowRight size={24} />;
     case 'up':
-      return <ChevronUp size={24} />;
+      return <FaChevronUp size={24} />;
     case 'down':
-      return <ChevronDown size={24} />;
+      return <FaChevronDown size={24} />;
     case 'rUp':
-      return <RotateCcw size={24} />;
+      return <FiRotateCcw size={24} />;
     case 'rDown':
-      return <RotateCw size={24} />;
+      return <FiRotateCw size={24} />;
     case 'rLeft':
-      return <RotateCcw size={24} />;
+      return <FiRotateCcw size={24} />;
     case 'rRight':
-      return <RotateCw size={24} />;
+      return <FiRotateCw size={24} />;
     case 'zoomIn':
-      return <ZoomIn size={24} />;
+      return <FiZoomIn size={24} />;
     case 'zoomOut':
-      return <ZoomOut size={24} />;
+      return <FiZoomOut size={24} />;
   }
 }

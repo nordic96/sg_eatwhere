@@ -1,6 +1,6 @@
 import { cn } from '@/app/utils';
-import { Sparkles } from 'lucide-react';
 import React from 'react';
+import { HiSparkles } from 'react-icons/hi';
 
 function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean }) {
   return (
@@ -18,7 +18,7 @@ function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean 
       title={'AI-powered semantic search'}
       aria-hidden={'true'}
     >
-      <Sparkles size={14} />
+      <HiSparkles size={14} />
     </div>
   );
 }

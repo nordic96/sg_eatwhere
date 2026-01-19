@@ -3,8 +3,8 @@ import Image from 'next/image';
 import FadeIn from '../FadeIn/FadeIn';
 import AppLink from '../AppLink';
 import { cn } from '@/app/utils';
-import { ArrowRight, Compass } from 'lucide-react';
 import { h1BaseStyle, microTextBaseStyle, primaryButtonStyle } from '@/app/constants';
+import { FaArrowRight, FaCompass } from 'react-icons/fa';
 
 export default function HeroSection() {
   const t = useTranslations('LandingPage');
@@ -30,7 +30,7 @@ export default function HeroSection() {
           <div className="flex gap-4 max-sm:gap-1">
             <AppLink route={'/mapview'} className={cn(primaryButtonStyle)}>
               {t('explore_more')}
-              <Compass size={20} />
+              <FaCompass size={20} />
             </AppLink>
             <AppLink
               route={'/about'}
@@ -40,7 +40,7 @@ export default function HeroSection() {
               )}
             >
               {t('discover_why')}
-              <ArrowRight size={20} />
+              <FaArrowRight size={20} />
             </AppLink>
           </div>
         </div>

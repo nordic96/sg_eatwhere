@@ -1,6 +1,6 @@
 import { cn } from '@/app/utils';
-import { Loader2 } from 'lucide-react';
 import React from 'react';
+import { TbLoader2 } from 'react-icons/tb';
 
 function LoadingProgress({ isReady }: { isReady: boolean }) {
   return (
@@ -14,7 +14,7 @@ function LoadingProgress({ isReady }: { isReady: boolean }) {
         },
       )}
     >
-      <Loader2 size={16} className="animate-spin" strokeWidth={3} />
+      <TbLoader2 size={16} className="animate-spin" strokeWidth={3} />
     </div>
   );
 }

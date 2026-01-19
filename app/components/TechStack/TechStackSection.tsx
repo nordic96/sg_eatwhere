@@ -5,15 +5,15 @@ import Section from '@/app/components/Section';
 import TechBadge, { TechBadgeProps } from './TechBadge';
 import FadeIn from '@/app/components/FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
-import { Github, Bug } from 'lucide-react';
+import { FaBug, FaGithub } from 'react-icons/fa';
 import {
-  siHuggingface,
-  siNextdotjs,
-  siReact,
-  siTailwindcss,
-  siThreedotjs,
-  siTypescript,
-} from 'simple-icons';
+  SiHuggingface,
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiTypescript,
+} from 'react-icons/si';
 
 export interface TechStackSectionProps {
   /** List of technologies to display */
@@ -29,27 +29,33 @@ const GITHUB_ISSUES_URL = 'https://github.com/nordic96/sg_eatwhere/issues';
 
 const DEFAULT_TECHNOLOGIES: TechBadgeProps[] = [
   {
-    ...siNextdotjs,
+    icon: SiNextdotjs,
+    title: 'Next.js',
     description: 'App framework',
   },
   {
-    ...siReact,
+    icon: SiReact,
+    title: 'React.js',
     description: 'UI library',
   },
   {
-    ...siThreedotjs,
+    icon: SiThreedotjs,
+    title: 'Three.js',
     description: '3D graphics',
   },
   {
-    ...siTypescript,
+    icon: SiTypescript,
+    title: 'Typescript',
     description: 'Type safety',
   },
   {
-    ...siTailwindcss,
+    icon: SiTailwindcss,
+    title: 'Tailwind CSS',
     description: 'Styling',
   },
   {
-    ...siHuggingface,
+    icon: SiHuggingface,
+    title: 'HuggingFace',
     description: 'AI / Machine Learning',
   },
 ];
@@ -86,7 +92,7 @@ export default function TechStackSection({
           {/* Tech Badges Grid */}
           <div className="flex flex-wrap justify-center gap-4">
             {technologies.map((tech) => (
-              <TechBadge key={tech.slug} {...tech} />
+              <TechBadge key={tech.title.replace(' ', '')} {...tech} />
             ))}
           </div>
 
@@ -104,7 +110,7 @@ export default function TechStackSection({
               className={primaryCtaStyles}
               aria-label={t('tech_star_github')}
             >
-              <Github size={18} />
+              <FaGithub size={18} />
               <span>{t('tech_star_github')}</span>
             </a>
             <a
@@ -114,7 +120,7 @@ export default function TechStackSection({
               className={secondaryCtaStyles}
               aria-label={t('tech_report_issue')}
             >
-              <Bug size={18} />
+              <FaBug size={18} />
               <span>{t('tech_report_issue')}</span>
             </a>
           </div>

@@ -1,8 +1,8 @@
 import { FoodHeritage } from '@/app/types';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
-import { MapPin, TrainFront } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
+import { FaMapPin, FaSubway } from 'react-icons/fa';
 
 function RichItem({ data }: { data: FoodHeritage }) {
   const t = useTranslations('HeritageListView');
@@ -19,11 +19,11 @@ function RichItem({ data }: { data: FoodHeritage }) {
         {/** MetaData Container */}
         <div className={'flex text-xs gap-2'}>
           <div className={'flex items-center'}>
-            <MapPin className="w-[1em] h-[1em]" />
+            <FaMapPin className="w-[1em] h-[1em]" />
             <span>{t(data.location.region)}</span>
           </div>
           <div className={'flex items-center'}>
-            <TrainFront className="w-[1em] h-[1em]" />
+            <FaSubway className="w-[1em] h-[1em]" />
             <span>{tMrt(data.location.mrt[0])}</span>
           </div>
         </div>

@@ -1,5 +1,4 @@
 'use client';
-import { Expand, RotateCw, Move } from 'lucide-react';
 import { RefObject, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { MapControls as MapControlsImpl } from 'three-stdlib';
@@ -8,6 +7,9 @@ import { ControlMode } from './types';
 import { cn, geoConverter } from '@/app/utils';
 import useCameraControls from '@/app/hooks/useCameraControls';
 import { useHeritageStore } from '@/app/stores';
+import { FaExpand } from 'react-icons/fa';
+import { BiMove } from 'react-icons/bi';
+import { FiRotateCw } from 'react-icons/fi';
 
 export type MapControllerProps = {
   controls: RefObject<MapControlsImpl | null>;
@@ -47,7 +49,7 @@ export default function MapController({ controls, camera }: MapControllerProps) 
           aria-expanded={expanded}
           aria-label={expanded ? 'Collapse controls' : 'Expand controls'}
         >
-          <Expand size={24} />
+          <FaExpand size={24} />
         </button>
         <ControlButton controls={controls} camera={camera} control={'zoomIn'} />
         <ControlButton controls={controls} camera={camera} control={'zoomOut'} />
@@ -78,7 +80,7 @@ function ControlButtonGroup({ mode, controls, camera }: ControlButtonGroupProps)
         control={mode === 'move' ? 'left' : 'rLeft'}
       />
       <div className={'flex justify-center items-center text-primary'}>
-        {mode === 'move' ? <Move size={24} /> : <RotateCw size={24} />}
+        {mode === 'move' ? <BiMove size={24} /> : <FiRotateCw size={24} />}
       </div>
       <ControlButton
         controls={controls}
