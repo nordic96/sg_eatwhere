@@ -193,9 +193,10 @@ describe('ImageCarousel', () => {
   });
 
   test('navigation buttons contain icon components', () => {
-    render(<ImageCarousel img={mockImages} />);
+    const { container } = render(<ImageCarousel img={mockImages} />);
 
-    expect(screen.getByTestId('WestIcon')).toBeInTheDocument();
-    expect(screen.getByTestId('EastIcon')).toBeInTheDocument();
+    // Lucide icons have class names like "lucide-chevron-left" and "lucide-chevron-right"
+    expect(container.querySelector('.lucide-chevron-left')).toBeInTheDocument();
+    expect(container.querySelector('.lucide-chevron-right')).toBeInTheDocument();
   });
 });

@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppStore, useHeritageStore } from '@/app/stores';
-import { MapOutlined, ThumbUpOutlined } from '@mui/icons-material';
+import { Map, ThumbsUp } from 'lucide-react';
 
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import { cn } from '@/app/utils';
@@ -71,7 +71,7 @@ function PlaceContent() {
         {/** Recommended Dish Container */}
         <div className="flex justify-between items-center gap-1 rounded-md bg-amber-50 p-1">
           <div className={'flex items-center gap-1'}>
-            <ThumbUpOutlined fontSize={'small'} />
+            <ThumbsUp size={18} />
             <span className={'font-bold'}>{t('must_try')}</span>
           </div>
           <div className={'flex gap-1 flex-col'}>
@@ -106,7 +106,7 @@ function PlaceContent() {
             target="_blank"
             rel={'noopener noreferrer'}
           >
-            <MapOutlined fontSize={'small'} />
+            <Map size={18} />
             <span>{t('directions')}</span>
           </a>
           <button

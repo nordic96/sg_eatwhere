@@ -1,5 +1,5 @@
 import { cn } from '@/app/utils';
-import { AutoAwesome } from '@mui/icons-material';
+import { Sparkles } from 'lucide-react';
 import React from 'react';
 
 function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean }) {
@@ -18,7 +18,7 @@ function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean 
       title={'AI-powered semantic search'}
       aria-hidden={'true'}
     >
-      <AutoAwesome fontSize={'inherit'} />
+      <Sparkles size={14} />
     </div>
   );
 }

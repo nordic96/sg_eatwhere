@@ -5,7 +5,7 @@ import Tooltip from '@/app/components/Tooltip/Tooltip';
 import { useHeritageStore } from '@/app/stores';
 import { FoodMarqueeItem } from '@/app/types';
 import { cn, shuffle } from '@/app/utils';
-import { CameraAlt, PauseCircle, PlayCircle, SubwayOutlined } from '@mui/icons-material';
+import { Camera, PauseCircle, PlayCircle, TrainFront } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useMemo, useRef, useState } from 'react';
@@ -55,8 +55,8 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
     <section className={'w-full'} aria-labelledby="featured-food-heading">
       {/** Title Container */}
       <div className={'flex justify-between items-center'}>
-        <div className={'flex items-center'}>
-          <CameraAlt fontSize={'medium'} aria-hidden="true" />
+        <div className={'flex items-center gap-1'}>
+          <Camera size={20} aria-hidden="true" />
           <h2 id="featured-food-heading" className={'font-bold text-lg'}>
             {t('featured_food_spots')}
           </h2>
@@ -72,7 +72,7 @@ export default function FoodMarquee({ items, shuffleArr = true }: FoodMarqueePro
             onClick={togglePause}
             aria-label={t(isPaused ? 'play_marquee' : 'pause_marquee')}
           >
-            {isPaused ? <PlayCircle aria-hidden="true" /> : <PauseCircle aria-hidden="true" />}
+            {isPaused ? <PlayCircle size={24} aria-hidden="true" /> : <PauseCircle size={24} aria-hidden="true" />}
           </button>
         </Tooltip>
       </div>
@@ -153,11 +153,9 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
       <div className={'absolute flex flex-col text-white bottom-2 w-full px-2 text-left'}>
         <CategoryIcon alt={'category'} cat={data.category} />
         <span className={'font-extrabold text-xs'}>{data.name}</span>
-        <div className={'flex text-xs'}>
-          <div>
-            <SubwayOutlined fontSize={'inherit'} />
-            <span>{mrtT(data.location.mrt[0])}</span>
-          </div>
+        <div className={'flex text-xs items-center gap-0.5'}>
+          <TrainFront className="w-[1em] h-[1em]" />
+          <span>{mrtT(data.location.mrt[0])}</span>
         </div>
       </div>
     </div>

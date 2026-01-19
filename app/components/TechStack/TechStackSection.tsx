@@ -5,7 +5,7 @@ import Section from '@/app/components/Section';
 import TechBadge, { TechBadgeProps } from './TechBadge';
 import FadeIn from '@/app/components/FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
-import { GitHub, BugReport } from '@mui/icons-material';
+import { Github, Bug } from 'lucide-react';
 import {
   siHuggingface,
   siNextdotjs,
@@ -104,7 +104,7 @@ export default function TechStackSection({
               className={primaryCtaStyles}
               aria-label={t('tech_star_github')}
             >
-              <GitHub fontSize="small" />
+              <Github size={18} />
               <span>{t('tech_star_github')}</span>
             </a>
             <a
@@ -114,7 +114,7 @@ export default function TechStackSection({
               className={secondaryCtaStyles}
               aria-label={t('tech_report_issue')}
             >
-              <BugReport fontSize="small" />
+              <Bug size={18} />
               <span>{t('tech_report_issue')}</span>
             </a>
           </div>

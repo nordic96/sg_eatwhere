@@ -1,5 +1,5 @@
 import { cn } from '@/app/utils';
-import { CircularProgress } from '@mui/material';
+import { Loader2 } from 'lucide-react';
 import React from 'react';
 
 function LoadingProgress({ isReady }: { isReady: boolean }) {
@@ -14,7 +14,7 @@ function LoadingProgress({ isReady }: { isReady: boolean }) {
         },
       )}
     >
-      <CircularProgress color={'inherit'} size={'16px'} thickness={8} />
+      <Loader2 size={16} className="animate-spin" strokeWidth={3} />
     </div>
   );
 }

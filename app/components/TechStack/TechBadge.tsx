@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/app/utils';
-import { Tooltip } from '@mui/material';
 import Link from 'next/link';
 import type { SimpleIcon } from 'simple-icons';
 
@@ -15,18 +14,10 @@ const nameStyles = 'text-sm font-medium text-[#333] max-sm:text-xs text-center';
 
 export default function TechBadge({ title, svg, source, description }: TechBadgeProps) {
   const badgeContent = (
-    <div className={cn(badgeBaseStyles, 'cursor-pointer')}>
+    <div className={cn(badgeBaseStyles, 'cursor-pointer')} title={description}>
       <span dangerouslySetInnerHTML={{ __html: svg }} className={iconStyles} />
       <span className={nameStyles}>{title}</span>
     </div>
-  );
-
-  const wrappedContent = description ? (
-    <Tooltip title={description} arrow placement="top">
-      {badgeContent}
-    </Tooltip>
-  ) : (
-    badgeContent
   );
 
   if (source) {
@@ -38,10 +29,10 @@ export default function TechBadge({ title, svg, source, description }: TechBadge
         className="no-underline"
         aria-label={`Learn more about ${title}`}
       >
-        {wrappedContent}
+        {badgeContent}
       </Link>
     );
   }
 
-  return wrappedContent;
+  return badgeContent;
 }

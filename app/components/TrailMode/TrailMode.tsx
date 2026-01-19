@@ -1,6 +1,6 @@
 import { useTrailStore } from '@/app/stores';
 import ToggleButton from '../ToggleButton/ToggleButton';
-import { Explore } from '@mui/icons-material';
+import { Compass } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/app/utils/cn';
 
@@ -19,8 +19,8 @@ export default function TrailMode() {
               'flex gap-1 items-center bg-primary text-white py-1 px-2 rounded-full border border-[#333]'
             }
           >
-            <span>
-              <Explore fontSize={'inherit'} />
+            <span className="flex items-center gap-1">
+              <Compass size={14} />
               <span>{t('trail_mode')}</span>
             </span>
             <div

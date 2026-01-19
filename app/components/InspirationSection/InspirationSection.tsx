@@ -4,7 +4,7 @@ import { cn } from '@/app/utils';
 import Section from '@/app/components/Section';
 import FadeIn from '@/app/components/FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
-import { OpenInNew } from '@mui/icons-material';
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 
 export interface InspirationSectionProps {
@@ -108,7 +108,7 @@ export default function InspirationSection({ className }: InspirationSectionProp
               aria-label={`${t('inspiration_cta')} (opens in new tab)`}
             >
               <span>{t('inspiration_cta')}</span>
-              <OpenInNew fontSize="small" aria-hidden="true" />
+              <ExternalLink size={18} aria-hidden="true" />
             </a>
           </div>
         </div>

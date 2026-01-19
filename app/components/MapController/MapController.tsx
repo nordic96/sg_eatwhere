@@ -1,5 +1,5 @@
 'use client';
-import { Expand, ThreeSixty, ZoomOutMap } from '@mui/icons-material';
+import { Expand, RotateCw, Move } from 'lucide-react';
 import { RefObject, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { MapControls as MapControlsImpl } from 'three-stdlib';
@@ -47,7 +47,7 @@ export default function MapController({ controls, camera }: MapControllerProps) 
           aria-expanded={expanded}
           aria-label={expanded ? 'Collapse controls' : 'Expand controls'}
         >
-          <Expand />
+          <Expand size={24} />
         </button>
         <ControlButton controls={controls} camera={camera} control={'zoomIn'} />
         <ControlButton controls={controls} camera={camera} control={'zoomOut'} />
@@ -78,7 +78,7 @@ function ControlButtonGroup({ mode, controls, camera }: ControlButtonGroupProps)
         control={mode === 'move' ? 'left' : 'rLeft'}
       />
       <div className={'flex justify-center items-center text-primary'}>
-        {mode === 'move' ? <ZoomOutMap /> : <ThreeSixty />}
+        {mode === 'move' ? <Move size={24} /> : <RotateCw size={24} />}
       </div>
       <ControlButton
         controls={controls}

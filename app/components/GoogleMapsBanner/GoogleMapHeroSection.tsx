@@ -1,6 +1,6 @@
 import { CDN_BASE } from '@/app/config/cdn';
 import { cn, getGmapUrl } from '@/app/utils';
-import { Map, Check, ArrowForward } from '@mui/icons-material';
+import { Map, Check, ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function GoogleMapsHeroSection() {
@@ -34,28 +34,28 @@ export default function GoogleMapsHeroSection() {
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center shrink-0 mt-0.5">
-                <Check sx={{ fontSize: 16, color: 'white' }} />
+                <Check size={16} className="text-white" />
               </div>
               <span className="text-sm">{t('feature_100_plus_locations')}</span>
             </div>
 
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center shrink-0 mt-0.5">
-                <Check sx={{ fontSize: 16, color: 'white' }} />
+                <Check size={16} className="text-white" />
               </div>
               <span className="text-sm">{t('feature_turn_by_turn')}</span>
             </div>
 
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center shrink-0 mt-0.5">
-                <Check sx={{ fontSize: 16, color: 'white' }} />
+                <Check size={16} className="text-white" />
               </div>
               <span className="text-sm">{t('feature_live_hours')}</span>
             </div>
 
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center shrink-0 mt-0.5">
-                <Check sx={{ fontSize: 16, color: 'white' }} />
+                <Check size={16} className="text-white" />
               </div>
               <span className="text-sm">{t('feature_hidden_gems')}</span>
             </div>
@@ -65,7 +65,7 @@ export default function GoogleMapsHeroSection() {
         {/* Right Side: CTA */}
         <div className="bg-white p-8 md:p-12 flex flex-col justify-center items-center text-center">
           <div className="w-20 h-20 bg-gradient-to-br from-primary to-outramorange rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-            <Map sx={{ fontSize: 40, color: 'white' }} />
+            <Map size={40} className="text-white" />
           </div>
 
           <h3 className="text-2xl font-bold text-gray-900 mb-3">{t('google_maps_collection')}</h3>
@@ -80,7 +80,7 @@ export default function GoogleMapsHeroSection() {
             aria-label={'View Complete food collection on Google Maps'}
           >
             {t('open_collection')}
-            <ArrowForward sx={{ fontSize: 20 }} />
+            <ArrowRight size={20} />
           </a>
 
           <p className="text-xs text-gray-500 mt-4">{t('opens_in_google_maps')}</p>

@@ -1,5 +1,5 @@
 import { cn } from '@/app/utils';
-import Close from '@mui/icons-material/Close';
+import { X } from 'lucide-react';
 import { ClassValue } from 'clsx';
 import React from 'react';
 
@@ -14,7 +14,7 @@ export default function CloseButton(props: CloseButtonProps) {
       onClick={props.onClick}
       aria-label="Close"
     >
-      <Close />
+      <X size={20} />
     </button>
   );
 }

@@ -1,36 +1,36 @@
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUp from '@mui/icons-material/ArrowDropUp';
-import ArrowLeft from '@mui/icons-material/ArrowLeft';
-import ArrowRight from '@mui/icons-material/ArrowRight';
-import Rotate90DegreesCcw from '@mui/icons-material/Rotate90DegreesCcw';
-import Rotate90DegreesCw from '@mui/icons-material/Rotate90DegreesCw';
-import RotateLeft from '@mui/icons-material/RotateLeft';
-import RotateRight from '@mui/icons-material/RotateRight';
-import ZoomIn from '@mui/icons-material/ZoomIn';
-import ZoomOut from '@mui/icons-material/ZoomOut';
+import {
+  ChevronDown,
+  ChevronUp,
+  ArrowLeft,
+  ArrowRight,
+  RotateCcw,
+  RotateCw,
+  ZoomIn,
+  ZoomOut,
+} from 'lucide-react';
 import { ControlType } from './types';
 
 export default function generateIcon(control: ControlType) {
   switch (control) {
     case 'left':
-      return <ArrowLeft />;
+      return <ArrowLeft size={24} />;
     case 'right':
-      return <ArrowRight />;
+      return <ArrowRight size={24} />;
     case 'up':
-      return <ArrowDropUp />;
+      return <ChevronUp size={24} />;
     case 'down':
-      return <ArrowDropDown />;
+      return <ChevronDown size={24} />;
     case 'rUp':
-      return <Rotate90DegreesCcw />;
+      return <RotateCcw size={24} />;
     case 'rDown':
-      return <Rotate90DegreesCw />;
+      return <RotateCw size={24} />;
     case 'rLeft':
-      return <RotateLeft />;
+      return <RotateCcw size={24} />;
     case 'rRight':
-      return <RotateRight />;
+      return <RotateCw size={24} />;
     case 'zoomIn':
-      return <ZoomIn />;
+      return <ZoomIn size={24} />;
     case 'zoomOut':
-      return <ZoomOut />;
+      return <ZoomOut size={24} />;
   }
 }

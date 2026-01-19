@@ -1,6 +1,5 @@
 import { cn } from '@/app/utils';
-import { Email, GitHub, LinkedIn } from '@mui/icons-material';
-import Home from '@mui/icons-material/Home';
+import { Linkedin, Github, Home, Mail } from 'lucide-react';
 
 interface SocialLink {
   href: string;
@@ -23,19 +22,19 @@ export interface NameCardProps {
 const defaultSocialLinks: SocialLink[] = [
   {
     href: 'https://www.linkedin.com/in/gi-hun-ko-863619184/',
-    icon: <LinkedIn fontSize={'inherit'} />,
+    icon: <Linkedin className="w-[1em] h-[1em]" />,
     label: 'LinkedIn',
     ariaLabel: 'Visit LinkedIn profile',
   },
   {
     href: 'https://github.com/nordic96',
-    icon: <GitHub fontSize={'inherit'} />,
+    icon: <Github className="w-[1em] h-[1em]" />,
     label: 'GitHub',
     ariaLabel: 'Visit GitHub profile',
   },
   {
     href: 'https://stephenghk.com',
-    icon: <Home fontSize={'inherit'} />,
+    icon: <Home className="w-[1em] h-[1em]" />,
     label: 'Portfolio',
     ariaLabel: 'Visit portfolio website',
   },
@@ -55,7 +54,7 @@ export default function NameCard({
   if (email) {
     socialLinks.push({
       href: `mailto:${email}`,
-      icon: <Email />,
+      icon: <Mail className="w-[1em] h-[1em]" />,
       label: 'Email',
       ariaLabel: `Send email to ${email}`,
     });

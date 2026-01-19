@@ -1,6 +1,5 @@
 import { cn } from '@/app/utils';
-import Search from '@mui/icons-material/Search';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Search, Loader2 } from 'lucide-react';
 import React from 'react';
 
 function SearchProgress({ isSearching }: { isSearching: boolean }) {
@@ -12,14 +11,14 @@ function SearchProgress({ isSearching }: { isSearching: boolean }) {
       })}
     >
       {isSearching && (
-        <CircularProgress
-          color={'inherit'}
-          size={'16px'}
-          thickness={8}
+        <Loader2
+          size={16}
+          className="animate-spin"
+          strokeWidth={3}
           aria-label={'Searching for results'}
         />
       )}
-      {!isSearching && <Search fontSize={'inherit'} />}
+      {!isSearching && <Search className="w-[1em] h-[1em]" />}
     </div>
   );
 }

@@ -1,18 +1,17 @@
 import Tooltip, { TooltipProps } from './Tooltip';
-import { HelpOutlineOutlined } from '@mui/icons-material';
-import { SvgIconOwnProps } from '@mui/material';
+import { HelpCircle, LucideProps } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type HelpTooltipProps = Omit<TooltipProps, 'content'> & {
   msgKey: string;
-  iconProps?: SvgIconOwnProps;
+  iconProps?: LucideProps;
 };
 
 export default function HelpTooltip({ msgKey, iconProps, ...tooltipProps }: HelpTooltipProps) {
   const tooltipT = useTranslations('Tooltip');
   return (
     <Tooltip {...tooltipProps} content={tooltipT(msgKey)}>
-      <HelpOutlineOutlined {...iconProps} />
+      <HelpCircle size={18} {...iconProps} />
     </Tooltip>
   );
 }

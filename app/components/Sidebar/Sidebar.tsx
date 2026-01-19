@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 import { useAppStore, useHeritageStore } from '@/app/stores';
 import Divider from '../Divider';
-import { MapOutlined, Public, SubwayOutlined, ThumbUpOutlined } from '@mui/icons-material';
+import { Map, Globe, TrainFront, ThumbsUp } from 'lucide-react';
 import HighlightedText from '../HighlightText/HighlightText';
 import VerticalDivider from '../VerticalDivider/VerticalDivider';
 import { useTranslations } from 'next-intl';
@@ -92,12 +92,12 @@ function Sidebar() {
             {/** Secondary Info Container */}
             <div className="flex items-center gap-1">
               <a href={data.location.gmapUrl} target="_blank">
-                <MapOutlined fontSize={'small'} />
+                <Map size={18} />
                 <label>{t('map')}</label>
               </a>
               {data.website && (
                 <a href={data.website} target={'_blank'}>
-                  <Public fontSize={'small'} />
+                  <Globe size={18} />
                   <label>{t('website')}</label>
                 </a>
               )}
@@ -107,7 +107,7 @@ function Sidebar() {
           <div className="flex flex-col items-center gap-1">
             <label>{t('must-try')}</label>
             <span className="flex justify-center items-center gap-1">
-              <ThumbUpOutlined />
+              <ThumbsUp size={20} />
               <div>
                 {data.recommendations.map((dish, i) => (
                   <HighlightedText key={i}>{dish}</HighlightedText>
@@ -119,7 +119,7 @@ function Sidebar() {
           <div className="flex flex-col items-center gap-1">
             <label>{t('nearest-mrt')}</label>
             <span className="flex justify-center items-center gap-1">
-              <SubwayOutlined />
+              <TrainFront size={20} />
               <div className="flex gap-1">
                 {data.location.mrt.map((station, i) => (
                   <div

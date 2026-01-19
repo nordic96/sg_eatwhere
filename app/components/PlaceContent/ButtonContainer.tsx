@@ -1,6 +1,6 @@
 'use client';
 import { useHeritageStore, useTrailStore } from '@/app/stores';
-import { Redo, Undo } from '@mui/icons-material';
+import { Redo, Undo } from 'lucide-react';
 import CloseButton from '../CloseButton/CloseButton';
 import { cn } from '@/app/utils';
 
@@ -24,14 +24,14 @@ export default function ButtonContainer() {
               onClick={() => moveToNextTrail(true)}
               aria-label="Previous location in trail"
             >
-              <Undo fontSize={'inherit'} />
+              <Undo size={14} />
             </button>
             <button
               className={cn(trailButtonStyle)}
               onClick={() => moveToNextTrail()}
               aria-label="Next location in trail"
             >
-              <Redo fontSize={'inherit'} />
+              <Redo size={14} />
             </button>
           </>
         )}

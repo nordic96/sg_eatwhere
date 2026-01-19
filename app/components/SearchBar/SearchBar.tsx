@@ -7,7 +7,7 @@ import { FoodHeritage } from '@/app/types';
 
 import { cn } from '@/app/utils';
 
-import { Close } from '@mui/icons-material';
+import { X } from 'lucide-react';
 
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
@@ -191,7 +191,7 @@ export default function SearchBar() {
               'absolute right-6 top-[50%] translate-y-[-60%] w-6 h-6 cursor-pointer rounded-full text-gray-400 text-xl items-center justify-center'
             }
           >
-            <Close fontSize={'inherit'} />
+            <X size={18} />
           </button>
         )}
       </div>

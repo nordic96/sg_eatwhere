@@ -2,7 +2,7 @@ import { cn } from '@/app/utils';
 import FadeIn from '../FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
 import { h1BaseStyle, microTextBaseStyle } from '@/app/constants';
-import { PhotoCamera } from '@mui/icons-material';
+import { Camera } from 'lucide-react';
 import Image from 'next/image';
 import { CDN_BASE } from '@/app/config/cdn';
 
@@ -58,7 +58,7 @@ export default function StorySection() {
               />
             </div>
             <div className="flex items-center gap-2 justify-end">
-              <PhotoCamera />
+              <Camera size={20} />
               <p className="font-light italic text-sm">{t('photo_disclaimer')}</p>
             </div>
           </div>

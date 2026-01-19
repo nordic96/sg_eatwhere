@@ -3,7 +3,7 @@ import Image from 'next/image';
 import FadeIn from '../FadeIn/FadeIn';
 import AppLink from '../AppLink';
 import { cn } from '@/app/utils';
-import { ArrowRightAlt, Explore } from '@mui/icons-material';
+import { ArrowRight, Compass } from 'lucide-react';
 import { h1BaseStyle, microTextBaseStyle, primaryButtonStyle } from '@/app/constants';
 
 export default function HeroSection() {
@@ -30,7 +30,7 @@ export default function HeroSection() {
           <div className="flex gap-4 max-sm:gap-1">
             <AppLink route={'/mapview'} className={cn(primaryButtonStyle)}>
               {t('explore_more')}
-              <Explore />
+              <Compass size={20} />
             </AppLink>
             <AppLink
               route={'/about'}
@@ -40,7 +40,7 @@ export default function HeroSection() {
               )}
             >
               {t('discover_why')}
-              <ArrowRightAlt />
+              <ArrowRight size={20} />
             </AppLink>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { FoodHeritage } from '@/app/types';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
-import { LocationPin, Subway } from '@mui/icons-material';
+import { MapPin, TrainFront } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -19,11 +19,11 @@ function RichItem({ data }: { data: FoodHeritage }) {
         {/** MetaData Container */}
         <div className={'flex text-xs gap-2'}>
           <div className={'flex items-center'}>
-            <LocationPin fontSize={'inherit'} />
+            <MapPin className="w-[1em] h-[1em]" />
             <span>{t(data.location.region)}</span>
           </div>
           <div className={'flex items-center'}>
-            <Subway fontSize={'inherit'} />
+            <TrainFront className="w-[1em] h-[1em]" />
             <span>{tMrt(data.location.mrt[0])}</span>
           </div>
         </div>

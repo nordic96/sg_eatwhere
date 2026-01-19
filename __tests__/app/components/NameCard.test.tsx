@@ -5,11 +5,15 @@ import NameCard from '@/app/components/NameCard/NameCard';
 describe('NameCard Component', () => {
   describe('Default rendering (compact mode)', () => {
     test('renders all social links', () => {
-      render(<NameCard />);
+      const { container } = render(<NameCard />);
 
-      expect(screen.getByTestId('LinkedInIcon')).toBeInTheDocument();
-      expect(screen.getByTestId('GitHubIcon')).toBeInTheDocument();
-      expect(screen.getByTestId('HomeIcon')).toBeInTheDocument();
+      // Lucide icons have class names like "lucide lucide-linkedin", etc.
+      expect(container.querySelector('.lucide-linkedin')).toBeInTheDocument();
+      expect(container.querySelector('.lucide-github')).toBeInTheDocument();
+      // Note: Lucide uses "house" internally for home icon
+      const homeIcon =
+        container.querySelector('.lucide-house') || container.querySelector('.lucide-home');
+      expect(homeIcon).toBeInTheDocument();
     });
 
     test('LinkedIn link has correct href', () => {
@@ -99,9 +103,10 @@ describe('NameCard Component', () => {
 
   describe('Email support', () => {
     test('renders email link when email prop is provided', () => {
-      render(<NameCard email="test@example.com" />);
+      const { container } = render(<NameCard email="test@example.com" />);
 
-      expect(screen.getByTestId('EmailIcon')).toBeInTheDocument();
+      // Lucide mail icon has class "lucide-mail"
+      expect(container.querySelector('.lucide-mail')).toBeInTheDocument();
     });
 
     test('email link has correct mailto href', () => {
@@ -275,15 +280,18 @@ describe('NameCard Component', () => {
     });
 
     test('renders icons inside links', () => {
-      render(<NameCard />);
+      const { container } = render(<NameCard />);
 
-      const linkedinIcon = screen.getByTestId('LinkedInIcon');
-      const githubIcon = screen.getByTestId('GitHubIcon');
-      const homeIcon = screen.getByTestId('HomeIcon');
+      // Lucide icons have class names like "lucide-linkedin", "lucide-github"
+      const linkedinIcon = container.querySelector('.lucide-linkedin');
+      const githubIcon = container.querySelector('.lucide-github');
+      // Note: Lucide uses "house" internally for home icon
+      const homeIcon =
+        container.querySelector('.lucide-house') || container.querySelector('.lucide-home');
 
-      expect(linkedinIcon.closest('a')).toBeInTheDocument();
-      expect(githubIcon.closest('a')).toBeInTheDocument();
-      expect(homeIcon.closest('a')).toBeInTheDocument();
+      expect(linkedinIcon?.closest('a')).toBeInTheDocument();
+      expect(githubIcon?.closest('a')).toBeInTheDocument();
+      expect(homeIcon?.closest('a')).toBeInTheDocument();
     });
 
     test('no href uses relative paths', () => {
