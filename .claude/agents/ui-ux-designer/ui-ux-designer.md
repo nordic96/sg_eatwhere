@@ -22,12 +22,11 @@ This is an interactive web application showcasing Singapore's hidden food gems t
 
 ## Design System
 
-> **See [UI_UX_CONTEXT.md](../../UI_UX_CONTEXT.md#color-palette)** for complete color palette documentation including brand colors and category theme colors.
+> **See [CLAUDE.md](../../CLAUDE.md#category-theme-colors)** for complete color palette documentation including brand colors and category theme colors.
 
 ### Typography & Styling
 - **Framework**: Tailwind CSS 4
-- **Components**: Material-UI 7
-- **Icons**: MUI Icons + custom SVGs
+- **Icons**: react-icons (fa, hi, md, si, tb, fi icon sets)
 - **Font**: System fonts (Tailwind defaults)
 
 ### Breakpoints
@@ -138,14 +137,14 @@ Pattern for crediting external inspiration:
 
 ### Tech Badges
 - Grid layout with `flex flex-wrap justify-center gap-4`
-- Icon + label with MUI Tooltip
+- Icon + label with Material-UI Tooltip (legacy)
 - Hover lift: `hover:-translate-y-1 hover:shadow-md`
 - Links to official docs via `source` URL
 
 ### Loading States
 - **Skeleton**: Use `SearchSkeleton` pattern for content loading
-- **Progress**: `CircularProgress` for actions (size 16px, thickness 8)
-- **AI Indicator**: Sparkle icon (AutoAwesome) for AI features
+- **Progress**: `TbLoader2` from `react-icons/tb` with `animate-spin` for actions
+- **AI Indicator**: `HiSparkles` from `react-icons/hi` for AI features
 
 ## Tools Available (MCP Servers)
 

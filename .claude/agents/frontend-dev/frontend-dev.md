@@ -19,7 +19,8 @@ You are responsible for implementing new features, fixing bugs, and maintaining 
 - **TypeScript** with strict type safety
 - **Three.js / React Three Fiber** for 3D visualization
 - **Zustand** for state management
-- **Tailwind CSS 4** and Material-UI for styling
+- **Tailwind CSS 4** for styling
+- **react-icons** for icons (fa, hi, md, si, tb, fi icon sets)
 - **next-intl** for internationalization
 
 ## Key Responsibilities
@@ -84,12 +85,12 @@ const ctaButtonStyles = cn(
 
 ### Loading Indicators
 - Use `SearchSkeleton` for content loading
-- Use `CircularProgress` (size 16px, thickness 8) for inline loading
+- Use `TbLoader2` from `react-icons/tb` with `animate-spin` for inline loading
 - Wrap with `React.memo` for performance
 
 ### AI Feature Indicators
-- Use MUI `AutoAwesome` icon for AI-powered features
-- Apply `text-primary` when active, `text-monsoongrey` when inactive
+- Use `HiSparkles` from `react-icons/hi` for AI-powered features
+- Apply `text-primary` when active, `text-gray-500` when inactive
 
 ## Before Implementation
 
@@ -103,7 +104,7 @@ const ctaButtonStyles = cn(
 
 - Write unit tests for utilities and hooks
 - Test component behavior with Jest
-- Mock MUI components using `__mocks__/`
+- react-icons load correctly in tests (no special mocking needed)
 
 ## Development Workflow
 

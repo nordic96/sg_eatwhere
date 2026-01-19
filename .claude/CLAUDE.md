@@ -19,9 +19,12 @@ This document provides shared context for all Claude Code agents working on this
 | Language | TypeScript 5.x (strict) |
 | 3D Engine | Three.js 0.181.2 + React Three Fiber 9.4.0 |
 | State | Zustand 5.0.8 |
-| Styling | Tailwind CSS 4 + Material-UI 7.3.5 |
+| Styling | Tailwind CSS 4 |
+| Icons | react-icons 5.5.0 |
 | i18n | next-intl 4.5.7 |
 | Testing | Jest 30.2.0 |
+
+**Note:** Material-UI and @emotion/* have been removed. Icons now use react-icons (see #136).
 
 ---
 
@@ -183,15 +186,16 @@ Two-column responsive grid (single column on mobile):
 ### Styling
 - Tailwind CSS for utility classes
 - `clsx` + `tailwind-merge` via `cn()` utility
-- Material-UI for complex components
+- react-icons for icons (multiple icon sets: fa, hi, md, si, tb, fi)
 - Theme colors from `constants/theme.ts`
 
 ### Design Patterns
 - **Centered CTAs**: Use `flex justify-center` for CTA button groups
 - **Attribution Sections**: Image, title, author, description, colour palette, CTA
 - **Tech Badges**: Icon + label with tooltip, hover lift effect (`hover:-translate-y-1`)
-- **Loading States**: Skeleton components for content, CircularProgress for actions
-- **AI Indicators**: Sparkle icon (AutoAwesome) for AI-powered features
+- **Loading States**: Skeleton components for content, spinner animations for actions
+- **AI Indicators**: Sparkle icon (`HiSparkles` from `react-icons/hi`) for AI-powered features
+- **Icon Usage**: Import from `react-icons/*` (e.g., `import { FaMap } from 'react-icons/fa'`, `import { HiSparkles } from 'react-icons/hi'`)
 
 ### State
 - Zustand stores with typed selectors
@@ -201,7 +205,7 @@ Two-column responsive grid (single column on mobile):
 ### Testing
 - Tests in `__tests__/` mirroring `app/` structure
 - Jest with jsdom environment
-- MUI mocks in `__mocks__/@mui/`
+- react-icons load correctly in tests (no special mocking required)
 
 ---
 
@@ -478,11 +482,12 @@ import { Activity } from 'react';
 **Solution:** Use conditional rendering or proper loading indicators.
 
 ```typescript
-// CORRECT - Use conditional rendering
+// CORRECT - Use conditional rendering for loading states
 {isLoading && <div className="spinner">Loading...</div>}
 
-// Or use a proper library component
-import CircularProgress from '@mui/material/CircularProgress';
+// Or use a react-icons spinner icon
+import { TbLoader2 } from 'react-icons/tb';
+<Loader2 className="animate-spin" />
 ```
 
 **Files affected in past:** ImageCarousel, SearchBar, ToggleButton, ClientHome, ButtonContainer, MapScene
@@ -642,9 +647,32 @@ Before starting any new implementation:
 |------|--------|----------|
 | Imports | `@/` alias required | Use `@/app/...` not `../` |
 | Styling | `cn()` utility exists | Import from `@/app/utils` |
-| Tests | MUI icons need mocks | Mocks exist in `__mocks__/@mui/` |
+| Icons | Use react-icons | Import from `react-icons/*` (fa, hi, md, si, tb, fi) |
 | i18n | 4 locales required | en, ko, ja, nl |
 | Git | Pre-commit hooks run tests | Ensure tests pass before commit |
+
+---
+
+## Recent Feature Development (2026-01-19)
+
+### Completed Work
+
+**Issue #136: MUI → react-icons Migration (Completed)**
+- Replaced Material-UI icons with react-icons library
+- Removed: @mui/material, @mui/icons-material, @emotion/*, simple-icons, lucide-react
+- Icon sets used: fa (Font Awesome), hi (Heroicons), md (Material Design), si (Simple Icons), tb (Tabler), fi (Feather)
+- Example: `import { FaMap } from 'react-icons/fa'`, `import { HiSparkles } from 'react-icons/hi'`
+
+### Pending Work
+
+**Issue #134: Must Try Property**
+- Feature: Add "Must Try" flag to food heritage items
+- Scope: Database model update, filter UI, visual indicator
+
+**Issue #135: Keyboard Accessibility for Heritage Card**
+- Feature: Enable keyboard navigation and interaction for Heritage Cards
+- Focus: Tab navigation, Enter/Space activation, ARIA attributes
+- Scope: CardContainer component and related interactive elements
 
 ---
 
