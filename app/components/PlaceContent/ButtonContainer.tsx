@@ -3,6 +3,7 @@ import { useHeritageStore, useTrailStore } from '@/app/stores';
 import { Redo, Undo } from 'lucide-react';
 import CloseButton from '../CloseButton/CloseButton';
 import { cn } from '@/app/utils';
+import { useCallback } from 'react';
 
 export default function ButtonContainer() {
   const { unSelect, getThemeStyle } = useHeritageStore();
@@ -10,6 +11,16 @@ export default function ButtonContainer() {
   const moveToNextTrail = useTrailStore((state) => state.moveToNextTrail);
   const trailButtonStyle =
     'h-6 w-6 bg-primary text-white hover:bg-red-700 rounded-full cursor-pointer flex items-center justify-center';
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      /** Don't handle if user is typing in an input */
+      if (e.target instanceof HTMLInputElement) return;
+      if (e.key === 'Escape') unSelect();
+    },
+    [unSelect],
+  );
+
   return (
     <div
       className={'flex w-full justify-between items-center'}
@@ -36,7 +47,7 @@ export default function ButtonContainer() {
           </>
         )}
       </div>
-      <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
+      <CloseButton onClick={unSelect} customClass={getThemeStyle()} onKeyDown={handleKeyDown} />
     </div>
   );
 }

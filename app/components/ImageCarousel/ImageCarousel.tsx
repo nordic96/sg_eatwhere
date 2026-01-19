@@ -34,6 +34,35 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     });
   }, [img]);
 
+  const onClickLeft = useCallback(() => {
+    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
+  }, [displayImages.length]);
+
+  const onClickRight = useCallback(() => {
+    setCurrImg((index) => (index + 1) % displayImages.length);
+  }, [displayImages.length]);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    function handleKeyNavigate(e: KeyboardEvent) {
+      /** Don't handle if user is typing input (searchbar component) */
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        onClickLeft();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        onClickRight();
+      }
+    }
+    window.addEventListener('keydown', handleKeyNavigate);
+
+    return () => window.removeEventListener('keydown', handleKeyNavigate);
+  }, [onClickLeft, onClickRight]);
+
   const handleImageLoad = useCallback((src: string) => {
     setLoadedImages((prev) => {
       if (prev.has(src)) return prev;
@@ -51,14 +80,6 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
       wrapperRef.current.style.transform = `translateX(${-currImg * offset}%)`;
     }
   }, [currImg, offset]);
-
-  const onClickLeft = useCallback(() => {
-    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
-  }, [displayImages.length]);
-
-  const onClickRight = useCallback(() => {
-    setCurrImg((index) => (index + 1) % displayImages.length);
-  }, [displayImages.length]);
 
   const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-white';
   const navBtnBaseStyle =
