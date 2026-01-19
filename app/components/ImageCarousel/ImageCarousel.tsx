@@ -35,6 +35,27 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     });
   }, [img]);
 
+  const onClickLeft = useCallback(() => {
+    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
+  }, [displayImages.length]);
+
+  const onClickRight = useCallback(() => {
+    setCurrImg((index) => (index + 1) % displayImages.length);
+  }, [displayImages.length]);
+
+  useEffect(() => {
+    function handleKeyNavigate(e: KeyboardEvent) {
+      if (e.key === 'ArrowLeft') {
+        onClickLeft();
+      } else if (e.key === 'ArrowRight') {
+        onClickRight();
+      }
+    }
+    window.addEventListener('keydown', handleKeyNavigate);
+
+    return () => window.removeEventListener('keydown', handleKeyNavigate);
+  }, [onClickLeft, onClickRight]);
+
   const handleImageLoad = useCallback((src: string) => {
     setLoadedImages((prev) => {
       if (prev.has(src)) return prev;
@@ -52,14 +73,6 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
       wrapperRef.current.style.transform = `translateX(${-currImg * offset}%)`;
     }
   }, [currImg, offset]);
-
-  const onClickLeft = useCallback(() => {
-    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
-  }, [displayImages.length]);
-
-  const onClickRight = useCallback(() => {
-    setCurrImg((index) => (index + 1) % displayImages.length);
-  }, [displayImages.length]);
 
   const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-white';
   const navBtnBaseStyle =

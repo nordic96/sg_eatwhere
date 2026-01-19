@@ -36,7 +36,15 @@ export default function ButtonContainer() {
           </>
         )}
       </div>
-      <CloseButton onClick={unSelect} customClass={getThemeStyle()} />
+      <CloseButton
+        onClick={unSelect}
+        customClass={getThemeStyle()}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            unSelect();
+          }
+        }}
+      />
     </div>
   );
 }
