@@ -114,7 +114,7 @@ interface FoodHeritage {
 ### UI Components (`app/components/`)
 | Component | Purpose |
 |-----------|---------|
-| `SearchBar/` | Autocomplete search with AI semantic search |
+| `SearchBar/` | Autocomplete search with AI semantic search (lazy-loaded, mapview only) |
 | `Sidebar/` | Location details panel |
 | `FilterBar/` | Category filters |
 | `MapController/` | Camera controls |
@@ -202,6 +202,95 @@ Two-column responsive grid (single column on mobile):
 - Tests in `__tests__/` mirroring `app/` structure
 - Jest with jsdom environment
 - MUI mocks in `__mocks__/@mui/`
+
+---
+
+## Performance Patterns
+
+### WebWorker & Heavy Resource Initialization
+**Pattern:** Lazy initialization in singleton factory with deferred constructor.
+
+**Problem:** The SemanticSearchClient (HuggingFace embedding model) was loading on all pages, causing performance degradation on pages that never use search functionality.
+
+**Solution:** Use deferred initialization pattern:
+```typescript
+// Don't auto-initialize in constructor - wait for first use
+export class SemanticSearchClient {
+  constructor() {
+    // Constructor is empty - no expensive operations
+  }
+
+  private initWorker(): Promise<void> {
+    // Heavy initialization happens only when needed
+  }
+
+  async generateEmbeddings(foodData): Promise<void> {
+    await this.ensureWorker();  // Lazy init on first call
+    // ...
+  }
+}
+
+// Singleton factory with lazy init
+export function getSemanticSearchClient(): SemanticSearchClient {
+  if (!searchClient) {
+    searchClient = new SemanticSearchClient();
+    // Note: Worker not created until first method call
+  }
+  return searchClient;
+}
+```
+
+**Implementation:** `lib/semanticSearch.ts` - `SemanticSearchClient` class with `initWorker()` private method.
+
+### React 19 Activity vs Conditional Rendering
+**Critical Issue:** React 19's `<Activity>` (Suspense-like) component mounts children but hides them - it does NOT prevent component initialization.
+
+**Problem:** Wrapping expensive components in Activity doesn't prevent their constructor from running:
+```typescript
+// WRONG - Component still mounts and initializes
+<Activity fallback={<Loading />}>
+  <SearchBar />  {/* Constructor runs, model loads */}
+</Activity>
+```
+
+**Solution:** Use explicit conditional rendering for heavy components:
+```typescript
+// RIGHT - Component only mounts when condition is true
+{pathname === '/mapview' && breakpoint === 'desktop' && (
+  <SearchBar />  {/* Constructor deferred until this condition is true */}
+)}
+```
+
+**Implementation:** `app/components/Header.tsx` (line 31-39) - SearchBar only renders on mapview + desktop.
+
+**Lesson:** For expensive components (especially those with WebWorkers or heavy resource loading), always use `{condition && <Component />}` rather than Activity/Suspense boundaries.
+
+### Singleton Factory Pattern with State Management
+**Pattern:** Use factory function with deferred initialization state.
+
+```typescript
+// Track initialization state to prevent re-initialization
+export class SemanticSearchClient {
+  private isReady = false;           // Model loaded and cached
+  private isDestroyed = false;       // Cleanup called
+  private initPromise: Promise<void> | null = null;  // Prevent race conditions
+
+  private async ensureWorker(): Promise<void> {
+    // Re-init if destroyed, return existing promise if already initializing
+    if (this.isDestroyed || !this.worker) {
+      await this.initWorker();
+    }
+  }
+}
+```
+
+**Benefits:**
+- Workers persist across component remounts
+- Model cached in worker memory after first load
+- Graceful re-initialization after cleanup
+- Request ID correlation prevents promise race conditions
+
+**Files:** `lib/semanticSearch.ts`
 
 ---
 
