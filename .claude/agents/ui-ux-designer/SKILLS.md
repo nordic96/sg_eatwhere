@@ -1,63 +1,32 @@
 # UI/UX Designer - Skills & Learnings
 
-> **Purpose:** Document design discoveries, UX recommendations, accessibility insights, and visual patterns learned while working on this project.
+> **Purpose:** Document design discoveries, UX recommendations, accessibility insights, visual patterns, and design system knowledge for this project.
 
 ---
 
-## Session Learnings
+## Design System Reference
 
-### Design Discoveries
+### Color Palette
 
-*Section for documenting design patterns and insights discovered during UI/UX analysis sessions.*
+| Role | Color | Hex | Usage |
+|------|-------|-----|-------|
+| Primary Brand | Maroon/Dark Red | `#A7292C` | Header, primary buttons, CTAs |
+| Hawker Category | Red | `#FF6B6B` | Hawker filter pill, markers |
+| Restaurant Category | Orange | `#FF9800` | Restaurant filter pill, markers |
+| Dessert Category | Green | `#4CAF50` | Dessert filter pill, markers |
+| Trail Mode | Purple | `#9C27B0` | Trail navigation elements |
+| Golden Highlight | Yellow | `#F8D64F` | Highlights, attention |
+| Background | Light Gray | `#F5F5F5` | Page backgrounds |
+| Card Background | White | `#FFFFFF` | Content cards |
+| Text Primary | Dark Gray | `#333333` | Body text |
+| Text Secondary | Medium Gray | `#666666` | Captions, metadata |
 
-<!-- Example entry:
-- **Discovery:** [Pattern/insight name]
-  - **Context:** Where this was identified
-  - **Impact:** How it affects user experience
-  - **Recommendation:** Suggested implementation
--->
+### Typography
 
-### UX Recommendations Implemented
-
-*Track UX improvements that have been successfully implemented.*
-
-<!-- Example entry:
-- **Improvement:** [Name]
-  - **Before:** Previous state
-  - **After:** Improved state
-  - **User Impact:** How this improves UX
--->
-
----
-
-## Accessibility Insights
-
-### WCAG Compliance Notes
-
-| Component | Status | Notes |
-|-----------|--------|-------|
-| SearchBar | Good | Keyboard navigation implemented |
-| 3D Map | Needs Review | Alternative navigation for screen readers |
-| FilterBar | Good | Clear focus states |
-
-### Keyboard Navigation Patterns
-
-- Tab order follows visual layout
-- Escape key closes modals/overlays
-- Arrow keys for carousel/list navigation
-- Enter/Space for selection
-
-### Color Contrast Checks
-
-| Element | Foreground | Background | Ratio | Status |
-|---------|------------|------------|-------|--------|
-| Primary CTA | #FFFFFF | #A7292C | 7.5:1 | Pass |
-| Body Text | #374151 | #FFFFFF | 10.6:1 | Pass |
-| Muted Text | #6B7280 | #FFFFFF | 5.3:1 | Pass |
-
----
-
-## Visual Consistency Patterns
+- **Headings:** Bold, large scale, high contrast
+- **Body:** Clean sans-serif (system fonts)
+- **Accent Text:** Red/maroon for emphasis
+- **Statistics:** Large bold numbers with gradient effects
 
 ### Spacing System
 
@@ -69,19 +38,6 @@
 32px (space-8)  - Page-level margins
 ```
 
-### Component Shadows
-
-```css
-/* Subtle lift for cards */
-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05)
-
-/* Elevated components */
-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1)
-
-/* Modals and overlays */
-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1)
-```
-
 ### Animation Timing
 
 - **Micro-interactions:** 150ms (hover states, toggles)
@@ -91,120 +47,256 @@ shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1)
 
 ---
 
-## Mobile-First Patterns
+## Page Design Summaries
+
+### Landing Page (`/{locale}`)
+
+**Key Elements:**
+- Split hero layout (text left, illustration right on desktop)
+- Stats display: "10+ Years. 100+ Visits."
+- Feature cards with dark red/maroon backgrounds
+- Film strip carousel for food photos
+- Stacked layout on mobile
+
+### MapView Page (`/{locale}/mapview`)
+
+**Key Elements:**
+- Header with search bar (desktop only)
+- Filter bar with category pills (color-coded)
+- 3D MRT-style map as main feature
+- Floating map controls (right side, desktop)
+- Featured food spots carousel
+- Region tabs for food list
+
+### About Page (`/{locale}/about`)
+
+**Key Elements:**
+- Two-column layout (illustration left, content right on desktop)
+- NameCard with social links and labels
+- StatsBar with 4 key metrics (responsive grid)
+- Section component with background variants
+- TechStackSection with badge grid
+- InspirationSection with attribution pattern
+
+---
+
+## Implemented Design Patterns
+
+### StatsBar Component (Implemented 2026-01)
+
+**Pattern:** Key metrics display with responsive layout
+- Desktop: Horizontal row
+- Mobile: 2x2 grid
+- Styling: Gradient text values, rounded cards, hover effects
+- Accessibility: `role="list"` with `role="listitem"` children
+
+### TechBadge Component (Implemented 2026-01)
+
+**Pattern:** Technology showcase badges
+- Icon + label with MUI Tooltip
+- Hover lift effect: `hover:-translate-y-1 hover:shadow-md`
+- Links to official documentation
+- Grid layout: `flex flex-wrap justify-center gap-4`
+
+### InspirationSection Component (Implemented 2026-01)
+
+**Pattern:** Attribution with visual elements
+1. Thumbnail image
+2. Title + author
+3. Description text
+4. Colour palette display
+5. CTA button to source
+
+### Section Component (Implemented 2026-01)
+
+**Pattern:** Content wrapper with styling variants
+- Background variants: `white`, `gray` (bg-gray-50), `accent` (bg-red-50)
+- Title styling: Bold text with 3px primary underline
+- Responsive padding: `py-8` mobile, `py-12` desktop
+- Accessible: `aria-labelledby` support
+
+### CTA Button Patterns
+
+```typescript
+// Primary CTA
+'bg-primary text-white hover:bg-red-700 rounded-full px-6 py-3'
+
+// Secondary CTA (GitHub)
+'bg-gray-900 text-white hover:bg-gray-800 rounded-full px-6 py-3'
+
+// Outlined CTA
+'bg-white text-gray-700 border border-gray-300 rounded-full px-6 py-3'
+
+// Responsive sizing
+'max-sm:px-4 max-sm:py-2 max-sm:text-xs'
+```
+
+---
+
+## Accessibility Insights
+
+### Current Strengths
+
+- High contrast header (white on maroon)
+- Clear visual category coding with distinct colors
+- Readable font sizes across all breakpoints
+- Touch-friendly tap targets (44x44px minimum)
+- ARIA roles on list components (StatsBar)
+
+### Areas for Improvement
+
+| Issue | Component | Recommendation |
+|-------|-----------|----------------|
+| Color-only category indicators | FilterBar, Markers | Add icons/patterns alongside colors |
+| 3D map keyboard navigation | MapView | Add keyboard controls for camera |
+| Screen reader for 3D canvas | MapScene | Provide text alternative/description |
+| Focus indicators | Various | Ensure visible focus rings on all interactive elements |
+
+### Color Contrast Checks
+
+| Element | Foreground | Background | Ratio | Status |
+|---------|------------|------------|-------|--------|
+| Primary CTA text | #FFFFFF | #A7292C | 7.5:1 | Pass |
+| Body Text | #374151 | #FFFFFF | 10.6:1 | Pass |
+| Muted Text | #6B7280 | #FFFFFF | 5.3:1 | Pass |
+| Hawker on White | #FF6B6B | #FFFFFF | 3.9:1 | Needs review |
+
+---
+
+## Responsive Behavior Patterns
+
+### Breakpoint Strategy
+
+| Breakpoint | Width | Key Changes |
+|------------|-------|-------------|
+| Mobile | < 768px | Single column, stacked elements, hamburger nav |
+| Tablet | 768-1023px | Hybrid layouts, some side-by-side |
+| Desktop | >= 1024px | Full multi-column, all controls visible |
+
+### Component Adaptations
+
+| Component | Mobile | Desktop |
+|-----------|--------|---------|
+| SearchBar | Hidden (icon trigger) | Full width in header |
+| Sidebar | Full screen overlay | Persistent slide panel |
+| FilterBar | Horizontal scroll | Single row |
+| StatsBar | 2x2 grid | Horizontal row |
+| 3D Controls | Simplified touch | Full floating panel |
 
 ### Touch Target Guidelines
 
 - Minimum touch target: 44x44px
-- Spacing between touch targets: 8px minimum
-- Bottom navigation for primary actions
+- Spacing between targets: 8px minimum
+- Bottom navigation for primary actions on mobile
 - Swipe gestures for secondary actions
 
-### Responsive Breakpoint Decisions
+---
 
-| Component | Mobile | Tablet | Desktop |
-|-----------|--------|--------|---------|
-| SearchBar | Hidden (use icon) | Full width | Inline in header |
-| Sidebar | Full screen overlay | Slide panel | Persistent sidebar |
-| FilterBar | Horizontal scroll | Wrap | Single row |
-| 3D Controls | Simplified | Standard | Full controls |
+## Improvement Opportunities
+
+### High Priority
+
+1. **Loading States**
+   - Add skeleton screens for content areas
+   - Use consistent CircularProgress for actions
+   - Show meaningful loading messages
+
+2. **Empty States**
+   - Design illustrated states when no search results
+   - Friendly messaging with suggested actions
+
+3. **Error States**
+   - Design error UI with retry actions
+   - Contextual error messages
+
+### Medium Priority
+
+1. **Micro-interactions**
+   - Subtle animations on filter toggles
+   - Smooth transitions between states
+
+2. **Onboarding**
+   - First-time user tour for map features
+   - Highlight key interactions
+
+3. **Mobile Bottom Navigation**
+   - Consider bottom nav bar for key actions
+   - Thumb-friendly primary controls
+
+### Future Considerations
+
+1. **Favorites System** - Allow users to save spots
+2. **Social Sharing** - Share individual food locations
+3. **Testimonials** - User feedback display (when collected)
+4. **Photo Gallery** - Personal food journey photos
 
 ---
 
-## Design Debt & Opportunities
+## Component Inventory
 
-### Current Issues
+### Navigation Components
 
-*Track identified design issues that need attention.*
+| Component | States |
+|-----------|--------|
+| Header | Default, scrolled, mobile-collapsed |
+| Footer | Standard |
+| LocaleSwitcher | Dropdown with 4 locales |
+| Mobile Menu | Closed, open (slide) |
 
-<!-- Example entry:
-- [ ] **Issue:** [Description]
-  - **Location:** [Component/Page]
-  - **Priority:** High/Medium/Low
-  - **Proposed Fix:** [Solution]
+### Interactive Components
+
+| Component | Behavior |
+|-----------|----------|
+| SearchBar | Autocomplete, keyboard nav, AI indicator |
+| FilterBar | Toggle pills, multi-select |
+| Trail Mode | Binary on/off toggle |
+| Map Controls | Camera adjust buttons |
+| Food Carousel | Horizontal scroll/swipe |
+
+### 3D Components
+
+| Component | Purpose |
+|-----------|---------|
+| MRT Map Texture | Base Singapore map |
+| Location Markers | Food spot indicators (category colored) |
+| Trail Path | Connecting curved lines |
+| Environment | Day/night atmosphere toggle |
+
+---
+
+## Session Learnings
+
+### Design Discoveries
+
+*Add discoveries from design sessions here.*
+
+<!-- Example:
+- **Discovery:** Users prefer larger touch targets on mobile filter pills
+  - **Context:** Usability testing showed mis-taps
+  - **Action:** Increased pill padding to 12px
 -->
 
-### Enhancement Ideas
+### UX Recommendations Implemented
 
-*Capture ideas for future UX improvements.*
-
-<!-- Example entry:
-- **Idea:** [Name]
-  - **Description:** What it would do
-  - **User Benefit:** Why it matters
-  - **Effort Estimate:** Low/Medium/High
--->
+| Date | Improvement | Impact |
+|------|-------------|--------|
+| 2026-01 | Added StatsBar to About page | Improved credibility display |
+| 2026-01 | Created TechStackSection | Better tech showcase |
+| 2026-01 | Enhanced NameCard with labels | Clearer social link purpose |
+| 2026-01 | Centered CTA buttons | Better visual balance |
 
 ---
 
-## Screenshot Library
+## Screenshot Reference
 
-### Reference Screenshots
+Screenshots stored in `.claude/screenshots/`:
 
-*Track key screenshots captured for design reference.*
-
-| Screenshot | Path | Purpose | Date |
-|------------|------|---------|------|
-| Desktop Landing | `.claude/screenshots/desktop-landing.png` | Hero section reference | - |
-| Mobile Map | `.claude/screenshots/mobile-map.png` | 3D interface mobile | - |
-| About Page | `.claude/screenshots/about-page.png` | Attribution layout | - |
-
-### Before/After Comparisons
-
-*Document visual changes with side-by-side comparisons.*
-
----
-
-## Component-Specific Notes
-
-### SearchBar
-- AI sparkle indicator should pulse subtly during search
-- Loading skeleton matches result item height
-- Rich items show category color indicators
-
-### 3D Map Interface
-- Camera controls adapt to device type
-- Touch gestures: pinch-zoom, two-finger rotate
-- Location pins use category theme colors
-
-### Sidebar
-- Slides in from right on desktop
-- Full screen on mobile with close button
-- Image carousel with swipe support
-
-### FilterBar
-- Category colors match theme constants
-- Active state uses filled style
-- Inactive uses outlined style
-
----
-
-## User Testing Insights
-
-*Document findings from user testing sessions.*
-
-<!-- Example entry:
-### Test Session: [Date]
-- **Participants:** [Number]
-- **Key Finding:** [Insight]
-- **Action Taken:** [Response]
--->
-
----
-
-## Design System Evolution
-
-### Color Palette Adjustments
-
-*Track changes to the design system colors.*
-
-### Typography Refinements
-
-*Document typography changes and reasoning.*
-
-### Component Library Updates
-
-*Track new components added or existing ones modified.*
+| Screenshot | Viewport | Purpose |
+|------------|----------|---------|
+| `landing-*.png` | 375/768/1440px | Landing page reference |
+| `mapview-*.png` | 375/768/1440px | Map interface reference |
+| `about-*.png` | 375/768/1440px | About page reference |
+| `section/*.png` | Various | Component-specific shots |
 
 ---
 

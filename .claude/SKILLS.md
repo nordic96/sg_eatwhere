@@ -37,12 +37,16 @@ When wrapping a session, consider:
 
 ### 1. MCP Servers vs Direct Package Installation
 
-**Problem:** Installing Playwright or other MCP-provided tools directly via npm.
+**Problem:** Installing Playwright or other MCP-provided tools directly via npm, or writing standalone scripts.
 
 ```bash
 # WRONG - Pollutes package.json and doesn't use MCP properly
 npm install playwright
 npm install --save-dev playwright
+
+# WRONG - Standalone scripts bypass MCP isolation
+node screenshot-script.js
+npx playwright screenshot ...
 ```
 
 **Solution:** Use MCP tools provided by Claude Code. MCP servers are configured in `.claude/mcp.json`.
@@ -52,13 +56,21 @@ npm install --save-dev playwright
 mcp__playwright__browser_navigate  - Navigate to URL
 mcp__playwright__browser_screenshot - Capture screenshot
 mcp__playwright__browser_resize    - Change viewport size
+mcp__playwright__browser_click     - Click elements
+mcp__playwright__browser_snapshot  - Get accessibility snapshot
 ```
+
+**Viewport sizes for responsive testing:**
+- Mobile: 375 x 812
+- Tablet: 768 x 1024
+- Desktop: 1440 x 900
 
 **Why this matters:**
 - MCP servers run in isolated environments
 - No modification to project's `package.json`
 - Consistent tooling across all agents
 - Automatically managed by Claude Code
+- No standalone scripts to maintain
 
 ---
 

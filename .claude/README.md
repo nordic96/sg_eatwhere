@@ -6,58 +6,79 @@ This directory contains the Claude Code configuration for **The Foodie's Trail -
 
 ```
 .claude/
-├── README.md           # This file
-├── CLAUDE.md           # Shared agent context
-├── SKILLS.md           # Lessons learned & best practices
-├── UI_UX_CONTEXT.md    # Visual design system documentation
-├── mcp.json            # MCP server configuration
-├── agents/             # Subagent definitions
-│   ├── frontend-dev.md    # @frontend-dev subagent
-│   └── ui-ux-designer.md  # @ui-ux-designer subagent
-├── context/            # Additional context documents
-└── screenshots/        # UI screenshots for review
+├── README.md              # This file
+├── CLAUDE.md              # Main project context (shared across all agents)
+├── SKILLS.md              # Global lessons learned & best practices
+├── mcp.json               # MCP server configuration
+├── settings.local.json    # Local permissions (gitignored)
+├── agents/                # Agent definitions
+│   ├── frontend-dev/
+│   │   ├── frontend-dev.md   # Agent definition
+│   │   └── SKILLS.md         # Agent-specific learnings
+│   └── ui-ux-designer/
+│       ├── ui-ux-designer.md # Agent definition
+│       └── SKILLS.md         # Agent-specific learnings
+└── screenshots/           # UI screenshots for reference
 ```
 
-## Subagents
+## Agents
 
 ### @frontend-dev
-Frontend developer agent for feature implementation. Specializes in:
+
+Frontend developer agent for feature implementation.
+
+**Files:**
+- Definition: `agents/frontend-dev/frontend-dev.md`
+- Skills: `agents/frontend-dev/SKILLS.md`
+
+**Specializes in:**
 - Next.js 16 / React 19 development
 - Three.js / React Three Fiber 3D features
 - Zustand state management
 - TypeScript with strict typing
-- Tailwind CSS styling
-
-**Usage:** `@frontend-dev implement the new filter component`
+- Performance optimization
 
 ### @ui-ux-designer
-UI/UX designer agent for interface analysis. Specializes in:
+
+UI/UX designer agent for interface analysis.
+
+**Files:**
+- Definition: `agents/ui-ux-designer/ui-ux-designer.md`
+- Skills: `agents/ui-ux-designer/SKILLS.md`
+
+**Specializes in:**
 - Visual consistency audits
-- User flow analysis
+- Design system maintenance
 - Responsive design review
 - Accessibility assessment
-- Design recommendations
-
-**Usage:** `@ui-ux-designer analyze the mobile search experience`
+- Component patterns
 
 ## MCP Servers
 
-### Playwright
-Browser automation for visual testing and UI verification.
-- Screenshot capture at different viewports
-- User flow navigation
-- Interaction testing
+Configured in `mcp.json`:
 
-### Sequential Thinking
-Enhanced reasoning for complex problem-solving.
-- Multi-step analysis
-- Design trade-off evaluation
-- Architecture decisions
+| Server | Purpose |
+|--------|---------|
+| `playwright` | Browser automation for screenshots & visual testing |
+| `sequential-thinking` | Enhanced reasoning for complex problems |
 
-## Project Context
+**Important:** Use MCP tools directly, do not install packages like Playwright via npm.
 
-See `/CLAUDE.md` at the project root for:
-- Full technology stack
-- Project structure
-- Coding conventions
-- Development commands
+## Skills & Learning
+
+The `/wrap-session` command updates documentation based on session context:
+
+| Context | Target File |
+|---------|-------------|
+| General learnings | `.claude/SKILLS.md` |
+| Frontend-specific | `agents/frontend-dev/SKILLS.md` |
+| UI/UX-specific | `agents/ui-ux-designer/SKILLS.md` |
+| Project-wide changes | `.claude/CLAUDE.md` |
+
+## Key Documents
+
+| Document | Purpose |
+|----------|---------|
+| `CLAUDE.md` | Project context, tech stack, coding standards |
+| `SKILLS.md` | Shared lessons, mistakes to avoid |
+| Agent `SKILLS.md` | Specialized knowledge per agent |
