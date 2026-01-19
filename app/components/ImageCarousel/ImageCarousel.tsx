@@ -44,10 +44,18 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   }, [displayImages.length]);
 
   useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
     function handleKeyNavigate(e: KeyboardEvent) {
+      /** Don't handle if user is typing input (searchbar component) */
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
       if (e.key === 'ArrowLeft') {
+        e.preventDefault();
         onClickLeft();
       } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
         onClickRight();
       }
     }

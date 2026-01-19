@@ -198,4 +198,26 @@ describe('ImageCarousel', () => {
     expect(screen.getByTestId('WestIcon')).toBeInTheDocument();
     expect(screen.getByTestId('EastIcon')).toBeInTheDocument();
   });
+
+  test('navigates to next image on ArrowRight key press', () => {
+    render(<ImageCarousel img={mockImages} />);
+
+    expect(screen.getByText('1 / 3')).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: 'ArrowRight' });
+
+    expect(screen.getByText('2 / 3')).toBeInTheDocument();
+  });
+
+  test('navigates to previous image on ArrowLeft key press', () => {
+    render(<ImageCarousel img={mockImages} />);
+
+    const nextButton = screen.getByLabelText('Next image');
+    fireEvent.click(nextButton);
+    expect(screen.getByText('2 / 3')).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: 'ArrowLeft' });
+
+    expect(screen.getByText('1 / 3')).toBeInTheDocument();
+  });
 });
