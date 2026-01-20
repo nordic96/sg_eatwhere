@@ -28,7 +28,7 @@ export default function Page() {
         }
       >
         <div className={'max-sm:w-full flex flex-col max-sm:items-center gap-12'}>
-          <FadeIn>
+          <FadeIn scrollTrigger direction="up">
             <Image
               alt={'me'}
               className={'w-full max-w-[500px]'}
@@ -40,35 +40,47 @@ export default function Page() {
             />
             <span className={'flex justify-center'}>{'-Illustration designed by Gihun Ko'}</span>
           </FadeIn>
-          <div className={'max-sm:w-full max-sm:mt-8'}>
-            <h1 className={h1BaseStyle}>Gihun Ko Stephen</h1>
-            <p className={microTextBaseStyle}>{t('intro')}</p>
-            <NameCard variant="expanded" />
-          </div>
-          <StatsBar stats={stats} />
-          <Section
-            title={t('about_project')}
-            id="about-project"
-            background="gray"
-            className="rounded-lg"
-          >
-            <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
-              {t('about_project_desc')}
-            </p>
-          </Section>
+          <FadeIn scrollTrigger direction="up" delay={100}>
+            <div className={'max-sm:w-full max-sm:mt-8'}>
+              <h1 className={h1BaseStyle}>Gihun Ko Stephen</h1>
+              <p className={microTextBaseStyle}>{t('intro')}</p>
+              <NameCard variant="expanded" />
+            </div>
+          </FadeIn>
+          <FadeIn scrollTrigger direction="up" delay={200}>
+            <StatsBar stats={stats} animateOnScroll animationDuration={2000} staggerDelay={100} />
+          </FadeIn>
+          <FadeIn scrollTrigger direction="up" delay={300}>
+            <Section
+              title={t('about_project')}
+              id="about-project"
+              background="gray"
+              className="rounded-lg"
+            >
+              <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
+                {t('about_project_desc')}
+              </p>
+            </Section>
+          </FadeIn>
         </div>
         <div className={'flex flex-col w-full'}>
           <div className={'flex flex-col w-full'}>
-            <Section title={t('food_code')} id="food-code" background="white" className="px-0">
-              <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
-                {t.rich('food_code_desc', {
-                  b: (chunks) => <span className={'font-bold'}>{chunks}</span>,
-                  i: (chunks) => <span className={'italic'}>{chunks}</span>,
-                })}
-              </p>
-            </Section>
-            <InspirationSection />
-            <TechStackSection />
+            <FadeIn scrollTrigger direction="up" delay={100}>
+              <Section title={t('food_code')} id="food-code" background="white" className="px-0">
+                <p className={'whitespace-pre-line font-light text-base leading-relaxed'}>
+                  {t.rich('food_code_desc', {
+                    b: (chunks) => <span className={'font-bold'}>{chunks}</span>,
+                    i: (chunks) => <span className={'italic'}>{chunks}</span>,
+                  })}
+                </p>
+              </Section>
+            </FadeIn>
+            <FadeIn scrollTrigger direction="up" delay={200}>
+              <InspirationSection />
+            </FadeIn>
+            <FadeIn scrollTrigger direction="up" delay={300}>
+              <TechStackSection />
+            </FadeIn>
           </div>
         </div>
       </div>
