@@ -1,7 +1,7 @@
 import { cn } from '@/app/utils';
-import Close from '@mui/icons-material/Close';
 import { ClassValue } from 'clsx';
 import React, { useEffect } from 'react';
+import { FaX } from 'react-icons/fa6';
 
 interface CloseButtonProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -27,7 +27,7 @@ export default function CloseButton({ customClass, onClick, onKeyDown }: CloseBu
       onClick={onClick}
       aria-label="Close"
     >
-      <Close />
+      <FaX size={20} />
     </button>
   );
 }

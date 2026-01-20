@@ -300,4 +300,47 @@ Screenshots stored in `.claude/screenshots/`:
 
 ---
 
+---
+
+## Session Learnings - 2026-01-19
+
+### Issue Tracking & Feature Definition
+
+- **Pattern:** Using GitHub Issues for Feature Planning
+  - **How:** Converted issue #31 into an epic, then created child issues for specific components
+  - **Example:** "New" property feature broken into:
+    - #134: "Must Try" boolean property (separate from "New")
+    - #135: Keyboard accessibility improvements
+    - #136: Icon library replacement (affects UI components)
+  - **Benefit for UX:** Clear feature boundaries prevent unrelated changes from blocking releases
+
+### Design System Impact Analysis
+
+- **Completed:** Icon Library Migration (Issue #136)
+  - **From:** MUI Icons (@mui/icons-material) - heavy, full Material Design set
+  - **To:** react-icons (multiple icon sets: fa, hi, md, si, tb, fi)
+  - **UX Impact:**
+    - Performance improvement (smaller bundle, faster component loads)
+    - Consistent icons using familiar sets (FontAwesome, Heroicons, Material Design)
+    - Simple Icons for brand logos (GitHub, LinkedIn, etc.)
+  - **Outcome:** Successfully migrated with visual consistency maintained
+
+### Accessibility Enhancement Planning
+
+- **Identified:** Issue #135 - Keyboard Navigation
+  - **Feature:** Arrow keys for carousel navigation
+  - **Feature:** Escape key to close overlays
+  - **UX Pattern:** Standard keyboard navigation for accessibility compliance
+  - **Testing Needed:** Verify focus indicators visible, logical tab order
+
+### Documentation Patterns
+
+- **Learning:** Agent Skill Documentation Organization
+  - **Structure:** Separate `SKILLS.md` for each agent (frontend-dev, ui-ux-designer)
+  - **Purpose:** Allows specialized knowledge to accumulate without cluttering global context
+  - **Example:** UI/UX learnings stay in `ui-ux-designer/SKILLS.md`, shared architecture in CLAUDE.md
+  - **Benefit:** Easier onboarding for new agents, clearer responsibility domains
+
+---
+
 *Last updated: 2026-01-19*

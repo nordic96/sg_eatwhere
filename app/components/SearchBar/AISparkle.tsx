@@ -1,6 +1,6 @@
 import { cn } from '@/app/utils';
-import { AutoAwesome } from '@mui/icons-material';
 import React from 'react';
+import { HiSparkles } from 'react-icons/hi';
 
 function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean }) {
   return (
@@ -18,7 +18,7 @@ function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean 
       title={'AI-powered semantic search'}
       aria-hidden={'true'}
     >
-      <AutoAwesome fontSize={'inherit'} />
+      <HiSparkles size={14} />
     </div>
   );
 }

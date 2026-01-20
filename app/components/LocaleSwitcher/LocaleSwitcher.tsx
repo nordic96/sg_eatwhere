@@ -5,11 +5,11 @@ import useLangNames from '@/i18n/useLangNames';
 
 import { useAppStore } from '@/app/stores';
 
-import Translate from '@mui/icons-material/Translate';
 import LocaleSwitch from '../LocaleSwitch/LocaleSwitch';
 import useClickOutside from '@/app/hooks/useClickOutside';
 import { LocaleIconMap } from '@/app/constants/localeIconMap';
 import { AvailableLocales } from '@/i18n/locales';
+import { MdTranslate } from 'react-icons/md';
 
 export default function LocaleSwitcher() {
   const currentLocale = useLocale();
@@ -27,7 +27,7 @@ export default function LocaleSwitcher() {
         aria-haspopup="menu"
         aria-label="Language selector"
       >
-        <Translate fontSize="small" className="cursor-pointer hover:text-[#f3f3f3]" />
+        <MdTranslate size={24} className="cursor-pointer hover:text-[#f3f3f3]" />
         <div className="text-sm items-center flex justify-end gap-1">
           <span className={LocaleIconMap[currentLocale]}></span>
           <span className="text-xs cursor-pointer pr-2">{localeNames.of(currentLocale)}</span>

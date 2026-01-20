@@ -2,10 +2,10 @@
 'use client';
 
 import { cn } from '@/app/utils';
-import { East, West } from '@mui/icons-material';
-import { CircularProgress } from '@mui/material';
 import { ClassValue } from 'clsx';
 import { useCallback, useState, useEffect, memo, useRef, useMemo, useTransition } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { TbLoader2 } from 'react-icons/tb';
 
 interface ImageCarouselProps {
   img: string[];
@@ -119,14 +119,14 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         onClick={onClickLeft}
         aria-label="Previous image"
       >
-        <West fontSize={'inherit'} />
+        <FaChevronLeft className="w-[1em] h-[1em]" />
       </button>
       <button
         className={cn(navBtnBaseStyle, { 'right-4': true }, customClass)}
         onClick={onClickRight}
         aria-label="Next image"
       >
-        <East fontSize={'inherit'} />
+        <FaChevronRight className="w-[1em] h-[1em]" />
       </button>
       <div
         className={cn(currImgIndicatorBaseStyle, customClass)}
@@ -140,7 +140,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
 function LoadingIndicator() {
   return (
     <div className={'w-full h-full flex justify-center items-center text-primary'}>
-      <CircularProgress color={'inherit'} />
+      <TbLoader2 size={40} className="animate-spin" />
     </div>
   );
 }

@@ -192,13 +192,6 @@ describe('ImageCarousel', () => {
     expect(wrapper).toHaveStyle({ width: '300%' }); // 3 images * 100%
   });
 
-  test('navigation buttons contain icon components', () => {
-    render(<ImageCarousel img={mockImages} />);
-
-    expect(screen.getByTestId('WestIcon')).toBeInTheDocument();
-    expect(screen.getByTestId('EastIcon')).toBeInTheDocument();
-  });
-
   test('navigates to next image on ArrowRight key press', () => {
     render(<ImageCarousel img={mockImages} />);
 

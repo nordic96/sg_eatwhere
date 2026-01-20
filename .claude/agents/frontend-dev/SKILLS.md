@@ -230,22 +230,21 @@ class HeavyService {
 ## Documentation Improvements Needed
 
 1. **Performance Guidelines Document**
-   - When to use conditional rendering vs Activity components
-   - Lazy init pattern for heavy resources
-   - Dynamic imports for large dependencies
-   - Location: `/.claude/PERFORMANCE.md`
+   - Consolidated into [CLAUDE.md](../../CLAUDE.md#performance-patterns)
+   - Content covers: conditional rendering vs Activity components, lazy init patterns, dynamic imports
+   - See section: "Performance Patterns"
 
 2. **Debugging Guide**
-   - Using Network tab to trace unexpected resource loads
-   - Console logging strategy for tracing mount/init order
-   - How to use Chrome DevTools Performance tab
-   - Location: `/.claude/DEBUG_GUIDE.md`
+   - Proposed future document: `/.claude/DEBUG_GUIDE.md`
+   - Would cover: Network tab analysis, console logging strategies, DevTools Performance tab
+   - Related: See [CLAUDE.md](../../CLAUDE.md#common-pitfalls--lessons-learned) for debugging patterns discovered
 
 3. **Add to Code Review Checklist**
    - Check for eager initialization in constructors
    - Verify conditional rendering used correctly
    - Look for module-level resource loads
    - Monitor bundle size changes
+   - Reference: [CLAUDE.md](../../CLAUDE.md#common-gotchas-in-this-codebase)
 
 ---
 
@@ -295,4 +294,358 @@ class HeavyService {
 
 ---
 
-*Last updated: 2026-01-18*
+---
+
+## Session Learnings - 2026-01-19
+
+### Project Organization Patterns
+
+- **Pattern:** Agent Directory Restructuring
+  - **Context:** Moved agents from flat files to hierarchical subdirectories (`.claude/agents/{agent-name}/`)
+  - **Structure:** Each agent now has:
+    - `agent-name.md` (definition, capabilities, instructions)
+    - `SKILLS.md` (learnings, patterns, debugging insights)
+  - **Benefits:**
+    - Clearer separation of concerns (definition vs. learnings)
+    - Easier to scale with multiple agents
+    - Reduces cognitive load in CLAUDE.md (main project context)
+    - Allows agents to specialize knowledge independently
+
+### Documentation Consolidation Insights
+
+- **Pattern:** Merging Scattered Documentation into Central Context
+  - **What was consolidated into CLAUDE.md:**
+    - Global SKILLS.md (general learnings)
+    - UI_UX_CONTEXT.md (design system reference)
+    - ABOUT_PAGE_UX_PROPOSAL.md (design recommendations)
+    - README.md (project overview)
+  - **Result:** Single source of truth for project-wide context
+  - **Key files now reference:** CLAUDE.md as primary context, agent-specific SKILLS.md for specialized knowledge
+  - **Prevention:** Avoid scattered documentation by consolidating early
+  - **Lesson:** Use CLAUDE.md for context that affects all agents, SKILLS.md for agent-specific learnings
+
+### GitHub Issue Management Best Practices
+
+- **Pattern:** Epic-Based Feature Tracking
+  - **Used:** Issue #31 converted to epic for "New" property feature
+  - **Child issues created:**
+    - #134: "Must Try" boolean property implementation
+    - #135: Keyboard accessibility (arrow keys, Escape to close)
+    - #136: Icon library migration (MUI → lighter alternative)
+  - **Benefit:** Clear feature breakdown prevents scope creep, tracks dependencies
+
+### Cleanup & Configuration Management
+
+- **Action:** Removed obsolete screenshot-script.js
+  - **Reason:** MCP servers (Playwright) provide browser automation
+  - **Lesson:** Don't maintain standalone scripts when MCP tools are available
+  - **Context:** See CLAUDE.md section on MCP Server Usage
+
+- **Action:** Updated settings.local.json
+  - **Removed:** Obsolete script execution permissions
+  - **Pattern:** Keep config minimal, remove unused settings to reduce confusion
+
+---
+
+---
+
+## Automation Opportunities - 2026-01-19
+
+### Session Work Analysis
+
+This session covered three distinct high-volume workflows that revealed significant automation opportunities:
+
+1. **GitHub Issue Management** - Created/edited multiple related issues with consistent structure
+2. **Dependency Migration** - Audited and migrated 24+ files from MUI Icons to react-icons
+3. **Documentation Consolidation** - Merged multiple documents into single sources
+
+### Potential Slash Commands
+
+#### `/migrate-library {oldLib} {newLib} {fileType?}`
+- **Purpose:** Bulk library replacement across codebase with pattern mapping
+- **Trigger:** When replacing a dependency library with another (e.g., MUI icons → react-icons)
+- **Complexity:** High
+- **Steps:**
+  1. Create import mapping table (old imports → new imports)
+  2. Find all files using old library (`grep` for import statements)
+  3. Generate migration diffs with before/after
+  4. Apply replacements with option to review each file
+  5. Update tests if affected
+  6. Suggest package.json changes (remove/add)
+- **Example:** Icon library migration migrated 24 files with consistent search-replace patterns
+- **Benefit:** What took 2+ hours manual work could be done in 10 minutes with verification
+
+#### `/create-epic-with-children {epic-name} {childTasks: string[]}`
+- **Purpose:** Create parent issue and child issues with consistent formatting
+- **Trigger:** When breaking down a feature into multiple independent tasks
+- **Complexity:** Low
+- **Preconditions:**
+  - Epic title and description
+  - List of child task names
+  - Optional: acceptance criteria template
+- **Steps:**
+  1. Create parent issue with epic label
+  2. Generate child issues with links to parent
+  3. Apply consistent labels and formatting
+  4. Return issue URLs for reference
+- **Example:** Feature #31 split into #134, #135, #136 with clear relationships
+- **Benefits:**
+  - Consistent formatting across all issues
+  - Prevents forgotten subtasks
+  - Parent-child relationships established automatically
+
+#### `/consolidate-docs {sourceFiles: string[]} {outputFile: string}`
+- **Purpose:** Merge multiple documentation files into single source with TOC and cross-references
+- **Trigger:** When documentation becomes scattered (e.g., multiple context files, design docs)
+- **Complexity:** Medium
+- **Steps:**
+  1. Read all source files
+  2. Identify common sections and deduplication opportunities
+  3. Create unified structure with table of contents
+  4. Generate cross-references and index
+  5. Output merged document
+  6. Suggest deletion of now-obsolete files
+- **Example:** Consolidated SKILLS.md + UI_UX_CONTEXT.md + ABOUT_PAGE_UX_PROPOSAL.md into CLAUDE.md
+- **Benefit:** Reduces cognitive load, single source of truth, easier maintenance
+
+#### `/audit-imports {oldPattern} {showOccurrences?}`
+- **Purpose:** Find all uses of a library/import pattern before migration
+- **Trigger:** Before starting any library replacement or cleanup
+- **Complexity:** Low
+- **Output:** Grouped results by file with line numbers and context
+- **Example:** Audited all `@mui/icons-material` imports to understand migration scope (24 files affected)
+- **Benefit:** Catches all occurrences, prevents partial migrations
+
+### Workflow Improvements
+
+#### Icon/Dependency Migration Workflow
+- **Current:**
+  1. Manually search for old import statements
+  2. Create mapping table by hand
+  3. Replace each file individually
+  4. Update test mocks
+  5. Update package.json
+  6. Manual verification of build
+  - **Time:** 2+ hours per migration
+
+- **Proposed:**
+  1. Run `/audit-imports @mui/icons-material` → Get scope
+  2. Run `/migrate-library @mui/icons-material react-icons --mapping-table`
+  3. Review generated migration diff
+  4. Apply with optional file-by-file verification
+  5. Automatic test/package.json update suggestion
+  - **Time:** ~15 minutes total
+
+- **Benefit:**
+  - Reduces manual work by 87%
+  - Eliminates missed occurrences
+  - Consistent replacement patterns
+  - Automated testing integration
+
+#### GitHub Issue Planning Workflow
+- **Current:**
+  1. Create initial issue (#31)
+  2. Manually create 3-5 child issues with consistent structure
+  3. Update labels and descriptions individually
+  4. Link issues manually
+  - **Time:** 15-20 minutes
+
+- **Proposed:**
+  1. Run `/create-epic-with-children "New Property Feature" ["Must Try boolean", "Keyboard nav", "Icon migration"]`
+  2. Command generates all issues with proper structure
+  3. Cross-links established automatically
+  - **Time:** 2-3 minutes
+
+- **Benefit:**
+  - Consistent formatting across all issues
+  - No forgotten subtasks
+  - Parent-child relationships correct from start
+
+#### Documentation Maintenance Workflow
+- **Current:**
+  1. Scatter learnings across multiple .md files
+  2. Update references manually when consolidating
+  3. Find obsolete files to delete
+  4. Update links in codebase
+  - **Time:** 30-45 minutes for consolidation
+
+- **Proposed:**
+  1. Maintain living SKILLS.md and CLAUDE.md
+  2. Run `/consolidate-docs` when documentation gets scattered
+  3. Automatic cross-reference generation
+  4. Automatic obsolete file detection
+  - **Time:** 5-10 minutes
+
+- **Benefit:**
+  - Single source of truth maintained
+  - Automatic duplicate detection
+  - Prevents stale documentation
+
+### Agent Ideas
+
+#### Dependency Audit Agent
+- **Specialization:** Library migrations, dependency cleanup, version upgrades
+- **Key Capabilities:**
+  - Scan codebase for library usage patterns
+  - Create import mapping tables
+  - Execute bulk replacements with verification
+  - Detect breaking changes
+  - Update package.json automatically
+  - Run tests post-migration
+- **Tools Needed:**
+  - Grep/glob for pattern discovery
+  - AST parsing for accurate import detection
+  - Git diff generation for review
+  - Test execution capability
+- **Trigger:** When planning library upgrade or replacement
+- **Example Workflow:**
+  ```
+  1. Initialize with old library & new library
+  2. Agent scans codebase for all usages
+  3. Creates comprehensive migration guide
+  4. Applies replacements with confidence levels
+  5. Runs tests to verify
+  6. Suggests cleanup (remove old packages, add new)
+  ```
+
+#### Issue Management Agent
+- **Specialization:** GitHub issue creation, epic management, feature planning
+- **Key Capabilities:**
+  - Create parent issues with epic label
+  - Generate consistent child issues
+  - Apply labels automatically
+  - Link issues hierarchically
+  - Generate release notes from issues
+  - Detect duplicate/overlapping issues
+- **Tools Needed:**
+  - GitHub API integration
+  - Template system for consistent formatting
+  - Cross-linking engine
+- **Trigger:** When creating features or planning sprints
+- **Example:** `/create-epic-with-children` command
+
+#### Documentation Consolidation Agent
+- **Specialization:** Finding scattered docs, consolidating, detecting obsolete content
+- **Key Capabilities:**
+  - Find related documentation files
+  - Detect duplicate content across files
+  - Merge with intelligent deduplication
+  - Generate table of contents
+  - Create cross-reference indexes
+  - Detect orphaned sections
+  - Suggest files for deletion
+- **Tools Needed:**
+  - File content similarity detection
+  - Cross-reference generation
+  - Markdown AST manipulation
+- **Trigger:** When documentation becomes scattered or after consolidation work
+- **Example:** Consolidate 4 related docs into single CLAUDE.md section
+
+### Patterns for Implementation
+
+#### Import Mapping Pattern
+```typescript
+// Pattern used in icon migration (MUI → react-icons)
+const importMappings = {
+  '@mui/icons-material/AutoAwesome': 'react-icons/hi:HiSparkles',
+  '@mui/icons-material/Close': 'react-icons/fa6:FaX',
+  '@mui/icons-material/Check': 'react-icons/fa:FaCheck',
+  '@mui/icons-material/GitHub': 'react-icons/fa:FaGithub',
+  '@mui/icons-material/Map': 'react-icons/fa:FaMap',
+  // Icon sets: fa (FontAwesome), hi (Heroicons), md (Material), si (Simple), tb (Tabler), fi (Feather)
+};
+
+// Could be generated by `/migrate-library` command
+// and verified before application
+```
+
+#### Epic Issue Template
+```markdown
+# [Feature Name] - Epic
+
+## Description
+[Feature overview]
+
+## Subtasks
+- [ ] Task 1 (#child-issue-num)
+- [ ] Task 2 (#child-issue-num)
+- [ ] Task 3 (#child-issue-num)
+
+## Acceptance Criteria
+- [ ] All subtasks completed
+- [ ] Tests passing
+- [ ] Documentation updated
+```
+
+#### Migration Verification Checklist
+```markdown
+## Pre-Migration
+- [ ] Audit all usages with `/audit-imports`
+- [ ] Create import mapping table
+- [ ] Backup current state (git commit)
+
+## Migration
+- [ ] Apply replacements
+- [ ] Update test mocks
+- [ ] Update package.json
+- [ ] Run full test suite
+
+## Verification
+- [ ] Build succeeds
+- [ ] All tests passing
+- [ ] Runtime verification on affected pages
+- [ ] Code review for any edge cases
+```
+
+### High-Value, Low-Effort Quick Wins
+
+1. **Create `/audit-imports` command**
+   - Effort: 1-2 hours
+   - Value: Catches all occurrences, prevents partial migrations
+   - Reusable: For any future library replacements
+
+2. **Create `/create-epic-with-children` command**
+   - Effort: 2-3 hours
+   - Value: Consistent issue formatting, prevents forgotten tasks
+   - Reusable: Every feature planning session
+
+3. **Create import mapping template**
+   - Effort: 30 minutes
+   - Value: Standardizes migration planning
+   - Reusable: Reference for all library migrations
+
+4. **Add migration verification script**
+   - Effort: 1 hour
+   - Value: Prevents missed files, ensures completeness
+   - Reusable: All future migrations
+
+### Testing Opportunities for Migrated Code
+
+Since the icon migration affected 24 files, ensure tests cover:
+
+1. **Import path correctness**
+   - Verify old imports completely removed
+   - Verify new imports used consistently
+
+2. **Visual regression testing**
+   - Icons render in all components
+   - Styling/sizing preserved
+
+3. **Component functionality**
+   - Affected components still work
+   - Props still accepted
+
+4. **Bundle impact**
+   - Bundle size reduction verified
+   - No new dependencies introduced
+
+### Lessons for Future Sessions
+
+1. **Before large migrations:** Create a command template to automate 80% of work
+2. **When creating multiple related issues:** Use a batch creation tool
+3. **When consolidating docs:** Use a consolidation command to prevent missed references
+4. **Pattern library:** Build reusable patterns as generic commands
+
+---
+
+*Last updated: 2026-01-19*

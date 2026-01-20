@@ -1,6 +1,6 @@
 import { cn } from '@/app/utils';
-import { CircularProgress } from '@mui/material';
 import React from 'react';
+import { TbLoader2 } from 'react-icons/tb';
 
 function LoadingProgress({ isReady }: { isReady: boolean }) {
   return (
@@ -14,7 +14,7 @@ function LoadingProgress({ isReady }: { isReady: boolean }) {
         },
       )}
     >
-      <CircularProgress color={'inherit'} size={'16px'} thickness={8} />
+      <TbLoader2 size={16} className="animate-spin" strokeWidth={3} />
     </div>
   );
 }
