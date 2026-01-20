@@ -95,17 +95,12 @@ export default function FadeIn({
 
   const { initial, visible } = directionStyles[direction];
 
-  const baseStyle = cn(
-    'transition-all ease-out',
-    !skipAnimation && `duration-${duration}`,
-  );
+  // Note: Duration is set via inline style since Tailwind JIT doesn't support arbitrary duration classes
+  const baseStyle = cn('transition-all ease-out');
 
   const animationStyle = skipAnimation
     ? 'opacity-100'
-    : cn(
-        isLoaded ? 'opacity-100' : 'opacity-0',
-        isLoaded ? visible : initial,
-      );
+    : cn(isLoaded ? 'opacity-100' : 'opacity-0', isLoaded ? visible : initial);
 
   // Use inline style for custom duration since Tailwind doesn't support arbitrary duration classes
   const style = skipAnimation ? {} : { transitionDuration: `${duration}ms` };

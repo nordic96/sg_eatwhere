@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, MutableRefObject } from 'react';
 
 export interface UseScrollRevealOptions {
   /** Threshold for intersection (0-1), default 0.1 */
@@ -51,6 +51,8 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   const ref = useRef<T>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  // Track timeout for cleanup to prevent memory leak
+  const timeoutRef: MutableRefObject<ReturnType<typeof setTimeout> | null> = useRef(null);
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -78,7 +80,11 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
 
       if (entry.isIntersecting) {
         if (delay > 0) {
-          setTimeout(() => setIsVisible(true), delay);
+          // Clear any existing timeout before setting a new one
+          if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+          }
+          timeoutRef.current = setTimeout(() => setIsVisible(true), delay);
         } else {
           setIsVisible(true);
         }
@@ -87,6 +93,11 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
           observer.disconnect();
         }
       } else if (!once) {
+        // Clear pending timeout when element leaves view
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
         setIsVisible(false);
       }
     },
@@ -107,7 +118,14 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
 
     observer.observe(element);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      // Clean up any pending timeout to prevent memory leak
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
   }, [threshold, rootMargin, handleIntersection, prefersReducedMotion]);
 
   return { ref, isVisible, prefersReducedMotion };

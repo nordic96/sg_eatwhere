@@ -55,9 +55,10 @@ function AnimatedStatItem({
   animationDuration: number;
   staggerDelay: number;
 }) {
-  const { numeric, suffix } = stat.numericValue !== undefined
-    ? { numeric: stat.numericValue, suffix: stat.suffix || '' }
-    : parseStatValue(stat.value);
+  const { numeric, suffix } =
+    stat.numericValue !== undefined
+      ? { numeric: stat.numericValue, suffix: stat.suffix || '' }
+      : parseStatValue(stat.value);
 
   const animatedValue = useCountUp({
     end: numeric,
