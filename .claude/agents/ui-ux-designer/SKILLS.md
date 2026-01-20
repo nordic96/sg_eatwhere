@@ -93,7 +93,7 @@
 ### TechBadge Component (Implemented 2026-01)
 
 **Pattern:** Technology showcase badges
-- Icon + label with MUI Tooltip
+- Icon + label with native title attribute for tooltip
 - Hover lift effect: `hover:-translate-y-1 hover:shadow-md`
 - Links to official documentation
 - Grid layout: `flex flex-wrap justify-center gap-4`

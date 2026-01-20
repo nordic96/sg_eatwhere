@@ -33,6 +33,7 @@
 > - Lazy WebWorker Initialization
 > - React 19 Activity vs Conditional Rendering
 > - Singleton Factory with Lazy Initialization
+> - Scroll-Based Animation Patterns (useScrollReveal, useCountUp, FadeIn)
 
 ### Debugging Wins
 
@@ -648,4 +649,445 @@ Since the icon migration affected 24 files, ensure tests cover:
 
 ---
 
-*Last updated: 2026-01-19*
+---
+
+## Session Learnings - 2026-01-20
+
+### Mistakes & Fixes
+
+- **Issue:** Jest tests failed with "window.matchMedia is not a function"
+  - **Root Cause:** The `useScrollReveal` hook uses Intersection Observer API which depends on `window.matchMedia` being available, but Jest/jsdom doesn't provide this mock by default
+  - **Fix:** Added `window.matchMedia` mock to `jest.setup.ts`:
+    ```typescript
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(query => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+    ```
+  - **Prevention:** When adding new hooks that depend on browser APIs (IntersectionObserver, ResizeObserver, matchMedia), immediately add Jest mocks to `jest.setup.ts`
+
+- **Issue:** Memory leak in `useScrollReveal` hook - timeout wasn't cleaned up
+  - **Root Cause:** Used `setTimeout` for initialization delay but didn't store the timeout ID to clean it up in useEffect cleanup function
+  - **Fix:** Added `useRef` to store timeout ID and clear it in cleanup:
+    ```typescript
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+      timeoutRef.current = setTimeout(() => {
+        // initialization code
+      }, 100);
+
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+      };
+    }, []);
+    ```
+  - **Prevention:** Any async operations in hooks must be cleaned up - use useRef for timers, AbortController for fetch calls, store subscription cleanup functions
+
+- **Issue:** Tailwind JIT compiler couldn't detect dynamic class names like `duration-${duration}`
+  - **Root Cause:** Attempted to use dynamic Tailwind classes with template literals in component props, but Tailwind's JIT compiler scans static strings at build time and can't detect dynamic class combinations
+  - **Fix:** Removed dynamic duration class, used hardcoded Tailwind class instead or used inline styles for the duration value
+  - **Prevention:** Never use template literals to generate Tailwind class names. For dynamic values, either:
+    1. Use a fixed set of predefined classes and select from them: `classMap[duration]`
+    2. Use inline styles for dynamic values: `<div style={{ transitionDuration: `${duration}ms` }}>`
+    3. Use CSS variables with Tailwind: `<div className="duration-500" style={{ '--duration': duration + 'ms' }}>`
+
+### Patterns Discovered
+
+- **Pattern:** Intersection Observer-based Scroll Reveal Hook
+  - **Context:** Animate elements when they scroll into view on About page
+  - **Implementation:** `useScrollReveal` hook that:
+    1. Takes a ref and optional config (threshold, rootMargin, delay)
+    2. Creates IntersectionObserver on mount
+    3. Sets visible state when element enters viewport
+    4. Cleans up observer on unmount
+  - **Usage:**
+    ```typescript
+    const ref = useRef(null);
+    const isVisible = useScrollReveal(ref, { delay: 200 });
+    return <div ref={ref} className={isVisible ? 'animate-in' : 'opacity-0'} />;
+    ```
+  - **Key detail:** IntersectionObserver is more efficient than scroll event listeners - it's hardware-accelerated and doesn't block main thread
+
+- **Pattern:** Animated Number Counter Hook
+  - **Context:** Count up stats numbers on About page when visible
+  - **Implementation:** `useCountUp` hook that:
+    1. Takes start, end, duration, and easing function
+    2. Uses `requestAnimationFrame` for smooth 60fps animation
+    3. Applies easing functions (easeOutQuad, easeInOutCubic, etc.)
+    4. Triggers based on external `isVisible` signal
+    5. Returns animated value for rendering
+  - **Usage:**
+    ```typescript
+    const count = useCountUp(0, 2024, 2000, easeOutQuad, isVisible);
+    return <span>{Math.floor(count)}</span>;
+    ```
+  - **Easing functions:** Created reusable easing helpers:
+    ```typescript
+    const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
+    const easeInOutCubic = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    ```
+
+- **Pattern:** Enhanced FadeIn Component with Scroll Triggers
+  - **Context:** Reusable animation wrapper component for scroll-based reveals
+  - **Implementation:** Extended existing `FadeIn` component with props:
+    - `scrollTrigger?: boolean` - Enable scroll reveal animation
+    - `direction?: 'up' | 'down' | 'left' | 'right'` - Slide direction before fade in
+    - `delay?: number` - Delay in milliseconds
+  - **Usage:**
+    ```typescript
+    <FadeIn scrollTrigger direction="up" delay={200}>
+      <div>Content animates up then fades in on scroll</div>
+    </FadeIn>
+    ```
+  - **Benefits:** Declarative API, reusable across pages, cleaner than hook-based approach for complex animations
+
+### Debugging Wins
+
+- **Problem:** Jest tests failing after adding scroll reveal hooks to About page
+  - **Approach:**
+    1. Ran jest to see error: "window.matchMedia is not a function"
+    2. Searched for where useScrollReveal was used (About page components)
+    3. Traced execution backward to find that IntersectionObserver depends on matchMedia
+    4. Added mock to jest.setup.ts
+  - **Tool/Technique:** Error stack trace pointed directly to the missing mock - just needed to add it
+
+- **Problem:** Memory leak warnings in tests due to cleanup not happening
+  - **Approach:**
+    1. Noticed "act" warnings when unmounting components in tests
+    2. Checked useScrollReveal implementation and found missing cleanup
+    3. Added timeoutRef to track and clear timeout on unmount
+    4. Verified warnings disappeared after running tests again
+  - **Tool/Technique:** React's console warnings about incomplete state updates guide toward cleanup issues
+
+### Performance Notes
+
+- **Scroll Animation Efficiency:** Intersection Observer is far more efficient than scroll event listeners
+  - No main thread blocking from repeated calculations
+  - Browser can optimize reflows/repaints
+  - Multiple observers share same internal detection mechanism
+
+- **RequestAnimationFrame for Animations:** Counter animations use rAF for smooth 60fps updates
+  - Syncs with browser's repaint cycle
+  - Automatically paused when tab is not visible
+  - Prevents jank from JavaScript execution on main thread
+
+- **Easing Functions:** Pre-calculated easing values (not animated) provide smooth curves
+  - Math-based easing (quadratic, cubic) cheaper than CSS animations
+  - Can be reused across multiple animations
+  - Easy to test vs visual animations
+
+---
+
+---
+
+## Automation Opportunities - 2026-01-20
+
+### Session Overview
+
+This session involved high-volume GitHub workflows including:
+1. Issue checkout and branch management
+2. PR review comment fetching and issue resolution
+3. Common Jest mock patterns discovered
+4. Documentation updates
+
+### Potential Slash Commands
+
+#### `/fetch-pr-comments {prNumber}`
+- **Purpose:** Fetch all comments from a GitHub PR and summarize feedback
+- **Trigger:** When starting work on PR review fixes
+- **Complexity:** Low
+- **Steps:**
+  1. Query GitHub API for PR comments
+  2. Extract "must fix" items vs optional suggestions
+  3. Group by component/file affected
+  4. Return prioritized list of issues
+- **Benefit:** Saves 5-10 minutes of manual GitHub UI navigation, creates structured list for implementation
+- **Example Workflow:**
+  ```
+  User: "Work on PR #127"
+  /fetch-pr-comments 127
+  → Returns: [{ component: "SearchBar", issue: "memory leak in useEffect", priority: "must fix" }, ...]
+  ```
+
+#### `/add-jest-mock {apiName} {mockType?}`
+- **Purpose:** Quickly add common browser API mocks to jest.setup.ts
+- **Trigger:** When tests fail with "X is not a function" for browser APIs
+- **Complexity:** Low
+- **Pre-built mocks:**
+  - `window.matchMedia` (for media queries, IntersectionObserver)
+  - `window.ResizeObserver` (for element resize detection)
+  - `window.IntersectionObserver` (for scroll reveal, lazy loading)
+  - `localStorage` / `sessionStorage` (for session state)
+  - `fetch` (with configurable response)
+- **Example:**
+  ```
+  /add-jest-mock matchMedia
+  → Adds complete mock to jest.setup.ts with all required properties
+  ```
+- **Benefit:** Eliminates manual mock copying, standardizes mock implementations
+
+#### `/run-pr-checks {branch}`
+- **Purpose:** Execute full check suite before pushing (lint, test, build)
+- **Trigger:** Before committing to avoid pushing broken code
+- **Complexity:** Low
+- **Steps:**
+  1. Run `npm run lint:fix` with auto-fix enabled
+  2. Run `npm run test` for all affected files
+  3. Run `npm run build` with production flags
+  4. Report pass/fail with specific errors
+- **Benefit:** Prevents pushing broken code, reduces CI/CD failure cycles
+- **Time saved:** ~3 minutes per push (avoid failed PR checks)
+
+#### `/cleanup-branch {branch}`
+- **Purpose:** Clean up local branch after PR merge
+- **Trigger:** After PR is merged to main
+- **Complexity:** Low
+- **Steps:**
+  1. Delete local branch
+  2. Delete remote branch
+  3. Switch back to main
+  4. Fetch latest from remote
+- **Benefit:** Prevents accumulating dead branches
+
+### Workflow Improvements
+
+#### GitHub Issue → Implementation → PR Workflow
+- **Current:**
+  1. Read GitHub issue manually
+  2. Manually checkout branch (`git checkout -b feature-name`)
+  3. Implement changes
+  4. Manually test changes
+  5. Commit with custom message
+  6. Push to remote
+  7. Create PR manually (with copy-pasted description)
+  - **Time:** 20-30 minutes (including manual UI navigation)
+  - **Friction:** Copy-pasting issue details, branch naming decisions
+
+- **Proposed:**
+  1. `/start-issue {issueNumber}` → Auto-creates branch, fetches requirements
+  2. Implement changes
+  3. `/pr-ready {issueNumber}` → Runs checks, commits, pushes, creates PR
+  4. Agent fetches PR comments on request
+  5. `/apply-pr-fixes` → Applies fixes, runs tests, pushes updates
+  - **Time:** ~10-15 minutes
+  - **Benefit:** Automation handles repetitive parts, fewer manual decisions
+
+#### Jest Mock Discovery & Application
+- **Current:**
+  1. Test fails with "window.X is not a function"
+  2. Manually search for example mocks in codebase
+  3. Copy mock implementation
+  4. Add to jest.setup.ts
+  5. Run tests again
+  - **Time:** 5-10 minutes per missing mock
+  - **Issue:** Mocks might be incomplete or use outdated patterns
+
+- **Proposed:**
+  1. Test fails
+  2. Run `/add-jest-mock {apiName}` → Auto-adds to jest.setup.ts
+  3. Run tests immediately
+  - **Time:** 1-2 minutes
+  - **Benefit:** Standardized, complete mocks; no searching required
+
+#### PR Review Fix Application
+- **Current:**
+  1. Open GitHub PR page
+  2. Manually read through comments
+  3. Extract issues into mental list
+  4. Navigate to files to fix
+  5. Apply fixes without clear priority
+  6. Commit and push
+  - **Time:** 15-20 minutes
+  - **Error risk:** Might miss issues, apply fixes in inefficient order
+
+- **Proposed:**
+  1. `/fetch-pr-comments {prNumber}` → Get prioritized list
+  2. `/pr-review-fix` → Agent auto-implements common fixes (memory leaks, missing deps, etc.)
+  3. Manual review of complex issues
+  4. Run `/run-pr-checks` before push
+  - **Time:** 5-10 minutes
+  - **Benefit:** Structured approach, catches common patterns
+
+### Agent Ideas
+
+#### GitHub Workflow Agent
+- **Specialization:** Streamline GitHub issue → implementation → PR workflow
+- **Key Capabilities:**
+  - Fetch and parse GitHub issue requirements
+  - Create feature branches with consistent naming
+  - Fetch PR comments and summarize feedback
+  - Auto-commit with semantic messages
+  - Create PRs with auto-populated descriptions
+  - Detect and apply common PR fixes (memory leaks, missing dependencies)
+- **Tools Needed:**
+  - GitHub API integration
+  - Git command execution
+  - PR comment parsing/analysis
+  - Semantic commit message templates
+- **Trigger:** When working on GitHub issues or reviewing PRs
+- **Workflow Example:**
+  ```
+  1. /start-issue #121 → Creates branch feat/121-must-try-property
+  2. [User implements changes]
+  3. /pr-ready → Runs checks, commits, pushes, creates PR
+  4. /fetch-pr-comments 127 → Returns prioritized list of feedback
+  5. /apply-pr-fixes → Auto-fixes common patterns
+  ```
+
+#### Jest Mock Manager Agent
+- **Specialization:** Manage and apply browser API mocks automatically
+- **Key Capabilities:**
+  - Detect missing browser API mocks from test failures
+  - Apply standardized mock implementations
+  - Suggest additional mocks for new features
+  - Test mock completeness
+  - Version track mock implementations
+- **Tools Needed:**
+  - Jest error parsing
+  - Mock template library
+  - Test execution and result analysis
+- **Trigger:** When adding new hooks or features that use browser APIs
+- **Example Mocks Library:**
+  ```typescript
+  - matchMedia (media queries)
+  - IntersectionObserver (scroll reveal)
+  - ResizeObserver (element resize)
+  - localStorage/sessionStorage (storage)
+  - fetch (network requests)
+  - requestAnimationFrame (animations)
+  - AudioContext (audio)
+  - WebGL context (3D rendering)
+  ```
+
+### Code Patterns for Automation Rules
+
+#### Jest Mock Template Pattern
+```typescript
+// Standard mock structure to detect and apply
+Object.defineProperty(window, 'apiName', {
+  writable: true,
+  value: jest.fn().mockImplementation(args => ({
+    // Required methods/properties
+    method1: jest.fn(),
+    method2: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+  })),
+});
+```
+
+#### Memory Leak Pattern in Hooks
+```typescript
+// ANTI-PATTERN - No cleanup for async operations
+useEffect(() => {
+  setTimeout(() => {
+    setState(value); // Memory leak if component unmounts
+  }, delay);
+}, []);
+
+// CORRECT - Cleanup with ref storage
+const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+useEffect(() => {
+  timeoutRef.current = setTimeout(() => {
+    setState(value);
+  }, delay);
+  return () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  };
+}, []);
+```
+
+**Automation Rule:** Flag `setTimeout`/`setInterval` in useEffect without cleanup ref
+
+#### Dynamic Tailwind Classes Anti-Pattern
+```typescript
+// ANTI-PATTERN - JIT compiler can't detect dynamic classes
+<div className={`duration-${duration}`} />
+
+// CORRECT - Use fixed predefined classes or inline styles
+<div style={{ transitionDuration: `${duration}ms` }} />
+
+// Or use classMap pattern
+const durationMap = { fast: 'duration-200', slow: 'duration-500' };
+<div className={durationMap[speed]} />
+```
+
+**Automation Rule:** Flag template literal class names, suggest alternatives
+
+### High-Value, Low-Effort Quick Wins
+
+1. **Create `/add-jest-mock` command**
+   - Effort: 1-2 hours
+   - Value: Saves 5-10 minutes per test failure with browser API
+   - Reusable: Every time new hooks are added
+   - Maintenance: Update templates as new patterns emerge
+
+2. **Create `/run-pr-checks` command**
+   - Effort: 1 hour
+   - Value: Prevents broken pushes, catches lint/test errors early
+   - Reusable: Before every commit
+   - Maintenance: Minimal
+
+3. **Create `/fetch-pr-comments` command**
+   - Effort: 1-2 hours
+   - Value: Structured PR review feedback, saves navigation time
+   - Reusable: Every PR review cycle
+   - Maintenance: None (uses GitHub API)
+
+4. **Establish Jest Mock Standard Library**
+   - Effort: 30 minutes
+   - Value: Reusable templates for 10+ common APIs
+   - Maintenance: Update as new browser APIs needed
+   - Reference:** Create `.claude/jest-mocks-template.ts` with standard implementations
+
+### Testing Opportunities for New Hooks
+
+When adding hooks that use browser APIs:
+
+1. **Add test for hook initialization**
+   - Verify no errors on mount
+   - Check required mocks are in place
+
+2. **Add test for hook cleanup**
+   - Verify timers are cleared
+   - Check event listeners are removed
+   - Verify no memory leaks on unmount
+
+3. **Add test for hook with Activity/Suspense boundary**
+   - Hook behavior inside boundary
+   - Check proper unmounting
+
+### Lessons for Future Sessions
+
+1. **Before writing hook tests:** Check jest.setup.ts for required mocks
+2. **When test fails with "X is not a function":** Use browser API mock library, don't create custom mocks
+3. **With PR review feedback:** Fetch all comments first to understand full scope
+4. **Before pushing:** Always run `/run-pr-checks` to catch issues early
+5. **Repetitive tasks:** Consider adding to slash command library
+
+### Common Jest Mock Scenarios
+
+| API | Mock Added | When Used | Example |
+|-----|-----------|-----------|---------|
+| `matchMedia` | Session 2026-01-20 | useScrollReveal, media queries | Intersection Observer dependencies |
+| `IntersectionObserver` | Needed | Scroll reveal effects | About page animations |
+| `ResizeObserver` | Needed | Element resize detection | Responsive hooks |
+| `localStorage` | Not yet | Session state persistence | User preferences |
+| `fetch` | Not yet | Network requests | Search, data loading |
+
+---
+
+*Last updated: 2026-01-20*

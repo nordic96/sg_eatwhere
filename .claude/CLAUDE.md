@@ -39,7 +39,7 @@ app/
 ├── api/                   # API routes
 ├── components/            # 31 UI components
 ├── mapmodels/             # 3D scene components
-├── hooks/                 # 7 custom hooks
+├── hooks/                 # 9 custom hooks
 ├── stores/                # 4 Zustand stores
 ├── types/                 # TypeScript definitions
 ├── utils/                 # Utility functions
@@ -128,7 +128,9 @@ interface FoodHeritage {
 ### About Page Components (`app/components/`)
 | Component | Purpose |
 |-----------|---------|
+| `FadeIn/` | Animated fade-in with scroll reveal, directional transitions, and timing controls |
 | `InspirationSection/` | Attribution section with colour palette & CTA |
+| `StatsBar/` | Statistics display with optional counter animations and staggered reveal |
 | `TechStack/TechStackSection` | Tech badges grid with GitHub CTAs |
 | `TechStack/TechBadge` | Individual tech badge with tooltip |
 
@@ -165,9 +167,11 @@ Two-column responsive grid (single column on mobile):
 | `useBreakpoints` | Responsive breakpoints (mobile/tablet/desktop) |
 | `useCameraControls` | 3D camera manipulation |
 | `useClickOutside` | Click outside detection |
+| `useCountUp` | Counter animation hook with easing functions and formatting |
 | `useDebounce` | Input debouncing (200ms default) |
 | `useHover` | Hover state tracking |
 | `useInstancingModel` | 3D model instancing |
+| `useScrollReveal` | Intersection Observer-based scroll reveal with a11y support |
 
 ---
 
@@ -295,6 +299,73 @@ export class SemanticSearchClient {
 - Request ID correlation prevents promise race conditions
 
 **Files:** `lib/semanticSearch.ts`
+
+### Scroll-Based Animation Patterns
+**Pattern:** Combine scroll reveal hooks with animated components for progressive disclosure.
+
+**Implementation:**
+- `useScrollReveal`: Detects when elements enter viewport via Intersection Observer
+- `useCountUp`: Animates numeric values with easing (ease-out-cubic default)
+- `FadeIn` component: Wraps scroll reveal with directional fade transitions
+- `StatsBar` component: Applies staggered animations across stats items
+
+**Benefits:**
+- Smooth progressive disclosure as user scrolls
+- Reduced initial render load (animations trigger on-demand)
+- Accessibility-friendly (respects `prefers-reduced-motion`)
+- Customizable timing: direction, duration, delay, stagger
+
+**Example usage:**
+```typescript
+// Basic fade-in with scroll trigger
+<FadeIn>
+  <div>Content appears with fade</div>
+</FadeIn>
+
+// With animation customization
+<FadeIn direction="up" duration={0.8} delay={0.2}>
+  <Stat value={42} />
+</FadeIn>
+
+// Stats with counter animation and stagger
+<StatsBar
+  stats={data}
+  animateOnScroll
+  animationDuration={2}
+  staggerDelay={0.1}
+/>
+```
+
+**Files:** `app/hooks/useScrollReveal.ts`, `app/hooks/useCountUp.ts`, `app/components/FadeIn/`, `app/components/StatsBar/`
+
+### Testing Environment Setup
+**Pattern:** Proper mocking of browser APIs for jest tests.
+
+**Setup:** `jest.setup.ts` includes mock for `window.matchMedia` to support responsive component testing.
+
+```typescript
+// Mock window.matchMedia for responsive tests
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+```
+
+**Benefits:**
+- Responsive components (using `useBreakpoints`) work in test environment
+- Intersection Observer-based hooks can be tested
+- No console warnings about unimplemented browser APIs
+
+**Files:** `jest.setup.ts`
 
 ---
 
@@ -494,14 +565,9 @@ mcp__playwright__browser_snapshot  - Get accessibility snapshot
 - Automatically managed by Claude Code
 - No standalone scripts to maintain
 
-#### 2. React Import Errors - Activity Component
+#### 2. React Import Errors - Loading Components
 
-**Problem:** Importing non-existent components from React.
-
-```typescript
-// WRONG - Activity does not exist in React
-import { Activity } from 'react';
-```
+**Problem:** Importing non-existent components from React or using improper loading patterns.
 
 **Solution:** Use conditional rendering or proper loading indicators.
 
@@ -513,6 +579,8 @@ import { Activity } from 'react';
 import { TbLoader2 } from 'react-icons/tb';
 <Loader2 className="animate-spin" />
 ```
+
+**Note:** For performance-critical components with heavy initialization, see [Performance Patterns - React 19 Activity vs Conditional Rendering](#react-19-activity-vs-conditional-rendering).
 
 **Files affected in past:** ImageCarousel, SearchBar, ToggleButton, ClientHome, ButtonContainer, MapScene
 
@@ -677,15 +745,23 @@ Before starting any new implementation:
 
 ---
 
-## Recent Feature Development (2026-01-19)
+## Recent Feature Development
 
 ### Completed Work
 
-**Issue #136: MUI → react-icons Migration (Completed)**
+**Issue #136: MUI → react-icons Migration (2026-01-19)**
 - Replaced Material-UI icons with react-icons library
 - Removed: @mui/material, @mui/icons-material, @emotion/*, simple-icons, lucide-react
 - Icon sets used: fa (Font Awesome), hi (Heroicons), md (Material Design), si (Simple Icons), tb (Tabler), fi (Feather)
 - Example: `import { FaMap } from 'react-icons/fa'`, `import { HiSparkles } from 'react-icons/hi'`
+
+**Animation Enhancements (2026-01-20)**
+- Created `useScrollReveal` hook: Intersection Observer-based scroll reveal with accessibility support
+- Created `useCountUp` hook: Counter animation with easing functions and value formatting
+- Enhanced `FadeIn` component: Added scrollTrigger, direction, duration, delay props
+- Enhanced `StatsBar` component: Added animateOnScroll, animationDuration, staggerDelay props
+- Added `window.matchMedia` mock to jest.setup.ts for responsive component testing
+- Pattern: Scroll-based animations for progressive disclosure on about page
 
 ### Pending Work
 
