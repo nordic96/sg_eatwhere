@@ -400,6 +400,30 @@ All agents should:
 4. Update tests for new functionality
 5. Update their SKILLS.md with session learnings via `/wrap-session`
 
+### Task Delegation Workflow
+
+**When to use `@frontend-dev` agent:**
+
+| Task Type | Approach |
+|-----------|----------|
+| Predefined GitHub issue (e.g., "work on issue #121") | Use `@frontend-dev` agent |
+| Impromptu/ad-hoc tasks or quick questions | Work directly (main conversation) |
+
+**Rationale:** When a specific GitHub issue is mentioned, the requirements are already defined in the issue, so the `@frontend-dev` agent can:
+1. Fetch the issue details from GitHub
+2. Understand the full scope and acceptance criteria
+3. Work autonomously with its specialized project context
+4. Return completed work for review
+
+**Example:**
+```
+User: "Work on issue #121"
+→ Invoke @frontend-dev agent with the issue context
+
+User: "Can you quickly fix this typo?"
+→ Work directly in the main conversation
+```
+
 ---
 
 ## Common Pitfalls & Lessons Learned
