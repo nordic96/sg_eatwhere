@@ -1,36 +1,28 @@
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUp from '@mui/icons-material/ArrowDropUp';
-import ArrowLeft from '@mui/icons-material/ArrowLeft';
-import ArrowRight from '@mui/icons-material/ArrowRight';
-import Rotate90DegreesCcw from '@mui/icons-material/Rotate90DegreesCcw';
-import Rotate90DegreesCw from '@mui/icons-material/Rotate90DegreesCw';
-import RotateLeft from '@mui/icons-material/RotateLeft';
-import RotateRight from '@mui/icons-material/RotateRight';
-import ZoomIn from '@mui/icons-material/ZoomIn';
-import ZoomOut from '@mui/icons-material/ZoomOut';
+import { FaArrowLeft, FaArrowRight, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { ControlType } from './types';
+import { FiRotateCcw, FiRotateCw, FiZoomIn, FiZoomOut } from 'react-icons/fi';
 
 export default function generateIcon(control: ControlType) {
   switch (control) {
     case 'left':
-      return <ArrowLeft />;
+      return <FaArrowLeft size={24} />;
     case 'right':
-      return <ArrowRight />;
+      return <FaArrowRight size={24} />;
     case 'up':
-      return <ArrowDropUp />;
+      return <FaChevronUp size={24} />;
     case 'down':
-      return <ArrowDropDown />;
+      return <FaChevronDown size={24} />;
     case 'rUp':
-      return <Rotate90DegreesCcw />;
+      return <FiRotateCcw size={24} />;
     case 'rDown':
-      return <Rotate90DegreesCw />;
+      return <FiRotateCw size={24} />;
     case 'rLeft':
-      return <RotateLeft />;
+      return <FiRotateCcw size={24} />;
     case 'rRight':
-      return <RotateRight />;
+      return <FiRotateCw size={24} />;
     case 'zoomIn':
-      return <ZoomIn />;
+      return <FiZoomIn size={24} />;
     case 'zoomOut':
-      return <ZoomOut />;
+      return <FiZoomOut size={24} />;
   }
 }

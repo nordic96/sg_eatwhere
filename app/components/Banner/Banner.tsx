@@ -1,8 +1,8 @@
 'use client';
 import { baseLayoutStyle } from '@/app/constants/theme';
 import { cn } from '@/app/utils';
-import Close from '@mui/icons-material/Close';
 import { useTranslations } from 'next-intl';
+import { FaX } from 'react-icons/fa6';
 
 export interface BannerProps {
   msg?: string;
@@ -25,7 +25,7 @@ export default function Banner({ msg = '' }: BannerProps) {
       <div className={cn('flex grow py-0.5 justify-between items-center', baseLayoutStyle)}>
         {t(msg)}
         <button onClick={onClose} aria-label="Close banner" className="cursor-pointer">
-          <Close fontSize={'small'} />
+          <FaX size={18} />
         </button>
       </div>
     </div>

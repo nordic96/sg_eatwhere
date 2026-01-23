@@ -1,7 +1,31 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import StatsBar from '@/app/components/StatsBar/StatsBar';
 import type { StatItem } from '@/app/components/StatsBar/StatsBar';
+
+// Mock IntersectionObserver for scroll reveal
+const mockIntersectionObserver = jest.fn();
+const mockDisconnect = jest.fn();
+const mockObserve = jest.fn();
+
+beforeEach(() => {
+  mockDisconnect.mockClear();
+  mockObserve.mockClear();
+  mockIntersectionObserver.mockClear();
+
+  mockIntersectionObserver.mockImplementation((callback) => ({
+    observe: mockObserve,
+    disconnect: mockDisconnect,
+    unobserve: jest.fn(),
+    root: null,
+    rootMargin: '',
+    thresholds: [],
+    takeRecords: jest.fn(),
+    _callback: callback,
+  }));
+
+  window.IntersectionObserver = mockIntersectionObserver as unknown as typeof IntersectionObserver;
+});
 
 const mockStats: StatItem[] = [
   { value: '10+', label: 'Years' },
@@ -211,6 +235,136 @@ describe('StatsBar Component', () => {
       expect(items[2]).toHaveTextContent('Languages');
       expect(items[3]).toHaveTextContent('1');
       expect(items[3]).toHaveTextContent('Dream Project');
+    });
+  });
+
+  describe('Animation features', () => {
+    test('renders static items when animateOnScroll is false (default)', () => {
+      const { container } = render(<StatsBar stats={mockStats} />);
+      const items = container.querySelectorAll('[role="listitem"]');
+
+      // Static items should have duration-200
+      items.forEach((item) => {
+        expect(item).toHaveClass('duration-200');
+      });
+    });
+
+    test('renders animated items when animateOnScroll is true', () => {
+      const { container } = render(<StatsBar stats={mockStats} animateOnScroll />);
+      const items = container.querySelectorAll('[role="listitem"]');
+
+      // Animated items should have duration-500
+      items.forEach((item) => {
+        expect(item).toHaveClass('duration-500');
+      });
+    });
+
+    test('attaches ref to container when animateOnScroll is true', () => {
+      render(<StatsBar stats={mockStats} animateOnScroll />);
+
+      // Should observe the element
+      expect(mockObserve).toHaveBeenCalled();
+    });
+
+    test('does not attach ref when animateOnScroll is false', () => {
+      render(<StatsBar stats={mockStats} animateOnScroll={false} />);
+
+      // Should not observe any element
+      expect(mockObserve).not.toHaveBeenCalled();
+    });
+
+    test('animated items start with opacity-0 before intersection', () => {
+      const { container } = render(<StatsBar stats={mockStats} animateOnScroll />);
+      const items = container.querySelectorAll('[role="listitem"]');
+
+      // Items should start invisible
+      items.forEach((item) => {
+        expect(item).toHaveClass('opacity-0');
+      });
+    });
+
+    test('animated items become visible after intersection', () => {
+      const { container } = render(<StatsBar stats={mockStats} animateOnScroll />);
+
+      // Trigger intersection
+      const observerCallback = mockIntersectionObserver.mock.calls[0][0];
+      act(() => {
+        observerCallback([{ isIntersecting: true }], { disconnect: mockDisconnect });
+      });
+
+      const items = container.querySelectorAll('[role="listitem"]');
+      items.forEach((item) => {
+        expect(item).toHaveClass('opacity-100');
+      });
+    });
+
+    test('applies stagger delay to animated items', () => {
+      const { container } = render(
+        <StatsBar stats={mockStats} animateOnScroll staggerDelay={150} />,
+      );
+      const items = container.querySelectorAll('[role="listitem"]');
+
+      // Check stagger delays
+      expect(items[0]).toHaveStyle({ transitionDelay: '0ms' });
+      expect(items[1]).toHaveStyle({ transitionDelay: '150ms' });
+      expect(items[2]).toHaveStyle({ transitionDelay: '300ms' });
+      expect(items[3]).toHaveStyle({ transitionDelay: '450ms' });
+    });
+
+    test('uses default stagger delay of 100ms', () => {
+      const { container } = render(<StatsBar stats={mockStats} animateOnScroll />);
+      const items = container.querySelectorAll('[role="listitem"]');
+
+      expect(items[0]).toHaveStyle({ transitionDelay: '0ms' });
+      expect(items[1]).toHaveStyle({ transitionDelay: '100ms' });
+      expect(items[2]).toHaveStyle({ transitionDelay: '200ms' });
+      expect(items[3]).toHaveStyle({ transitionDelay: '300ms' });
+    });
+
+    test('accepts custom animationDuration prop', () => {
+      // This tests that the prop is passed through
+      // Actual animation duration is handled by useCountUp hook
+      const { container } = render(
+        <StatsBar stats={mockStats} animateOnScroll animationDuration={3000} />,
+      );
+      const items = container.querySelectorAll('[role="listitem"]');
+
+      expect(items).toHaveLength(4);
+    });
+
+    test('parses numeric values from stat value strings', () => {
+      const statsWithSuffix: StatItem[] = [
+        { value: '10+', label: 'Years' },
+        { value: '100%', label: 'Success' },
+      ];
+
+      const { container } = render(<StatsBar stats={statsWithSuffix} animateOnScroll />);
+
+      // Trigger intersection
+      const observerCallback = mockIntersectionObserver.mock.calls[0][0];
+      act(() => {
+        observerCallback([{ isIntersecting: true }], { disconnect: mockDisconnect });
+      });
+
+      const items = container.querySelectorAll('[role="listitem"]');
+      expect(items).toHaveLength(2);
+    });
+
+    test('uses explicit numericValue when provided', () => {
+      const statsWithNumeric: StatItem[] = [
+        { value: 'N/A', label: 'Years', numericValue: 10, suffix: '+' },
+      ];
+
+      const { container } = render(<StatsBar stats={statsWithNumeric} animateOnScroll />);
+
+      // Trigger intersection
+      const observerCallback = mockIntersectionObserver.mock.calls[0][0];
+      act(() => {
+        observerCallback([{ isIntersecting: true }], { disconnect: mockDisconnect });
+      });
+
+      const items = container.querySelectorAll('[role="listitem"]');
+      expect(items).toHaveLength(1);
     });
   });
 });

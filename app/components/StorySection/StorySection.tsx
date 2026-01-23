@@ -2,9 +2,9 @@ import { cn } from '@/app/utils';
 import FadeIn from '../FadeIn/FadeIn';
 import { useTranslations } from 'next-intl';
 import { h1BaseStyle, microTextBaseStyle } from '@/app/constants';
-import { PhotoCamera } from '@mui/icons-material';
 import Image from 'next/image';
 import { CDN_BASE } from '@/app/config/cdn';
+import { FaCamera } from 'react-icons/fa';
 
 export default function StorySection() {
   const t = useTranslations('LandingPage');
@@ -58,7 +58,7 @@ export default function StorySection() {
               />
             </div>
             <div className="flex items-center gap-2 justify-end">
-              <PhotoCamera />
+              <FaCamera size={20} />
               <p className="font-light italic text-sm">{t('photo_disclaimer')}</p>
             </div>
           </div>

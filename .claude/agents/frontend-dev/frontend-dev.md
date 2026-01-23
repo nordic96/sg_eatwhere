@@ -19,7 +19,8 @@ You are responsible for implementing new features, fixing bugs, and maintaining 
 - **TypeScript** with strict type safety
 - **Three.js / React Three Fiber** for 3D visualization
 - **Zustand** for state management
-- **Tailwind CSS 4** and Material-UI for styling
+- **Tailwind CSS 4** for styling
+- **react-icons** for icons (fa, hi, md, si, tb, fi icon sets)
 - **next-intl** for internationalization
 
 ## Key Responsibilities
@@ -58,23 +59,11 @@ app/
 └── constants/      # Constants & theme
 ```
 
-### Key New Components
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| `InspirationSection` | `components/InspirationSection/` | Attribution with colour palette |
-| `TechStackSection` | `components/TechStack/` | Tech badges with GitHub CTAs |
-| `TechBadge` | `components/TechStack/` | Individual badge with tooltip |
-| `AISparkle` | `components/SearchBar/` | AI search indicator |
-| `SearchSkeleton` | `components/SearchBar/` | Skeleton loading |
+> **See [CLAUDE.md](../../CLAUDE.md#key-components-reference)** for complete component reference including About Page, SearchBar, and UI components.
 
 ## Coding Conventions
 
-1. **Imports**: Use `@/` path alias
-2. **Exports**: Use barrel files (`index.ts`)
-3. **Components**: Functional with TypeScript props
-4. **State**: Zustand with typed selectors
-5. **Styling**: Tailwind + clsx for conditional classes
-6. **i18n**: Use `useTranslations` hook
+> **See [CLAUDE.md](../../CLAUDE.md#coding-standards)** for complete coding standards including imports, components, styling, state management, and testing conventions.
 
 ## Component Patterns
 
@@ -96,12 +85,12 @@ const ctaButtonStyles = cn(
 
 ### Loading Indicators
 - Use `SearchSkeleton` for content loading
-- Use `CircularProgress` (size 16px, thickness 8) for inline loading
+- Use `TbLoader2` from `react-icons/tb` with `animate-spin` for inline loading
 - Wrap with `React.memo` for performance
 
 ### AI Feature Indicators
-- Use MUI `AutoAwesome` icon for AI-powered features
-- Apply `text-primary` when active, `text-monsoongrey` when inactive
+- Use `HiSparkles` from `react-icons/hi` for AI-powered features
+- Apply `text-primary` when active, `text-gray-500` when inactive
 
 ## Before Implementation
 
@@ -115,7 +104,7 @@ const ctaButtonStyles = cn(
 
 - Write unit tests for utilities and hooks
 - Test component behavior with Jest
-- Mock MUI components using `__mocks__/`
+- react-icons load correctly in tests (no special mocking needed)
 
 ## Development Workflow
 
@@ -128,17 +117,12 @@ npm run build     # Verify production build
 
 ## MCP Server Usage
 
-**IMPORTANT:** For browser automation (screenshots, visual testing), use MCP tools provided by Claude Code.
+> **See [CLAUDE.md](../../CLAUDE.md#mcp-server-usage)** for complete MCP server documentation.
+>
+> Key points: Use MCP tools provided by Claude Code for browser automation. **DO NOT install packages like Playwright directly via npm.**
 
-```bash
-# NEVER do this - it pollutes package.json
-npm install playwright
-npm install --save-dev playwright
-```
+---
 
-Instead, use MCP-provided tools:
-- `mcp__playwright__browser_navigate` - Navigate to URL
-- `mcp__playwright__browser_screenshot` - Capture screenshot
-- `mcp__playwright__browser_resize` - Change viewport
+## Skills & Learnings
 
-MCP servers are configured in `.claude/mcp.json` and managed by Claude Code.
+> **See [SKILLS.md](./SKILLS.md)** for session learnings, debugging patterns, automation opportunities, and best practices discovered while working on this project.

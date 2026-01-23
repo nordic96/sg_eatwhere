@@ -2,10 +2,10 @@
 'use client';
 
 import { cn } from '@/app/utils';
-import { East, West } from '@mui/icons-material';
-import { CircularProgress } from '@mui/material';
 import { ClassValue } from 'clsx';
 import { useCallback, useState, useEffect, memo, useRef, useMemo, useTransition } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { TbLoader2 } from 'react-icons/tb';
 
 interface ImageCarouselProps {
   img: string[];
@@ -35,6 +35,35 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     });
   }, [img]);
 
+  const onClickLeft = useCallback(() => {
+    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
+  }, [displayImages.length]);
+
+  const onClickRight = useCallback(() => {
+    setCurrImg((index) => (index + 1) % displayImages.length);
+  }, [displayImages.length]);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    function handleKeyNavigate(e: KeyboardEvent) {
+      /** Don't handle if user is typing input (searchbar component) */
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        onClickLeft();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        onClickRight();
+      }
+    }
+    window.addEventListener('keydown', handleKeyNavigate);
+
+    return () => window.removeEventListener('keydown', handleKeyNavigate);
+  }, [onClickLeft, onClickRight]);
+
   const handleImageLoad = useCallback((src: string) => {
     setLoadedImages((prev) => {
       if (prev.has(src)) return prev;
@@ -52,14 +81,6 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
       wrapperRef.current.style.transform = `translateX(${-currImg * offset}%)`;
     }
   }, [currImg, offset]);
-
-  const onClickLeft = useCallback(() => {
-    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
-  }, [displayImages.length]);
-
-  const onClickRight = useCallback(() => {
-    setCurrImg((index) => (index + 1) % displayImages.length);
-  }, [displayImages.length]);
 
   const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-white';
   const navBtnBaseStyle =
@@ -98,14 +119,14 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         onClick={onClickLeft}
         aria-label="Previous image"
       >
-        <West fontSize={'inherit'} />
+        <FaChevronLeft className="w-[1em] h-[1em]" />
       </button>
       <button
         className={cn(navBtnBaseStyle, { 'right-4': true }, customClass)}
         onClick={onClickRight}
         aria-label="Next image"
       >
-        <East fontSize={'inherit'} />
+        <FaChevronRight className="w-[1em] h-[1em]" />
       </button>
       <div
         className={cn(currImgIndicatorBaseStyle, customClass)}
@@ -119,7 +140,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
 function LoadingIndicator() {
   return (
     <div className={'w-full h-full flex justify-center items-center text-primary'}>
-      <CircularProgress color={'inherit'} />
+      <TbLoader2 size={40} className="animate-spin" />
     </div>
   );
 }

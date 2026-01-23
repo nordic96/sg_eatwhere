@@ -15,8 +15,8 @@ import { Activity, useEffect } from 'react';
 import TrailMode from '../../components/TrailMode/TrailMode';
 import { SearchBar } from '@/app/components/SearchBar';
 import FoodMarquee from '../../components/FoodMarquee/FoodMarquee';
-import { LocationPin } from '@mui/icons-material';
 import GoogleMapsBanner from '@/app/components/GoogleMapsBanner/GoogleMapsBanner';
+import { FaMapPin } from 'react-icons/fa';
 
 type ClientHomeProps = {
   locale: string;
@@ -81,8 +81,8 @@ function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeP
         <GoogleMapsBanner url={gmapUrl} />
         {/** Food List Container */}
         <div className={'flex flex-col'}>
-          <div className={'flex items-center'}>
-            <LocationPin fontSize={'medium'} aria-hidden="true" />
+          <div className={'flex items-center gap-1'}>
+            <FaMapPin size={20} aria-hidden="true" />
             <h2 className={'font-bold text-lg'}>{t('foodlist_by_region')}</h2>
           </div>
           <div className="grid grid-cols-4 flex-1 mt-1">

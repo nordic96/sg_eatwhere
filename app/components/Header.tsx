@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Activity } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import horizontalImage from '@/public/images/header_icon.svg';
 import LocaleSwitcher from './LocaleSwitcher/LocaleSwitcher';
@@ -28,8 +28,7 @@ const Header = () => {
         </nav>
         <LocaleSwitcher />
       </div>
-      <Activity mode={pathname === '/mapview' && breakpoint === 'desktop' ? 'visible' : 'hidden'}>
-        {/** Search Bar */}
+      {pathname === '/mapview' && breakpoint === 'desktop' && (
         <div
           className={
             'absolute top-[50%] -translate-x-[50%] left-[50%] -translate-y-[50%] h-10 py-0.5 flex items-center z-50'
@@ -37,7 +36,7 @@ const Header = () => {
         >
           <SearchBar />
         </div>
-      </Activity>
+      )}
     </header>
   );
 };

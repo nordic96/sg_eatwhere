@@ -1,7 +1,7 @@
 import { cn } from '@/app/utils';
-import Search from '@mui/icons-material/Search';
-import CircularProgress from '@mui/material/CircularProgress';
 import React from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { TbLoader2 } from 'react-icons/tb';
 
 function SearchProgress({ isSearching }: { isSearching: boolean }) {
   return (
@@ -12,14 +12,14 @@ function SearchProgress({ isSearching }: { isSearching: boolean }) {
       })}
     >
       {isSearching && (
-        <CircularProgress
-          color={'inherit'}
-          size={'16px'}
-          thickness={8}
+        <TbLoader2
+          size={16}
+          className="animate-spin"
+          strokeWidth={3}
           aria-label={'Searching for results'}
         />
       )}
-      {!isSearching && <Search fontSize={'inherit'} />}
+      {!isSearching && <FaSearch className="w-[1em] h-[1em]" />}
     </div>
   );
 }

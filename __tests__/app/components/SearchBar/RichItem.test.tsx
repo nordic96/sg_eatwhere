@@ -10,8 +10,11 @@ jest.mock('next-intl', () => ({
 
 // Mock CategoryIcon component
 jest.mock('@/app/components/CategoryIcon/CategoryIcon', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function MockCategoryIcon({ cat, className, alt }: any) {
-    return <div data-testid="category-icon" data-cat={cat} className={className} aria-label={alt} />;
+    return (
+      <div data-testid="category-icon" data-cat={cat} className={className} aria-label={alt} />
+    );
   };
 });
 
@@ -70,7 +73,12 @@ describe('RichItem Component', () => {
   });
 
   test('renders with different regions', () => {
-    const regions: Array<'central' | 'east' | 'west' | 'north'> = ['central', 'east', 'west', 'north'];
+    const regions: Array<'central' | 'east' | 'west' | 'north'> = [
+      'central',
+      'east',
+      'west',
+      'north',
+    ];
 
     regions.forEach((region) => {
       const data = { ...mockFoodData, location: { ...mockFoodData.location, region } };

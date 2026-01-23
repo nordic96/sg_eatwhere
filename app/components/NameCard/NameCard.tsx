@@ -1,6 +1,5 @@
 import { cn } from '@/app/utils';
-import { Email, GitHub, LinkedIn } from '@mui/icons-material';
-import Home from '@mui/icons-material/Home';
+import { FaGithub, FaHome, FaLinkedinIn } from 'react-icons/fa';
 
 interface SocialLink {
   href: string;
@@ -14,8 +13,6 @@ export interface NameCardProps {
   showLabels?: boolean;
   /** Layout style: compact (icons only) or expanded (with labels) */
   variant?: 'compact' | 'expanded';
-  /** Optional email address to display */
-  email?: string;
   /** Additional CSS classes */
   className?: string;
 }
@@ -23,19 +20,19 @@ export interface NameCardProps {
 const defaultSocialLinks: SocialLink[] = [
   {
     href: 'https://www.linkedin.com/in/gi-hun-ko-863619184/',
-    icon: <LinkedIn fontSize={'inherit'} />,
+    icon: <FaLinkedinIn className="w-[1em] h-[1em]" />,
     label: 'LinkedIn',
     ariaLabel: 'Visit LinkedIn profile',
   },
   {
     href: 'https://github.com/nordic96',
-    icon: <GitHub fontSize={'inherit'} />,
+    icon: <FaGithub className="w-[1em] h-[1em]" />,
     label: 'GitHub',
     ariaLabel: 'Visit GitHub profile',
   },
   {
     href: 'https://stephenghk.com',
-    icon: <Home fontSize={'inherit'} />,
+    icon: <FaHome className="w-[1em] h-[1em]" />,
     label: 'Portfolio',
     ariaLabel: 'Visit portfolio website',
   },
@@ -44,22 +41,11 @@ const defaultSocialLinks: SocialLink[] = [
 export default function NameCard({
   showLabels = false,
   variant = 'compact',
-  email,
   className,
 }: NameCardProps) {
   const isExpanded = variant === 'expanded' || showLabels;
 
   const socialLinks = [...defaultSocialLinks];
-
-  // Add email link if provided
-  if (email) {
-    socialLinks.push({
-      href: `mailto:${email}`,
-      icon: <Email />,
-      label: 'Email',
-      ariaLabel: `Send email to ${email}`,
-    });
-  }
 
   const linkBaseStyles = cn(
     'flex items-center gap-2 text-gray-700 transition-all duration-200 ease-in-out',
