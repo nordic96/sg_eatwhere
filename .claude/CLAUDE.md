@@ -436,16 +436,25 @@ npm run lint:fix   # ESLint auto-fix
 
 ## Agent Collaboration
 
-### Agent Directory Structure
+### Directory Structure
 
 ```
-.claude/agents/
-├── frontend-dev/
-│   ├── frontend-dev.md     # Agent definition & capabilities
-│   └── SKILLS.md           # Session learnings & patterns
-└── ui-ux-designer/
-    ├── ui-ux-designer.md   # Agent definition & capabilities
-    └── SKILLS.md           # Design insights & UX patterns
+.claude/                        # Project-specific configuration
+├── agents/
+│   ├── frontend-dev/
+│   │   ├── frontend-dev.md     # Agent definition & capabilities
+│   │   └── SKILLS.md           # Session learnings & patterns
+│   └── ui-ux-designer/
+│       ├── ui-ux-designer.md   # Agent definition & capabilities
+│       └── SKILLS.md           # Design insights & UX patterns
+├── CLAUDE.md                   # Project context (this file)
+└── mcp.json                    # MCP server configuration
+
+~/.claude/commands/             # Global workflow commands (shared across projects)
+├── issue-dev.md                # Feature implementation workflow
+├── run-pr-checks.md            # Pre-push validation & PR creation
+├── fetch-pr-review.md          # PR review feedback application
+└── wrap-session.md             # Session wrap-up workflow
 ```
 
 ### @frontend-dev
@@ -493,6 +502,28 @@ User: "Work on issue #121"
 
 User: "Can you quickly fix this typo?"
 → Work directly in the main conversation
+```
+
+### Workflow Commands (Global)
+
+Reusable slash commands available across all projects. Definitions in `~/.claude/commands/`.
+
+| Command | Usage | Purpose |
+|---------|-------|---------|
+| `/issue-dev {n}` | `/issue-dev 121` | Fetch issue, checkout branch, implement (auto-selects agent) |
+| `/run-pr-checks {branch}` | `/run-pr-checks issue_121` | Run lint/test/build, create PR if all pass |
+| `/fetch-pr-review {n}` | `/fetch-pr-review 139` | Fetch PR comments, apply critical/high fixes |
+| `/wrap-session` | `/wrap-session` | Extract learnings, update docs, suggest followups |
+
+**Agent Auto-Selection:** `/issue-dev` automatically detects available agents in the project's `.claude/agents/` directory and selects the most appropriate one based on issue labels. Falls back to working directly if no agents are defined.
+
+**Workflow Chain Example:**
+```
+1. /issue-dev 134            → Implement feature (uses @frontend-dev if available)
+2. /run-pr-checks issue_134  → Validate and create PR
+3. (wait for review)
+4. /fetch-pr-review 140      → Apply review feedback
+5. /wrap-session             → Document learnings
 ```
 
 ---

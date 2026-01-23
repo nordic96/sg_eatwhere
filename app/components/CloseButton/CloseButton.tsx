@@ -1,25 +1,31 @@
 import { cn } from '@/app/utils';
 import { ClassValue } from 'clsx';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaX } from 'react-icons/fa6';
 
+type KeyboardEventHandler = (e: KeyboardEvent) => void;
 interface CloseButtonProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   customClass?: string | ClassValue;
-  onKeyDown?: (e: KeyboardEvent) => void;
+  onKeyDown?: KeyboardEventHandler;
 }
 export default function CloseButton({ customClass, onClick, onKeyDown }: CloseButtonProps) {
-  useEffect(() => {
-    if (onKeyDown) {
-      window.addEventListener('keydown', onKeyDown);
-    }
+  const handlerRef = useRef<KeyboardEventHandler | null>(null);
 
-    return () => {
-      if (onKeyDown) {
-        window.removeEventListener('keydown', onKeyDown);
-      }
-    };
+  useEffect(() => {
+    handlerRef.current = onKeyDown ?? null;
   }, [onKeyDown]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const listener = (e: KeyboardEvent) => {
+      handlerRef.current?.(e);
+    };
+    window.addEventListener('keydown', listener);
+    return () => {
+      window.removeEventListener('keydown', listener);
+    };
+  }, []);
 
   return (
     <button
