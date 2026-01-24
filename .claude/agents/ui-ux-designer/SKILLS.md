@@ -1,6 +1,18 @@
-# UI/UX Designer - Skills & Learnings
+# UI/UX Designer - Skills & Learnings (SG EatWhere)
 
-> **Purpose:** Document design discoveries, UX recommendations, accessibility insights, visual patterns, and design system knowledge for this project.
+> **Purpose:** Project-specific design decisions, component patterns, and session learnings for the SG EatWhere project.
+>
+> **Global Skills:** Universal design patterns have been extracted to `~/.claude/skills/ui-ux-designer/SKILL.md`. See that file for:
+> - Visual Hierarchy Checklist
+> - Responsive Design Guidelines
+> - WCAG Compliance Quick Reference
+> - Typography Best Practices
+> - Touch Target Minimums
+> - Animation Timing Standards
+> - Responsive Component Patterns
+> - Review Grading Criteria
+> - Common Design Issues
+> - State Visualization for Async Operations
 
 ---
 

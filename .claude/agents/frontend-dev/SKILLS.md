@@ -1,6 +1,17 @@
-# Frontend Developer - Skills & Learnings
+# Frontend Developer - Skills & Learnings (SG EatWhere)
 
-> **Purpose:** Document key lessons, mistakes, debugging patterns, and automation opportunities learned while working on this codebase.
+> **Purpose:** Project-specific patterns, session learnings, and automation opportunities for the SG EatWhere codebase.
+>
+> **Global Skills:** Universal patterns have been extracted to `~/.claude/skills/frontend-dev/SKILL.md`. See that file for:
+> - React 19 Activity vs Conditional Rendering
+> - Lazy Initialization for Heavy Resources
+> - Singleton Factory with Lazy Init
+> - Timer Cleanup with useRef
+> - Scroll Reveal Hook Pattern
+> - Animated Counter with Easing
+> - Jest Browser API Mocks
+> - Tailwind JIT Dynamic Class Anti-Pattern
+> - react-icons as MUI Alternative
 
 ---
 
