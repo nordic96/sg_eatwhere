@@ -3,7 +3,7 @@
 
 import { cn } from '@/app/utils';
 import { ClassValue } from 'clsx';
-import { useCallback, useState, useEffect, memo, useRef, useMemo, useTransition } from 'react';
+import { useCallback, useState, useEffect, memo, useRef, useMemo } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { TbLoader2 } from 'react-icons/tb';
 
@@ -14,48 +14,24 @@ interface ImageCarouselProps {
 
 function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [currImg, setCurrImg] = useState<number>(0);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const [isPending, startTransition] = useTransition();
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const [displayImages, setDisplayImages] = useState<string[]>(img);
+  const isLoading = loadedImages.size < img.length;
 
-  // Track previous images to detect actual changes vs remounts
-  const prevImgRef = useRef<string[]>(img);
-
-  const isLoading = useMemo(
-    () => isPending || loadedImages.size < displayImages.length,
-    [isPending, loadedImages.size, displayImages.length],
-  );
-
+  // Reset state when images change
   useEffect(() => {
-    const prevImg = prevImgRef.current;
-    // Check if images actually changed (not just remount with same images)
-    const imagesChanged =
-      img.length !== prevImg.length || img.some((src, i) => src !== prevImg[i]);
-
-    prevImgRef.current = img;
-
-    // Skip reset on remount with same images to avoid race condition
-    // where startTransition might reset loadedImages after cached images loaded
-    if (!imagesChanged) return;
-
-    // Reset index immediately when images change (outside transition)
     setCurrImg(0);
-
-    startTransition(() => {
-      setLoadedImages(new Set());
-      setDisplayImages(img);
-    });
+    setLoadedImages(new Set());
   }, [img]);
 
   const onClickLeft = useCallback(() => {
-    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
-  }, [displayImages.length]);
+    setCurrImg((index) => (index - 1 + img.length) % img.length);
+  }, [img.length]);
 
   const onClickRight = useCallback(() => {
-    setCurrImg((index) => (index + 1) % displayImages.length);
-  }, [displayImages.length]);
+    setCurrImg((index) => (index + 1) % img.length);
+  }, [img.length]);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -87,8 +63,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     });
   }, []);
 
-  // Use displayImages.length for consistency between indicator and carousel
-  const offset = useMemo(() => 100 / displayImages.length, [displayImages.length]);
+  const offset = useMemo(() => 100 / img.length, [img.length]);
 
   useEffect(() => {
     if (wrapperRef.current) {
@@ -107,7 +82,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
       <div
         ref={wrapperRef}
         style={{
-          width: `${displayImages.length * 100}%`,
+          width: `${img.length * 100}%`,
         }}
         className={cn(
           'h-full flex transition-transform ease-in-out',
@@ -115,14 +90,14 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         )}
         aria-live="polite"
       >
-        {displayImages.map((src, i) => {
+        {img.map((src, i) => {
           return (
             <img
               key={`${src}-${i}`}
-              style={{ width: `${100 / displayImages.length}%` }}
+              style={{ width: `${100 / img.length}%` }}
               className={'h-full object-cover'}
               src={src}
-              alt={`Image ${i + 1} of ${displayImages.length}`}
+              alt={`Image ${i + 1} of ${img.length}`}
               onLoad={() => handleImageLoad(src)}
               draggable="false"
             />
@@ -148,7 +123,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         className={cn(currImgIndicatorBaseStyle, customClass)}
         aria-live="polite"
         aria-atomic="true"
-      >{`${currImg + 1} / ${displayImages.length}`}</div>
+      >{`${currImg + 1} / ${img.length}`}</div>
     </div>
   );
 }
