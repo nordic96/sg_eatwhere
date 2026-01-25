@@ -20,12 +20,26 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [displayImages, setDisplayImages] = useState<string[]>(img);
 
+  // Track previous images to detect actual changes vs remounts
+  const prevImgRef = useRef<string[]>(img);
+
   const isLoading = useMemo(
     () => isPending || loadedImages.size < displayImages.length,
     [isPending, loadedImages.size, displayImages.length],
   );
 
   useEffect(() => {
+    const prevImg = prevImgRef.current;
+    // Check if images actually changed (not just remount with same images)
+    const imagesChanged =
+      img.length !== prevImg.length || img.some((src, i) => src !== prevImg[i]);
+
+    prevImgRef.current = img;
+
+    // Skip reset on remount with same images to avoid race condition
+    // where startTransition might reset loadedImages after cached images loaded
+    if (!imagesChanged) return;
+
     // Reset index immediately when images change (outside transition)
     setCurrImg(0);
 
@@ -82,7 +96,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     }
   }, [currImg, offset]);
 
-  const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-white';
+  const containerBaseStyle = 'w-full h-full relative overflow-hidden bg-white';
   const navBtnBaseStyle =
     'absolute top-[50%] opacity-80 text-white rounded-full cursor-pointer text-3xl max-sm:text-4xl flex';
   const currImgIndicatorBaseStyle =
@@ -96,8 +110,8 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
           width: `${displayImages.length * 100}%`,
         }}
         className={cn(
-          'h-full transition-transform ease-in-out',
-          isLoading ? 'invisible' : 'visible flex',
+          'h-full flex transition-transform ease-in-out',
+          isLoading ? 'invisible' : 'visible',
         )}
         aria-live="polite"
       >
