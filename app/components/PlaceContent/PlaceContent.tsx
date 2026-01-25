@@ -41,7 +41,7 @@ function PlaceContent() {
     >
       {/** Carousel Container */}
       <div className={'w-full h-[280px]'}>
-        <ImageCarousel img={data.imgSource} customClass={getThemeStyle()} />
+        <ImageCarousel key={data.id} img={data.imgSource} customClass={getThemeStyle()} />
       </div>
       <div className={'absolute top-1 w-full px-4'}>
         <ButtonContainer />
