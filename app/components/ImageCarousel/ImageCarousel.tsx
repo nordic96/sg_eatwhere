@@ -19,11 +19,8 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
 
   const isLoading = loadedImages.size < img.length;
 
-  // Reset state when images change
-  useEffect(() => {
-    setCurrImg(0);
-    setLoadedImages(new Set());
-  }, [img]);
+  // Note: State reset is handled by React's key-based remounting in PlaceContent
+  // When heritage changes, ImageCarousel gets a new key and remounts with fresh state
 
   const onClickLeft = useCallback(() => {
     setCurrImg((index) => (index - 1 + img.length) % img.length);

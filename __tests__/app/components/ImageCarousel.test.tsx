@@ -168,8 +168,9 @@ describe('ImageCarousel', () => {
     expect(screen.getByLabelText('Next image')).toBeInTheDocument();
   });
 
-  test('resets to first image when img prop changes', () => {
-    const { rerender } = render(<ImageCarousel img={mockImages} />);
+  test('resets to first image when remounted with different images (key change)', () => {
+    // First mount with initial images
+    const { unmount } = render(<ImageCarousel img={mockImages} />);
 
     const nextButton = screen.getByLabelText('Next image');
 
@@ -177,11 +178,14 @@ describe('ImageCarousel', () => {
     fireEvent.click(nextButton);
     expect(screen.getByText('2 / 3')).toBeInTheDocument();
 
-    // Change images
-    const newImages = ['https://example.com/new1.jpg', 'https://example.com/new2.jpg'];
-    rerender(<ImageCarousel img={newImages} />);
+    // Unmount (simulates key change in parent causing remount)
+    unmount();
 
-    // Should reset to first image
+    // Remount with different images (simulates key change)
+    const newImages = ['https://example.com/new1.jpg', 'https://example.com/new2.jpg'];
+    render(<ImageCarousel img={newImages} />);
+
+    // Should start at first image (fresh state from remount)
     expect(screen.getByText('1 / 2')).toBeInTheDocument();
   });
 
