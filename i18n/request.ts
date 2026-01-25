@@ -1,11 +1,15 @@
 import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
+import { CDN_BASE } from '@/app/config/cdn';
 
 export async function geti18nConfig(locale: string) {
   let messages;
   try {
-    messages = (await import(`@/messages/${locale}.json`)).default;
+    const res = await fetch(`${CDN_BASE}/messages/${locale}.json`);
+    if (res.ok) {
+      messages = await res.json();
+    }
   } catch (e) {
     console.error(e);
     messages = (await import('@/messages/en.json')).default;
