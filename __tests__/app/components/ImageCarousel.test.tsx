@@ -213,4 +213,62 @@ describe('ImageCarousel', () => {
 
     expect(screen.getByText('1 / 3')).toBeInTheDocument();
   });
+
+  test('loads images correctly on remount with same images', async () => {
+    // First mount - simulate opening the card
+    const { container, unmount } = render(<ImageCarousel img={mockImages} />);
+
+    // Images should be present but invisible while loading
+    const wrapper = container.querySelector('[aria-live="polite"]');
+    expect(wrapper).toHaveClass('invisible');
+
+    // Simulate images loading
+    simulateImageLoads(container);
+
+    await waitFor(() => {
+      expect(wrapper).toHaveClass('visible');
+    });
+
+    // Unmount - simulate closing the card
+    unmount();
+
+    // Remount with same images - simulate reopening the card
+    const { container: container2 } = render(<ImageCarousel img={mockImages} />);
+
+    // Images should be invisible while loading (not stuck in loading state)
+    const wrapper2 = container2.querySelector('[aria-live="polite"]');
+    expect(wrapper2).toHaveClass('invisible');
+
+    // Simulate images loading again
+    simulateImageLoads(container2);
+
+    await waitFor(() => {
+      // After images load, wrapper should become visible
+      expect(wrapper2).toHaveClass('visible');
+    });
+
+    // Verify images are rendered correctly
+    const images = screen.getAllByRole('img');
+    expect(images).toHaveLength(3);
+  });
+
+  test('images remain in DOM during loading state for proper load events', () => {
+    const { container } = render(<ImageCarousel img={mockImages} />);
+
+    // Even while loading, images should be in the DOM (not display:none)
+    // so that onLoad events can fire
+    const images = container.querySelectorAll('img');
+    expect(images).toHaveLength(3);
+
+    // Wrapper uses visibility:hidden instead of display:none
+    // so images can still load
+    const wrapper = container.querySelector('[aria-live="polite"]');
+    expect(wrapper).toHaveClass('invisible');
+
+    // Verify images are not set to display:none
+    images.forEach((img) => {
+      const computedStyle = window.getComputedStyle(img);
+      expect(computedStyle.display).not.toBe('none');
+    });
+  });
 });

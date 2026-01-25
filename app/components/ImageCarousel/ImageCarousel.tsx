@@ -94,9 +94,11 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         ref={wrapperRef}
         style={{
           width: `${displayImages.length * 100}%`,
-          display: isLoading ? 'none' : 'flex',
         }}
-        className="h-full transition-transform ease-in-out"
+        className={cn(
+          'h-full transition-transform ease-in-out',
+          isLoading ? 'invisible' : 'visible flex',
+        )}
         aria-live="polite"
       >
         {displayImages.map((src, i) => {
