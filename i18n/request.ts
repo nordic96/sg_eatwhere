@@ -6,9 +6,13 @@ import { CDN_BASE } from '@/app/config/cdn';
 export async function geti18nConfig(locale: string) {
   let messages;
   try {
-    const res = await fetch(`${CDN_BASE}/messages/${locale}.json`);
+    const res = await fetch(`${CDN_BASE}/messages/${locale}.json`, {
+      next: { revalidate: 3600 },
+    });
     if (res.ok) {
       messages = await res.json();
+    } else {
+      messages = (await import(`@/messages/${locale}.json`)).default;
     }
   } catch (e) {
     console.error(e);
