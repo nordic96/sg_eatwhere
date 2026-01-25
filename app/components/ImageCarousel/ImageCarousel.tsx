@@ -3,7 +3,7 @@
 
 import { cn } from '@/app/utils';
 import { ClassValue } from 'clsx';
-import { useCallback, useState, useEffect, memo, useRef, useMemo, useTransition } from 'react';
+import { useCallback, useState, useEffect, memo, useRef, useMemo } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { TbLoader2 } from 'react-icons/tb';
 
@@ -14,34 +14,21 @@ interface ImageCarouselProps {
 
 function ImageCarousel({ img, customClass }: ImageCarouselProps) {
   const [currImg, setCurrImg] = useState<number>(0);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const [isPending, startTransition] = useTransition();
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const [displayImages, setDisplayImages] = useState<string[]>(img);
+  const isLoading = loadedImages.size < img.length;
 
-  const isLoading = useMemo(
-    () => isPending || loadedImages.size < displayImages.length,
-    [isPending, loadedImages.size, displayImages.length],
-  );
-
-  useEffect(() => {
-    // Reset index immediately when images change (outside transition)
-    setCurrImg(0);
-
-    startTransition(() => {
-      setLoadedImages(new Set());
-      setDisplayImages(img);
-    });
-  }, [img]);
+  // Note: State reset is handled by React's key-based remounting in PlaceContent
+  // When heritage changes, ImageCarousel gets a new key and remounts with fresh state
 
   const onClickLeft = useCallback(() => {
-    setCurrImg((index) => (index - 1 + displayImages.length) % displayImages.length);
-  }, [displayImages.length]);
+    setCurrImg((index) => (index - 1 + img.length) % img.length);
+  }, [img.length]);
 
   const onClickRight = useCallback(() => {
-    setCurrImg((index) => (index + 1) % displayImages.length);
-  }, [displayImages.length]);
+    setCurrImg((index) => (index + 1) % img.length);
+  }, [img.length]);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -73,8 +60,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     });
   }, []);
 
-  // Use displayImages.length for consistency between indicator and carousel
-  const offset = useMemo(() => 100 / displayImages.length, [displayImages.length]);
+  const offset = useMemo(() => 100 / img.length, [img.length]);
 
   useEffect(() => {
     if (wrapperRef.current) {
@@ -82,7 +68,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
     }
   }, [currImg, offset]);
 
-  const containerBaseStyle = 'w-full h-full relative overflow-x-hidden bg-white';
+  const containerBaseStyle = 'w-full h-full relative overflow-hidden bg-white';
   const navBtnBaseStyle =
     'absolute top-[50%] opacity-80 text-white rounded-full cursor-pointer text-3xl max-sm:text-4xl flex';
   const currImgIndicatorBaseStyle =
@@ -93,20 +79,22 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
       <div
         ref={wrapperRef}
         style={{
-          width: `${displayImages.length * 100}%`,
-          display: isLoading ? 'none' : 'flex',
+          width: `${img.length * 100}%`,
         }}
-        className="h-full transition-transform ease-in-out"
+        className={cn(
+          'h-full flex transition-transform ease-in-out',
+          isLoading ? 'invisible' : 'visible',
+        )}
         aria-live="polite"
       >
-        {displayImages.map((src, i) => {
+        {img.map((src, i) => {
           return (
             <img
               key={`${src}-${i}`}
-              style={{ width: `${100 / displayImages.length}%` }}
+              style={{ width: `${100 / img.length}%` }}
               className={'h-full object-cover'}
               src={src}
-              alt={`Image ${i + 1} of ${displayImages.length}`}
+              alt={`Image ${i + 1} of ${img.length}`}
               onLoad={() => handleImageLoad(src)}
               draggable="false"
             />
@@ -132,7 +120,7 @@ function ImageCarousel({ img, customClass }: ImageCarouselProps) {
         className={cn(currImgIndicatorBaseStyle, customClass)}
         aria-live="polite"
         aria-atomic="true"
-      >{`${currImg + 1} / ${displayImages.length}`}</div>
+      >{`${currImg + 1} / ${img.length}`}</div>
     </div>
   );
 }
