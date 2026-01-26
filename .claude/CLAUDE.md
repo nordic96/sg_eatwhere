@@ -390,6 +390,35 @@ Use `useBreakpoints()` hook for responsive logic.
 - Hook: `useTranslations('namespace')`
 - Server: `getTranslations('namespace')`
 
+### i18n CDN Fallback Chain
+
+When loading translations from CDN (e.g., for search results or dynamic content), implement a nested fallback strategy:
+
+```typescript
+async function fetchTranslations(locale: string) {
+  try {
+    // Try locale-specific CDN file first
+    return await fetch(`${CDN_BASE}/messages/${locale}.json`);
+  } catch (error) {
+    try {
+      // Fallback to English if locale file fails
+      return await fetch(`${CDN_BASE}/messages/en.json`);
+    } catch (fallbackError) {
+      // Last resort: empty object or cached default
+      return {};
+    }
+  }
+}
+```
+
+**Benefits:**
+- Graceful degradation on network failures
+- Users see English content rather than broken text
+- Works across all locales without duplication
+- Handles partial network failures (e.g., CDN timeout for specific locale)
+
+**Implementation:** `app/api/` routes handling dynamic translation fetching
+
 ---
 
 ## API Endpoints
@@ -701,6 +730,48 @@ npm run test -- --testPathPattern="StatsBar"
 npm run test -- StatsBar
 ```
 
+#### 7. useEffect State Reset Race Conditions with Cached Resources
+
+**Problem:** Using `useEffect` to reset state when props change causes race conditions with cached images or other onLoad events. When a component is unmounted and remounted rapidly (e.g., reopening PlaceContent), the state reset and onLoad events may execute out of order, leaving the component in a loading state.
+
+```typescript
+// WRONG - State reset may happen after onLoad events fire
+useEffect(() => {
+  setCurrImg(0);  // Reset happens asynchronously
+  setDisplayImages(img);
+}, [img]);
+
+// Later, when images load:
+const handleImageLoad = () => {
+  setLoadedImages(prev => new Set([...prev, src])); // May fire before state reset
+};
+```
+
+**Solution:** Use key-based remounting to force React to create a new component instance, automatically resetting all internal state.
+
+```typescript
+// CORRECT - Component remounts, all state reset automatically
+<ImageCarousel key={data.id} img={data.images} />
+
+// This triggers a fresh component with:
+// - Fresh state (currImg = 0, loadedImages = new Set())
+// - Fresh event listeners
+// - No state/onLoad timing conflicts
+```
+
+**Benefits:**
+- Eliminates race conditions between state resets and event handlers
+- Cleaner code (no manual state reset logic needed)
+- React handles unmount/mount lifecycle properly
+- Works reliably with cached resources (images, videos, etc.)
+
+**When to use:**
+- Component needs full reset when parent data changes
+- Component has async resource loading (images, fonts, etc.)
+- Prop changes should trigger fresh component initialization
+
+**Files:** `app/components/PlaceContent/ImageCarousel.tsx`
+
 ### Best Practices Established
 
 #### Component Structure
@@ -793,6 +864,18 @@ Before starting any new implementation:
 - Enhanced `StatsBar` component: Added animateOnScroll, animationDuration, staggerDelay props
 - Added `window.matchMedia` mock to jest.setup.ts for responsive component testing
 - Pattern: Scroll-based animations for progressive disclosure on about page
+
+**Issue #142: ImageCarousel Persistent Loading Bug (2026-01-26)**
+- Fixed: Loading spinner persisting when reopening PlaceContent
+- Root cause: useEffect state reset race condition with cached image onLoad events
+- Solution: Implemented key-based remounting (`key={data.id}`) instead of manual state reset
+- Added pattern documentation: useEffect State Reset Race Conditions with Cached Resources
+
+**Issue #141: i18n CDN Fallback (2026-01-26)**
+- Fixed: Network failures skipping locale-specific fallback in CDN translation loading
+- Root cause: Single try-catch didn't attempt English fallback on network error
+- Solution: Nested try-catch blocks (locale → English → default)
+- Added pattern documentation: i18n CDN Fallback Chain
 
 ### Pending Work
 

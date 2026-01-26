@@ -20,23 +20,11 @@
 ### Mistakes & Fixes
 
 - **Issue:** Landing page loading extremely slow (~50MB HuggingFace semantic model loading on all pages)
-  - **Root Cause:** Two compounding issues:
-    1. React 19's `<Activity mode={condition}>` component wraps children but **still mounts them** - visibility hiding does not equal conditional rendering
-    2. `SemanticSearchClient` constructor called `initWorker()` automatically on instantiation, triggering model download on any page where SearchBar component existed
-    3. SearchBar was used in Header.tsx which appears on every page, so model loaded everywhere even when not needed
-  - **Fix:**
-    1. Replaced `<Activity mode={condition}><SearchBar /></Activity>` with true conditional rendering: `{condition && <SearchBar />}`
-    2. Deferred worker initialization in SemanticSearchClient - removed auto-call from constructor, kept lazy initialization via `ensureWorker()` method called only by `generateEmbeddings()`
-    3. Result: Model now loads only when SearchBar actually mounts on /mapview with desktop breakpoint
+  - **Root Cause:** SemanticSearchClient constructor called `initWorker()` automatically on instantiation, triggering model download on any page where SearchBar component existed
+  - **Fix:** See [CLAUDE.md Performance Patterns](../../CLAUDE.md#performance-patterns) for the documented solution (lazy initialization + conditional rendering)
   - **Prevention:**
-    - Use true conditional rendering `{condition && <Component />}` instead of visibility-hiding wrappers
-    - Never auto-initialize heavy resources in constructors - defer to lazy init patterns
     - Test app with Network throttling to catch unexpected resource loads on unrelated pages
     - Check git diff on bundle/asset changes to verify assets aren't loading unexpectedly
-
-- **Misconception:** Adding `loading.tsx` would prevent component mounting and solve the issue
-  - **Why Incorrect:** `loading.tsx` provides Suspense UI fallback but doesn't prevent child components from mounting - it only controls what's shown while async operations complete
-  - **Correct Understanding:** Must use conditional rendering in component tree itself to prevent mount, not just suspend rendering
 
 ### Patterns Discovered
 
@@ -49,25 +37,11 @@
 ### Debugging Wins
 
 - **Problem:** Landing page taking 5+ seconds to load, Network tab showed 50MB model download despite page not using search
-  - **Approach:**
-    1. Checked Network tab to identify unexpected large asset
-    2. Traced asset URL back to HuggingFace embedding model
-    3. Added console logs at component mount to see when SearchBar loads
-    4. Found SearchBar mounted on all pages (via Header.tsx)
-    5. Traced execution backwards from SearchBar -> useSemanticSearch hook -> getSemanticSearchClient singleton -> constructor auto-init
   - **Tools/Techniques:**
     - Network tab with asset download tracing (crucial for finding unexpected resource loads)
     - Strategic console.log() at component mounts and constructor calls
     - Conditional rendering test: temporarily removed SearchBar to verify impact
-    - Git blame to see when `<Activity>` wrapper was added (revealed misunderstanding of component behavior)
-
-- **Problem:** After removing auto-init from constructor, ensuring singleton still worked and model loaded when needed
-  - **Approach:**
-    1. Verified `getReadyState()` returned false initially
-    2. Confirmed `generateEmbeddings()` called `ensureWorker()` before processing
-    3. Tested on /mapview that model eventually loaded (not on page load, but on first search attempt)
-    4. Confirmed mobile/tablet breakpoints didn't mount SearchBar at all
-  - **Tool:** Debug console checking `getReadyState()` during interaction
+    - Git blame to see when changes were introduced
 
 ---
 
@@ -163,52 +137,12 @@ Based on the performance investigation session, several automation opportunities
 
 ### Code Patterns for Automation Rules
 
-#### Anti-Pattern: Eager Init in Constructor
-```typescript
-// ANTI-PATTERN - Don't do this
-class HeavyService {
-  constructor() {
-    this.initialize(); // Blocks creation, loads resources immediately
-  }
-}
-```
+#### Automation Patterns
 
-**Automation Rule:** Scan for `new HeavyService()` at module level or in constructors, flag for review
-
-#### Anti-Pattern: Activity Component for Performance
-```typescript
-// ANTI-PATTERN - Component still mounts and runs side effects
-<Activity mode={isSearchVisible}>
-  <SearchBar /> {/* Loads 50MB model even when hidden */}
-</Activity>
-```
-
-**Automation Rule:** Flag `<Activity mode={...}>` wrapping heavy components, suggest conditional rendering
-
-#### Correct Pattern: Lazy Initialization
-```typescript
-// CORRECT - Constructor lightweight, init deferred
-class HeavyService {
-  private resource: Resource | null = null;
-
-  constructor() {
-    // Don't initialize here
-  }
-
-  private async initialize() {
-    if (!this.resource) {
-      this.resource = await loadHeavyResource();
-    }
-  }
-
-  async doWork(data) {
-    await this.initialize(); // Lazy trigger
-    // Process data...
-  }
-}
-```
-
-**Automation Rule:** Recognize and suggest this pattern when detecting eager init
+> **Performance patterns:** See [~/.claude/skills/frontend-dev/SKILL.md](~/.claude/skills/frontend-dev/SKILL.md#react-19-patterns) for universal anti-patterns and correct implementations of:
+> - Lazy initialization
+> - Conditional rendering vs Activity components
+> - Hook cleanup patterns
 
 ### Testing Automation Opportunities
 
@@ -666,139 +600,12 @@ Since the icon migration affected 24 files, ensure tests cover:
 
 ### Mistakes & Fixes
 
-- **Issue:** Jest tests failed with "window.matchMedia is not a function"
-  - **Root Cause:** The `useScrollReveal` hook uses Intersection Observer API which depends on `window.matchMedia` being available, but Jest/jsdom doesn't provide this mock by default
-  - **Fix:** Added `window.matchMedia` mock to `jest.setup.ts`:
-    ```typescript
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation(query => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-    ```
-  - **Prevention:** When adding new hooks that depend on browser APIs (IntersectionObserver, ResizeObserver, matchMedia), immediately add Jest mocks to `jest.setup.ts`
+> **Universal patterns:** See [~/.claude/skills/frontend-dev/SKILL.md](~/.claude/skills/frontend-dev/SKILL.md) for:
+> - Jest Browser API Mocks (matchMedia, IntersectionObserver, ResizeObserver)
+> - Timer Cleanup with useRef
+> - Tailwind Dynamic Class Anti-Pattern
 
-- **Issue:** Memory leak in `useScrollReveal` hook - timeout wasn't cleaned up
-  - **Root Cause:** Used `setTimeout` for initialization delay but didn't store the timeout ID to clean it up in useEffect cleanup function
-  - **Fix:** Added `useRef` to store timeout ID and clear it in cleanup:
-    ```typescript
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-    useEffect(() => {
-      timeoutRef.current = setTimeout(() => {
-        // initialization code
-      }, 100);
-
-      return () => {
-        if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current);
-        }
-      };
-    }, []);
-    ```
-  - **Prevention:** Any async operations in hooks must be cleaned up - use useRef for timers, AbortController for fetch calls, store subscription cleanup functions
-
-- **Issue:** Tailwind JIT compiler couldn't detect dynamic class names like `duration-${duration}`
-  - **Root Cause:** Attempted to use dynamic Tailwind classes with template literals in component props, but Tailwind's JIT compiler scans static strings at build time and can't detect dynamic class combinations
-  - **Fix:** Removed dynamic duration class, used hardcoded Tailwind class instead or used inline styles for the duration value
-  - **Prevention:** Never use template literals to generate Tailwind class names. For dynamic values, either:
-    1. Use a fixed set of predefined classes and select from them: `classMap[duration]`
-    2. Use inline styles for dynamic values: `<div style={{ transitionDuration: `${duration}ms` }}>`
-    3. Use CSS variables with Tailwind: `<div className="duration-500" style={{ '--duration': duration + 'ms' }}>`
-
-### Patterns Discovered
-
-- **Pattern:** Intersection Observer-based Scroll Reveal Hook
-  - **Context:** Animate elements when they scroll into view on About page
-  - **Implementation:** `useScrollReveal` hook that:
-    1. Takes a ref and optional config (threshold, rootMargin, delay)
-    2. Creates IntersectionObserver on mount
-    3. Sets visible state when element enters viewport
-    4. Cleans up observer on unmount
-  - **Usage:**
-    ```typescript
-    const ref = useRef(null);
-    const isVisible = useScrollReveal(ref, { delay: 200 });
-    return <div ref={ref} className={isVisible ? 'animate-in' : 'opacity-0'} />;
-    ```
-  - **Key detail:** IntersectionObserver is more efficient than scroll event listeners - it's hardware-accelerated and doesn't block main thread
-
-- **Pattern:** Animated Number Counter Hook
-  - **Context:** Count up stats numbers on About page when visible
-  - **Implementation:** `useCountUp` hook that:
-    1. Takes start, end, duration, and easing function
-    2. Uses `requestAnimationFrame` for smooth 60fps animation
-    3. Applies easing functions (easeOutQuad, easeInOutCubic, etc.)
-    4. Triggers based on external `isVisible` signal
-    5. Returns animated value for rendering
-  - **Usage:**
-    ```typescript
-    const count = useCountUp(0, 2024, 2000, easeOutQuad, isVisible);
-    return <span>{Math.floor(count)}</span>;
-    ```
-  - **Easing functions:** Created reusable easing helpers:
-    ```typescript
-    const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
-    const easeInOutCubic = (t: number) =>
-      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    ```
-
-- **Pattern:** Enhanced FadeIn Component with Scroll Triggers
-  - **Context:** Reusable animation wrapper component for scroll-based reveals
-  - **Implementation:** Extended existing `FadeIn` component with props:
-    - `scrollTrigger?: boolean` - Enable scroll reveal animation
-    - `direction?: 'up' | 'down' | 'left' | 'right'` - Slide direction before fade in
-    - `delay?: number` - Delay in milliseconds
-  - **Usage:**
-    ```typescript
-    <FadeIn scrollTrigger direction="up" delay={200}>
-      <div>Content animates up then fades in on scroll</div>
-    </FadeIn>
-    ```
-  - **Benefits:** Declarative API, reusable across pages, cleaner than hook-based approach for complex animations
-
-### Debugging Wins
-
-- **Problem:** Jest tests failing after adding scroll reveal hooks to About page
-  - **Approach:**
-    1. Ran jest to see error: "window.matchMedia is not a function"
-    2. Searched for where useScrollReveal was used (About page components)
-    3. Traced execution backward to find that IntersectionObserver depends on matchMedia
-    4. Added mock to jest.setup.ts
-  - **Tool/Technique:** Error stack trace pointed directly to the missing mock - just needed to add it
-
-- **Problem:** Memory leak warnings in tests due to cleanup not happening
-  - **Approach:**
-    1. Noticed "act" warnings when unmounting components in tests
-    2. Checked useScrollReveal implementation and found missing cleanup
-    3. Added timeoutRef to track and clear timeout on unmount
-    4. Verified warnings disappeared after running tests again
-  - **Tool/Technique:** React's console warnings about incomplete state updates guide toward cleanup issues
-
-### Performance Notes
-
-- **Scroll Animation Efficiency:** Intersection Observer is far more efficient than scroll event listeners
-  - No main thread blocking from repeated calculations
-  - Browser can optimize reflows/repaints
-  - Multiple observers share same internal detection mechanism
-
-- **RequestAnimationFrame for Animations:** Counter animations use rAF for smooth 60fps updates
-  - Syncs with browser's repaint cycle
-  - Automatically paused when tab is not visible
-  - Prevents jank from JavaScript execution on main thread
-
-- **Easing Functions:** Pre-calculated easing values (not animated) provide smooth curves
-  - Math-based easing (quadratic, cubic) cheaper than CSS animations
-  - Can be reused across multiple animations
-  - Easy to test vs visual animations
+- **Project-specific:** Added scroll reveal and counter animations to About page (see [CLAUDE.md Performance Patterns](../../CLAUDE.md#scroll-based-animation-patterns))
 
 ---
 
@@ -1000,43 +807,12 @@ Object.defineProperty(window, 'apiName', {
 });
 ```
 
-#### Memory Leak Pattern in Hooks
-```typescript
-// ANTI-PATTERN - No cleanup for async operations
-useEffect(() => {
-  setTimeout(() => {
-    setState(value); // Memory leak if component unmounts
-  }, delay);
-}, []);
+#### Code Pattern Automation Rules
 
-// CORRECT - Cleanup with ref storage
-const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-useEffect(() => {
-  timeoutRef.current = setTimeout(() => {
-    setState(value);
-  }, delay);
-  return () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  };
-}, []);
-```
-
-**Automation Rule:** Flag `setTimeout`/`setInterval` in useEffect without cleanup ref
-
-#### Dynamic Tailwind Classes Anti-Pattern
-```typescript
-// ANTI-PATTERN - JIT compiler can't detect dynamic classes
-<div className={`duration-${duration}`} />
-
-// CORRECT - Use fixed predefined classes or inline styles
-<div style={{ transitionDuration: `${duration}ms` }} />
-
-// Or use classMap pattern
-const durationMap = { fast: 'duration-200', slow: 'duration-500' };
-<div className={durationMap[speed]} />
-```
-
-**Automation Rule:** Flag template literal class names, suggest alternatives
+> **Universal anti-patterns:** See [~/.claude/skills/frontend-dev/SKILL.md](~/.claude/skills/frontend-dev/SKILL.md) for automation rules on:
+> - Memory leak detection in hooks
+> - Dynamic Tailwind class anti-patterns
+> - useEffect cleanup requirements
 
 ### High-Value, Low-Effort Quick Wins
 
@@ -1066,20 +842,7 @@ const durationMap = { fast: 'duration-200', slow: 'duration-500' };
 
 ### Testing Opportunities for New Hooks
 
-When adding hooks that use browser APIs:
-
-1. **Add test for hook initialization**
-   - Verify no errors on mount
-   - Check required mocks are in place
-
-2. **Add test for hook cleanup**
-   - Verify timers are cleared
-   - Check event listeners are removed
-   - Verify no memory leaks on unmount
-
-3. **Add test for hook with Activity/Suspense boundary**
-   - Hook behavior inside boundary
-   - Check proper unmounting
+> **Testing patterns:** See [~/.claude/skills/frontend-dev/SKILL.md](~/.claude/skills/frontend-dev/SKILL.md#testing-patterns) for standard Jest mock implementations and testing guidelines.
 
 ### Lessons for Future Sessions
 
@@ -1091,14 +854,50 @@ When adding hooks that use browser APIs:
 
 ### Common Jest Mock Scenarios
 
-| API | Mock Added | When Used | Example |
-|-----|-----------|-----------|---------|
-| `matchMedia` | Session 2026-01-20 | useScrollReveal, media queries | Intersection Observer dependencies |
-| `IntersectionObserver` | Needed | Scroll reveal effects | About page animations |
-| `ResizeObserver` | Needed | Element resize detection | Responsive hooks |
-| `localStorage` | Not yet | Session state persistence | User preferences |
-| `fetch` | Not yet | Network requests | Search, data loading |
+> **Mock templates:** See [~/.claude/skills/frontend-dev/SKILL.md](~/.claude/skills/frontend-dev/SKILL.md#jest-browser-api-mocks) for standard mock implementations.
+
+| API | Status | Project Usage |
+|-----|--------|---------------|
+| `matchMedia` | Added (2026-01-20) | useScrollReveal, media queries |
+| `IntersectionObserver` | Needed | Scroll reveal effects |
+| `ResizeObserver` | Needed | Element resize detection |
 
 ---
 
-*Last updated: 2026-01-20*
+---
+
+---
+
+## Session Learnings - 2026-01-26
+
+### Mistakes & Fixes
+
+- **Issue:** ImageCarousel loading spinner persisted after reopening PlaceContent (Issue #142)
+  - **Root Cause:** useEffect state reset race condition with cached image onLoad events
+  - **Fix:** Key-based remounting pattern - see [CLAUDE.md Critical Lessons #7](../../CLAUDE.md#7-useeffect-state-reset-race-conditions-with-cached-resources)
+  - **Also see:** [~/.claude/skills/frontend-dev/SKILL.md](~/.claude/skills/frontend-dev/SKILL.md#useeffect-state-reset-race-conditions-with-cached-events) for universal pattern
+
+- **Issue:** i18n CDN fallback skipped locale-specific file on network failure (Issue #141)
+  - **Root Cause:** Network error when fetching locale-specific file immediately fell back to English
+  - **Fix:** Nested try-catch blocks - see [CLAUDE.md Internationalization](../../CLAUDE.md#i18n-cdn-fallback-chain)
+  - **Prevention:** Always implement fallback chains in nested try-catch blocks, not flat sequential retries
+
+### Patterns Discovered
+
+> **Key-based remounting:** See [CLAUDE.md Critical Lessons #7](../../CLAUDE.md#7-useeffect-state-reset-race-conditions-with-cached-resources) and [~/.claude/skills/frontend-dev/SKILL.md](~/.claude/skills/frontend-dev/SKILL.md#useeffect-state-reset-race-conditions-with-cached-events)
+
+> **i18n CDN fallback:** See [CLAUDE.md Internationalization](../../CLAUDE.md#i18n-cdn-fallback-chain)
+
+### Debugging Wins
+
+- **Tool/Technique:** Console logging onLoad callbacks + understanding React lifecycle (useState before useEffect) led to key-based remounting solution
+- **Tool/Technique:** Manual API testing for understanding fallback chain ordering
+
+### Automation Opportunities (Project-Specific)
+
+- **`/fix-carousel-loading`** - Auto-apply key-based remounting pattern
+- **`/validate-i18n-fallbacks`** - Check CDN translation fallback chains
+
+---
+
+*Last updated: 2026-01-26*
