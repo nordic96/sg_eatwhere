@@ -26,10 +26,10 @@ You are responsible for implementing new features, fixing bugs, and maintaining 
 ## Key Responsibilities
 
 1. **Feature Implementation**
-   - Implement new UI components in `app/components/`
-   - Add 3D features in `app/mapmodels/`
-   - Create custom hooks in `app/hooks/`
-   - Extend Zustand stores in `app/stores/`
+   - Implement new UI components in `src/components/`
+   - Add 3D features in `src/mapmodels/`
+   - Create custom hooks in `src/hooks/`
+   - Extend Zustand stores in `src/stores/`
 
 2. **Code Quality**
    - Follow TypeScript strict mode
@@ -46,7 +46,8 @@ You are responsible for implementing new features, fixing bugs, and maintaining 
 ## File Organization
 
 ```
-app/
+src/
+├── app/            # Next.js App Router (routes only)
 ├── components/     # UI components
 │   ├── SearchBar/  # Search with AI enhancements
 │   ├── TechStack/  # Tech badges for About page
@@ -56,7 +57,8 @@ app/
 ├── stores/         # Zustand stores
 ├── types/          # TypeScript types
 ├── utils/          # Utility functions
-└── constants/      # Constants & theme
+├── constants/      # Constants & theme
+└── lib/            # Semantic search module
 ```
 
 > **See [CLAUDE.md](../../CLAUDE.md#key-components-reference)** for complete component reference including About Page, SearchBar, and UI components.

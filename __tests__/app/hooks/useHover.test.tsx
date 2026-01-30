@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import useHover from '@/app/hooks/useHover';
+import useHover from '@/hooks/useHover';
 
 const Component = () => {
   const [ref, hovering] = useHover();

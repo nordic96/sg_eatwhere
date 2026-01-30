@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
-import { useHeritageStore } from '@/app/stores/useHeritageStore';
-import { FoodHeritage } from '@/app/types';
+import { useHeritageStore } from '@/stores/useHeritageStore';
+import { FoodHeritage } from '@/types';
 
 describe('Heritage Filtering Workflow Integration Tests', () => {
   // Comprehensive mock data representing different regions and categories

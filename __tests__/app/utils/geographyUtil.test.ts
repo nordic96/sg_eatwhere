@@ -5,7 +5,7 @@ import {
   geoConverter,
   LatLng,
   Vec3,
-} from '@/app/utils/geographyUtil';
+} from '@/utils/geographyUtil';
 import * as THREE from 'three';
 
 describe('geographyUtil', () => {

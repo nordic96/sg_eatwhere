@@ -1,4 +1,4 @@
-import { calculateEnvironment, EnvironmentState } from '@/app/utils/calcEnvironment';
+import { calculateEnvironment, EnvironmentState } from '@/utils/calcEnvironment';
 
 describe('calcEnvironment', () => {
   describe('calculateEnvironment', () => {

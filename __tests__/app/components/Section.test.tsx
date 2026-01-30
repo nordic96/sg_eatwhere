@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Section from '@/app/components/Section/Section';
+import Section from '@/components/Section/Section';
 
 describe('Section Component', () => {
   describe('Default rendering', () => {

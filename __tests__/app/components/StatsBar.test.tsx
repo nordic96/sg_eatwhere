@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
-import StatsBar from '@/app/components/StatsBar/StatsBar';
-import type { StatItem } from '@/app/components/StatsBar/StatsBar';
+import StatsBar from '@/components/StatsBar/StatsBar';
+import type { StatItem } from '@/components/StatsBar/StatsBar';
 
 // Mock IntersectionObserver for scroll reveal
 const mockIntersectionObserver = jest.fn();

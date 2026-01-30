@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { renderHook, act } from '@testing-library/react';
-import { useHeritageStore } from '@/app/stores/useHeritageStore';
-import { useAppStore } from '@/app/stores/useAppStore';
-import { useTrailStore } from '@/app/stores/useTrailStore';
-import { FoodHeritage } from '@/app/types';
+import { useHeritageStore } from '@/stores/useHeritageStore';
+import { useAppStore } from '@/stores/useAppStore';
+import { useTrailStore } from '@/stores/useTrailStore';
+import { FoodHeritage } from '@/types';
 
 describe('Store Integration Tests', () => {
   const mockFoodData: FoodHeritage[] = [

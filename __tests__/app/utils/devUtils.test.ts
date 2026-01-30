@@ -1,4 +1,4 @@
-import { getGmapUrl, isProductionMode, isTrailMode, isUsingTestData } from '@/app/utils/devUtils';
+import { getGmapUrl, isProductionMode, isTrailMode, isUsingTestData } from '@/utils/devUtils';
 
 describe('devUtils', () => {
   const originalEnv = process.env;

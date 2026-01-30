@@ -19,7 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@/i18n/*": ["./i18n/*"],
+      "@/resources/*": ["./resources/*"],
+      "@/messages/*": ["./messages/*"],
+      "@/public/*": ["./public/*"],
+      "@/node_modules/*": ["./node_modules/*"]
     }
   },
   "include": [

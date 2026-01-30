@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Divider from '@/app/components/Divider/Divider';
-import VerticalDivider from '@/app/components/VerticalDivider/VerticalDivider';
+import Divider from '@/components/Divider/Divider';
+import VerticalDivider from '@/components/VerticalDivider/VerticalDivider';
 
 describe('Divider Component', () => {
   test('renders horizontal divider', () => {

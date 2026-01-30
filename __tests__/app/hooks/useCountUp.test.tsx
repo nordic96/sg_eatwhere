@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, act } from '@testing-library/react';
-import { useCountUp, UseCountUpOptions } from '@/app/hooks/useCountUp';
+import { useCountUp, UseCountUpOptions } from '@/hooks/useCountUp';
 
 // Mock requestAnimationFrame
 let frameCallbacks: Array<(timestamp: number) => void> = [];

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import RichItem from '@/app/components/SearchBar/RichItem';
-import { FoodHeritage } from '@/app/types';
+import RichItem from '@/components/SearchBar/RichItem';
+import { FoodHeritage } from '@/types';
 
 // Mock next-intl
 jest.mock('next-intl', () => ({
@@ -9,7 +9,7 @@ jest.mock('next-intl', () => ({
 }));
 
 // Mock CategoryIcon component
-jest.mock('@/app/components/CategoryIcon/CategoryIcon', () => {
+jest.mock('@/components/CategoryIcon/CategoryIcon', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function MockCategoryIcon({ cat, className, alt }: any) {
     return (

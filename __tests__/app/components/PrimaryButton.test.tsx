@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import PrimaryButton from '@/app/components/PrimaryButton/PrimaryButton';
+import PrimaryButton from '@/components/PrimaryButton/PrimaryButton';
 
 describe('PrimaryButton Component', () => {
   test('renders button with children', () => {

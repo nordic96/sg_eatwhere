@@ -1,4 +1,4 @@
-import { generateRandomArr } from '@/app/utils/randomUtils';
+import { generateRandomArr } from '@/utils/randomUtils';
 
 describe('randomUtils', () => {
   describe('generateRandomArr', () => {

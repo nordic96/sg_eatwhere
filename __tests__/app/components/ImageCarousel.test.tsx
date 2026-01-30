@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import ImageCarousel from '@/app/components/ImageCarousel/ImageCarousel';
+import ImageCarousel from '@/components/ImageCarousel/ImageCarousel';
 
 // Helper to simulate image loading
 function simulateImageLoads(container: HTMLElement) {

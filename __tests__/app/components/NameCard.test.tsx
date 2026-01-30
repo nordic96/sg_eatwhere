@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import NameCard from '@/app/components/NameCard/NameCard';
+import NameCard from '@/components/NameCard/NameCard';
 
 describe('NameCard Component', () => {
   describe('Default rendering (compact mode)', () => {

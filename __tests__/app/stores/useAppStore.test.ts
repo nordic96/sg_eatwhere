@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useAppStore, openSidebar, closeSidebar } from '@/app/stores/useAppStore';
+import { useAppStore, openSidebar, closeSidebar } from '@/stores/useAppStore';
 
 describe('useAppStore', () => {
   beforeEach(() => {

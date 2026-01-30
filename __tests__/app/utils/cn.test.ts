@@ -1,4 +1,4 @@
-import { cn } from '@/app/utils/cn';
+import { cn } from '@/utils/cn';
 
 describe('cn utility', () => {
   test('merges single class name', () => {

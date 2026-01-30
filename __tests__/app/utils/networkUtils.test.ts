@@ -1,5 +1,5 @@
-import { fetchApi } from '@/app/utils/networkUtils';
-import { AppResponse } from '@/app/types';
+import { fetchApi } from '@/utils/networkUtils';
+import { AppResponse } from '@/types';
 
 // Mock the global fetch function
 global.fetch = jest.fn();
