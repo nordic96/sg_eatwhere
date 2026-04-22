@@ -47,6 +47,9 @@
   }
 }
 
+html {
+  font-size: 85%;
+}
 
 body {
   background: var(--background);
