@@ -11,6 +11,7 @@ import ButtonContainer from './ButtonContainer';
 import { memo, useMemo } from 'react';
 import { MrtLabel } from '../MrtLabel/MrtLabel';
 import { FaMap, FaThumbsUp } from 'react-icons/fa';
+import { ENABLE_SIDEBAR } from '@/config';
 
 const MIN_DESC_LEN = 50;
 function PlaceContent() {
@@ -74,7 +75,7 @@ function PlaceContent() {
             <FaThumbsUp size={18} />
             <span className={'font-bold'}>{t('must_try')}</span>
           </div>
-          <div className={'flex gap-1 flex-col'}>
+          <div className={'flex gap-1 flex-wrap justify-center'}>
             {data.recommendations.map((dish, i) => (
               <span
                 key={i}
@@ -88,12 +89,14 @@ function PlaceContent() {
           </div>
         </div>
         {/** Desc Container */}
-        <div className="flex flex-col justify-start gap-4">
-          <p className="font-light text-xs">
-            {description.substring(0, Math.min(description.length, MIN_DESC_LEN))}
-            {description.length > MIN_DESC_LEN ? '...' : ''}
-          </p>
-        </div>
+        {ENABLE_SIDEBAR && (
+          <div className="flex flex-col justify-start gap-4">
+            <p className="font-light text-xs">
+              {description.substring(0, Math.min(description.length, MIN_DESC_LEN))}
+              {description.length > MIN_DESC_LEN ? '...' : ''}
+            </p>
+          </div>
+        )}
         {/** Learn More Btn Container */}
         <div className="flex justify-center gap-2">
           <a
@@ -109,13 +112,15 @@ function PlaceContent() {
             <FaMap size={18} />
             <span>{t('directions')}</span>
           </a>
-          <button
-            className={cn('flex-1', learnMoreBtnBaseStyle, getThemeStyle())}
-            onClick={openMore}
-            aria-label="Learn more about this location"
-          >
-            {t('learnmore')}
-          </button>
+          {ENABLE_SIDEBAR && (
+            <button
+              className={cn('flex-1', learnMoreBtnBaseStyle, getThemeStyle())}
+              onClick={openMore}
+              aria-label="Learn more about this location"
+            >
+              {t('learnmore')}
+            </button>
+          )}
         </div>
       </div>
     </article>
