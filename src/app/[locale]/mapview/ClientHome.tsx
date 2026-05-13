@@ -16,7 +16,7 @@ import TrailMode from '@/components/TrailMode/TrailMode';
 import { SearchBar } from '@/components/SearchBar';
 import FoodMarquee from '@/components/FoodMarquee/FoodMarquee';
 import GoogleMapsBanner from '@/components/GoogleMapsBanner/GoogleMapsBanner';
-import { FaMapPin } from 'react-icons/fa';
+import { FaMapPin, FaInfoCircle } from 'react-icons/fa';
 
 type ClientHomeProps = {
   locale: string;
@@ -79,17 +79,32 @@ function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeP
           <FoodMarquee items={foodImages} />
         </div>
         <GoogleMapsBanner url={gmapUrl} />
-        {/** Food List Container */}
-        <div className={'flex flex-col'}>
-          <div className={'flex items-center gap-1'}>
-            <FaMapPin size={20} aria-hidden="true" />
-            <h2 className={'font-bold text-lg'}>{t('foodlist_by_region')}</h2>
+        {/** Metadata Container */}
+        <div className="grid grid-cols-2 flex-1 mt-1">
+          {/** HeritageListView Container */}
+          <div className={'flex flex-1 flex-col'}>
+            <div className={'flex justify-between items-center'}>
+              <div className={'flex items-center gap-1'}>
+                <FaMapPin size={20} aria-hidden="true" />
+                <h2 className={'font-bold text-lg'}>{t('foodlist_by_region')}</h2>
+              </div>
+              {/** Legend Container */}
+              <div></div>
+            </div>
+            <div className={'flex max-sm:flex-col'}>
+              <HeritageListView region={'central'} />
+              <HeritageListView region={'east'} />
+              <HeritageListView region={'west'} />
+              <HeritageListView region={'north'} />
+            </div>
           </div>
-          <div className="grid grid-cols-4 flex-1 mt-1">
-            <HeritageListView region={'central'} />
-            <HeritageListView region={'east'} />
-            <HeritageListView region={'west'} />
-            <HeritageListView region={'north'} />
+          {/** Other Useful Info Container */}
+          <div className={'flex flex-col'}>
+            <div className={'flex items-center gap-1'}>
+              <FaInfoCircle size={20} aria-hidden="true" />
+              <h2 className={'font-bold text-lg'}>{t('other_info_header')}</h2>
+            </div>
+            <div className={'flex max-sm:flex-col'}></div>
           </div>
         </div>
       </div>

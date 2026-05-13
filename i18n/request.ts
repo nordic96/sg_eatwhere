@@ -2,13 +2,19 @@ import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 import { CDN_BASE } from '@/config/cdn';
+import { USE_TEST_LOCALE } from '@/config';
 
 export async function geti18nConfig(locale: string) {
   let messages;
   try {
-    const res = await fetch(`${CDN_BASE}/messages/${locale}.json`, {
-      next: { revalidate: 3600 },
-    });
+    let res: Response;
+    if (USE_TEST_LOCALE) {
+      res = (await import(`../messages/${locale}.json`)).default;
+    } else {
+      res = await fetch(`${CDN_BASE}/messages/${locale}.json`, {
+        next: { revalidate: 3600 },
+      });
+    }
     if (res.ok) {
       const data = await res.json();
       // Basic validation - ensure we got a valid object
