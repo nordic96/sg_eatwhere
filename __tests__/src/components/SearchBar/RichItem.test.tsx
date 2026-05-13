@@ -25,7 +25,8 @@ describe('RichItem Component', () => {
     category: 'restaurant',
     location: {
       region: 'central',
-      mrt: ['NS1', 'EW12'],
+      mrt: ['NE1', 'EW12'],
+      mrt_codes: ['NE1', 'EW12'],
       address: '123 Test Street',
       gmapUrl: 'https://maps.google.com',
       geoLocation: { latitude: 1.234, longitude: 103.456 },
@@ -55,7 +56,7 @@ describe('RichItem Component', () => {
 
   test('renders first MRT station with translation', () => {
     render(<RichItem data={mockFoodData} />);
-    expect(screen.getByText('MRT.NS1')).toBeInTheDocument();
+    expect(screen.getByText('HarbourFront')).toBeInTheDocument();
   });
 
   test('renders with different category types', () => {
