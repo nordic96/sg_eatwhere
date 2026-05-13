@@ -134,5 +134,9 @@
         "languages_label": "Languages",
         "project_value": "1",
         "project_label": "Dream Project"
+    },
+    "Spicy": {
+        "label": "Spicy",
+        "tooltip_desc": "May contain spicy menu"
     }
 }

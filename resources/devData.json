@@ -1,285 +1,266 @@
 [
-  {
-    "id": "ahtai",
-    "name": "AhTai Hainanese Chicken Rice",
-    "recommendations": ["Chicken Rice Set"],
-    "category": "hawker",
-    "imgSource": ["/ahtai/ahtai.jpeg"],
-    "location": {
-      "address": "1 Kadayanallur St, Maxwell Food Centre, Singapore 069184",
-      "gmapUrl": "https://maps.google.com/?q=Maxwell+Food+Centre",
-      "mrt": ["maxwell"],
-      "region": "central",
-      "geoLocation": { 
-        "latitude": 1.2808, 
-        "longitude": 103.8440 
+    {
+      "id": "komala",
+      "name": "Komala Vilas",
+      "category": "restaurant",
+      "spicy": true,
+      "recommendations": ["Masla Dosai", "Masala Chai"],
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/komala/komalavilla_1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/komala/komalavilla_2.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/komala/komalavilla_3.jpeg"
+      ],
+      "location": {
+        "address": "76 Serangoon Rd, Singapore 217981",
+        "gmapUrl": "https://maps.app.goo.gl/k7tFGxx6g8q9ooL49",
+        "mrt": ["little_india"],
+        "mrt_codes": ["NE7/DT12"],
+        "region": "central",
+        "geoLocation": {
+          "latitude": 1.307901,
+          "longitude": 103.853522
+        }
+      },
+      "website": "https://www.komalavilas.com.sg/"
+    },
+    {
+      "id": "spicy_wife",
+      "name": "Spicy Wife Nasi Lemak",
+      "category": "hawker",
+      "spicy": true,
+      "recommendations": ["Aromatic Chicken"],
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/spicy/spicy_wife_1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/spicy/spicy_wife_2.jpeg"
+      ],
+      "location": {
+        "address": "7 Maxwell Rd, Amoy St, Food Centre, 02-119, 069111",
+        "gmapUrl": "https://maps.app.goo.gl/hmquZSaXGugMDH4q8",
+        "mrt": ["tanjong_pagar"],
+        "mrt_codes": ["EW15"],
+        "region": "central",
+        "geoLocation": {
+          "latitude": 1.2792477058866272,
+          "longitude": 103.84652104460396
+        }
+      }
+    },
+    {
+      "id": "yatkayan",
+      "name": "Yat Ka Yan Dessert",
+      "category": "dessert",
+      "recommendations": ["Yam Chendol", "Purple Rice with Icecream"],
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/yatkayan/yatkayan_1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/yatkayan/yatkayan_2.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/yatkayan/yatkayan_3.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/yatkayan/yatkayan_4.jpeg"
+      ],
+      "location": {
+        "address": "190 Middle Rd, #02-08 Fortune Centre, Singapore 188979",
+        "gmapUrl": "https://maps.app.goo.gl/kAc8EuW5MqgZDbWQA",
+        "mrt": ["bencoolen"],
+        "mrt_codes": ["DT21"],
+        "region": "central",
+        "geoLocation": {
+          "latitude": 1.3007023528612611,
+          "longitude": 103.85208220385952
+        }
+      }
+    },
+    {
+      "id": "nanhuachang",
+      "name": "Nan Hua Chang SeaFood",
+      "category": "restaurant",
+      "recommendations": ["Grouper Fish Head Steamboat", "Prawn Paste Wings"],
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/nanhua/nanhuachang_1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/nanhua/nanhuachang_2.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/nanhua/nanhuachang_3.jpeg"
+      ],
+      "location": {
+        "address": "462 Crawford Ln, #01-69/71, Singapore 190462",
+        "gmapUrl": "https://maps.app.goo.gl/mBPhoS7j188iqBzv9",
+        "mrt": ["lavender", "bugis", "nicoll_highway"],
+        "mrt_codes": ["EW11"],
+        "region": "central",
+        "geoLocation": {
+          "latitude": 1.3050929262076814,
+          "longitude": 103.86270769767101
+        }
+      },
+      "website": "https://nanhwachong.com.sg/"
+    },
+    {
+      "id": "jixiang",
+      "name": "Ji Xiang Confectionery",
+      "category": "dessert",
+      "recommendations": ["Yam AngKuKueh", "Sweet Bean AngKuKueh"],
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/jixiang/jixiang_1.jpeg"
+      ],
+      "location": {
+        "address": "1 Everton Park, #01-33, Singapore 081001",
+        "gmapUrl": "https://maps.app.goo.gl/SJmoZAJ9NkfEEoau6",
+        "mrt": ["outram_park", "tanjong_pagar"],
+        "mrt_codes": ["EW15"],
+        "region": "central",
+        "geoLocation": {
+          "latitude": 1.277494311833965,
+          "longitude": 103.84025398917902
+        }
+      },
+      "website": "https://jixiangeverton.com.sg/"
+    },
+    {
+      "id": "oldtree",
+      "name": "99 Old Trees Durian",
+      "category": "dessert",
+      "recommendations": ["Stinky Bowl (with Extra Shot)", "MaoShanWang Durian Chendol"],
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/oldtree/3A01AF2E-B75C-498C-A8D9-D298970AF2D2_1_105_c.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/oldtree/oldtree_3.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/oldtree/oldtree_1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/oldtree/066AF8A2-72E8-48C2-93E7-280C8CB25A4F_1_105_c.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/oldtree/42A3E561-7823-45BF-B002-A11E5E9AAC77_1_102_a.jpeg"
+      ],
+      "location": {
+        "address": "1 Teo Hong Rd, Singapore 088321",
+        "gmapUrl": "https://maps.app.goo.gl/gqcUMstgvKDpAsZ7A",
+        "mrt": ["outram_park", "tanjong_pagar"],
+        "mrt_codes": ["NE3/EW16/TE17"],
+        "region": "central",
+        "geoLocation": {
+          "latitude": 1.280484583904037,
+          "longitude": 103.84097249373312
+        }
+      },
+      "website": "https://www.99oldtrees.com/"
+    },
+    {
+      "id": "donamanis",
+      "name": "Dona Manis Cake Shop",
+      "recommendations": ["Banana Pie"],
+      "category": "dessert",
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/dona/dona1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/dona/dona2.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/dona/dona3.jpeg"
+      ],
+      "location": {
+        "address": "865 Mountbatten Rd, B1 93, Singapore 437844",
+        "gmapUrl": "https://maps.app.goo.gl/7bSKyDyfB7VzA5Tz8",
+        "mrt": ["marine_parade"],
+        "mrt_codes": ["TE26"],
+        "region": "east",
+        "geoLocation": { "latitude": 1.30391, "longitude": 103.90145 }
+      },
+      "website": "https://www.donamanis.com/"
+    },
+    {
+      "id": "ahtai",
+      "name": "Ah Tai Hainanese Chicken Rice",
+      "recommendations": ["Hainanese Chicken Rice"],
+      "category": "hawker",
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/ahtai/ahtai.jpeg"
+      ],
+      "location": {
+        "address": "1 Kadayanallur St, #01-07 Maxwell Food Centre, Singapore 069184",
+        "gmapUrl": "https://maps.app.goo.gl/oFkWqWT2Ew2dC6v97",
+        "mrt": ["maxwell"],
+        "mrt_codes": ["TE18"],
+        "region": "central",
+        "geoLocation": { 
+          "latitude": 1.28078, 
+          "longitude": 103.84467 
+        }
+      }
+    },
+    {
+      "id": "1950",
+      "name": "The 1950s Coffee",
+      "recommendations": ["Kopi", "Kopi C Siew Dai"],
+      "category": "hawker",
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/1950/1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/1950/2.jpeg"
+      ],
+      "location": {
+        "address": "335 Smith St, #02-048, Singapore 050335",
+        "gmapUrl": "https://maps.app.goo.gl/CMbL5GabwE2NkuSz6",
+        "mrt": ["maxwell", "chinatown"],
+        "mrt_codes": ["TE18", "NE4/DT19"],
+        "region": "central",
+        "geoLocation": { 
+          "latitude": 1.2823386991951635, 
+          "longitude": 103.84338974566543 
+        }
+      }
+    },
+    {
+      "id": "springleaf",
+      "name": "SpringLeaf Prata Place",
+      "recommendations": ["Teh Tarik", "Plain Prata", "Coin Prata"],
+      "category": "restaurant",
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/springleaf/1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/springleaf/2.jpeg"
+      ],
+      "location": {
+        "address": "1 Maritime Square, #01-28, Singapore 099253",
+        "gmapUrl": "https://maps.app.goo.gl/sqUKkEG8qAbLENmEA",
+        "mrt": ["harbourfront"],
+        "mrt_codes": ["NE1/CC29"],
+        "region": "central",
+        "geoLocation": { 
+          "latitude": 1.2644459743457326, 
+          "longitude": 103.8206866134469 
+        }
+      },
+      "website": "https://spplace.com/"
+    },
+    {
+      "id": "khengnamlee",
+      "name": "Kheng Nam Lee Curry Rice (琼南利咖喱饭)",
+      "recommendations": ["Economic Rice"],
+      "category": "hawker",
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/khengnamlee/1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/khengnamlee/2.jpeg"
+      ],
+      "location": {
+        "address": "2 Seah Im Rd, #01-53 Seah Im Food Centre, Singapore 099114",
+        "gmapUrl": "https://maps.app.goo.gl/LiWrCs4LbVHveAsJ9",
+        "mrt": ["harbourfront"],
+        "mrt_codes": ["NE1/CC29"],
+        "region": "central",
+        "geoLocation": { 
+          "latitude": 1.2669440740465652, 
+          "longitude": 103.81956461573232 
+        }
+      }
+    },
+    {
+      "id": "threemeal",
+      "name": "3 Meals a Day",
+      "recommendations": ["Salted Egg Chicken Rice", "Crispy Noodle with Egg"],
+      "category": "restaurant",
+      "imgSource": [
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/threemeal/1.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/threemeal/2.jpeg",
+        "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/threemeal/3.jpeg"
+      ],
+      "location": {
+        "address": "1 Rochor Canal Rd, #02-01 Sim Lim Square, Singapore 188504",
+        "gmapUrl": "https://maps.app.goo.gl/xF5n5SiL2Ne4gwt26",
+        "mrt": ["bugis", "bencoolen"],
+        "mrt_codes": ["EW12/DT14", "DT21"],
+        "region": "central",
+        "geoLocation": { 
+          "latitude": 1.3036053307224096, 
+          "longitude": 103.85402704627906 
+        }
       }
     }
-  },
-  {
-    "id": "fh-002",
-    "name": "Tiong Bahru Bakery",
-    "recommendations": ["Croissant", "Kouign-amann"],
-    "category": "dessert",
-    "imgSource": ["/tbb-1.jpg"],
-    "location": {
-      "address": "56 Eng Hoon St",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Tiong Bahru"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.2847, "longitude": 103.8320 }
-    }
-  },
-  {
-    "id": "fh-003",
-    "name": "Lau Pa Sat Satay Street",
-    "recommendations": ["Satay", "Chilli crab"],
-    "category": "hawker",
-    "imgSource": ["/laupasat-1.jpg"],
-    "location": {
-      "address": "18 Raffles Quay",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Downtown"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.2803, "longitude": 103.8500 }
-    }
-  },
-  {
-    "id": "fh-004",
-    "name": "Burnt Ends",
-    "recommendations": ["Sanger burger", "Wood-fired steak"],
-    "category": "restaurant",
-    "imgSource": ["/burntends-1.jpg"],
-    "location": {
-      "address": "7 Dempsey Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Napier"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.3050, "longitude": 103.8090 }
-    }
-  },
-  {
-    "id": "fh-005",
-    "name": "Chinatown Complex Food Centre",
-    "recommendations": ["Char kway teow", "Bak chor mee"],
-    "category": "hawker",
-    "imgSource": ["/chinatownfc-1.jpg"],
-    "location": {
-      "address": "335 Smith St",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Chinatown"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.2832, "longitude": 103.8437 }
-    }
-  },
-  {
-    "id": "fh-006",
-    "name": "Old Airport Road Food Centre",
-    "recommendations": ["Lor mee", "Hokkien mee"],
-    "category": "hawker",
-    "imgSource": ["/oldairport-1.jpg"],
-    "location": {
-      "address": "51 Old Airport Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Dakota"],
-      "region": "east",
-      "geoLocation": { "latitude": 1.3081, "longitude": 103.8850 }
-    }
-  },
-  {
-    "id": "fh-007",
-    "name": "Atlas",
-    "recommendations": ["Cocktails", "Afternoon tea"],
-    "category": "restaurant",
-    "imgSource": ["/atlas-1.jpg"],
-    "location": {
-      "address": "600 North Bridge Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Bugis"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.2988, "longitude": 103.8555 }
-    }
-  },
-  {
-    "id": "fh-008",
-    "name": "Ya Kun Kaya Toast",
-    "recommendations": ["Kaya toast", "Soft-boiled eggs"],
-    "category": "restaurant",
-    "imgSource": ["/yakun-1.jpg"],
-    "location": {
-      "address": "18 China St",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Raffles Place"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.2843, "longitude": 103.8510 }
-    }
-  },
-  {
-    "id": "fh-009",
-    "name": "Bedok Interchange Hawker Centre",
-    "recommendations": ["Fried carrot cake", "Mee rebus"],
-    "category": "hawker",
-    "imgSource": ["/bedok-1.jpg"],
-    "location": {
-      "address": "208 New Upper Changi Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Bedok"],
-      "region": "east",
-      "geoLocation": { "latitude": 1.3244, "longitude": 103.9300 }
-    }
-  },
-  {
-    "id": "fh-010",
-    "name": "Odette",
-    "recommendations": ["Seasonal tasting menu"],
-    "category": "restaurant",
-    "imgSource": ["/odette-1.jpg"],
-    "location": {
-      "address": "1 St Andrew's Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["City Hall"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.2905, "longitude": 103.8519 }
-    }
-  },
-  {
-    "id": "fh-011",
-    "name": "Changi Village Hawker Centre",
-    "recommendations": ["Nasi lemak"],
-    "category": "hawker",
-    "imgSource": ["/changi-1.jpg"],
-    "location": {
-      "address": "2 Changi Village Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Tanah Merah"],
-      "region": "east",
-      "geoLocation": { "latitude": 1.3894, "longitude": 103.9886 }
-    }
-  },
-  {
-    "id": "fh-012",
-    "name": "Seletar Aerospace Park Bistro",
-    "recommendations": ["Western brunch"],
-    "category": "restaurant",
-    "imgSource": ["/seletar-1.jpg"],
-    "location": {
-      "address": "1 The Oval",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Yio Chu Kang"],
-      "region": "north",
-      "geoLocation": { "latitude": 1.4167, "longitude": 103.8670 }
-    }
-  },
-  {
-    "id": "fh-013",
-    "name": "Springleaf Prata Place",
-    "recommendations": ["Plain prata", "Egg prata"],
-    "category": "restaurant",
-    "imgSource": ["/springleaf-1.jpg"],
-    "location": {
-      "address": "1 Springleaf Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Springleaf"],
-      "region": "north",
-      "geoLocation": { "latitude": 1.3987, "longitude": 103.8187 }
-    }
-  },
-  {
-    "id": "fh-014",
-    "name": "Jurong West 505 Market",
-    "recommendations": ["Wanton mee"],
-    "category": "hawker",
-    "imgSource": ["/jurong-1.jpg"],
-    "location": {
-      "address": "505 Jurong West St 52",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Lakeside"],
-      "region": "west",
-      "geoLocation": { "latitude": 1.3497, "longitude": 103.7187 }
-    }
-  },
-  {
-    "id": "fh-015",
-    "name": "Hillview Cafe",
-    "recommendations": ["Pasta", "Coffee"],
-    "category": "dessert",
-    "imgSource": ["/hillview-1.jpg"],
-    "location": {
-      "address": "Hillview Rise",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Hillview"],
-      "region": "west",
-      "geoLocation": { "latitude": 1.3622, "longitude": 103.7646 }
-    }
-  },
-  {
-    "id": "fh-016",
-    "name": "Beauty World Centre Food Court",
-    "recommendations": ["Laksa"],
-    "category": "hawker",
-    "imgSource": ["/beautyworld-1.jpg"],
-    "location": {
-      "address": "144 Upper Bukit Timah Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Beauty World"],
-      "region": "west",
-      "geoLocation": { "latitude": 1.3416, "longitude": 103.7750 }
-    }
-  },
-  {
-    "id": "fh-017",
-    "name": "Punggol Container Park",
-    "recommendations": ["Street desserts"],
-    "category": "dessert",
-    "imgSource": ["/punggol-1.jpg"],
-    "location": {
-      "address": "50 Punggol East",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Punggol"],
-      "region": "north",
-      "geoLocation": { "latitude": 1.4052, "longitude": 103.9020 }
-    }
-  },
-  {
-    "id": "fh-018",
-    "name": "Toa Payoh Lorong 8 Hawker",
-    "recommendations": ["Chicken rice"],
-    "category": "hawker",
-    "imgSource": ["/toapayoh-1.jpg"],
-    "location": {
-      "address": "210 Lor 8 Toa Payoh",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Toa Payoh"],
-      "region": "central",
-      "geoLocation": { "latitude": 1.3314, "longitude": 103.8564 }
-    }
-  },
-  {
-    "id": "fh-019",
-    "name": "Kovan Ice Cream Bar",
-    "recommendations": ["Waffles", "Ice cream"],
-    "category": "dessert",
-    "imgSource": ["/kovan-1.jpg"],
-    "location": {
-      "address": "Kovan Rd",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Kovan"],
-      "region": "north",
-      "geoLocation": { "latitude": 1.3604, "longitude": 103.8858 }
-    }
-  },
-  {
-    "id": "fh-020",
-    "name": "East Coast Lagoon Food Village",
-    "recommendations": ["BBQ seafood"],
-    "category": "hawker",
-    "imgSource": ["/eastcoast-1.jpg"],
-    "location": {
-      "address": "1220 East Coast Pkwy",
-      "gmapUrl": "https://maps.google.com",
-      "mrt": ["Bedok"],
-      "region": "east",
-      "geoLocation": { "latitude": 1.3059, "longitude": 103.9230 }
-    }
-  }
-]
+  ]
