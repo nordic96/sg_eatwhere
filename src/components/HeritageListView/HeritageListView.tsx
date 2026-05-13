@@ -1,10 +1,12 @@
 'use client';
 import { useHeritageStore } from '@/stores';
 import { Region } from '@/types';
-import HighlightedText from '../HighlightText/HighlightText';
 import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import { useMemo } from 'react';
+import SpicyIcon from '../SpicyIcon';
+import { parseMrtCodes } from '../MrtLabel';
+import { cn } from '@/utils/cn';
 
 interface HeritageListViewProps {
   region: Region;
@@ -23,8 +25,12 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
     [foodData, region, filter],
   );
 
+  if (filteredLocations.length <= 0) {
+    return null;
+  }
+
   return (
-    <nav className="flex flex-col gap-2" aria-label={`${t(region)} locations`}>
+    <nav className={'flex flex-1 flex-col gap-2'} aria-label={`${t(region)} locations`}>
       <span className="font-medium text-[14px]">{t(region)}</span>
       <ul className="flex flex-col gap-2" role="list">
         {filteredLocations
@@ -34,7 +40,11 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
               <li
                 key={`list-view-${location.id}`}
                 role="listitem"
-                className="flex items-center gap-1 cursor-pointer"
+                className={cn(
+                  'flex items-center gap-1 cursor-pointer p-1 rounded-lg',
+                  'hover:bg-primary hover:text-white',
+                  location.id === heritageId ? 'bg-primary text-white' : undefined,
+                )}
                 onClick={() => setHeritageId(location.id)}
                 aria-current={location.id === heritageId ? 'location' : undefined}
               >
@@ -43,13 +53,21 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                   alt={'listview_category_icon'}
                   className={'max-sm:min-w-10'}
                 />
-                {location.id === heritageId ? (
-                  <HighlightedText>
-                    <span className="text-[12px]">{location.name}</span>
-                  </HighlightedText>
-                ) : (
-                  <span className="text-[12px] cursor-pointer">{location.name}</span>
-                )}
+                <div>
+                  {/** Location Name Container */}
+                  {<span className="text-sm max-sm:text-sm cursor-pointer">{location.name}</span>}
+                  {/** MRT & Metadata Icons Container */}
+                  <div className={'flex gap-1 items-center max-sm:flex-col max-sm:items-start'}>
+                    {location.location.mrt_codes && (
+                      <div className={'flex gap-1 max-sm:flex-col'}>
+                        {location.location.mrt_codes.map((code, i) => {
+                          return <div key={`mrt-${code}-${i}`}>{parseMrtCodes(code)}</div>;
+                        })}
+                      </div>
+                    )}
+                    {location.spicy && <SpicyIcon />}
+                  </div>
+                </div>
               </li>
             );
           })}

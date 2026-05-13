@@ -9,9 +9,10 @@ import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
 import { memo, useMemo } from 'react';
-import { MrtLabel } from '../MrtLabel/MrtLabel';
+import { MrtLabel } from '../MrtLabel';
 import { FaMap, FaThumbsUp } from 'react-icons/fa';
 import { ENABLE_SIDEBAR } from '@/config';
+import SpicyIcon from '../SpicyIcon';
 
 const MIN_DESC_LEN = 50;
 function PlaceContent() {
@@ -65,9 +66,18 @@ function PlaceContent() {
             />
             <span>{catT(data.category)}</span>
           </div>
-          <VerticalDivider />
-          <MrtLabel mrt={data.location.mrt[0]} />
-          <VerticalDivider />
+          {data.spicy && (
+            <>
+              <VerticalDivider />
+              <SpicyIcon label />
+            </>
+          )}
+          {data.location.mrt_codes && (
+            <>
+              <VerticalDivider />
+              <MrtLabel mrtCode={data.location.mrt_codes[0]} />
+            </>
+          )}
         </div>
         {/** Recommended Dish Container */}
         <div className="flex justify-between items-center gap-1 rounded-md bg-amber-50 p-1">

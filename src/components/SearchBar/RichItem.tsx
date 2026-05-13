@@ -2,11 +2,12 @@ import { FoodHeritage } from '@/types';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { FaMapPin, FaSubway } from 'react-icons/fa';
+import { FaMapPin } from 'react-icons/fa';
+import { parseMrtCodes } from '../MrtLabel';
+import SpicyIcon from '../SpicyIcon';
 
 function RichItem({ data }: { data: FoodHeritage }) {
   const t = useTranslations('HeritageListView');
-  const tMrt = useTranslations('MRT');
 
   return (
     <div className={'flex gap-4 items-center'}>
@@ -22,10 +23,8 @@ function RichItem({ data }: { data: FoodHeritage }) {
             <FaMapPin className="w-[1em] h-[1em]" />
             <span>{t(data.location.region)}</span>
           </div>
-          <div className={'flex items-center'}>
-            <FaSubway className="w-[1em] h-[1em]" />
-            <span>{tMrt(data.location.mrt[0])}</span>
-          </div>
+          {data.location.mrt_codes && parseMrtCodes(data.location.mrt_codes[0])}
+          {data.spicy && <SpicyIcon />}
         </div>
       </div>
     </div>
