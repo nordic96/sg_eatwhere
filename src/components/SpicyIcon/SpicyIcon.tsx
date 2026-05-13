@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 export default function SpicyIcon({ label }: { label?: boolean }) {
   const t = useTranslations('Spicy');
   return (
-    <div className={'flex items-center gap-0.5'}>
+    <div className={'flex items-center gap-0.5 w-4 h-4 rounded-full bg-white justify-center'}>
       <Image
         alt={'spicy'}
         src={'/images/spicy.svg'}

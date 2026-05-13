@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { useMemo, useRef, useState } from 'react';
 import { FaCamera, FaPauseCircle, FaPlayCircle, FaSubway } from 'react-icons/fa';
 import { useSwipeable } from 'react-swipeable';
+import SpicyIcon from '../SpicyIcon';
 
 interface FoodMarqueeProps {
   items: FoodMarqueeItem[];
@@ -156,7 +157,10 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent"></div>
       <div className={'absolute flex flex-col text-white bottom-2 w-full px-2 text-left'}>
         <CategoryIcon alt={'category'} cat={data.category} />
-        <span className={'font-extrabold text-xs'}>{data.name}</span>
+        <div className={'flex gap-1'}>
+          <span className={'font-extrabold text-xs'}>{data.name}</span>
+          {data.spicy && <SpicyIcon />}
+        </div>
         <div className={'flex text-xs items-center gap-0.5'}>
           <FaSubway className="w-[1em] h-[1em]" />
           <span>{mrtT(data.location.mrt[0])}</span>
