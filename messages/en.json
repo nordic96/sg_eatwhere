@@ -23,7 +23,8 @@
         "bugis": "Bugis",
         "nicoll_highway": "Nicoll Highway",
         "marine_parade": "Marine Parade",
-        "maxwell": "Maxwell"
+        "maxwell": "Maxwell",
+        "harbourfront": "HarbourFront"
     },
     "Header": {
         "link_mapview": "MapView",
@@ -66,7 +67,8 @@
         "marquee_playing": "Marquee playing",
         "foodlist_by_region": "Food List By Region",
         "map_by": "Map Credit: ",
-        "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants"
+        "map_disclaimer": "**The scale of the map is not precise, it is for rough estimation of the locations for each restaurants",
+        "other_info_header": "Other Useful Information"
     },
     "GMapBanner": {
         "explore_complete_collection": "Explore the Complete Collection",
@@ -134,5 +136,9 @@
         "languages_label": "Languages",
         "project_value": "1",
         "project_label": "Dream Project"
+    },
+    "Spicy": {
+        "label": "Spicy",
+        "tooltip_desc": "May contain spicy menu"
     }
 }

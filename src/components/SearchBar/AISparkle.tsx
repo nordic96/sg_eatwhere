@@ -1,0 +1,26 @@
+import { cn } from '@/utils';
+import React from 'react';
+import { HiSparkles } from 'react-icons/hi';
+
+function AISparkle({ isReady, isActive }: { isReady: boolean; isActive: boolean }) {
+  return (
+    <div
+      className={cn(
+        'text-monsoongrey absolute left-2 top-[50%] -translate-y-[50%] text-sm z-51',
+        'transition-transform ease-in-out',
+        {
+          'text-monsoongrey': !isActive,
+          'text-primary': isActive,
+          'translate-x-0': isReady,
+          '-translate-x-100': !isReady,
+        },
+      )}
+      title={'AI-powered semantic search'}
+      aria-hidden={'true'}
+    >
+      <HiSparkles size={14} />
+    </div>
+  );
+}
+
+export default React.memo(AISparkle);

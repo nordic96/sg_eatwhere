@@ -31,12 +31,13 @@ This document provides shared context for all Claude Code agents working on this
 ## Directory Map
 
 ```
-app/
-├── [locale]/              # Locale-based routing (en, ko, ja, nl)
-│   ├── mapview/           # Main 3D map interface
-│   ├── about/             # About page
-│   └── admin/editor/      # Admin panel
-├── api/                   # API routes
+src/
+├── app/                   # Next.js App Router (routes only)
+│   ├── [locale]/          # Locale-based routing (en, ko, ja, nl)
+│   │   ├── mapview/       # Main 3D map interface
+│   │   ├── about/         # About page
+│   │   └── admin/editor/  # Admin panel
+│   └── api/               # API routes
 ├── components/            # 31 UI components
 ├── mapmodels/             # 3D scene components
 ├── hooks/                 # 9 custom hooks
@@ -44,11 +45,16 @@ app/
 ├── types/                 # TypeScript definitions
 ├── utils/                 # Utility functions
 ├── constants/             # Theme & canvas constants
-└── config/                # CDN configuration
+├── config/                # CDN configuration
+├── lib/                   # Semantic search module
+├── workers/               # Web workers
+└── functions/             # Server functions
 
 i18n/                      # Internationalization setup
 messages/                  # Translation files (en, ko, ja, nl)
 __tests__/                 # Test files
+public/                    # Static assets
+resources/                 # Development data
 ```
 
 ---
@@ -96,16 +102,16 @@ interface FoodHeritage {
 
 | Store | Location | Purpose |
 |-------|----------|---------|
-| `useHeritageStore` | `app/stores/useHeritageStore.ts` | Food data, filtering, selection |
-| `useAppStore` | `app/stores/useAppStore.ts` | UI state (sidebar, menus) |
-| `useTrailStore` | `app/stores/useTrailStore.ts` | Trail mode navigation |
-| `useEnvironmentStore` | `app/stores/useEnvironmentStore.ts` | Day/night mode |
+| `useHeritageStore` | `src/stores/useHeritageStore.ts` | Food data, filtering, selection |
+| `useAppStore` | `src/stores/useAppStore.ts` | UI state (sidebar, menus) |
+| `useTrailStore` | `src/stores/useTrailStore.ts` | Trail mode navigation |
+| `useEnvironmentStore` | `src/stores/useEnvironmentStore.ts` | Day/night mode |
 
 ---
 
 ## Key Components Reference
 
-### 3D Components (`app/mapmodels/`)
+### 3D Components (`src/mapmodels/`)
 | Component | Purpose |
 |-----------|---------|
 | `MapEnvironment.tsx` | Scene lighting & setup |
@@ -114,7 +120,7 @@ interface FoodHeritage {
 | `TrailPath.tsx` | Curved path between locations |
 | `TextureMap.tsx` | Singapore map texture |
 
-### UI Components (`app/components/`)
+### UI Components (`src/components/`)
 | Component | Purpose |
 |-----------|---------|
 | `SearchBar/` | Autocomplete search with AI semantic search (lazy-loaded, mapview only) |
@@ -125,7 +131,7 @@ interface FoodHeritage {
 | `Header.tsx` | Navigation header |
 | `LocaleSwitcher/` | Language switcher |
 
-### About Page Components (`app/components/`)
+### About Page Components (`src/components/`)
 | Component | Purpose |
 |-----------|---------|
 | `FadeIn/` | Animated fade-in with scroll reveal, directional transitions, and timing controls |
@@ -134,7 +140,7 @@ interface FoodHeritage {
 | `TechStack/TechStackSection` | Tech badges grid with GitHub CTAs |
 | `TechStack/TechBadge` | Individual tech badge with tooltip |
 
-### SearchBar Sub-Components (`app/components/SearchBar/`)
+### SearchBar Sub-Components (`src/components/SearchBar/`)
 | Component | Purpose |
 |-----------|---------|
 | `AISparkle` | Sparkle icon indicating AI semantic search |
@@ -143,7 +149,7 @@ interface FoodHeritage {
 | `SearchSkeleton` | Skeleton loading for search results |
 | `RichItem` | Rich search result item display |
 
-### About Page Layout (`app/[locale]/about/page.tsx`)
+### About Page Layout (`src/app/[locale]/about/page.tsx`)
 Two-column responsive grid (single column on mobile):
 
 **Left Column:**
@@ -160,7 +166,7 @@ Two-column responsive grid (single column on mobile):
 
 ---
 
-## Custom Hooks (`app/hooks/`)
+## Custom Hooks (`src/hooks/`)
 
 | Hook | Purpose |
 |------|---------|
@@ -248,7 +254,7 @@ export function getSemanticSearchClient(): SemanticSearchClient {
 }
 ```
 
-**Implementation:** `lib/semanticSearch.ts` - `SemanticSearchClient` class with `initWorker()` private method.
+**Implementation:** `src/lib/semanticSearch.ts` - `SemanticSearchClient` class with `initWorker()` private method.
 
 ### React 19 Activity vs Conditional Rendering
 **Critical Issue:** React 19's `<Activity>` (Suspense-like) component mounts children but hides them - it does NOT prevent component initialization.
@@ -269,7 +275,7 @@ export function getSemanticSearchClient(): SemanticSearchClient {
 )}
 ```
 
-**Implementation:** `app/components/Header.tsx` (line 31-39) - SearchBar only renders on mapview + desktop.
+**Implementation:** `src/components/Header.tsx` (line 31-39) - SearchBar only renders on mapview + desktop.
 
 **Lesson:** For expensive components (especially those with WebWorkers or heavy resource loading), always use `{condition && <Component />}` rather than Activity/Suspense boundaries.
 
@@ -298,7 +304,7 @@ export class SemanticSearchClient {
 - Graceful re-initialization after cleanup
 - Request ID correlation prevents promise race conditions
 
-**Files:** `lib/semanticSearch.ts`
+**Files:** `src/lib/semanticSearch.ts`
 
 ### Scroll-Based Animation Patterns
 **Pattern:** Combine scroll reveal hooks with animated components for progressive disclosure.
@@ -336,7 +342,7 @@ export class SemanticSearchClient {
 />
 ```
 
-**Files:** `app/hooks/useScrollReveal.ts`, `app/hooks/useCountUp.ts`, `app/components/FadeIn/`, `app/components/StatsBar/`
+**Files:** `src/hooks/useScrollReveal.ts`, `src/hooks/useCountUp.ts`, `src/components/FadeIn/`, `src/components/StatsBar/`
 
 ### Testing Environment Setup
 **Pattern:** Proper mocking of browser APIs for jest tests.
@@ -770,7 +776,7 @@ const handleImageLoad = () => {
 - Component has async resource loading (images, fonts, etc.)
 - Prop changes should trigger fresh component initialization
 
-**Files:** `app/components/PlaceContent/ImageCarousel.tsx`
+**Files:** `src/components/PlaceContent/ImageCarousel.tsx`
 
 ### Best Practices Established
 
@@ -789,7 +795,7 @@ export interface StatsBarProps {
 2. **Barrel Exports:** Use `index.ts` for clean imports
 
 ```typescript
-// app/components/StatsBar/index.ts
+// src/components/StatsBar/index.ts
 export { default } from './StatsBar';
 export type { StatItem, StatsBarProps } from './StatsBar';
 ```
@@ -840,7 +846,7 @@ Before starting any new implementation:
 | Area | Gotcha | Solution |
 |------|--------|----------|
 | Imports | `@/` alias required | Use `@/app/...` not `../` |
-| Styling | `cn()` utility exists | Import from `@/app/utils` |
+| Styling | `cn()` utility exists | Import from `@/utils` |
 | Icons | Use react-icons | Import from `react-icons/*` (fa, hi, md, si, tb, fi) |
 | i18n | 4 locales required | en, ko, ja, nl |
 | Git | Pre-commit hooks run tests | Ensure tests pass before commit |
