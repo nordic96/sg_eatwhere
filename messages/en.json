@@ -23,7 +23,8 @@
         "bugis": "Bugis",
         "nicoll_highway": "Nicoll Highway",
         "marine_parade": "Marine Parade",
-        "maxwell": "Maxwell"
+        "maxwell": "Maxwell",
+        "harbourfront": "HarbourFront"
     },
     "Header": {
         "link_mapview": "MapView",

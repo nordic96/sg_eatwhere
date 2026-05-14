@@ -10,7 +10,7 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
 import { memo, useMemo } from 'react';
 import { MrtLabel } from '../MrtLabel';
-import { FaMap, FaThumbsUp } from 'react-icons/fa';
+import { FaGlobe, FaMap, FaThumbsUp } from 'react-icons/fa';
 import { ENABLE_SIDEBAR } from '@/config';
 import SpicyIcon from '../SpicyIcon';
 
@@ -19,6 +19,7 @@ function PlaceContent() {
   const t = useTranslations('CardView');
   const catT = useTranslations('FoodCategory');
   const heritageT = useTranslations('Heritage');
+  const sideT = useTranslations('Sidebar');
 
   const { getThemeStyle, getSelectedFoodData } = useHeritageStore();
   const { openMore } = useAppStore();
@@ -76,6 +77,21 @@ function PlaceContent() {
             <>
               <VerticalDivider />
               <MrtLabel mrtCode={data.location.mrt_codes[0]} />
+            </>
+          )}
+          {data.website && (
+            <>
+              <VerticalDivider />
+              <a
+                href={data.website}
+                target={'_blank'}
+                className={'flex gap-0.5 cursor-pointer hover:text-gray-600'}
+              >
+                <div className={'w-4 h-4'}>
+                  <FaGlobe size={'inherit'} />
+                </div>
+                <span>{sideT('website')}</span>
+              </a>
             </>
           )}
         </div>
