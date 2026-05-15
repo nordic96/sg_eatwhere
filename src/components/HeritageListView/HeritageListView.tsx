@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import { useMemo } from 'react';
 import SpicyIcon from '../SpicyIcon';
-import { parseMrtCodes } from '../MrtLabel';
+import { MRTColourLabel } from '../MrtLabel';
 import { cn } from '@/utils/cn';
 
 interface HeritageListViewProps {
@@ -61,7 +61,11 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                     {location.location.mrt_codes && (
                       <div className={'flex gap-1 max-sm:flex-col'}>
                         {location.location.mrt_codes.map((code, i) => {
-                          return <div key={`mrt-${code}-${i}`}>{parseMrtCodes(code)}</div>;
+                          return (
+                            <div key={`mrt-${code}-${i}`}>
+                              <MRTColourLabel code={code} />
+                            </div>
+                          );
                         })}
                       </div>
                     )}

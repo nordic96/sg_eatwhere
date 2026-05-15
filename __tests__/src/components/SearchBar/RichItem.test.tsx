@@ -6,6 +6,7 @@ import { FoodHeritage } from '@/types';
 // Mock next-intl
 jest.mock('next-intl', () => ({
   useTranslations: (namespace: string) => (key: string) => `${namespace}.${key}`,
+  useLocale: () => 'en',
 }));
 
 // Mock CategoryIcon component

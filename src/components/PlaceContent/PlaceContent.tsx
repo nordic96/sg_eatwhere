@@ -51,8 +51,12 @@ function PlaceContent() {
       </div>
       <div className="w-full flex flex-col gap-2 px-4 py-2">
         <div className="flex flex-col items-start">
+          {/** Name Container */}
           <span className="text-2xl font-bold">{data.name}</span>
+          {/** Address Container */}
           <span className={'text-[#555]'}>{data.location.address}</span>
+          {/** MRT Label Container */}
+          {data.location.mrt_codes && <MrtLabel mrtCodes={data.location.mrt_codes} />}
         </div>
         {/** Info Container */}
         <div
@@ -71,12 +75,6 @@ function PlaceContent() {
             <>
               <VerticalDivider />
               <SpicyIcon label />
-            </>
-          )}
-          {data.location.mrt_codes && (
-            <>
-              <VerticalDivider />
-              <MrtLabel mrtCode={data.location.mrt_codes[0]} />
             </>
           )}
           {data.website && (

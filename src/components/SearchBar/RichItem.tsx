@@ -3,7 +3,7 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaMapPin } from 'react-icons/fa';
-import { parseMrtCodes } from '../MrtLabel';
+import { MRTColourLabel } from '../MrtLabel';
 import SpicyIcon from '../SpicyIcon';
 
 function RichItem({ data }: { data: FoodHeritage }) {
@@ -23,7 +23,7 @@ function RichItem({ data }: { data: FoodHeritage }) {
             <FaMapPin className="w-[1em] h-[1em]" />
             <span>{t(data.location.region)}</span>
           </div>
-          {data.location.mrt_codes && parseMrtCodes(data.location.mrt_codes[0])}
+          {data.location.mrt_codes && <MRTColourLabel code={data.location.mrt_codes[0]} />}
           {data.spicy && <SpicyIcon />}
         </div>
       </div>
