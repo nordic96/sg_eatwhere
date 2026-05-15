@@ -3,9 +3,16 @@ import { render, screen } from '@testing-library/react';
 import RichItem from '@/components/SearchBar/RichItem';
 import { FoodHeritage } from '@/types';
 
-// Mock next-intl
 jest.mock('next-intl', () => ({
-  useTranslations: (namespace: string) => (key: string) => `${namespace}.${key}`,
+  useTranslations: (namespace: string) =>
+    Object.assign(
+      jest.fn((key: string) => `${namespace}.${key}`), // the callable (key) => string
+      {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        has: jest.fn((_: string) => false), // the .has() method
+        rich: jest.fn((key: string) => key), // add others if needed
+      },
+    ),
   useLocale: () => 'en',
 }));
 
