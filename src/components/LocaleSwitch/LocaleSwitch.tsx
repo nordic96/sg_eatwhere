@@ -20,12 +20,10 @@ export default function LocaleSwitch({ locale }: { locale: string }) {
       onClick={onClick}
       role="menuitem"
       aria-label={`Switch to ${langNames.of(locale)}`}
-      className="flex gap-4 items-center justify-between text-lg cursor-pointer"
+      className="flex gap-1 items-center justify-between text-lg cursor-pointer hover:text-primary"
     >
       <span className={LocaleIconMap[locale]}></span>
-      <label className="w-10 text-xs wrap-break-word hover:text-primary cursor-pointer">
-        {langNames.of(locale)}
-      </label>
+      <label className="text-xs wrap-break-word cursor-pointer">{langNames.of(locale)}</label>
     </div>
   );
 }

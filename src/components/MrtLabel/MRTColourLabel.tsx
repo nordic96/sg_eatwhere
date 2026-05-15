@@ -1,8 +1,12 @@
+import { MRT_LABEL_DISPLAY_LANG } from '@/config';
 import { mrtLabelMap } from '@/constants';
 import { mrtColourStyle } from '@/styles';
 import { cn } from '@/utils';
+import { useLocale, useTranslations } from 'next-intl';
 
-export function parseMrtCodes(code: string) {
+export default function MRTColourLabel({ code }: { code: string }) {
+  const locale = useLocale();
+  const mrtT = useTranslations('MRT');
   if (code.length <= 0) {
     return null;
   }
@@ -29,7 +33,11 @@ export function parseMrtCodes(code: string) {
         })}
       </div>
       {/** MRT Name Container */}
-      <span className={'text-xs'}>{mrtLabelMap[mrts[0]]}</span>
+      <span className={'text-xs'}>
+        {MRT_LABEL_DISPLAY_LANG.includes(locale)
+          ? `${mrtT(mrts[0])} (${mrtLabelMap[mrts[0]]})`
+          : mrtLabelMap[mrts[0]]}
+      </span>
     </div>
   );
 }

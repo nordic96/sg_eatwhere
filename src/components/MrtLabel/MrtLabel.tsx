@@ -1,10 +1,9 @@
 import { cn } from '@/utils';
 import { FaSubway } from 'react-icons/fa';
-import { parseMrtCodes } from './parseMrtCodes';
+import MRTColourLabel from './MRTColourLabel';
 
-export default function MrtLabel({ mrtCode }: { mrtCode: string }) {
-  const codes = mrtCode.split('/');
-  if (codes.length <= 0) {
+export default function MrtLabel({ mrtCodes }: { mrtCodes: string[] }) {
+  if (mrtCodes.length <= 0) {
     return null;
   }
   return (
@@ -19,7 +18,9 @@ export default function MrtLabel({ mrtCode }: { mrtCode: string }) {
         <FaSubway fontSize={'inherit'} />
       </div>
       {/** MRT Colour Bar Container */}
-      {parseMrtCodes(mrtCode)}
+      {mrtCodes.map((code, i) => {
+        return <MRTColourLabel key={`mrt-label-${code}-${i}`} code={code} />;
+      })}
     </span>
   );
 }
