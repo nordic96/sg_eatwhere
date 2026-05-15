@@ -1,0 +1,144 @@
+{
+  "FoodCategory": {
+    "dessert": "Dessert",
+    "hawker": "Hawker-Stand",
+    "restaurant": "Restaurant"
+  },
+  "Heritage": {
+    "oldtree_desc": "Nur 1 Minute von der MRT-Station Outram Park entfernt befindet sich dieses kleine Eckgeschäft, das seit Jahren als verstecktes Juwel für köstliche Durian-Desserts unter Büroangestellten im Central Business District gilt. Das Personal bereitet die Durian direkt vor den Augen der Kunden frisch zu, und es gibt eine große Auswahl an Durian-Desserts zum Probieren.\n\nWir empfehlen besonders die Stinky Bowl (Durian-Mousse) mit Extra Shot! Selbst Menschen, die eigentlich keine Durian mögen, ändern nach diesem Dessert oft ihre Meinung.\n\nBist du bereits ein Durian-Liebhaber? Im vorderen Bereich des Ladens werden auch frisch verpackte rohe Durians verkauft! Die Preise variieren je nach Saison.",
+    "komala_desc": "Dieses Restaurant, das bei vielen Singapurern beliebt ist, serviert seit 1947 vegetarisches indisches Essen! Die Gerichte werden auf Bananenblättern serviert und mit verschiedenen herzhaften Currysoßen ergänzt.\n\nWir empfehlen besonders Dosai, eine indische Art von Crêpe aus fermentiertem Reis- und Linsenteig. Wenn du Little India besuchst, solltest du unbedingt die authentische Erfahrung ausprobieren, lokale vegetarische indische Küche in historischer Atmosphäre zu genießen.",
+    "spicy_wife_desc": "Dieser Stand verkauft eines der leckersten Nasi-Lemak-Gerichte zu einem der günstigsten Preise für Büroangestellte im Amoy Street Food Centre. Der Hawker-Stand ist spezialisiert auf aromatisches Hähnchen (Nasi Lemak Ayam Berempah), also Kokosreis mit würzig frittiertem Hähnchen.\n\nDas Gericht wird mit Gurken, einer großzügigen Portion würzigem frittiertem Hähnchen, Spiegelei, spezieller Sambal-Chilisoße, Erdnüssen und Ikan Bilis (getrockneten Sardellen) serviert. Die Chilisoße kann für manche ziemlich scharf sein – also sei vorbereitet und genieße es!\n\n[Tipp] Der Stand schließt bereits um 14 Uhr und ist nur an Werktagen geöffnet. Überprüfe daher vorher die aktuellen Öffnungszeiten!",
+    "nanhuachang_desc": "Bist du ein Seafood-Liebhaber? Oder vielleicht ein Hotpot-Fan? Dieses Restaurant serviert seit 1927 eines der besten Fishhead-Steamboat-Gerichte, und die Familie führt das Geschäft bereits in der 4. Generation. Fishhead Steamboat ist ein Gericht mit Fischkopfsuppe, Gemüse und einem speziell entworfenen Topf, in dessen Mitte Holzkohle platziert wird. Dadurch bleibt das Essen lange heiß und die Suppe erhält ein einzigartiges Raucharoma.\n\nEs ist ein Ort geworden, an dem viele Singapurer mit Familie und Freunden zusammenkommen, essen und stundenlang reden. Möchtest du die Steamboat-Kultur hier auf besonders köstliche Weise erleben?",
+    "yatkayan_desc": "Wohnst du in der Nähe der Dhoby-Ghaut-Station oder planst du einen Besuch in Chijmes? Nicht weit von der Bencoolen-Station entfernt befindet sich ein verstecktes chinesisches Dessertgeschäft, das besonders bei jungen Singapurern beliebt ist. Auch Studenten der nahegelegenen Designschulen und Universitäten kommen gerne hierher, da es viele leckere chinesische Desserts zu günstigen Preisen gibt.\n\nMein persönlicher Favorit ist Chendol, ein beliebtes singapurisches Eis-Dessert mit großzügiger Menge Gula Melaka (karamellisierter Sirup). Wenn du weniger süße Desserts bevorzugst, probiere das Dessert aus violettem Klebreis mit verschiedenen Toppings. Es gibt auch warme Desserts!",
+    "jixiang_desc": "Weißt du, was Kueh ist? Diese Konditorei wurde 1988 gegründet und liegt nahe der MRT-Stationen Outram Park und Tanjong Pagar. Hier werden täglich frisch handgemachte Ang Ku Kueh verkauft. Der Name bedeutet wörtlich „rote Schildkrötenkuchen“, da die Form an einen Schildkrötenpanzer erinnert. Die Reiskuchen haben eine weiche Konsistenz, sind mit Sesamöl bestrichen und in verschiedenen Füllungen erhältlich.\n\nIch persönlich empfehle die süße Bohnenfüllung und die Yamswurzel-Füllung.",
+    "donamanis_desc": "Planst du einen Besuch an der Joo Chiat Road? Nicht weit vom Zentrum dieser beliebten Straße entfernt befindet sich im Katong Shopping Centre eine traditionsreiche Bäckerei, die seit 1990 köstliche Kuchen und Pies backt. Sobald du in die Nähe kommst, wirst du dem Duft eines der besten Bananenpies Singapurs kaum widerstehen können.",
+    "ahtai_desc": "Chicken Rice ist eines der beliebtesten Gerichte in Singapur. Ah Tai Chicken Rice befindet sich im Maxwell Food Centre, nur wenige Gehminuten vom berühmten Buddha Tooth Relic Temple in Chinatown entfernt. Wenn du mit mehr als zwei Personen unterwegs bist, empfehle ich ein halbes oder ganzes Hähnchen mit separaten Reisschalen zu bestellen – oder einfach einzelne Chicken-Rice-Sets, falls du nicht so hungrig bist!"
+  },
+  "MRT": {
+    "EW15": "Tanjong Pagar",
+    "NE3": "Outram Park",
+    "DT21": "Bencoolen",
+    "NE7": "Little India",
+    "EW11": "Lavender",
+    "EW12": "Bugis",
+    "CC5": "Nicoll Highway",
+    "TE26": "Marine Parade",
+    "TE18": "Maxwell",
+    "NE1": "HarbourFront"
+  },
+  "Header": {
+    "link_mapview": "Kartenansicht",
+    "link_landing": "Startseite",
+    "link_about": "Über"
+  },
+  "Banner": {
+    "banner_msg": "Bitte beachten! Dies ist ein persönliches Projekt. Die Essensorte wurden basierend auf persönlichen Besuchen, Empfehlungen lokaler Freunde und subjektiven Kriterien ausgewählt."
+  },
+  "SearchBar": {
+    "placeholder_loading": "Intelligente Suche wird vorbereitet...",
+    "placeholder": "Nach Essen suchen...",
+    "no_results": "Keine Ergebnisse gefunden"
+  },
+  "LandingPage": {
+    "hero_desc": "<green>10+</green> Jahre. <green>100+</green> Besuche.\nEin Koreaner, der wie ein Einheimischer isst.\n\nJetzt teile ich <primary>Singapurs</primary> echte\n <primary>Must-Try-Gerichte</primary>",
+    "hero_micro_desc": "Entdecke die echten Orte, an denen Singapurer wirklich essen – kuratiert aus über einem Jahrzehnt Leben und gemeinsamen Mahlzeiten mit lokalen Freunden.",
+    "explore_more": "Foodie's Trail entdecken",
+    "discover_why": "Warum ich diesen Guide erstellt habe",
+    "landing2_desc": "Das ist nicht nur eine Essensliste",
+    "landing2_desc_2": "\"Ich bin vor mehr als 10 Jahren nach Singapur gezogen. Diese Karte zeigt persönliche Erinnerungen an Hunderte lokaler Mahlzeiten ... Freund für Freund.\"",
+    "photo_disclaimer": "Alle Fotos wurden von mir aufgenommen!",
+    "your_complete_singapore_food_guide": "Dein vollständiger Singapur-Food-Guide",
+    "access_full_curated_collection": "Greife auf meine vollständige kuratierte Sammlung auf Google Maps mit Echtzeitinformationen und Navigation zu.",
+    "feature_100_plus_locations": "100+ authentische Food-Locations",
+    "feature_turn_by_turn": "Schritt-für-Schritt-Navigation",
+    "feature_live_hours": "Aktuelle Öffnungszeiten & Kontaktinfos",
+    "feature_hidden_gems": "Versteckte Geheimtipps außerhalb der interaktiven Karte",
+    "google_maps_collection": "Google-Maps-Sammlung",
+    "ten_years_discoveries": "10+ Jahre kulinarische Entdeckungen an einem Ort",
+    "open_collection": "Sammlung öffnen",
+    "opens_in_google_maps": "Öffnet in Google Maps"
+  },
+  "HomePage": {
+    "trail_mode": "Trail-Modus",
+    "featured_food_spots": "Empfohlene Food-Spots",
+    "play_marquee": "Lauftext starten",
+    "pause_marquee": "Lauftext pausieren",
+    "marquee_paused": "Lauftext pausiert",
+    "marquee_playing": "Lauftext läuft",
+    "foodlist_by_region": "Essensliste nach Region",
+    "map_by": "Kartenerstellung: ",
+    "map_disclaimer": "**Die Kartenskala ist nicht exakt und dient nur zur groben Orientierung der Restaurantstandorte.",
+    "other_info_header": "Weitere nützliche Informationen"
+  },
+  "GMapBanner": {
+    "explore_complete_collection": "Die vollständige Sammlung entdecken",
+    "google_maps_banner_description": "Sieh dir alle 100+ kuratierten Food-Spots auf Google Maps an – inklusive versteckter Geheimtipps, die noch nicht auf dieser Karte sind. Mit Wegbeschreibungen, Fotos und Echtzeit-Updates.",
+    "view_full_list": "Vollständige Liste anzeigen",
+    "google_maps_banner_sr_description": "Öffne die vollständige Food-Sammlung in Google Maps mit über 100 kuratierten Orten, Wegbeschreibungen und Echtzeitinformationen."
+  },
+  "AboutPage": {
+    "intro": "Frontend-Softwareentwickler | Webentwickler",
+    "food_code_desc": "Zwischen 2024 und 2025 kehrte ich nach Südkorea zurück, um meinen Militärdienst abzuleisten.\nVor meiner Einberufung arbeitete ich als Softwareentwickler – und während des Dienstes vermisste ich es, Dinge mit Code zu erschaffen.\n\nEs gab aber noch etwas, das ich genauso vermisste: das <b>Essen in Singapur</b>.\n\nWährend ich durch alte Fotos von Mahlzeiten mit meinen singapurischen Freunden scrollte, kam mir eine Idee. Ich wollte etwas schaffen, das mehr als nur ein Food-Blog ist – etwas Interaktives, das die Erinnerungen hinter jedem Ort erlebbar macht.\nDaraus entstand die Idee für den <b>Foodie's Trail</b>: eine <i>3D-Food-Map</i>, die die zwei Dinge verbindet, die ich am meisten liebe – Essen und Code.",
+    "food_code": "Essen & Code",
+    "inspiration_label": "Inspiriert von",
+    "inspiration_title": "\"Singapore in Colour\"",
+    "inspiration_author": "von Alex Lim, The Straits Times (August 2023)",
+    "inspiration_description": "Die Farbpalette dieses Projekts wurde von dieser interaktiven visuellen Geschichte inspiriert, die Singapurs farbliche Identität anhand von über 2.000 Fotos verschiedener Stadtviertel erkundete.",
+    "inspiration_palette_label": "Unsere Farbpalette, inspiriert vom Artikel:",
+    "inspiration_cta": "Originalartikel lesen",
+    "colour_hawker": "Hawker",
+    "colour_dessert": "Dessert",
+    "colour_restaurant": "Restaurant",
+    "colour_yellow": "Banner",
+    "about_project": "Über dieses Projekt",
+    "about_project_desc": "Diese Website ist ein persönliches Herzensprojekt. Sie ist eine Sammlung von Essensorten, die ich in den letzten 10 Jahren meines Lebens in Singapur entdeckt und geliebt habe – ein kleines Archiv voller Mahlzeiten, Erinnerungen und Momente mit Freunden und Familie.\n\nIch hoffe, dass diese Karte nicht nur zukünftigen Besuchern hilft, sondern auch allen, die neugierig auf Singapurs Esskultur sind.\nWenn diese Empfehlungen auch nur einer Person helfen, ein unvergessliches Essen zu entdecken oder die Wärme zu spüren, die ich hier erlebt habe, dann macht mich das sehr glücklich.",
+    "tech_title": "Mit Leidenschaft & Code entwickelt",
+    "tech_desc": "Dieses Projekt verbindet meine Leidenschaft für Webentwicklung mit meiner Liebe zu Singapurs Food-Szene. Die 3D-Karte nutzt Three.js, um die MRT-inspirierte Visualisierung zum Leben zu erwecken und Food-Entdeckung interaktiv und unterhaltsam zu gestalten.",
+    "tech_star_github": "Auf GitHub markieren",
+    "tech_report_issue": "Problem melden"
+  },
+  "Tooltip": {
+    "what_is_hawker": "Ein Hawker-Stand ist ein kleiner Essensstand, der günstige Gerichte in sogenannten Hawker Centres verkauft.\nEin Hawker Centre besteht normalerweise aus vielen unabhängigen Ständen und ist dadurch ein kultureller Schmelztiegel verschiedenster Gerichte.\nHier essen Singapurer und Einwohner besonders gerne, um preiswerte Mahlzeiten zu genießen."
+  },
+  "FilterBar": {
+    "hawker": "Hawker-Stände",
+    "restaurant": "Restaurants",
+    "dessert": "Dessert"
+  },
+  "HeritageListView": {
+    "central": "Zentralregion",
+    "east": "Ostregion",
+    "west": "Westregion",
+    "north": "Nordregion"
+  },
+  "CardView": {
+    "must_try": "Unbedingt probieren",
+    "directions": "Route anzeigen",
+    "learnmore": "Mehr erfahren"
+  },
+  "Sidebar": {
+    "map": "Karte",
+    "website": "Webseite",
+    "must-try": "Empfohlenes Gericht",
+    "nearest-mrt": "Nächste MRT-Station"
+  },
+  "Footer": {
+    "changelanguage": "Sprache ändern",
+    "column_website": "Webseite",
+    "app_version": "App-Version"
+  },
+  "StatsBar": {
+    "years_value": "10+",
+    "years_label": "Jahre",
+    "spots_value": "100+",
+    "spots_label": "Orte",
+    "languages_value": "4",
+    "languages_label": "Sprachen",
+    "project_value": "1",
+    "project_label": "Traumprojekt"
+  },
+  "Spicy": {
+    "label": "Scharf",
+    "tooltip_desc": "Kann scharfe Gerichte enthalten"
+  }
+}

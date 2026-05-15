@@ -16,6 +16,7 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
   const { heritageId, setHeritageId, filter } = useHeritageStore();
   const foodData = useHeritageStore((state) => state.foodData);
   const t = useTranslations('HeritageListView');
+  const heritageT = useTranslations('Heritage');
 
   const filteredLocations = useMemo(
     () =>
@@ -55,7 +56,11 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                 />
                 <div>
                   {/** Location Name Container */}
-                  {<span className="text-sm max-sm:text-sm cursor-pointer">{location.name}</span>}
+                  {
+                    <span className="text-sm max-sm:text-sm cursor-pointer">
+                      {heritageT.has(location.id) ? heritageT(location.id) : location.name}
+                    </span>
+                  }
                   {/** MRT & Metadata Icons Container */}
                   <div className={'flex gap-1 items-center max-sm:flex-col max-sm:items-start'}>
                     {location.location.mrt_codes && (

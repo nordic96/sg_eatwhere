@@ -52,7 +52,9 @@ function PlaceContent() {
       <div className="w-full flex flex-col gap-2 px-4 py-2">
         <div className="flex flex-col items-start">
           {/** Name Container */}
-          <span className="text-2xl font-bold">{data.name}</span>
+          <span className="text-2xl font-bold wrap-break-word">
+            {heritageT.has(data.id) ? `${heritageT(data.id)} (${data.name})` : data.name}
+          </span>
           {/** Address Container */}
           <span className={'text-[#555]'}>{data.location.address}</span>
           {/** MRT Label Container */}

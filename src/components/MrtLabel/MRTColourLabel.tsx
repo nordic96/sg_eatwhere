@@ -34,8 +34,9 @@ export default function MRTColourLabel({ code }: { code: string }) {
       </div>
       {/** MRT Name Container */}
       <span className={'text-xs'}>
-        {mrtLabelMap[mrts[0]]}
-        {MRT_LABEL_DISPLAY_LANG.includes(locale) ? ` (${mrtT(mrts[0])})` : undefined}
+        {MRT_LABEL_DISPLAY_LANG.includes(locale)
+          ? `${mrtT(mrts[0])} (${mrtLabelMap[mrts[0]]})`
+          : mrtLabelMap[mrts[0]]}
       </span>
     </div>
   );
