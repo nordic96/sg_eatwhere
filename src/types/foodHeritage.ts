@@ -8,7 +8,7 @@ export interface Location {
   gmapUrl: string;
   /** TODO: mrt property deprecated! will be removed in future implementations */
   mrt: string[];
-  mrt_codes?: string[];
+  mrt_codes: string[];
   region: Region;
   geoLocation: GeoLocation;
 }
