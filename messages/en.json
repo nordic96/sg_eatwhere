@@ -140,5 +140,11 @@
     "Spicy": {
         "label": "Spicy",
         "tooltip_desc": "May contain spicy menu"
+    },
+    "TagIcon": {
+        "spicy": "Spicy",
+        "spicy_tooltip": "May contain spicy menu",
+        "durian": "Durian",
+        "durian_tooltip": "Contains durian menu"
     }
 }

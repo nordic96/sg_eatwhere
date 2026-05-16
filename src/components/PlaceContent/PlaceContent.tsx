@@ -12,7 +12,7 @@ import { memo, useMemo } from 'react';
 import { MrtLabel } from '../MrtLabel';
 import { FaGlobe, FaMap, FaThumbsUp } from 'react-icons/fa';
 import { ENABLE_SIDEBAR } from '@/config';
-import SpicyIcon from '../SpicyIcon';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 const MIN_DESC_LEN = 50;
 function PlaceContent() {
@@ -73,10 +73,14 @@ function PlaceContent() {
             />
             <span>{catT(data.category)}</span>
           </div>
-          {data.spicy && (
+          {data.tags && (
             <>
               <VerticalDivider />
-              <SpicyIcon label />
+              {data.tags.map((tag, i) => {
+                return (
+                  <FoodTagIcon tagType={tag} showLabel key={`place-content-foodtag-${tag}-${i}`} />
+                );
+              })}
             </>
           )}
           {data.website && (

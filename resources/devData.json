@@ -3,7 +3,7 @@
       "id": "komala",
       "name": "Komala Vilas",
       "category": "restaurant",
-      "spicy": true,
+      "tags": ["spicy"],
       "recommendations": ["Masla Dosai", "Masala Chai"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/komala/komalavilla_1.jpeg",
@@ -27,7 +27,7 @@
       "id": "spicy_wife",
       "name": "Spicy Wife Nasi Lemak",
       "category": "hawker",
-      "spicy": true,
+      "tags": ["spicy"],
       "recommendations": ["Aromatic Chicken"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/spicy/spicy_wife_1.jpeg",
@@ -116,6 +116,7 @@
       "id": "oldtree",
       "name": "99 Old Trees Durian",
       "category": "dessert",
+      "tags": ["durian"], 
       "recommendations": ["Stinky Bowl (with Extra Shot)", "MaoShanWang Durian Chendol"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/oldtree/3A01AF2E-B75C-498C-A8D9-D298970AF2D2_1_105_c.jpeg",

@@ -4,9 +4,9 @@ import { Region } from '@/types';
 import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import { useMemo } from 'react';
-import SpicyIcon from '../SpicyIcon';
 import { MRTColourLabel } from '../MrtLabel';
 import { cn } from '@/utils/cn';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 interface HeritageListViewProps {
   region: Region;
@@ -74,7 +74,13 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                         })}
                       </div>
                     )}
-                    {location.spicy && <SpicyIcon />}
+                    {location.tags && (
+                      <>
+                        {location.tags.map((tag, i) => {
+                          return <FoodTagIcon key={`foodtag-${tag}-${i}`} tagType={tag} />;
+                        })}
+                      </>
+                    )}
                   </div>
                 </div>
               </li>

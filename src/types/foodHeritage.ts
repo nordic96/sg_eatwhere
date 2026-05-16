@@ -18,10 +18,13 @@ export type Region = 'central' | 'east' | 'west' | 'north';
 export const EateryCategoryValues = ['restaurant', 'dessert', 'hawker'] as const;
 export type EateryCategory = (typeof EateryCategoryValues)[number];
 
+export type FoodTag = 'durian' | 'spicy' | 'seafood';
+
 export interface FoodHeritage {
   id: string;
   name: string;
   spicy?: boolean;
+  tags?: FoodTag[];
   recommendations: string[];
   category: EateryCategory;
   imgSource: string[];
