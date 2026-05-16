@@ -140,5 +140,13 @@
   "Spicy": {
     "label": "Scharf",
     "tooltip_desc": "Kann scharfe Gerichte enthalten"
+  },
+  "TagIcon": {
+      "spicy": "Scharf",
+      "spicy_tooltip": "Kann scharfe Soßen/Gerichte enthalten",
+      "durian": "Durian",
+      "durian_tooltip": "Enthält Durian-Gerichte",
+      "seafood": "Meeresfrüchte",
+      "seafood_tooltip": "Enthält Meeresfrüchte-Gerichte/Zutaten"
   }
 }

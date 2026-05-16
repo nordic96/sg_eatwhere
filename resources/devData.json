@@ -70,8 +70,9 @@
     },
     {
       "id": "nanhuachang",
-      "name": "Nan Hua Chang SeaFood",
+      "name": "Nan Hua Chang Fish Head Steamboat",
       "category": "restaurant",
+      "tags": ["seafood"],
       "recommendations": ["Grouper Fish Head Steamboat", "Prawn Paste Wings"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/nanhua/nanhuachang_1.jpeg",

@@ -143,8 +143,10 @@
     },
     "TagIcon": {
         "spicy": "Spicy",
-        "spicy_tooltip": "May contain spicy menu",
+        "spicy_tooltip": "May contain spicy dis/sauce",
         "durian": "Durian",
-        "durian_tooltip": "Contains durian menu"
+        "durian_tooltip": "Contains durian dishes",
+        "seafood": "Seafood",
+        "seafood_tooltip": "Contains seafood dishes"
     }
 }

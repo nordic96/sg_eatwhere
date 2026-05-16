@@ -136,5 +136,13 @@
         "languages_label": "언어 지원",
         "project_value": "1",
         "project_label": "프로젝트"
+    },
+    "TagIcon": {
+        "spicy": "매움",
+        "spicy_tooltip": "매운 소스/요리가 있을 수 있음",
+        "durian": "두리안",
+        "durian_tooltip": "두리안 메뉴 포함",
+        "seafood": "해산물",
+        "seafood_tooltip": "해산물 요리/재료 포함"
     }
 }

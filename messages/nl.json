@@ -134,5 +134,13 @@
         "languages_label": "Talen",
         "project_value": "1",
         "project_label": "Droomproject"
+    },
+    "TagIcon": {
+        "spicy": "Pittig",
+        "spicy_tooltip": "Kan pittige saus/gerechten bevatten",
+        "durian": "Doerian",
+        "durian_tooltip": "Bevat doerian gerechten",
+        "seafood": "Zeevruchten",
+        "seafood_tooltip": "Bevat gerechten/ingrediënten met zeevruchten"
     }
 }

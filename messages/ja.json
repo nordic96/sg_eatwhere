@@ -136,5 +136,13 @@
         "languages_label": "言語",
         "project_value": "1",
         "project_label": "夢のプロジェクト"
+    },
+    "TagIcon": {
+        "spicy": "辛い",
+        "spicy_tooltip": "辛いソース/料理が含まれる場合があります",
+        "durian": "ドリアン",
+        "durian_tooltip": "ドリアンのメニューを含みます",
+        "seafood": "シーフード",
+        "seafood_tooltip": "シーフード料理/食材を含みます"
     }
 }

@@ -7,7 +7,7 @@
   "Heritage": {
     "oldtree": "99老树",
     "yatkayan": "一家人",
-    "nanhuachang": "南華昌海鮮魚頭爐",
+    "nanhuachang": "南华昌(亚秋)鱼头炉",
     "ahtai": "阿仔海南鸡饭",
     "1950": "五十年代",
     "threemeal": "一日三餐",
@@ -148,5 +148,13 @@
   "Spicy": {
     "label": "辣",
     "tooltip_desc": "可能包含辣味菜单"
+  },
+  "TagIcon": {
+      "spicy": "辛辣",
+      "spicy_tooltip": "可能含有辣酱/辛辣菜肴",
+      "durian": "榴莲",
+      "durian_tooltip": "包含榴莲菜品",
+      "seafood": "海鲜",
+      "seafood_tooltip": "包含海鲜菜肴/食材"
   }
 }
