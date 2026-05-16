@@ -161,7 +161,13 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
         <div className={'flex gap-1'}>
           <span className={'font-extrabold text-xs'}>{data.name}</span>
           {data.tags?.map((tag, i) => {
-            return <FoodTagIcon tagType={tag} key={`foodmarquee-foodtag-${tag}-${i}`} />;
+            return (
+              <FoodTagIcon
+                tagType={tag}
+                key={`foodmarquee-foodtag-${tag}-${i}`}
+                showTooltip={false}
+              />
+            );
           })}
         </div>
         {data.location.mrt_codes && (

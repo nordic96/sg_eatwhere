@@ -77,7 +77,13 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                     {location.tags && (
                       <>
                         {location.tags.map((tag, i) => {
-                          return <FoodTagIcon key={`foodtag-${tag}-${i}`} tagType={tag} />;
+                          return (
+                            <FoodTagIcon
+                              key={`foodtag-${tag}-${i}`}
+                              tagType={tag}
+                              showTooltip={false}
+                            />
+                          );
                         })}
                       </>
                     )}
