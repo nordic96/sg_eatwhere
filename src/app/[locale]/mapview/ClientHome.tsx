@@ -17,6 +17,7 @@ import { SearchBar } from '@/components/SearchBar';
 import FoodMarquee from '@/components/FoodMarquee/FoodMarquee';
 import GoogleMapsBanner from '@/components/GoogleMapsBanner/GoogleMapsBanner';
 import { FaMapPin, FaInfoCircle } from 'react-icons/fa';
+import FoodTagLegend from '@/components/FoodTagIcon/FoodTagLegend';
 
 type ClientHomeProps = {
   locale: string;
@@ -89,9 +90,11 @@ function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeP
                 <h2 className={'font-bold text-lg'}>{t('foodlist_by_region')}</h2>
               </div>
               {/** Legend Container */}
-              <div></div>
+              <div className={'pr-2'}>
+                <FoodTagLegend />
+              </div>
             </div>
-            <div className={'flex max-sm:flex-col'}>
+            <div className={'flex mt-4 max-sm:flex-col'}>
               <HeritageListView region={'central'} />
               <HeritageListView region={'east'} />
               <HeritageListView region={'west'} />
