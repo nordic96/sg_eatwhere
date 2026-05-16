@@ -120,7 +120,8 @@
     "map": "Karte",
     "website": "Webseite",
     "must-try": "Empfohlenes Gericht",
-    "nearest-mrt": "Nächste MRT-Station"
+    "nearest-mrt": "Nächste MRT-Station",
+    "ig": "Instagram"
   },
   "Footer": {
     "changelanguage": "Sprache ändern",

@@ -118,7 +118,8 @@
         "map": "Kaart",
         "website": "Website",
         "must-try": "Moet Proberen Gerecht",
-        "nearest-mrt": "Dichtstbijzijnde MRT Station"
+        "nearest-mrt": "Dichtstbijzijnde MRT Station",
+        "ig": "Instagram"
     },
     "Footer": {
         "changelanguage": "Taal Wijzigen",

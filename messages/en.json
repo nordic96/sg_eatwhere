@@ -120,7 +120,8 @@
         "map": "Map",
         "website": "Website",
         "must-try": "Must Try Dish",
-        "nearest-mrt": "Nearest MRT Station"
+        "nearest-mrt": "Nearest MRT Station",
+        "ig": "Instagram"
     },
     "Footer": {
         "changelanguage": "Change Language",
