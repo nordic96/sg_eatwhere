@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaMapPin } from 'react-icons/fa';
 import { MRTColourLabel } from '../MrtLabel';
-import SpicyIcon from '../SpicyIcon';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 function RichItem({ data }: { data: FoodHeritage }) {
   const heritageT = useTranslations('Heritage');
@@ -27,7 +27,9 @@ function RichItem({ data }: { data: FoodHeritage }) {
             <span>{t(data.location.region)}</span>
           </div>
           {data.location.mrt_codes && <MRTColourLabel code={data.location.mrt_codes[0]} />}
-          {data.spicy && <SpicyIcon />}
+          {data.tags?.map((tag, i) => {
+            return <FoodTagIcon tagType={tag} showLabel key={`richitem-foodtag-${tag}-${i}`} />;
+          })}
         </div>
       </div>
     </div>

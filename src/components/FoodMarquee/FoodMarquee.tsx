@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useMemo, useRef, useState } from 'react';
 import { FaCamera, FaPauseCircle, FaPlayCircle, FaSubway } from 'react-icons/fa';
 import { useSwipeable } from 'react-swipeable';
-import SpicyIcon from '../SpicyIcon';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 interface FoodMarqueeProps {
   items: FoodMarqueeItem[];
@@ -160,7 +160,15 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
         <CategoryIcon alt={'category'} cat={data.category} />
         <div className={'flex gap-1'}>
           <span className={'font-extrabold text-xs'}>{data.name}</span>
-          {data.spicy && <SpicyIcon />}
+          {data.tags?.map((tag, i) => {
+            return (
+              <FoodTagIcon
+                tagType={tag}
+                key={`foodmarquee-foodtag-${tag}-${i}`}
+                showTooltip={false}
+              />
+            );
+          })}
         </div>
         {data.location.mrt_codes && (
           <div className={'flex text-xs items-center gap-0.5'}>

@@ -10,9 +10,9 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
 import { memo, useMemo } from 'react';
 import { MrtLabel } from '../MrtLabel';
-import { FaGlobe, FaMap, FaThumbsUp } from 'react-icons/fa';
+import { FaGlobe, FaInstagram, FaMap, FaThumbsUp } from 'react-icons/fa';
 import { ENABLE_SIDEBAR } from '@/config';
-import SpicyIcon from '../SpicyIcon';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 const MIN_DESC_LEN = 50;
 function PlaceContent() {
@@ -32,6 +32,13 @@ function PlaceContent() {
     return <div>No data selected</div>;
   }
 
+  let isWebsiteIg = false;
+  if (!!data.website) {
+    const hostname = new URL(data.website).hostname;
+    if (hostname.includes('instagram.com')) {
+      isWebsiteIg = true;
+    }
+  }
   const learnMoreBtnBaseStyle =
     'bg-primary py-0.5 px-4 rounded-lg text-white cursor-pointer text-md font-bold';
   return (
@@ -73,10 +80,14 @@ function PlaceContent() {
             />
             <span>{catT(data.category)}</span>
           </div>
-          {data.spicy && (
+          {data.tags && (
             <>
               <VerticalDivider />
-              <SpicyIcon label />
+              {data.tags.map((tag, i) => {
+                return (
+                  <FoodTagIcon tagType={tag} showLabel key={`place-content-foodtag-${tag}-${i}`} />
+                );
+              })}
             </>
           )}
           {data.website && (
@@ -88,9 +99,9 @@ function PlaceContent() {
                 className={'flex gap-0.5 cursor-pointer hover:text-gray-600'}
               >
                 <div className={'w-4 h-4'}>
-                  <FaGlobe size={'inherit'} />
+                  {isWebsiteIg ? <FaInstagram size={'inherit'} /> : <FaGlobe size={'inherit'} />}
                 </div>
-                <span>{sideT('website')}</span>
+                <span>{isWebsiteIg ? sideT('ig') : sideT('website')}</span>
               </a>
             </>
           )}

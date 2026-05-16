@@ -120,7 +120,8 @@
         "map": "地図",
         "website": "ウェブサイト",
         "must-try": "必食料理",
-        "nearest-mrt": "最寄りのMRT駅"
+        "nearest-mrt": "最寄りのMRT駅",
+        "ig": "インスタグラム"
     },
     "Footer": {
         "changelanguage": "言語を変更",
@@ -136,5 +137,13 @@
         "languages_label": "言語",
         "project_value": "1",
         "project_label": "夢のプロジェクト"
+    },
+    "TagIcon": {
+        "spicy": "辛い",
+        "spicy_tooltip": "辛いソース/料理が含まれる場合があります",
+        "durian": "ドリアン",
+        "durian_tooltip": "ドリアンのメニューを含みます",
+        "seafood": "シーフード",
+        "seafood_tooltip": "シーフード料理/食材を含みます"
     }
 }
