@@ -15,16 +15,16 @@
         "ahtai_desc": "Chicken Rice is one of the most popular dish in Singapore. AhTai Chicken Rice, located at Maxwell Food Centre, which is only few minutes walk from the famous Buddha Tooth Relic Temple in ChinaTown. If you are travelling with more than 2 people, I recommend ordering half/whole chicken with separate rice bowls, or just individual chicken rice sets if you are not so hungry!"
     },
     "MRT": {
-        "tanjong_pagar": "Tanjong Pagar",
-        "outram_park": "Outram Park",
-        "bencoolen": "Bencoolen",
-        "little_india": "Little India",
-        "lavender": "Lavender",
-        "bugis": "Bugis",
-        "nicoll_highway": "Nicoll Highway",
-        "marine_parade": "Marine Parade",
-        "maxwell": "Maxwell",
-        "harbourfront": "HarbourFront"
+        "EW15": "Tanjong Pagar",
+        "NE3": "Outram Park",
+        "DT21": "Bencoolen",
+        "NE7": "Little India",
+        "EW11": "Lavender",
+        "EW12": "Bugis",
+        "CC5": "Nicoll Highway",
+        "TE26": "Marine Parade",
+        "TE18": "Maxwell",
+        "NE1": "HarbourFront"
     },
     "Header": {
         "link_mapview": "MapView",
@@ -120,7 +120,8 @@
         "map": "Map",
         "website": "Website",
         "must-try": "Must Try Dish",
-        "nearest-mrt": "Nearest MRT Station"
+        "nearest-mrt": "Nearest MRT Station",
+        "ig": "Instagram"
     },
     "Footer": {
         "changelanguage": "Change Language",
@@ -140,5 +141,13 @@
     "Spicy": {
         "label": "Spicy",
         "tooltip_desc": "May contain spicy menu"
+    },
+    "TagIcon": {
+        "spicy": "Spicy",
+        "spicy_tooltip": "May contain spicy dis/sauce",
+        "durian": "Durian",
+        "durian_tooltip": "Contains durian dishes",
+        "seafood": "Seafood",
+        "seafood_tooltip": "Contains seafood dishes"
     }
 }

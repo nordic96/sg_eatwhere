@@ -3,7 +3,7 @@
       "id": "komala",
       "name": "Komala Vilas",
       "category": "restaurant",
-      "spicy": true,
+      "tags": ["spicy"],
       "recommendations": ["Masla Dosai", "Masala Chai"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/komala/komalavilla_1.jpeg",
@@ -27,7 +27,7 @@
       "id": "spicy_wife",
       "name": "Spicy Wife Nasi Lemak",
       "category": "hawker",
-      "spicy": true,
+      "tags": ["spicy"],
       "recommendations": ["Aromatic Chicken"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/spicy/spicy_wife_1.jpeg",
@@ -43,7 +43,8 @@
           "latitude": 1.2792477058866272,
           "longitude": 103.84652104460396
         }
-      }
+      },
+      "website": "https://www.instagram.com/spicywifenasilemak/"
     },
     {
       "id": "yatkayan",
@@ -66,12 +67,14 @@
           "latitude": 1.3007023528612611,
           "longitude": 103.85208220385952
         }
-      }
+      },
+      "website": "https://www.instagram.com/yatkayan/"
     },
     {
       "id": "nanhuachang",
-      "name": "Nan Hua Chang SeaFood",
+      "name": "Nan Hua Chang Fish Head Steamboat",
       "category": "restaurant",
+      "tags": ["seafood"],
       "recommendations": ["Grouper Fish Head Steamboat", "Prawn Paste Wings"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/nanhua/nanhuachang_1.jpeg",
@@ -116,6 +119,7 @@
       "id": "oldtree",
       "name": "99 Old Trees Durian",
       "category": "dessert",
+      "tags": ["durian"], 
       "recommendations": ["Stinky Bowl (with Extra Shot)", "MaoShanWang Durian Chendol"],
       "imgSource": [
         "https://cdn.jsdelivr.net/gh/nordic96/foodies_trail_assets/resources/oldtree/3A01AF2E-B75C-498C-A8D9-D298970AF2D2_1_105_c.jpeg",
@@ -222,7 +226,7 @@
     },
     {
       "id": "khengnamlee",
-      "name": "Kheng Nam Lee Curry Rice (琼南利咖喱饭)",
+      "name": "Kheng Nam Lee Curry Rice",
       "recommendations": ["Economic Rice"],
       "category": "hawker",
       "imgSource": [

@@ -8,7 +8,7 @@ export interface Location {
   gmapUrl: string;
   /** TODO: mrt property deprecated! will be removed in future implementations */
   mrt: string[];
-  mrt_codes?: string[];
+  mrt_codes: string[];
   region: Region;
   geoLocation: GeoLocation;
 }
@@ -18,10 +18,14 @@ export type Region = 'central' | 'east' | 'west' | 'north';
 export const EateryCategoryValues = ['restaurant', 'dessert', 'hawker'] as const;
 export type EateryCategory = (typeof EateryCategoryValues)[number];
 
+export const FOODTAGS = ['durian', 'spicy', 'seafood'] as const;
+export type FoodTag = (typeof FOODTAGS)[number];
+
 export interface FoodHeritage {
   id: string;
   name: string;
   spicy?: boolean;
+  tags?: FoodTag[];
   recommendations: string[];
   category: EateryCategory;
   imgSource: string[];

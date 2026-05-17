@@ -10,9 +10,9 @@ import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import ButtonContainer from './ButtonContainer';
 import { memo, useMemo } from 'react';
 import { MrtLabel } from '../MrtLabel';
-import { FaGlobe, FaMap, FaThumbsUp } from 'react-icons/fa';
+import { FaGlobe, FaInstagram, FaMap, FaThumbsUp } from 'react-icons/fa';
 import { ENABLE_SIDEBAR } from '@/config';
-import SpicyIcon from '../SpicyIcon';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 const MIN_DESC_LEN = 50;
 function PlaceContent() {
@@ -32,6 +32,13 @@ function PlaceContent() {
     return <div>No data selected</div>;
   }
 
+  let isWebsiteIg = false;
+  if (!!data.website) {
+    const hostname = new URL(data.website).hostname;
+    if (hostname.includes('instagram.com')) {
+      isWebsiteIg = true;
+    }
+  }
   const learnMoreBtnBaseStyle =
     'bg-primary py-0.5 px-4 rounded-lg text-white cursor-pointer text-md font-bold';
   return (
@@ -51,8 +58,14 @@ function PlaceContent() {
       </div>
       <div className="w-full flex flex-col gap-2 px-4 py-2">
         <div className="flex flex-col items-start">
-          <span className="text-2xl font-bold">{data.name}</span>
+          {/** Name Container */}
+          <span className="text-2xl font-bold wrap-break-word">
+            {heritageT.has(data.id) ? `${heritageT(data.id)} (${data.name})` : data.name}
+          </span>
+          {/** Address Container */}
           <span className={'text-[#555]'}>{data.location.address}</span>
+          {/** MRT Label Container */}
+          {data.location.mrt_codes && <MrtLabel mrtCodes={data.location.mrt_codes} />}
         </div>
         {/** Info Container */}
         <div
@@ -67,16 +80,14 @@ function PlaceContent() {
             />
             <span>{catT(data.category)}</span>
           </div>
-          {data.spicy && (
+          {data.tags && (
             <>
               <VerticalDivider />
-              <SpicyIcon label />
-            </>
-          )}
-          {data.location.mrt_codes && (
-            <>
-              <VerticalDivider />
-              <MrtLabel mrtCode={data.location.mrt_codes[0]} />
+              {data.tags.map((tag, i) => {
+                return (
+                  <FoodTagIcon tagType={tag} showLabel key={`place-content-foodtag-${tag}-${i}`} />
+                );
+              })}
             </>
           )}
           {data.website && (
@@ -88,9 +99,9 @@ function PlaceContent() {
                 className={'flex gap-0.5 cursor-pointer hover:text-gray-600'}
               >
                 <div className={'w-4 h-4'}>
-                  <FaGlobe size={'inherit'} />
+                  {isWebsiteIg ? <FaInstagram size={'inherit'} /> : <FaGlobe size={'inherit'} />}
                 </div>
-                <span>{sideT('website')}</span>
+                <span>{isWebsiteIg ? sideT('ig') : sideT('website')}</span>
               </a>
             </>
           )}

@@ -4,9 +4,9 @@ import { Region } from '@/types';
 import { useTranslations } from 'next-intl';
 import CategoryIcon from '../CategoryIcon/CategoryIcon';
 import { useMemo } from 'react';
-import SpicyIcon from '../SpicyIcon';
-import { parseMrtCodes } from '../MrtLabel';
+import { MRTColourLabel } from '../MrtLabel';
 import { cn } from '@/utils/cn';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 interface HeritageListViewProps {
   region: Region;
@@ -16,6 +16,7 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
   const { heritageId, setHeritageId, filter } = useHeritageStore();
   const foodData = useHeritageStore((state) => state.foodData);
   const t = useTranslations('HeritageListView');
+  const heritageT = useTranslations('Heritage');
 
   const filteredLocations = useMemo(
     () =>
@@ -55,17 +56,37 @@ export default function HeritageListView({ region }: HeritageListViewProps) {
                 />
                 <div>
                   {/** Location Name Container */}
-                  {<span className="text-sm max-sm:text-sm cursor-pointer">{location.name}</span>}
+                  {
+                    <span className="text-sm max-sm:text-sm cursor-pointer">
+                      {heritageT.has(location.id) ? heritageT(location.id) : location.name}
+                    </span>
+                  }
                   {/** MRT & Metadata Icons Container */}
                   <div className={'flex gap-1 items-center max-sm:flex-col max-sm:items-start'}>
                     {location.location.mrt_codes && (
                       <div className={'flex gap-1 max-sm:flex-col'}>
                         {location.location.mrt_codes.map((code, i) => {
-                          return <div key={`mrt-${code}-${i}`}>{parseMrtCodes(code)}</div>;
+                          return (
+                            <div key={`mrt-${code}-${i}`}>
+                              <MRTColourLabel code={code} />
+                            </div>
+                          );
                         })}
                       </div>
                     )}
-                    {location.spicy && <SpicyIcon />}
+                    {location.tags && (
+                      <>
+                        {location.tags.map((tag, i) => {
+                          return (
+                            <FoodTagIcon
+                              key={`foodtag-${tag}-${i}`}
+                              tagType={tag}
+                              showTooltip={false}
+                            />
+                          );
+                        })}
+                      </>
+                    )}
                   </div>
                 </div>
               </li>

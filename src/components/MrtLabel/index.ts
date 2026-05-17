@@ -1,2 +1,2 @@
 export { default as MrtLabel } from './MrtLabel';
-export * from './parseMrtCodes';
+export { default as MRTColourLabel } from './MRTColourLabel';

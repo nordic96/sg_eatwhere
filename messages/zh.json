@@ -1,0 +1,161 @@
+{
+  "FoodCategory": {
+    "dessert": "甜品",
+    "hawker": "小贩摊位",
+    "restaurant": "餐厅"
+  },
+  "Heritage": {
+    "oldtree": "99老树",
+    "yatkayan": "一家人",
+    "nanhuachang": "南华昌(亚秋)鱼头炉",
+    "ahtai": "阿仔海南鸡饭",
+    "1950": "五十年代",
+    "threemeal": "一日三餐",
+    "khengnamlee": "琼南利咖喱饭",
+    "oldtree_desc": "距离欧南园地铁站仅1分钟路程，这家位于街角的小店一直是中央商务区上班族之间隐藏的榴莲甜品宝藏。店员会在顾客面前现场处理新鲜榴莲，并提供多种榴莲甜品供选择。\n\n我们非常推荐尝试加 Extra Shot 的 Stinky Bowl（榴莲慕斯）！即使是害怕榴莲的人，吃过后也可能改变想法。\n\n如果你本身就是榴莲爱好者，店前方还售卖新鲜包装的生榴莲！价格会根据季节浮动。",
+    "komala_desc": "这家深受许多新加坡人喜爱的餐厅，自1947年以来一直供应印度素食料理！食物会盛放在香蕉叶上，并搭配各种香浓咖喱酱。\n\n我们特别推荐 Dosai，一种由米和扁豆发酵面糊制作的印度薄饼。如果你计划前往小印度，不妨体验一下在充满历史氛围中享用正宗印度素食料理。",
+    "spicy_wife_desc": "这家位于亚茂街熟食中心的小贩摊位，以实惠价格售卖美味的椰浆饭，是附近上班族的最爱之一。摊位主打香料炸鸡椰浆饭（Nasi Lemak Ayam Berempah），也就是搭配香料炸鸡的椰浆饭。\n\n这道料理配有黄瓜、分量十足的香料炸鸡、煎蛋、特制参巴辣椒酱、花生和江鱼仔（炸小鱼干）。辣椒酱对部分人来说可能会比较辣，请做好准备并享受美食！\n\n【小提示】摊位下午2点就会关闭，而且只在工作日营业，建议前往前查看最新营业时间！",
+    "nanhuachang_desc": "你是海鲜爱好者吗？或者喜欢火锅？这家餐厅自1927年以来一直供应新加坡著名的鱼头炉火锅，而且已经传承至第四代。鱼头炉火锅是一道以鱼头汤为主，搭配各种蔬菜，并使用特别设计的炭火锅来保温的料理。锅中央放置木炭，让食物长时间保持热度，同时也让汤底带有独特炭香。\n\n这里已经成为许多新加坡人带着家人与朋友聚餐聊天的地方。你愿意来这里体验最地道又美味的炉火锅文化吗？",
+    "yatkayan_desc": "你住在多美歌地铁站附近吗？或者计划前往赞美广场（CHIJMES）？在明古连地铁站附近，藏着一家深受年轻新加坡人喜爱的中式甜品店。附近设计学院和大学的学生们也常来这里，因为这里有许多价格亲民又美味的中式甜品。\n\n我个人最喜欢的是 Chendol（煎蕊），这是一种经典新加坡冰甜品，淋上大量椰糖糖浆（Gula Melaka）。如果你不太喜欢太甜的甜品，也可以尝试紫米甜品，搭配各种配料。这里也有热甜品可选！",
+    "jixiang_desc": "你知道“Kueh”是什么吗？这家糕点店成立于1988年，位于欧南园与丹戎巴葛地铁站附近，售卖新鲜手工制作的红龟粿（Ang Ku Kueh）。“Ang Ku Kueh”直译为“红龟糕”，因为外形像乌龟壳。它拥有软糯Q弹的口感，表面刷有香油，并有多种内馅可选。\n\n我个人推荐甜豆沙馅和芋头馅。",
+    "donamanis_desc": "计划前往如切路（Joo Chiat Road）吗？在加东购物中心内，有一家自1990年以来就开始制作美味派点的老字号烘焙店。只要靠近店铺，你就很难抵挡新加坡其中一家最好吃香蕉派的香气。",
+    "ahtai_desc": "海南鸡饭是新加坡最受欢迎的料理之一。Ah Tai Chicken Rice 位于麦士威熟食中心，距离著名的牛车水佛牙寺仅几分钟步行路程。如果你是两人以上同行，我推荐点半只或整只鸡搭配单独的饭；如果没那么饿，也可以直接点个人鸡饭套餐！"
+  },
+  "MRT": {
+    "EW15": "丹戎巴葛",
+    "NE3": "欧南园",
+    "NE4": "牛车水",
+    "DT21": "明古连",
+    "NE7": "小印度",
+    "EW11": "劳明达",
+    "EW12": "武吉士",
+    "CC5": "尼诰大道",
+    "TE26": "马林百列",
+    "TE18": "麦士威",
+    "NE1": "港湾"
+  },
+  "Header": {
+    "link_mapview": "地图视图",
+    "link_landing": "首页",
+    "link_about": "关于"
+  },
+  "Banner": {
+    "banner_msg": "请注意！这是一个个人项目。美食地点基于个人探访、本地朋友推荐以及主观标准进行挑选。"
+  },
+  "SearchBar": {
+    "placeholder_loading": "正在准备智能搜索...",
+    "placeholder": "搜索美食...",
+    "no_results": "未找到结果"
+  },
+  "LandingPage": {
+    "hero_desc": "<green>10+</green> 年。<green>100+</green> 次探访。\n一个像本地人一样吃饭的韩国人。\n\n现在分享 <primary>新加坡</primary> 真正的\n<primary>必吃美食</primary>",
+    "hero_micro_desc": "探索真正新加坡人会去吃的地方——通过十多年与本地朋友共享美食的经历精心整理。",
+    "explore_more": "探索 Foodie's Trail",
+    "discover_why": "为什么我制作了这个指南",
+    "landing2_desc": "这不仅仅是一份美食清单",
+    "landing2_desc_2": "\"十多年前我搬到了新加坡。这张地图记录了我与朋友们共享数百顿本地美食的回忆……一位朋友接着一位朋友。\"",
+    "photo_disclaimer": "所有照片均由我亲自拍摄！",
+    "your_complete_singapore_food_guide": "你的完整新加坡美食指南",
+    "access_full_curated_collection": "通过 Google Maps 查看我完整整理的美食收藏，包括实时信息与导航。",
+    "feature_100_plus_locations": "100+ 真实美食地点",
+    "feature_turn_by_turn": "逐步路线导航",
+    "feature_live_hours": "实时营业时间与联系信息",
+    "feature_hidden_gems": "互动地图之外的隐藏美食",
+    "google_maps_collection": "Google Maps 收藏",
+    "ten_years_discoveries": "10+ 年美食探索汇聚于此",
+    "open_collection": "打开收藏",
+    "opens_in_google_maps": "在 Google Maps 中打开"
+  },
+  "HomePage": {
+    "trail_mode": "探索模式",
+    "featured_food_spots": "精选美食地点",
+    "play_marquee": "播放滚动横幅",
+    "pause_marquee": "暂停滚动横幅",
+    "marquee_paused": "滚动横幅已暂停",
+    "marquee_playing": "滚动横幅播放中",
+    "foodlist_by_region": "按区域分类的美食列表",
+    "map_by": "地图来源：",
+    "map_disclaimer": "**地图比例并不精确，仅用于大致估算各餐厅位置。",
+    "other_info_header": "其他实用信息"
+  },
+  "GMapBanner": {
+    "explore_complete_collection": "探索完整收藏",
+    "google_maps_banner_description": "在 Google Maps 查看全部 100+ 精选美食地点——包括地图中尚未展示的隐藏美食。获取路线、照片与实时更新。",
+    "view_full_list": "查看完整列表",
+    "google_maps_banner_sr_description": "在 Google Maps 打开完整美食收藏，包括100多个精选地点、路线与实时信息。"
+  },
+  "AboutPage": {
+    "intro": "前端软件工程师 | 网页开发者",
+    "food_code_desc": "在2024至2025年间，我回到了家乡韩国完成兵役。\n入伍前，我曾担任软件工程师——而在服役期间，我开始怀念用代码创造东西的快乐。\n\n还有一样东西同样让我怀念：<b>新加坡的美食</b>。\n\n当我翻看与新加坡朋友一起吃饭的旧照片时，我突然受到启发。我想创造的不只是一个简单的美食博客，而是一个互动式的平台，让人们能够探索每个地方背后的回忆。\n于是，<b>Foodie's Trail</b> 的想法诞生了：一个结合了我最热爱的两件事——美食与代码——的 <i>3D 美食地图</i>。",
+    "food_code": "美食与代码",
+    "inspiration_label": "灵感来源",
+    "inspiration_title": "《Singapore in Colour》",
+    "inspiration_author": "Alex Lim，《海峡时报》（2023年8月）",
+    "inspiration_description": "本项目的色彩灵感来自这篇互动视觉故事，该作品通过2000多张照片探索了新加坡不同街区的色彩身份。",
+    "inspiration_palette_label": "受文章启发的配色：",
+    "inspiration_cta": "阅读原始文章",
+    "colour_hawker": "小贩",
+    "colour_dessert": "甜品",
+    "colour_restaurant": "餐厅",
+    "colour_yellow": "横幅",
+    "about_project": "关于这个项目",
+    "about_project_desc": "这个网站是一个个人热情项目。它收录了我过去10年在新加坡生活期间发现并喜爱的美食地点——一个关于美食、回忆，以及与朋友和家人共享时光的小档案。\n\n我希望这张地图不仅能帮助未来游客，也能让所有对新加坡饮食文化感兴趣的人有所收获。\n如果这些推荐能够帮助哪怕一个人找到难忘的一餐，或感受到我曾在这里体验到的温暖，那我就已经非常满足了。",
+    "tech_title": "用热情与代码打造",
+    "tech_desc": "这个项目结合了我对网页开发的热爱以及对新加坡美食文化的喜爱。3D 地图使用 Three.js 打造 MRT 风格的可视化体验，让探索美食变得互动又有趣。",
+    "tech_star_github": "在 GitHub 点赞",
+    "tech_report_issue": "报告问题"
+  },
+  "Tooltip": {
+    "what_is_hawker": "小贩摊位（Hawker Stall）指的是在熟食中心内售卖平价美食的小型档口。\n熟食中心通常由多个独立摊位组成，因此成为各种美食文化的融合地。\n这里也是新加坡人与居民最喜欢享用平价餐点的地方。"
+  },
+  "FilterBar": {
+    "hawker": "小贩摊位",
+    "restaurant": "餐厅",
+    "dessert": "甜品"
+  },
+  "HeritageListView": {
+    "central": "中部地区",
+    "east": "东部地区",
+    "west": "西部地区",
+    "north": "北部地区"
+  },
+  "CardView": {
+    "must_try": "必试美食",
+    "directions": "获取路线",
+    "learnmore": "了解更多"
+  },
+  "Sidebar": {
+    "map": "地图",
+    "website": "网站",
+    "must-try": "推荐菜品",
+    "nearest-mrt": "最近地铁站",
+    "ig": "IG"
+  },
+  "Footer": {
+    "changelanguage": "切换语言",
+    "column_website": "网站",
+    "app_version": "应用版本"
+  },
+  "StatsBar": {
+    "years_value": "10+",
+    "years_label": "年",
+    "spots_value": "100+",
+    "spots_label": "地点",
+    "languages_value": "4",
+    "languages_label": "语言",
+    "project_value": "1",
+    "project_label": "梦想项目"
+  },
+  "Spicy": {
+    "label": "辣",
+    "tooltip_desc": "可能包含辣味菜单"
+  },
+  "TagIcon": {
+      "spicy": "辛辣",
+      "spicy_tooltip": "可能含有辣酱/辛辣菜肴",
+      "durian": "榴莲",
+      "durian_tooltip": "包含榴莲菜品",
+      "seafood": "海鲜",
+      "seafood_tooltip": "包含海鲜菜肴/食材"
+  }
+}

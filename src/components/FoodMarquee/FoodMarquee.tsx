@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useMemo, useRef, useState } from 'react';
 import { FaCamera, FaPauseCircle, FaPlayCircle, FaSubway } from 'react-icons/fa';
 import { useSwipeable } from 'react-swipeable';
-import SpicyIcon from '../SpicyIcon';
+import { FoodTagIcon } from '../FoodTagIcon';
 
 interface FoodMarqueeProps {
   items: FoodMarqueeItem[];
@@ -128,6 +128,7 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
     return null;
   }
 
+  const mrtCodeToDisplay = data.location.mrt_codes[0].split('/')[0];
   const handleClick = () => setHeritageId(id);
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -143,12 +144,12 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
-      aria-label={`View details for ${data.name} at ${mrtT(data.location.mrt[0])}`}
+      aria-label={`View details for ${data.name} at ${mrtT(mrtCodeToDisplay)}`}
     >
       <Image
         className={'object-cover w-full h-full rounded-sm'}
         priority={index < 5}
-        alt={`${data.name}, ${data.category} near ${mrtT(data.location.mrt[0])} MRT station`}
+        alt={`${data.name}, ${data.category} near ${mrtT(mrtCodeToDisplay)} MRT station`}
         src={src}
         width={160}
         height={160}
@@ -159,12 +160,22 @@ function FoodMarqueeItemComp({ src, id, index }: FoodMarqueeItem & { index: numb
         <CategoryIcon alt={'category'} cat={data.category} />
         <div className={'flex gap-1'}>
           <span className={'font-extrabold text-xs'}>{data.name}</span>
-          {data.spicy && <SpicyIcon />}
+          {data.tags?.map((tag, i) => {
+            return (
+              <FoodTagIcon
+                tagType={tag}
+                key={`foodmarquee-foodtag-${tag}-${i}`}
+                showTooltip={false}
+              />
+            );
+          })}
         </div>
-        <div className={'flex text-xs items-center gap-0.5'}>
-          <FaSubway className="w-[1em] h-[1em]" />
-          <span>{mrtT(data.location.mrt[0])}</span>
-        </div>
+        {data.location.mrt_codes && (
+          <div className={'flex text-xs items-center gap-0.5'}>
+            <FaSubway className="w-[1em] h-[1em]" />
+            <span>{mrtT(mrtCodeToDisplay)}</span>
+          </div>
+        )}
       </div>
     </div>
   );
