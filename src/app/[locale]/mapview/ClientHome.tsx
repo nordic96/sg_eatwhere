@@ -84,7 +84,7 @@ function ClientHome({ trailMode, foods, locale, messages, gmapUrl }: ClientHomeP
         <div className="grid grid-cols-2 flex-1 mt-1">
           {/** HeritageListView Container */}
           <div className={'flex flex-1 flex-col'}>
-            <div className={'flex justify-between items-center'}>
+            <div className={'flex max-sm:flex-col max-sm:items-start justify-between items-center'}>
               <div className={'flex items-center gap-1'}>
                 <FaMapPin size={20} aria-hidden="true" />
                 <h2 className={'font-bold text-lg'}>{t('foodlist_by_region')}</h2>
